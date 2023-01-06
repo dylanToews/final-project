@@ -1,29 +1,29 @@
 import { useState } from "react";
 
 import Header from "./components/Header";
-import AlarmForm from "./components/AlarmForm";
-import ContactForm from "./components/ContactForm";
 import AlarmList from "./components/AlarmList";
+import SetAlarmForm from "./components/SetAlarmForm";
 
 import "./App.css";
 
-import mockContactData from "./data/mockContactData"
+import mockContactData from "./data/mockContactData";
+import mockSoundData from "./data/mockSoundData";
+import mockAlarmItemData from "./data/mockAlarmItemData";
 
 function App() {
-  const [contacts, setContacts] = useState(mockContactData)
-   
+  const [alarmItems, setAlarmItems] = useState(mockAlarmItemData);
+
   return (
     <div className="App">
       <Header />
       <main>
         <section>
-          <AlarmForm />
-          <ContactForm />
+          <SetAlarmForm />
         </section>
-        <AlarmList contacts={contacts}/>
+        <AlarmList alarmItems={alarmItems} />
       </main>
     </div>
   );
-} 
+}
 
 export default App;

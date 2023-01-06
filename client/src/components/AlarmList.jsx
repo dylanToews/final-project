@@ -1,17 +1,23 @@
 import AlarmListItem from "./AlarmListItem";
 
 export default function AlarmList(props) {
-  const { contacts } = props;
-  const isArray = Array.isArray(contacts)
+  const { alarmItems } = props;
+  const isArray = Array.isArray(alarmItems)
 
-  const parsedContacts = isArray && contacts.map((contact) => (
-    <AlarmListItem key={contact.id} {... contact} />
+
+  const parsedAlarmItems = isArray && alarmItems.map((alarmItem) => (
+    <AlarmListItem key={alarmItem.id} {... alarmItem} />
   ))
+
+
+
   return (
     <section className="AlarmList">
       <h2>Existing Alarms</h2>
       {!isArray && <p>There are currently no contacts</p>}
-      <ul>{parsedContacts}</ul>
+      <ul>
+        {[parsedAlarmItems]}
+      </ul>
     </section>
   );
 }

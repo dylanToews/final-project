@@ -1,10 +1,12 @@
 export default function AlarmListItem(props) {
-  const { name, tel_number } = props;
+  const { time, contact, sound } = props;
 
+  console.log(props)
   return (
     <li className="AlarmListItem">
-      <p>Contact Name: {name}</p>
-      <p>Contact Number: {tel_number}</p>
+      <p>Time: {time}</p>
+      <p>Contact Name: {contact}</p>
+      <p>Sound: {sound}</p>
     </li>
   );
 }
