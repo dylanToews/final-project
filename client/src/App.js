@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import Header from "./components/Header";
+import AlarmForm from "./components/AlarmForm";
+import ContactForm from "./components/ContactForm";
+import AlarmList from "./components/AlarmList";
+
+import "./App.css";
+
+import mockContactData from "./data/mockContactData"
 
 function App() {
+  const [contacts, setContacts] = useState(mockContactData)
+   
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <main>
+        <section>
+          <AlarmForm />
+          <ContactForm />
+        </section>
+        <AlarmList contacts={contacts}/>
+      </main>
     </div>
   );
-}
+} 
 
 export default App;
