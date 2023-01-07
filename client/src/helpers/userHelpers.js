@@ -21,7 +21,6 @@ export const getUserAlarms = (users) => {
   const alarmsBuffer = {};
   users.forEach((user) => (alarmsBuffer[user.user] = 0));
 
-  // might need to change what were targetting ie: user.something
   return Object.keys(alarmsBuffer);
 };
 
@@ -36,7 +35,6 @@ export const getAlarmSounds = (users) => {
   const alarmsBuffer = {};
   users.forEach((user) => (alarmsBuffer[user.sound] = 0));
 
-  // might need to change what were targetting ie: user.something
   return Object.keys(alarmsBuffer);
 };
 
@@ -50,7 +48,6 @@ export const getAlarmContact = (users) => {
   const alarmsBuffer = {};
   users.forEach((user) => (alarmsBuffer[user.contact] = 0));
 
-  // might need to change what were targetting ie: user.something
   return Object.keys(alarmsBuffer);
 };
 
@@ -63,6 +60,5 @@ export const getAlarmTime = (users) => {
   const alarmsBuffer = {};
   users.forEach((user) => (alarmsBuffer[user.time] = 0));
 
-  // might need to change what were targetting ie: user.something
   return Object.keys(alarmsBuffer);
 };
