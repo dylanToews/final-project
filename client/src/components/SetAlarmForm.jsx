@@ -1,24 +1,38 @@
+import { useState } from "react";
+
 export default function SetAlarmForm(props) {
+  const { onSubmit } = props;
+
+  const initialValues = {
+    time: "",
+  };
+
+  const [formData, setFormData] = useState(initialValues);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    
+    onSubmit(formData)
+
+    setFormData(initialValues)
+  };
+
   return (
-    <form className="SetAlarmForm">
+    <form className="SetAlarmForm" onSubmit={handleSubmit}>
       <h2>Choose Time</h2>
-      <input type="text" name="alarmTime" placeholder="Enter time" />
-
-      <h2>Select Contact </h2>
-      <select name="selectContact">
-        <option value="contactOption1">Select Contact 1</option>
-        <option value="contactOption2">Select Contact 2</option>
-        <option value="contactOption2">Select Contact 3</option>
-      </select>
-
-      <h2>Select Sound </h2>
-      <select name="selectsound">
-        <option value="soundOption1">Select sound 1</option>
-        <option value="soundOption2">Select sound 2</option>
-        <option value="soundOption2">Select sound 3</option>
-      </select>
-      <br></br>
-      <button>Add Alarm </button>
+      <input 
+      type="text" 
+      name="time" 
+      placeholder="Enter time" 
+      onChange={handleChange} 
+      value={formData.time}/>
+      <button>Add Time</button>
     </form>
   );
 }
