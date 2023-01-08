@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import AlarmList from "./components/AlarmList";
 import SetAlarmForm from "./components/SetAlarmForm";
 import UserList from "./components/UserList";
+import Clock from "./components/clock";
 
 import "./App.css";
 
@@ -78,6 +79,9 @@ function App() {
     <div className="App">
       <Header />
       <main>
+        <div className="Clock">
+          <Clock />
+        </div>
         <section>
           <button onClick={() => setViewMode(VIEW)}>VIEW</button>
           <button onClick={() => setViewMode(NEWTIME)}>ADD NEW TIME</button>
