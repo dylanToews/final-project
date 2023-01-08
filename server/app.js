@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const alarmItems = require("./data/mockAlarmItemData");
 
-console.log(alarmItems)
 
 const app = express();
 
@@ -20,15 +19,11 @@ app.use(express.static(path.join(__dirname, "public")));
 //   return db.query("SELECT * FROM data")
 // }
 
-
-
-///Returns full item for each alarm 
+///Returns full item for each alarm
 
 const getAlarmItems = () => {
   return Promise.resolve(alarmItems);
 };
-
-
 
 //gets specific information from alarmItems below
 
@@ -64,25 +59,39 @@ const getSounds = () => {
   return Promise.resolve(sounds);
 };
 
+// functions to handle axios posts coming from front end
+
+
+const addTime = (time) => {
+  alarmItems.push(time);
+
+  return Promise.resolve("ok"); // if this was DB call, return the created id
+};
+
+const addAlarmItem = (newAlarmItem) => {
+  alarmItems.push(newAlarmItem);
+
+  return Promise.resolve("ok"); // if this was DB call, return the created id
+};
 
 app.get("/api/v1/alarmItems", (req, res) => {
-  getAlarmItems().then((alarmItems) => res.json(alarmItems))
+  getAlarmItems().then((alarmItems) => res.json(alarmItems));
 });
 
 app.get("/api/v1/users", (req, res) => {
-  getUsers().then((users) => res.json(users))
+  getUsers().then((users) => res.json(users));
 });
 
 app.get("/api/v1/times", (req, res) => {
-  getTimes().then((times) => res.json(times))
+  getTimes().then((times) => res.json(times));
 });
 
 app.get("/api/v1/contacts", (req, res) => {
-  getContacts().then((contacts) => res.json(contacts))
+  getContacts().then((contacts) => res.json(contacts));
 });
 
 app.get("/api/v1/sounds", (req, res) => {
-  getSounds().then((Sounds) => res.json(Sounds))
+  getSounds().then((Sounds) => res.json(Sounds));
 });
 
 
@@ -90,11 +99,13 @@ app.get("/api/v1/sounds", (req, res) => {
 
 
 
-app.post("/api/v1/alarmItem", (req, res) => {
-  //...
-  app.post("/api/v1/alarm", (req, res) => {
-    //...
-  });
+app.post("/api/v1/alarmItems", (req, res) => {
+  const { newAlarmItem } = req.body;
+  addAlarmItem(newAlarmItem).then((data) => res.send(data));
 });
 
+app.post("/api/v1/times", (req, res) => {
+  const { time } = req.body;
+  addTime(time).then((data) => res.send(data));
+});
 module.exports = app;

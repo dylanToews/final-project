@@ -1,11 +1,10 @@
-import { useState } from "react";
-import axios from "axios"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import Header from "./components/Header";
 import AlarmList from "./components/AlarmList";
 import SetAlarmForm from "./components/SetAlarmForm";
 import UserList from "./components/UserList";
-
 
 import "./App.css";
 
@@ -24,28 +23,44 @@ const NEWTIME = "NEWTIME";
 const NEWPARAM = "NEWPARAM";
 
 function App() {
-  const [alarmItems, setAlarmItems] = useState(mockAlarmItemData);
-  const [users, setUsers] = useState(getUserAlarms(alarmItems));
-  const [sounds, setSounds] = useState(getAlarmSounds(alarmItems));
-  const [contacts, setContacts] = useState(getAlarmContact(alarmItems));
-  const [alarms, setAlarms] = useState(getAlarmTime(alarmItems));
+  const [alarmItems, setAlarmItems] = useState([]);
+  const [users, setUsers] = useState(getUserAlarms([]));
+  const [sounds, setSounds] = useState(getAlarmSounds([]));
+  const [contacts, setContacts] = useState(getAlarmContact([]));
+  const [alarms, setAlarms] = useState(getAlarmTime([]));
   const [viewMode, setViewMode] = useState(VIEW);
 
-  const requests = [
-    axios.get("/api/v1/alarmItems"),
-    axios.get("/api/v1/users"),
-    axios.get("/api/v1/times"),
-    axios.get("/api/v1/sounds"),
-    axios.get("/api/v1/contacts")
-  ]
-
-  Promise.all(requests).then(responses => console.log(responses))
-
-
+  useEffect(() => {
+    const requests = [
+      axios.get("/api/v1/alarmItems"),
+      axios.get("/api/v1/users"),
+      axios.get("/api/v1/times"),
+      axios.get("/api/v1/sounds"),
+      axios.get("/api/v1/contacts"),
+    ];
+    Promise.all(requests)
+      .then((responses) => ({
+        alarmItems: responses[0].data,
+        users: responses[1].data,
+        times: responses[2].data,
+        sounds: responses[3].data,
+        contacts: responses[4].data,
+      }))
+      .then(({ alarmItems, users, times, sounds, contacts }) => {
+        setAlarmItems(alarmItems);
+        setUsers(users);
+        setSounds(sounds);
+        setContacts(contacts);
+        setAlarms(times);
+      });
+  }, []);
 
   const addNewAlarm = (formData) => {
     if (!alarms.includes(formData.time)) {
-      setAlarms([...alarms, formData.time]);
+      axios.post("/api/v1/times", { time: formData.time }).then((res) => {
+        console.log("add new time successful");
+        setAlarms([...alarms, formData.time]);
+      });
     }
   };
 
@@ -53,7 +68,10 @@ function App() {
     const id = alarmItems.length + 1;
     const newAlarmItem = { id, ...formData };
 
-    setAlarmItems([...alarmItems, newAlarmItem]);
+    axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
+      console.log("add new alarmItem sucessful");
+      setAlarmItems([...alarmItems, newAlarmItem]);
+    });
   };
 
   return (
