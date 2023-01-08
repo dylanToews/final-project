@@ -4,20 +4,18 @@ import axios from "axios";
 import Header from "./components/Header";
 import AlarmList from "./components/AlarmList";
 import SetAlarmForm from "./components/SetAlarmForm";
-import UserList from "./components/UserList";
+import SetParamsForm from "./components/SetParamsForm";
+
+
+
+
 import Clock from "./components/clock";
+
+
 
 import "./App.css";
 
-import mockAlarmItemData from "./data/mockAlarmItemData";
-import mockUserData from "./data/mockUserData";
-import {
-  getUserAlarms,
-  getAlarmSounds,
-  getAlarmContact,
-  getAlarmTime,
-} from "./helpers/userHelpers";
-import SetParamsForm from "./components/SetParamsForm";
+
 
 const VIEW = "VIEW";
 const NEWTIME = "NEWTIME";
@@ -25,10 +23,10 @@ const NEWPARAM = "NEWPARAM";
 
 function App() {
   const [alarmItems, setAlarmItems] = useState([]);
-  const [users, setUsers] = useState(getUserAlarms([]));
-  const [sounds, setSounds] = useState(getAlarmSounds([]));
-  const [contacts, setContacts] = useState(getAlarmContact([]));
-  const [alarms, setAlarms] = useState(getAlarmTime([]));
+  const [users, setUsers] = useState([]);
+  const [sounds, setSounds] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [alarms, setAlarms] = useState([]);
   const [viewMode, setViewMode] = useState(VIEW);
 
   useEffect(() => {
