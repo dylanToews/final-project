@@ -114,7 +114,7 @@ a {
 
 /*=============== CLOCK ===============*/
 .clock__container {
-  height: 100vh;
+  /* height: 100vh; */
   grid-template-rows: 1fr max-content;
 }
 

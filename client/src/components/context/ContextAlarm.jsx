@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import months from "../../data";
-import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
+// import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
-const alarm = new Audio(Sound);
+// const alarm = new Audio(Sound);
 export const AlarmContext = createContext();
 
 function ContextAlarm({ children }) {
@@ -44,18 +44,46 @@ function ContextAlarm({ children }) {
       setMonthNow(months[month]);
       setYearNow(year);
     }, 1000);
-  }, []);
 
-  if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
-    // alarm.play();
-    // alarm.loop = true;
-    console.log("alarm has occured")
-  }
+    const alarmArray = ["04:09 PM", "04:10 PM", "04:11 PM", "04:07 PM", "04:08 PM",]
+    
+    setAlarmTime(alarmArray)
+    
+    
+  }, []);
+  
+
+
+  // iterates through alarmTime state and runs conditional if any of values match with current time. Have to use Object.values because state seems to always be stores as an object, even if given an array 
+  
+  Object.values(alarmTime).forEach((time) => {
+    if (time === `${hourDigital}:${minutesDigital} ${amPm}`) {
+      // alarm.play();
+      // alarm.loop = true;
+      console.log("alarm has occured at", time)
+    }
+  })
+
+
+  //Original alarm conditional below 
+
+  // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
+  //   // alarm.play();
+  //   // alarm.loop = true;
+  //   console.log("alarm has occured")
+  // }
+
+
 
   const pauseAlarm = () => {
-    alarm.pause();
+    // alarm.pause();
     setAlarmTime("");
   };
+  
+
+
+
+
 
   return (
     <AlarmContext.Provider

@@ -6,11 +6,9 @@ import AlarmList from "./components/AlarmList";
 import SetAlarmForm from "./components/SetAlarmForm";
 import SetParamsForm from "./components/SetParamsForm";
 
-
-
-
-import Clock from "./components/clock";
-
+import AlarmOption from './components/AlarmOption/AlarmOption';
+import ContextAlarm from './components/context/ContextAlarm';
+import DigitalClock from './components/DigitalClock/DigitalClock';
 
 
 import "./App.css";
@@ -77,10 +75,17 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <div className="Clock">
-          <Clock />
+        <section className="clock container">
+      <div className="clock__container grid">
+        <div className="clock__content grid">
+          <ContextAlarm>
+            <DigitalClock />
+            <AlarmOption />
+          </ContextAlarm>
         </div>
-        <section>
+      </div>
+    </section>
+    <section>
           <button onClick={() => setViewMode(VIEW)}>VIEW</button>
           <button onClick={() => setViewMode(NEWTIME)}>ADD NEW TIME</button>
           <button onClick={() => setViewMode(NEWPARAM)}>
