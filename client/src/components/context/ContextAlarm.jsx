@@ -45,7 +45,7 @@ function ContextAlarm({ children }) {
       setYearNow(year);
     }, 1000);
 
-    const alarmArray = ["04:09 PM", "04:10 PM", "04:11 PM", "04:07 PM", "04:08 PM",]
+    const alarmArray = ["08:43 AM", "08:44 AM", "08:45 AM", "04:07 PM", "04:08 PM",]
     
     setAlarmTime(alarmArray)
     

@@ -51,7 +51,8 @@ function AlarmOption(props) {
   ));
 
   
-  const setAlarm = () => {
+  const setAlarm = (event) => {
+    event.preventDefault();
     if (hasAlarm) {
       pauseAlarm();
       setHasAlarm(false);
