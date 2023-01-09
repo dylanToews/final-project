@@ -1,5 +1,5 @@
--- schema/03_create_contacts.sql
-DROP TABLE IF EXISTS contacts CASCADE;
+-- schema/04_create_alarms.sql
+DROP TABLE IF EXISTS alarms CASCADE;
 
 -- timestamp function for updated_at
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
@@ -10,17 +10,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- CREATE CONTACTS
-CREATE TABLE contacts (
+-- CREATE ALARMS
+CREATE TABLE alarms (
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users(id) ON DELETE CASCADE NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  tel_number VARCHAR(15) NOT NULL,
+  sound_id integer REFERENCES sounds(id) ON DELETE CASCADE NOT NULL,
+  contact_id integer REFERENCES contacts(id) ON DELETE CASCADE NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  set_for TIME NOT NULL,
+  active BOOL NOT NULL DEFAULT true,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON contacts
+BEFORE UPDATE ON alarms
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();

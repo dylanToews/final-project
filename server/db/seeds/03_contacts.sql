@@ -18,6 +18,6 @@ INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Link Contact 2', '1
 INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Link Contact 3', '10000000011');
 
 -- Seed Simon
-INSERT INTO contacts (user_id, name, tel_number) VALUES (4, 'Simon Contact  1', '1000000012');
+INSERT INTO contacts (user_id, name, tel_number) VALUES (4, 'Simon Contact 1', '10000000012');
 
 -- Seed Mario (no contacts)
