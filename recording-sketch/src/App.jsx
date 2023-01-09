@@ -13,16 +13,11 @@ import useRecordingsList from './hooks/useRecordingsList';
 import './App.scss';
 
 import mockSounds from './data/mockSoundData';
+import { getSoundCategories } from './handlers/soundHelpers';
 
-// recorderState example:
-// {
-//   recordingMinutes: 0,
-//   recordingSeconds: 0,
-//   initRecording: false,
-//   mediaStream: null,
-//   mediaRecorder: null,
-//   audio: null
-// };
+const VIEW = "VIEW";
+const NEWSOUND = "NEWSOUND";
+const NEWCATEGORY = "NEWCATEGORY";
 
 function App() {
   const { recorderState, ...handlers } = useRecorder();
@@ -31,14 +26,35 @@ function App() {
 
 
   const [sounds, setSounds] = useState(mockSounds);
+  const [categories, setCategories] = useState(getSoundCategories(sounds));
+  const [viewMode, setViewMode] = useState(VIEW);
+
+  const addNewSound = (formData) => {
+    const id = sounds.length + 1;
+    const newSound = {id, ...formData}
+
+    setSounds([...sounds, newSound]);
+
+  };
+
+  const addNewCategory = (formData) => {
+    if (!categories.includes(formData.category)) {
+      setCategories([...categories, formData.category])
+    }
+
+
+  }
 
   return (
     <div className="App">
       <Header />
       <main>
         <section>
-          <SoundForm />
-          <CategoryForm />
+          <button onClick={() => setViewMode(VIEW)}>View Sounds</button>
+          <button onClick={() => setViewMode(NEWSOUND)}>Add New Sound</button>
+          <button onClick={() => setViewMode(NEWCATEGORY)}>Add New Sound Category</button>
+          {viewMode === NEWSOUND && <SoundForm onSubmit={addNewSound} categories={categories}/>}
+          {viewMode === NEWCATEGORY && <CategoryForm onSubmit={addNewCategory}/>}
         </section>
         <SoundList sounds={sounds} />
       </main>

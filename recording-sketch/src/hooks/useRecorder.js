@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { startRecording, saveRecording } from "../handlers/recorder-controls";
 
+// sounds state object structure
 const initialState = {
   recordingMinutes: 0,
   recordingSeconds: 0,
