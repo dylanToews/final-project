@@ -92,22 +92,6 @@ function App() {
             </div>
           </div>
         </section>
-        <section>
-          {/* <button onClick={() => setViewMode(VIEW)}>VIEW</button>
-          <button onClick={() => setViewMode(NEWTIME)}>ADD NEW TIME</button>
-          <button onClick={() => setViewMode(NEWPARAM)}>
-            ADD NEW PARAMETERS
-          </button> */}
-          {/* {viewMode === NEWTIME && <SetAlarmForm onSubmit={addNewAlarm} />} */}
-{/* 
-          <SetParamsForm
-            onSubmit={addNewParams}
-            users={users}
-            sounds={sounds}
-            contacts={contacts}
-            alarms={alarms}
-          /> */}
-        </section>
         <AlarmList alarmItems={alarmItems} />
       </main>
     </div>

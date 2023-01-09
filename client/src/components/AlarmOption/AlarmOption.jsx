@@ -17,7 +17,9 @@ function AlarmOption(props) {
   const initialValues = {
     contact: "",
     sound: "",
-    time: "",
+    hour: "",
+    minutes: "",
+    amPmOption: ""
   };
 
   const [formData, setFormData] = useState(initialValues);
@@ -52,28 +54,20 @@ function AlarmOption(props) {
 
   
   const setAlarm = (event) => {
-    event.preventDefault();
     if (hasAlarm) {
       pauseAlarm();
       setHasAlarm(false);
       return;
     }
-
-    if (
-      !hour.includes("Hour") &&
-      !minutes.includes("Minutes") &&
-      !amPmOption.includes("Am-Pm")
-    ) {
       setHasAlarm(true);
       setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
-      if (formData.contact && formData.sound) {
-        setFormData({ ...formData, time: `${hour}:${minutes} ${amPmOption}` })
+      if (formData.contact && 
+          formData.sound &&
+          formData.hour &&
+          formData.minutes &&
+          formData.amPmOption) {
         onSubmit(formData);
-        // setFormData(initialValues);
-        // console.log(formData)
       }
-      // console.log(`${hour}:${minutes} ${amPmOption}`)
-    }
   };
 
 
@@ -91,7 +85,7 @@ function AlarmOption(props) {
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
-        <select {...setHour}>
+        <select name="hour" value={formData.hour} onChange={handleChange}>
           <option disabled value="Hour">
             Hour
           </option>
@@ -101,7 +95,7 @@ function AlarmOption(props) {
             </option>
           ))}
         </select>
-        <select {...setMinutes}>
+        <select name="minutes" value={formData.minutes} onChange={handleChange}>
           <option disabled value="Minutes">
             Minutes
           </option>
@@ -111,7 +105,7 @@ function AlarmOption(props) {
             </option>
           ))}
         </select>
-        <select {...setAmPmOption}>
+        <select name="amPmOption" value={formData.amPmOption} onChange={handleChange}>
           <option disabled value="Am-Pm">
             Am/Pm
           </option>
