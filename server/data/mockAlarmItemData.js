@@ -2,31 +2,24 @@ const alarmItems = [
   {
     id: 1,
     user: "Dylan",
-    time: "7:00 AM",
+    time: "07:00 AM",
     contact: "Danny Devito",
-    sound: "garbage truck"
+    sound: "Recording 1"
   },
   {
     id: 2,
     user: "Dylan",
-    time: "5:00 AM",
-    contact: "Jim",
-    sound: "Jimmynoise"
+    time: "05:00 AM",
+    contact: "Bill Hader",
+    sound: "Recording 2"
   },
   {
     id: 3,
     user: "Cheever",
-    time: "5:40 AM",
-    contact: "bob",
-    sound: "bob makes a joke"
+    time: "05:40 AM",
+    contact: "T-Swizzy",
+    sound: "Recording 3"
   },
-  {
-    id: 4,
-    user: "Ryan",
-    time: "5:40123 AM",
-    contact: "bo2131b",
-    sound: "bob m123123123123akes a joke"
-  }, 
 ];
 
 module.exports = alarmItems

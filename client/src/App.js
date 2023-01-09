@@ -6,14 +6,13 @@ import AlarmList from "./components/AlarmList";
 import SetAlarmForm from "./components/SetAlarmForm";
 import SetParamsForm from "./components/SetParamsForm";
 
-import AlarmOption from './components/AlarmOption/AlarmOption';
-import ContextAlarm from './components/context/ContextAlarm';
-import DigitalClock from './components/DigitalClock/DigitalClock';
-
+import AlarmOption from "./components/AlarmOption/AlarmOption";
+import ContextAlarm from "./components/context/ContextAlarm";
+import DigitalClock from "./components/DigitalClock/DigitalClock";
 
 import "./App.css";
 
-
+//Views -- Mostly test views atm
 
 const VIEW = "VIEW";
 const NEWTIME = "NEWTIME";
@@ -52,14 +51,16 @@ function App() {
       });
   }, []);
 
-  const addNewAlarm = (formData) => {
-    if (!alarms.includes(formData.time)) {
-      axios.post("/api/v1/times", { time: formData.time }).then((res) => {
-        console.log("add new time successful");
-        setAlarms([...alarms, formData.time]);
-      });
-    }
-  };
+  // Function below unnecessary because alarm time is now handled by contextAlarm. Kept for reference but to be deleted later
+
+  // const addNewAlarm = (formData) => {
+  //   if (!alarms.includes(formData.time)) {
+  //     axios.post("/api/v1/times", { time: formData.time }).then((res) => {
+  //       console.log("add new time successful");
+  //       setAlarms([...alarms, formData.time]);
+  //     });
+  //   }
+  // };
 
   const addNewParams = (formData) => {
     const id = alarmItems.length + 1;
@@ -67,6 +68,7 @@ function App() {
 
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
       console.log("add new alarmItem sucessful");
+      console.log( newAlarmItem)
       setAlarmItems([...alarmItems, newAlarmItem]);
     });
   };
@@ -76,32 +78,35 @@ function App() {
       <Header />
       <main>
         <section className="clock container">
-      <div className="clock__container grid">
-        <div className="clock__content grid">
-          <ContextAlarm>
-            <DigitalClock />
-            <AlarmOption />
-          </ContextAlarm>
-        </div>
-      </div>
-    </section>
-    <section>
-          <button onClick={() => setViewMode(VIEW)}>VIEW</button>
+          <div className="clock__container grid">
+            <div className="clock__content grid">
+              <ContextAlarm>
+                <DigitalClock />
+                <AlarmOption
+                  onSubmit={addNewParams}
+                  sounds={sounds}
+                  contacts={contacts}
+                  alarms={alarms}
+                />
+              </ContextAlarm>
+            </div>
+          </div>
+        </section>
+        <section>
+          {/* <button onClick={() => setViewMode(VIEW)}>VIEW</button>
           <button onClick={() => setViewMode(NEWTIME)}>ADD NEW TIME</button>
           <button onClick={() => setViewMode(NEWPARAM)}>
             ADD NEW PARAMETERS
-          </button>
-          {viewMode === NEWTIME && <SetAlarmForm onSubmit={addNewAlarm} />}
-
-          {viewMode === NEWPARAM && (
-            <SetParamsForm
-              onSubmit={addNewParams}
-              users={users}
-              sounds={sounds}
-              contacts={contacts}
-              alarms={alarms}
-            />
-          )}
+          </button> */}
+          {/* {viewMode === NEWTIME && <SetAlarmForm onSubmit={addNewAlarm} />} */}
+{/* 
+          <SetParamsForm
+            onSubmit={addNewParams}
+            users={users}
+            sounds={sounds}
+            contacts={contacts}
+            alarms={alarms}
+          /> */}
         </section>
         <AlarmList alarmItems={alarmItems} />
       </main>

@@ -4,10 +4,10 @@ export default function AlarmListItem(props) {
   
   return (
     <li className="AlarmListItem">
-      <p>User: {user}</p>
       <p>Time: {time}</p>
       <p>Contact Name: {contact}</p>
       <p>Sound: {sound}</p>
+      <br></br>
     </li>
   );
 }

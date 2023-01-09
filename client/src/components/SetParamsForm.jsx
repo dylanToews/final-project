@@ -47,17 +47,17 @@ export default function SetParamsForm(props) {
 
   return (
     <form className="SetParamsForm" onSubmit={handleSubmit}>
-      <h2>Select User</h2>
+      {/* <h2>Select User</h2>
       <select name="user" value={formData.user} onChange={handleChange}>
         <option value="">Please Select A User</option>
         {parsedUsers}
-      </select>
-
+      </select> */}
+{/* 
       <h2>Select Alarm</h2>
       <select name="time" value={formData.time} onChange={handleChange}>
         <option value="">Please Select an Alarm</option>
         {parsedAlarms}
-      </select>
+      </select> */}
 
       <h2>Select Contact </h2>
       <select name="contact" value={formData.contact} onChange={handleChange}>
@@ -70,8 +70,8 @@ export default function SetParamsForm(props) {
         <option value="">Please Select A Sound</option>
         {parsedSounds}
       </select>
-      <br></br>
-      <button>Add Options </button>
+      {/* <br></br>
+      <button>Add Options </button> */}
     </form>
   );
 }
