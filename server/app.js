@@ -4,6 +4,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const alarmItems = require("./data/mockAlarmItemData");
 
+// DB Query test router
+var usersRouter = require('./routes/users');
+
 
 const app = express();
 
@@ -12,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// DB query test app.use
+app.use('/users', usersRouter);
 
 // eventually write db queries in functions below, i think?
 
