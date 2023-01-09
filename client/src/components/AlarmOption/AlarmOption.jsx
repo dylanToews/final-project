@@ -9,10 +9,10 @@ function AlarmOption(props) {
   const [minutes, setMinutes] = useSelect("Minutes");
   const [amPmOption, setAmPmOption] = useSelect("Am-Pm");
 
-  const { setAlarmTime, pauseAlarm, hasAlarm, setHasAlarm } =
+  const { setAlarmTime, pauseAlarm, hasAlarm, setHasAlarm, sounds, contacts, alarms, addNewParams } =
     useContext(AlarmContext);
 
-  const { onSubmit, sounds, contacts, alarms } = props;
+  const { onSubmit } = props;
 
   const initialValues = {
     contact: "",
@@ -66,19 +66,21 @@ function AlarmOption(props) {
           formData.hour &&
           formData.minutes &&
           formData.amPmOption) {
-        onSubmit(formData);
+        addNewParams(formData);
       }
   };
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (formData.contact && formData.sound) {
-      onSubmit(formData);
-      setFormData(initialValues);
-    }
-    //could add error state here -- populate error state if all forms are not selected
-  };
+  //Function below moved into setAlarm
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (formData.contact && formData.sound) {
+  //     addNewParams(formData);
+  //     setFormData(initialValues);
+  //   }
+  //   //could add error state here -- populate error state if all forms are not selected
+  // };
 
 
 

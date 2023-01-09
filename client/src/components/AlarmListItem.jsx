@@ -1,5 +1,5 @@
 export default function AlarmListItem(props) {
-  const { user, hour, minutes, amPmOption, contact, sound } = props;
+  const {  hour, minutes, amPmOption, contact, sound } = props;
 
   
   return (

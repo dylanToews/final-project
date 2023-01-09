@@ -19,37 +19,37 @@ const NEWTIME = "NEWTIME";
 const NEWPARAM = "NEWPARAM";
 
 function App() {
-  const [alarmItems, setAlarmItems] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [sounds, setSounds] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const [alarms, setAlarms] = useState([]);
-  const [viewMode, setViewMode] = useState(VIEW);
+  // const [alarmItems, setAlarmItems] = useState([]);
+  // const [users, setUsers] = useState([]);
+  // const [sounds, setSounds] = useState([]);
+  // const [contacts, setContacts] = useState([]);
+  // const [alarms, setAlarms] = useState([]);
+  // const [viewMode, setViewMode] = useState(VIEW);
 
-  useEffect(() => {
-    const requests = [
-      axios.get("/api/v1/alarmItems"),
-      axios.get("/api/v1/users"),
-      axios.get("/api/v1/times"),
-      axios.get("/api/v1/sounds"),
-      axios.get("/api/v1/contacts"),
-    ];
-    Promise.all(requests)
-      .then((responses) => ({
-        alarmItems: responses[0].data,
-        users: responses[1].data,
-        times: responses[2].data,
-        sounds: responses[3].data,
-        contacts: responses[4].data,
-      }))
-      .then(({ alarmItems, users, times, sounds, contacts }) => {
-        setAlarmItems(alarmItems);
-        setUsers(users);
-        setSounds(sounds);
-        setContacts(contacts);
-        setAlarms(times);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const requests = [
+  //     axios.get("/api/v1/alarmItems"),
+  //     axios.get("/api/v1/users"),
+  //     axios.get("/api/v1/times"),
+  //     axios.get("/api/v1/sounds"),
+  //     axios.get("/api/v1/contacts"),
+  //   ];
+  //   Promise.all(requests)
+  //     .then((responses) => ({
+  //       alarmItems: responses[0].data,
+  //       users: responses[1].data,
+  //       times: responses[2].data,
+  //       sounds: responses[3].data,
+  //       contacts: responses[4].data,
+  //     }))
+  //     .then(({ alarmItems, users, times, sounds, contacts }) => {
+  //       setAlarmItems(alarmItems);
+  //       // setUsers(users);
+  //       setSounds(sounds);
+  //       setContacts(contacts);
+  //       setAlarms(times);
+  //     });
+  // }, []);
 
   // Function below unnecessary because alarm time is now handled by contextAlarm. Kept for reference but to be deleted later
 
@@ -62,16 +62,16 @@ function App() {
   //   }
   // };
 
-  const addNewParams = (formData) => {
-    const id = alarmItems.length + 1;
-    const newAlarmItem = { id, ...formData };
+  // const addNewParams = (formData) => {
+  //   const id = alarmItems.length + 1;
+  //   const newAlarmItem = { id, ...formData };
 
-    axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      console.log("add new alarmItem sucessful");
-      console.log( newAlarmItem)
-      setAlarmItems([...alarmItems, newAlarmItem]);
-    });
-  };
+  //   axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
+  //     console.log("add new alarmItem sucessful");
+  //     console.log(newAlarmItem);
+  //     setAlarmItems([...alarmItems, newAlarmItem]);
+  //   });
+  // };
 
   return (
     <div className="App">
@@ -83,16 +83,16 @@ function App() {
               <ContextAlarm>
                 <DigitalClock />
                 <AlarmOption
-                  onSubmit={addNewParams}
-                  sounds={sounds}
-                  contacts={contacts}
-                  alarms={alarms}
+                  // onSubmit={addNewParams}
+                  // sounds={sounds}
+                  // contacts={contacts}
+                  // alarms={alarms}
                 />
+                <AlarmList />
               </ContextAlarm>
             </div>
           </div>
         </section>
-        <AlarmList alarmItems={alarmItems} />
       </main>
     </div>
   );
