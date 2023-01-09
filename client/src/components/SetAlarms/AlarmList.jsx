@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import AlarmListItem from "./AlarmListItem";
-import { getFilteredUsers, getUserAlarms } from "../helpers/userHelpers";
-import { AlarmContext } from "./context/ContextAlarm";
+import { getFilteredUsers, getUserAlarms } from "../../helpers/userHelpers";
+import { AlarmContext } from "../context/ContextAlarm";
 
 export default function AlarmList(props) {
   const [filter, setFilter] = useState(null)
@@ -29,7 +29,6 @@ export default function AlarmList(props) {
     <section className="AlarmList">
       <h2>Existing Alarms</h2>
       <br></br>
-      {/* {parsedButton} */}
       <ul>
         {[parsedAlarmItems]}
       </ul>

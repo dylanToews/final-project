@@ -79,13 +79,11 @@ function ContextAlarm({ children }) {
       setYearNow(year);
     }, 1000);
 
-    // const alarmArray = ["08:43 AM", "08:44 AM", "08:45 AM", "04:07 PM", "04:08 PM",]
-    
-    // setAlarmTime(alarmArray)
-    
-    
-    
   }, []);
+  
+
+  
+  // const parsedAlarmItems = `${alarmItems.hour}`
   
 
   const addNewParams = (formData) => {
@@ -100,13 +98,13 @@ function ContextAlarm({ children }) {
   };
 
    
-  // iterates through alarmTime state and runs conditional if any of values match with current time. Have to use Object.values because state seems to always be stores as an object, even if given an array 
-  
-  Object.values(alarmTime).forEach((time) => {
-    if (time === `${hourDigital}:${minutesDigital} ${amPm}`) {
+  // This conditional is what fires off the alarms. 
+
+  Object.values(alarmItems).forEach((alarmItem) => {
+    if (`${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}` === `${hourDigital}:${minutesDigital} ${amPm}`) {
       // alarm.play();
       // alarm.loop = true;
-      console.log("alarm has occured at", time)
+      console.log("alarm has occured at", `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption} with the contact ${alarmItem.contact} and the sound ${alarmItem.sound}`)
     }
   })
 
