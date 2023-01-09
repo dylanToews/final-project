@@ -9,15 +9,17 @@ function AlarmOption(props) {
   const [minutes, setMinutes] = useSelect("Minutes");
   const [amPmOption, setAmPmOption] = useSelect("Am-Pm");
 
-  const { setAlarmTime, pauseAlarm, hasAlarm, setHasAlarm } =
+  const { setAlarmTime, pauseAlarm, hasAlarm, setHasAlarm, sounds, contacts, alarms, addNewParams } =
     useContext(AlarmContext);
 
-  const { onSubmit, sounds, contacts, alarms } = props;
+  const { onSubmit } = props;
 
   const initialValues = {
     contact: "",
     sound: "",
-    time: "",
+    hour: "",
+    minutes: "",
+    amPmOption: ""
   };
 
   const [formData, setFormData] = useState(initialValues);
@@ -52,46 +54,40 @@ function AlarmOption(props) {
 
   
   const setAlarm = (event) => {
-    event.preventDefault();
     if (hasAlarm) {
       pauseAlarm();
       setHasAlarm(false);
       return;
     }
-
-    if (
-      !hour.includes("Hour") &&
-      !minutes.includes("Minutes") &&
-      !amPmOption.includes("Am-Pm")
-    ) {
       setHasAlarm(true);
       setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
-      if (formData.contact && formData.sound) {
-        setFormData({ ...formData, time: `${hour}:${minutes} ${amPmOption}` })
-        onSubmit(formData);
-        // setFormData(initialValues);
-        // console.log(formData)
+      if (formData.contact && 
+          formData.sound &&
+          formData.hour &&
+          formData.minutes &&
+          formData.amPmOption) {
+        addNewParams(formData);
       }
-      // console.log(`${hour}:${minutes} ${amPmOption}`)
-    }
   };
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (formData.contact && formData.sound) {
-      onSubmit(formData);
-      setFormData(initialValues);
-    }
-    //could add error state here -- populate error state if all forms are not selected
-  };
+  //Function below moved into setAlarm
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (formData.contact && formData.sound) {
+  //     addNewParams(formData);
+  //     setFormData(initialValues);
+  //   }
+  //   //could add error state here -- populate error state if all forms are not selected
+  // };
 
 
 
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
-        <select {...setHour}>
+        <select name="hour" value={formData.hour} onChange={handleChange}>
           <option disabled value="Hour">
             Hour
           </option>
@@ -101,7 +97,7 @@ function AlarmOption(props) {
             </option>
           ))}
         </select>
-        <select {...setMinutes}>
+        <select name="minutes" value={formData.minutes} onChange={handleChange}>
           <option disabled value="Minutes">
             Minutes
           </option>
@@ -111,7 +107,7 @@ function AlarmOption(props) {
             </option>
           ))}
         </select>
-        <select {...setAmPmOption}>
+        <select name="amPmOption" value={formData.amPmOption} onChange={handleChange}>
           <option disabled value="Am-Pm">
             Am/Pm
           </option>

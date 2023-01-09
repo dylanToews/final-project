@@ -2,23 +2,29 @@ const alarmItems = [
   {
     id: 1,
     user: "Dylan",
-    time: "07:00 AM",
     contact: "Danny Devito",
-    sound: "Recording 1"
+    sound: "Recording 1",
+    hour: "02",
+    minutes: "01",
+    amPmOption: "PM"
   },
   {
     id: 2,
     user: "Dylan",
-    time: "05:00 AM",
     contact: "Bill Hader",
-    sound: "Recording 2"
+    sound: "Recording 2",
+    hour: "11",
+    minutes: "01",
+    amPmOption: "AM"
   },
   {
     id: 3,
     user: "Cheever",
-    time: "05:40 AM",
     contact: "T-Swizzy",
-    sound: "Recording 3"
+    sound: "Recording 3",
+    hour: "04",
+    minutes: "51",
+    amPmOption: "PM"
   },
 ];
 
