@@ -1,5 +1,5 @@
--- schema/02_create_urls.sql
-DROP TABLE IF EXISTS urls CASCADE;
+-- schema/02_create_sounds.sql
+DROP TABLE IF EXISTS sounds CASCADE;
 
 -- timestamp function for updated_at
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
