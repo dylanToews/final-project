@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./AlarmOption.css";
+import "../Alarms.css";
 import { minutesNumber, hourNumber } from "../../func";
 import useSelect from "../../hook/useSelect";
 import { AlarmContext } from "../context/ContextAlarm";
@@ -87,33 +88,36 @@ function AlarmOption(props) {
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
-        <select name="hour" value={formData.hour} onChange={handleChange}>
-          <option disabled value="Hour">
-            Hour
-          </option>
-          {hourNumber.map((hour, index) => (
-            <option key={index} value={hour}>
-              {hour}
+        
+        <row>
+          <select name="hour" value={formData.hour} onChange={handleChange} className="SpaceTime">
+            <option disabled value="Hour">
+              Hour
             </option>
-          ))}
-        </select>
-        <select name="minutes" value={formData.minutes} onChange={handleChange}>
-          <option disabled value="Minutes">
-            Minutes
-          </option>
-          {minutesNumber.map((minutes, index) => (
-            <option key={index} value={minutes}>
-              {minutes}
+            {hourNumber.map((hour, index) => (
+              <option key={index} value={hour}>
+                {hour}
+              </option>
+            ))}
+          </select>
+          <select name="minutes" value={formData.minutes} onChange={handleChange} className="SpaceTime">
+            <option disabled value="Minutes">
+              Minutes
             </option>
-          ))}
-        </select>
-        <select name="amPmOption" value={formData.amPmOption} onChange={handleChange}>
-          <option disabled value="Am-Pm">
-            Am/Pm
-          </option>
-          <option value="AM">Am</option>
-          <option value="PM">Pm</option>
-        </select>
+            {minutesNumber.map((minutes, index) => (
+              <option key={index} value={minutes}>
+                {minutes}
+              </option>
+            ))}
+          </select>
+          <select name="amPmOption" value={formData.amPmOption} onChange={handleChange} className="SpaceTime">
+            <option disabled value="Am-Pm">
+              Am/Pm
+            </option>
+            <option value="AM">Am</option>
+            <option value="PM">Pm</option>
+          </select>
+        </row>
 
       <select name="contact" value={formData.contact} onChange={handleChange}>
         <option value="">Please Select A Contact</option>

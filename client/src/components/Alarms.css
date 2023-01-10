@@ -1,0 +1,16 @@
+.AlarmListItem{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #ff9d56;
+  border-style: solid;
+  border-color: #BB3812;
+  border-width: 5px;
+  border-radius: 15px;
+  color: #EEEEEE;
+  padding-top: 20px;
+}
+
+.SpaceTime {
+  padding: 5px;
+  margin: 5px;
+}
