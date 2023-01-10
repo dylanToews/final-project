@@ -1,7 +1,7 @@
 
 
-import useRecordingsList from "../../hooks/useRecordingsList";
-import "../../styles/recordings-list.scss"
+import useRecordingsList from "../../hook/useRecordingsList";
+import "./recordings-list.css";
 
 export default function RecordingsList(props) {
   const { recordings, deleteAudio } = props;
