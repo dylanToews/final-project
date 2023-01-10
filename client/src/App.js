@@ -13,7 +13,7 @@ import "./App.css";
 
 function App() {
   return (
-    // <ContextAlarm>
+    <ContextAlarm>
       // <Notification></Notification>
       <BrowserRouter>
         <Routes>

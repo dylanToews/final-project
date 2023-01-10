@@ -1,8 +1,11 @@
 import React from 'react';
+import "../About.css"
 
 function About() {
     return (
         <div>
+            <br/>
+            <br/>
             <h1>LEARN</h1>
             <br/>
             <h2>Welcome to Startle, the App that does... something.</h2>
