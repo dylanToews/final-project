@@ -2,7 +2,7 @@ import React from 'react';
 
 function Login_Register() {
     return (
-        <h1>this is the hlogin</h1>
+        <h1>Log in or Register</h1>
     );
 }
 
