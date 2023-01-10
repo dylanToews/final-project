@@ -52,7 +52,7 @@ export default function SetParamsForm(props) {
         <option value="">Please Select A User</option>
         {parsedUsers}
       </select> */}
-{/* 
+      {/* 
       <h2>Select Alarm</h2>
       <select name="time" value={formData.time} onChange={handleChange}>
         <option value="">Please Select an Alarm</option>
