@@ -9,16 +9,16 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/Login_Register">Account</Link>
+          <Link to="/login_register">Account</Link>
         </li>
         <li>
-          <Link to="/Contacts">Contacts</Link>
+          <Link to="/contacts">Contacts</Link>
         </li>
         <li>
-          <Link to="/Sounds">Sounds</Link>
+          <Link to="/sounds">Sounds</Link>
         </li>
         <li>
-          <Link to="/About">About</Link>
+          <Link to="/about">About</Link>
         </li>
       </ul>
     </nav>
