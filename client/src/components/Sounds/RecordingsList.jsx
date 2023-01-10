@@ -1,6 +1,6 @@
 
 
-import useRecordingsList from "../../hook/useRecordingsList";
+import useRecordingsList from "../../hooks/useRecordingsList";
 import "./recordings-list.css";
 
 export default function RecordingsList(props) {

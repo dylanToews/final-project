@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import RecorderControls from '../components/Sounds/RecorderControls';
 import RecordingsList from '../components/Sounds/RecordingsList';
-import useRecorder from '../hook/useRecorder';
-import useRecordingsList from '../hook/useRecordingsList';
+import useRecorder from '../hooks/useRecorder';
+import useRecordingsList from '../hooks/useRecordingsList';
 
 function Sounds() {
   const { recorderState, ...handlers } = useRecorder();
