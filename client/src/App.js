@@ -19,11 +19,11 @@ function App() {
   const [token, setToken] = useState();
   const { auth } = useContext(authContext);
 
-  if (!token) {
-    return (
-      <Login_Register setToken={setToken}/>
-    );
-  }
+  // if (!token) {
+  //   return (
+  //     <Login_Register setToken={setToken}/>
+  //   );
+  // }
 
   return (
     <>
