@@ -1,10 +1,24 @@
 import React from 'react';
-// import ContextAlarm from "./components/context/AlarmProvider";
+import { useContext } from 'react';
+import { AlarmContext } from '../components/context/AlarmProvider';
+
+import NotificationAlert from '../components/NotificationAlert/NotificationAlert';
+
+
 
 function Notification() {
+  const { notification, setNotification } = useContext(AlarmContext)
+
+  console.log("notification", notification)
+
+  // setNotification(true)
+  
     return (
-        <h1>The alarm has gone off!!</h1>
+      <div>
+      {notification === true && <NotificationAlert />}
+      </div>
     );
+
 }
 
 export default Notification;

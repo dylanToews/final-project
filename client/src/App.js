@@ -14,7 +14,7 @@ import "./App.css";
 function App() {
   return (
     <ContextAlarm>
-      // <Notification></Notification>
+      <Notification />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -27,7 +27,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    // </ContextAlarm>
+    </ContextAlarm>
   );
 }
 

@@ -21,11 +21,37 @@ function ContextAlarm({ children }) {
   const [sounds, setSounds] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [alarms, setAlarms] = useState([]);
-  const [notification, setNotification] = useState([])
+  const [notification, setNotification] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
-  
+  // This conditional is what fires off the alarms.
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  const yourFunction = async () => {
+    await delay(60000);
+    console.log("Waited 60s");
+  };
+
+  let waitToReset = false;
+
+  let testNotification = false;
+
+  const waitForAlarm = function () {
+    setTimeout(6000);
+  };
+
+  console.log("waiting", waiting)
+  const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
+    if (
+      waiting === false &&
+      `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}` ===
+        `${hourDigital}:${minutesDigital} ${amPm}`
+    ) {
+      testNotification = true;
+    }
+  });
+
   useEffect(() => {
-
     const requests = [
       axios.get("/api/v1/alarmItems"),
       axios.get("/api/v1/users"),
@@ -48,9 +74,6 @@ function ContextAlarm({ children }) {
         setContacts(contacts);
         setAlarms(times);
       });
-
-
-
 
     setInterval(() => {
       let date = new Date();
@@ -81,12 +104,13 @@ function ContextAlarm({ children }) {
       setYearNow(year);
     }, 1000);
 
-  }, []);
-  
+    if (testNotification) {
+      console.log("alarm has occured");
+      setNotification(true);
+    }
+  }, [testNotification]);
 
-  
   // const parsedAlarmItems = `${alarmItems.hour}`
-  
 
   const addNewParams = (formData) => {
     const id = alarmItems.length + 1;
@@ -99,20 +123,7 @@ function ContextAlarm({ children }) {
     });
   };
 
-   
-  // This conditional is what fires off the alarms. 
-
-  Object.values(alarmItems).forEach((alarmItem) => {
-    if (`${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}` === `${hourDigital}:${minutesDigital} ${amPm}`) {
-      // alarm.play();
-      // alarm.loop = true;
-      console.log("alarm has occured at", `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption} with the contact ${alarmItem.contact} and the sound ${alarmItem.sound}`)
-
-    }
-  })
-
-
-  //Original alarm conditional below 
+  //Original alarm conditional below
 
   // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
   //   // alarm.play();
@@ -120,17 +131,10 @@ function ContextAlarm({ children }) {
   //   console.log("alarm has occured")
   // }
 
-
-
   const pauseAlarm = () => {
     // alarm.pause();
     setAlarmTime("");
   };
-  
-
-
-
-
 
   return (
     <AlarmContext.Provider
@@ -150,7 +154,11 @@ function ContextAlarm({ children }) {
         sounds,
         contacts,
         alarms,
-        addNewParams
+        addNewParams,
+        notification,
+        setNotification,
+        waiting,
+        setWaiting
       }}
     >
       {children}
