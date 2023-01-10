@@ -4,11 +4,28 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const alarmItems = require("./data/mockAlarmItemData");
 
+//Multer middleware for file uploading
+const multer = require("multer");
+
 // DB Query test router
 var usersRouter = require('./routes/users');
 
 
 const app = express();
+
+// Multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "data");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, file.originalname);
+  }
+})
+
+const upload = multer({storage: storage});
+
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -24,6 +41,11 @@ app.use('/users', usersRouter);
 // const getSomeDataExample = () => {
 //   return db.query("SELECT * FROM data")
 // }
+
+// Multer upload test
+app.post("/upload", upload.single("sound"), (req, res) => {
+  res.send("Sound Uploaded");
+});
 
 ///Returns full item for each alarm
 
