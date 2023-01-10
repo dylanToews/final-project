@@ -89,9 +89,9 @@ function AlarmOption(props) {
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
         
-        <row>
+        <div className="time-row">
           <select name="hour" value={formData.hour} onChange={handleChange} className="SpaceTime">
-            <option disabled value="Hour">
+            <option value="" disabled defaultValue={""} hidden>
               Hour
             </option>
             {hourNumber.map((hour, index) => (
@@ -101,7 +101,7 @@ function AlarmOption(props) {
             ))}
           </select>
           <select name="minutes" value={formData.minutes} onChange={handleChange} className="SpaceTime">
-            <option disabled value="Minutes">
+            <option value="" disabled defaultValue={""} hidden>
               Minutes
             </option>
             {minutesNumber.map((minutes, index) => (
@@ -111,13 +111,13 @@ function AlarmOption(props) {
             ))}
           </select>
           <select name="amPmOption" value={formData.amPmOption} onChange={handleChange} className="SpaceTime">
-            <option disabled value="Am-Pm">
+            <option value="" disabled defaultValue={""} hidden>
               Am/Pm
             </option>
             <option value="AM">Am</option>
             <option value="PM">Pm</option>
           </select>
-        </row>
+        </div>
 
       <select name="contact" value={formData.contact} onChange={handleChange}>
         <option value="">Please Select A Contact</option>
