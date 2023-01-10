@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-import { redirect } from 'react-router-dom';
 import months from "../../data";
 import axios from "axios";
+import Notification from "../../pages/Notification";
 // import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
 // const alarm = new Audio(Sound);
@@ -107,9 +107,7 @@ function ContextAlarm({ children }) {
       // alarm.play();
       // alarm.loop = true;
       console.log("alarm has occured at", `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption} with the contact ${alarmItem.contact} and the sound ${alarmItem.sound}`)
-      return(
-      <redirect to="/Notification" />
-      )
+
     }
   })
 
