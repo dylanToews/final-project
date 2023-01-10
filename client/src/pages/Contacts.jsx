@@ -2,7 +2,7 @@ import React from 'react';
 
 function Contacts() {
     return (
-        <h1>AAAAAAAAAAAAAAAAAAs</h1>
+        <h1>Contacts</h1>
     );
 }
 
