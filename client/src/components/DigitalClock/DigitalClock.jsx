@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./DigitalClock.css";
-import { AlarmContext } from "../context/ContextAlarm";
+import { AlarmContext } from "../context/AlarmProvider";
 
 function DigitalClock() {
   const { hourDigital, minutesDigital, amPm, dayNow, monthNow, yearNow } =

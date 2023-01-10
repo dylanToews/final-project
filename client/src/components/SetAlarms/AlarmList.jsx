@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import AlarmListItem from "./AlarmListItem";
 import { getFilteredUsers, getUserAlarms } from "../../helpers/userHelpers";
-import { AlarmContext } from "../context/ContextAlarm";
+import { AlarmContext } from "../context/AlarmProvider";
 
 export default function AlarmList(props) {
   const [filter, setFilter] = useState(null)
