@@ -89,7 +89,7 @@ function AlarmOption(props) {
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
         
-        <row>
+        <div className="time-row">
           <select name="hour" value={formData.hour} onChange={handleChange} className="SpaceTime">
             <option disabled value="Hour">
               Hour
@@ -117,7 +117,7 @@ function AlarmOption(props) {
             <option value="AM">Am</option>
             <option value="PM">Pm</option>
           </select>
-        </row>
+        </div>
 
       <select name="contact" value={formData.contact} onChange={handleChange}>
         <option value="">Please Select A Contact</option>
