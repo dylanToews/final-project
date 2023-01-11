@@ -14,13 +14,14 @@ var usersRouter = require('./routes/users');
 const app = express();
 
 // Multer storage
+const DIR = "./data/soundData" // Sound data file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "data");
+    cb(null, DIR);
   },
   filename: (req, file, cb) => {
-    console.log(file);
-    cb(null, file.originalname);
+    console.log("file: ", file);
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 })
 
@@ -44,7 +45,7 @@ app.use('/users', usersRouter);
 
 // Multer upload test
 app.post("/upload", upload.single("sound"), (req, res) => {
-  res.send("Sound Uploaded");
+  res.send("Sound uploaded!");
 });
 
 ///Returns full item for each alarm

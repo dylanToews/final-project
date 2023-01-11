@@ -71,14 +71,16 @@ export default function useRecorder() {
       };
 
       recorder.onstop = () => {
-        const blob = new Blob(chunks, { type: chunks[0].type }); // edited from type: "audio/ogg; codecs=opus"
+        const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" }); // at one point this was type: chunks[0].type (no quotes)
+        console.log(chunks);
         chunks = [];
+        const tempFile = new File([blob], "tempfile.ogg", { type: "audio/ogg"} );
 
         setRecorderState((prevState) => {
           if (prevState.mediaRecorder)
             return {
               ...initialState,
-              audio: window.URL.createObjectURL(blob),
+              audio: tempFile
             };
           else return initialState;
         });

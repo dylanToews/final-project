@@ -1,10 +1,33 @@
 
 
+import { useEffect } from "react";
+import axios from "axios";
 import useRecordingsList from "../../hook/useRecordingsList";
 import "./recordings-list.css";
 
 export default function RecordingsList(props) {
   const { recordings, deleteAudio } = props;
+
+  
+
+
+
+  useEffect(() => {
+    if (recordings.length > 0) {
+      const formData = new FormData();
+      console.log(recordings[0]);
+      formData.append("sound", recordings[0].audio);
+      axios.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+        .then(res => {
+          console.log("success?: ", res.data)
+        });
+
+    } 
+  }, [recordings])
 
   return (
     <div className="recordings-container">
@@ -24,10 +47,7 @@ export default function RecordingsList(props) {
                     Cancel
                   </button><br />
                   <a href={record.audio} target="_blank">Download this audio</a>
-                  <form method="POST" action="/upload" encType="multipart/form-data" >
-                    <input type="file" name="sound" />
-                    <input type="submit" />
-                  </form>
+                  
                 </div>
               </div>
             ))}
