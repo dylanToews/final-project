@@ -1,15 +1,20 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
 import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 
 export default function NotificationAlert(props) {
   const { notification, setNotification } = useContext(AlarmContext);
 
- 
+ const phoneNumber = "+17802386933"
 
   function sendText() {
-    setNotification(false)
+    // setNotification(false)
     console.log("sending a text")
+    axios.post("/api/v1/sendSMS", { phoneNumber }).then((res) => {
+    console.log("text sent !!!")  
+
+    })
     return 
   }
 

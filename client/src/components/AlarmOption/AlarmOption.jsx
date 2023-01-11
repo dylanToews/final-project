@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./AlarmOption.css";
 import "../Alarms.css";
 import { minutesNumber, hourNumber } from "../../func";
-import useSelect from "../../hook/useSelect";
+import useSelect from "../../hooks/useSelect";
 import { AlarmContext } from "../context/AlarmProvider";
 
 function AlarmOption(props) {

@@ -9,16 +9,20 @@ const client = require('twilio')(accountSid, authToken);
 
 recipientList = ['+19022926082', '+16475302024']
 
-const send = (list) =>{
-  for(recipient of list){
+
+const sendTwilio = (numberArray) =>{
+  console.log("send message to", numberArray)
+  // for(recipient of numberArray){
     client.messages
     .create({
       body: 'I like eggs',
       from: process.env.SEND_FROM_NUMBER,
-      to: recipient
+      to: numberArray
     })
     .then(message => console.log(message.sid));
-  }
+  // }
 }
 
-send(recipientList);
+module.exports = sendTwilio;
+
+// send(recipientList);
