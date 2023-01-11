@@ -7,6 +7,7 @@ const cors = require("cors");
 const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms")
 const alarmItems = require("./data/mockAlarmItemData");
+const soundsData = require("./data/mockSoundData");
 
 const app = express();
 
@@ -106,6 +107,10 @@ const getSounds = () => {
   return Promise.resolve(sounds);
 };
 
+const getMockSounds = () => {
+  return Promise.resolve(soundsData);
+};
+
 // functions to handle axios posts coming from front end
 
 
@@ -120,6 +125,12 @@ const addAlarmItem = (newAlarmItem) => {
 
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
+
+const addNewSound = (newSound) => {
+  soundsData.push(newSound);
+
+  return Promise.resolve("ok sound");
+}
 
 app.post("/api/v1/sendSMS", (req, res) => {
   console.log(req.body.phoneNumber)
@@ -146,7 +157,17 @@ app.get("/api/v1/sounds", (req, res) => {
   getSounds().then((Sounds) => res.json(Sounds));
 });
 
+// extra route needed for testing sound without breaking alarms
+app.get("/api/v2/sounds", (req, res) => {
+  getMockSounds().then((sounds) => res.json(sounds));
+});
 
+ // extra route needed for testing sounds without breaking alarms
+app.post("/api/v2/sounds", (req, res) => {
+  const { newSound } = req.body;
+  console.log(req.body);
+  addNewSound(newSound).then((data) => res.send(data));
+});
 
 
 

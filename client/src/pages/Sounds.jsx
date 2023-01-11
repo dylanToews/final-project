@@ -11,7 +11,7 @@ function Sounds() {
   const { recordings, deleteAudio } = useRecordingsList(audio);
 
     return (
-      <section className="voice-recorder">
+      <section className="App">
       <h1 className="title">Voice Recorder</h1>
       <div className="recorder-container">
         {recordings.length === 0 && <RecorderControls recorderState={recorderState} handlers={handlers} />}
