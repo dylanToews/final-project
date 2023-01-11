@@ -2,33 +2,32 @@ import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 
-export default function NotificationAlert() {
-  const { notification, setNotification, waiting, setWaiting } = useContext(AlarmContext);
+export default function NotificationAlert(props) {
+  const { notification, setNotification } = useContext(AlarmContext);
 
  
 
-  let testNotification = true;
+  function sendText() {
+    console.log("sending a text")
+    return 
+  }
+
 
   function changeNotification() {
-    setWaiting(true)
     setNotification(false)
-    // setTimeout(() => {setWaiting(false)}, 60000)
+    console.log("accept button pressed")
     return
   }
 
-  // useEffect(() => {
-  //   setNotification(true)
-  //   // if (testNotification) {
-  //   //   setNotification(false);
-  //   // }
-  // }, [testNotification]);
+
 
   return (
     <div>
-    <form>
+ 
     <h1>THE ALARM HAS GONE OFF!!!!</h1>
-    <button onSubmit={changeNotification}>ACCEPT</button>
-    </form>
+    <button onClick={changeNotification}>ACCEPT</button>
+    <button onClick={sendText}>SNOOZE</button> 
+
     </div>
 
   )

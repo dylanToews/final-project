@@ -1,7 +1,8 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import months from "../../data";
 import axios from "axios";
 import Notification from "../../pages/Notification";
+import { WaitingContext } from "./WaitingProvider";
 // import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
 // const alarm = new Audio(Sound);
@@ -10,6 +11,7 @@ export const AlarmContext = createContext();
 function ContextAlarm({ children }) {
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
+  const [secondsDigital, setSecondsDigital] = useState("")
   const [amPm, setAmPm] = useState("");
   const [dayNow, setDayNow] = useState("");
   const [monthNow, setMonthNow] = useState("");
@@ -22,36 +24,45 @@ function ContextAlarm({ children }) {
   const [contacts, setContacts] = useState([]);
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(false);
-  const [waiting, setWaiting] = useState(false);
+  const [waiting, setWaiting] = useState()
+
+  // const {waiting, setWaiting} = useContext(WaitingContext);
 
   // This conditional is what fires off the alarms.
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-  const yourFunction = async () => {
-    await delay(60000);
-    console.log("Waited 60s");
-  };
-
-  let waitToReset = false;
 
   let testNotification = false;
 
-  const waitForAlarm = function () {
-    setTimeout(6000);
+
+ checkAlarm()
+
+  function checkAlarm() {
+    // console.log("checking alarm...")
+    // console.log(`CLOCK ${hourDigital}:${minutesDigital} ${amPm}:0`)
+
+    const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
+      const alarmSeconds = 0
+
+      if (
+        `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}` ===
+          `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
+      ) { 
+        testNotification = true;
+        // console.log("the alarm has gone off")
+      }
+    });
+
+  }
+
+
+  const pauseAlarm = () => {
+    // alarm.pause();
+    setAlarmTime("");
   };
 
-  console.log("waiting", waiting)
-  const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
-    if (
-      waiting === false &&
-      `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}` ===
-        `${hourDigital}:${minutesDigital} ${amPm}`
-    ) {
-      testNotification = true;
-    }
-  });
-
   useEffect(() => {
+
+  setWaiting(false)
+
     const requests = [
       axios.get("/api/v1/alarmItems"),
       axios.get("/api/v1/users"),
@@ -80,6 +91,7 @@ function ContextAlarm({ children }) {
 
       let HH = date.getHours(),
         MM = date.getMinutes(),
+        SS = date.getSeconds(),
         day = date.getDate(),
         month = date.getMonth(),
         year = date.getFullYear(),
@@ -95,9 +107,11 @@ function ContextAlarm({ children }) {
       if (HH === 0) HH = 12;
       if (HH < 10) HH = `0${HH}`;
       if (MM < 10) MM = `0${MM}`;
+      // if (SS <10) SS = `0${SS}`;
 
       setHourDigital(HH);
       setMinutesDigital(MM);
+      setSecondsDigital(SS);
       setAmPm(ampm);
       setDayNow(day);
       setMonthNow(months[month]);
@@ -131,16 +145,14 @@ function ContextAlarm({ children }) {
   //   console.log("alarm has occured")
   // }
 
-  const pauseAlarm = () => {
-    // alarm.pause();
-    setAlarmTime("");
-  };
+
 
   return (
     <AlarmContext.Provider
       value={{
         hourDigital,
         minutesDigital,
+        secondsDigital,
         amPm,
         dayNow,
         monthNow,
