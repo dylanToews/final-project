@@ -81,6 +81,16 @@ const getSounds = () => {
   return Promise.resolve(sounds);
 };
 
+
+
+const getUsers = () => {
+  const alarmsBuffer = {};
+  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+  const users = Object.keys(alarmsBuffer);
+  return Promise.resolve(users);
+};
+
 // functions to handle axios posts coming from front end
 
 const addTime = (time) => {
@@ -103,7 +113,7 @@ app.post("/api/v1/sendSMS", (req, res) => {
 ///Returns full item for each alarm based on user_email
 
 const getAlarmItems = (user_email) => {
-
+  
   const sortedByUser = alarmItems.filter(function (el) {
     return el.user_email == user_email;
   });
@@ -111,19 +121,22 @@ const getAlarmItems = (user_email) => {
   return Promise.resolve(sortedByUser);
 };
 
-//gets specific information from alarmItems below
+const getAlarmItemsLastId = () => {
 
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+  const lastId = alarmItems.length
 
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
+  return Promise.resolve(lastId)
+}
+
 
 app.get("/api/v1/alarmItems/:id", (req, res) => {
   getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
 });
+
+app.get("/api/v1/alarmItemLastId", (req, res) => (
+  getAlarmItemsLastId().then((lastId) => res.json(lastId))
+
+))
 
 app.get("/api/v1/users", (req, res) => {
   getUsers().then((users) => res.json(users));

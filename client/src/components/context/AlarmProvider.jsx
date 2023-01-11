@@ -19,6 +19,7 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
+  const [lastId, setLastId]= useState([])
 
   // const [sounds, setSounds] = useState([]);
   // const [contacts, setContacts] = useState([]);
@@ -73,6 +74,7 @@ function ContextAlarm({ children }) {
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
+      axios.get("/api/v1/alarmItemLastId")
       // axios.get("/api/v1/users"),
       // axios.get("/api/v1/times"),
       // axios.get("/api/v1/sounds"),
@@ -81,6 +83,7 @@ function ContextAlarm({ children }) {
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
+        lastId: responses[1].data
         // users: responses[1].data,
         // times: responses[2].data,
         // sounds: responses[3].data,
@@ -89,9 +92,11 @@ function ContextAlarm({ children }) {
       .then(
         ({
           alarmItems,
+          lastId
           // users, times, sounds, contacts
         }) => {
           setAlarmItems(alarmItems);
+          setLastId(lastId)
           // setUsers(users);
           // setSounds(sounds);
           // setContacts(contacts);
@@ -144,9 +149,9 @@ function ContextAlarm({ children }) {
   ///function for adding new alarms. function is called within AlarmOption
 
   const addNewParams = (formData) => {
-    const id = alarmItems.length + 1;
-    const newAlarmItem = { id, ...formData };
-
+    const id = lastId + 1;
+    const newAlarmItem = { id, user_email, ...formData };
+    setLastId(lastId + 1)
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
       console.log("add new alarmItem sucessful:", newAlarmItem);
       setAlarmItems([...alarmItems, newAlarmItem]);
