@@ -6,10 +6,10 @@ import ContactListItem from "./ContactListItem";
 
 export default function ContactList() {
 
-  const { alarmItems } = useContext(AlarmContext)
+  const { alarmItems, contactItems } = useContext(AlarmContext)
 
-  const parsedAlarmItems = alarmItems.map((alarmItem) => (
-    <ContactListItem key={alarmItem.id} {... alarmItem} />
+  const parsedContactItems = contactItems.map((contactItem) => (
+    <ContactListItem key={contactItem.id} {... contactItem} />
   ))
 
 
@@ -18,7 +18,7 @@ export default function ContactList() {
     <h2>Existing Contacts</h2>
     <br/>
     <ul>
-      {[parsedAlarmItems]}
+      {[parsedContactItems]}
     </ul>
   </section>
   )

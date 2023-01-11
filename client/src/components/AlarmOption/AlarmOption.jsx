@@ -17,6 +17,7 @@ function AlarmOption(props) {
     setHasAlarm,
     addNewParams,
     alarmItems,
+    contactItems,
   } = useContext(AlarmContext);
 
 
@@ -38,7 +39,7 @@ function AlarmOption(props) {
 
 
   const parsedContacts = Object.values(
-    alarmItems.map((alarmItem) => (
+    contactItems.map((alarmItem) => (
       <option key={alarmItem.id} value={alarmItem.contact_name}>
         {alarmItem.contact_name}
       </option>
