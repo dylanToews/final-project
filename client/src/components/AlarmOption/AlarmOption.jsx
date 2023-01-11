@@ -16,16 +16,13 @@ function AlarmOption(props) {
     hasAlarm,
     setHasAlarm,
     addNewParams,
-    alarms,
-    contacts,
     alarmItems,
   } = useContext(AlarmContext);
 
-  // const { onSubmit } = props;
 
   const initialValues = {
-    contact: "",
-    sound: "",
+    contact_name: "",
+    sound_name: "",
     hour: "",
     minutes: "",
     amPmOption: "",
@@ -42,25 +39,20 @@ function AlarmOption(props) {
 
   const parsedContacts = Object.values(
     alarmItems.map((alarmItem) => (
-      <option key={alarmItem.contact} value={alarmItem.contact}>
-        {alarmItem.contact}
+      <option key={alarmItem.id} value={alarmItem.contact_name}>
+        {alarmItem.contact_name}
       </option>
     ))
   );
 
   const parsedSounds = Object.values(
     alarmItems.map((alarmItem) => (
-      <option key={alarmItem.sound} value={alarmItem.sound}>
-        {alarmItem.sound}
+      <option key={alarmItem.id} value={alarmItem.sound_name}>
+        {alarmItem.sound_name}
       </option>
     ))
   );
 
-  // const parsedAlarms = alarms.map((alarm) => (
-  //   <option key={alarm} value={alarm}>
-  //     {alarm}
-  //   </option>
-  // ));
 
   const setAlarm = (event) => {
     if (hasAlarm) {
@@ -71,8 +63,8 @@ function AlarmOption(props) {
     setHasAlarm(true);
     setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
     if (
-      formData.contact &&
-      formData.sound &&
+      formData.contact_name &&
+      formData.sound_name &&
       formData.hour &&
       formData.minutes &&
       formData.amPmOption
@@ -140,12 +132,12 @@ function AlarmOption(props) {
           </select>
         </div>
 
-        <select name="contact" value={formData.contact} onChange={handleChange}>
+        <select name="contact_name" value={formData.contact_name} onChange={handleChange}>
           <option value="">Please Select A Contact</option>
           {parsedContacts}
         </select>
 
-        <select name="sound" value={formData.sound} onChange={handleChange}>
+        <select name="sound_name" value={formData.sound_name} onChange={handleChange}>
           <option value="">Please Select A Sound</option>
           {parsedSounds}
         </select>

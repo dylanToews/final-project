@@ -1,13 +1,15 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import months from "../../data";
 import axios from "axios";
-import Notification from "../../pages/Notification";
+import { authContext } from "../../providers/AuthProvider";
 // import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
 // const alarm = new Audio(Sound);
 export const AlarmContext = createContext();
 
 function ContextAlarm({ children }) {
+
+  
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [secondsDigital, setSecondsDigital] = useState("");
@@ -17,18 +19,41 @@ function ContextAlarm({ children }) {
   const [yearNow, setYearNow] = useState("");
   const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
-
+  
   const [alarmItems, setAlarmItems] = useState([]);
-
+  
   // const [sounds, setSounds] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const [alarms, setAlarms] = useState([]);
-
+  // const [contacts, setContacts] = useState([]);
+  // const [alarms, setAlarms] = useState([]);
+  
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
+  
+  
+  const { auth, user } = useContext(authContext)
+
+  // const email = user.email
 
   // This conditional is what fires off the alarms.
 
+  
+  // useEffect(() => {
+  //   if(auth){
+  //     const email = user.email
+  //   }
+  //   // console.log("user email", user.email)
+
+  // },[])
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   let testNotification = false;
 
   const notificationDetailsObject = {
@@ -59,38 +84,43 @@ function ContextAlarm({ children }) {
 
   checkAlarm();
 
+
+
+  
 useEffect(() => {
   if(notificationDetailsObject.alarm_time){
     setNotificationDetails(notificationDetailsObject)
   }
 }, [notificationDetailsObject.alarm_time])
 
-
+const user_id = "test@test.ca"
 
 
   useEffect(() => {
 
     const requests = [
-      axios.get("/api/v1/alarmItems"),
-      axios.get("/api/v1/users"),
-      axios.get("/api/v1/times"),
-      axios.get("/api/v1/sounds"),
-      axios.get("/api/v1/contacts"),
+      axios.get(`/api/v1/alarmItems/${user_id}`),
+      // axios.get("/api/v1/users"),
+      // axios.get("/api/v1/times"),
+      // axios.get("/api/v1/sounds"),
+      // axios.get("/api/v1/contacts"),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        users: responses[1].data,
-        times: responses[2].data,
-        sounds: responses[3].data,
-        contacts: responses[4].data,
+        // users: responses[1].data,
+        // times: responses[2].data,
+        // sounds: responses[3].data,
+        // contacts: responses[4].data,
       }))
-      .then(({ alarmItems, users, times, sounds, contacts }) => {
+      .then(({ alarmItems, 
+        // users, times, sounds, contacts
+       }) => {
         setAlarmItems(alarmItems);
         // setUsers(users);
         // setSounds(sounds);
-        setContacts(contacts);
-        setAlarms(times);
+        // setContacts(contacts);
+        // setAlarms(times);
       });
 
     setInterval(() => {
@@ -131,19 +161,24 @@ useEffect(() => {
     }
   }, [testNotification]);
 
-  // const parsedAlarmItems = `${alarmItems.hour}`
+
+
+
+
 
   const addNewParams = (formData) => {
     const id = alarmItems.length + 1;
     const newAlarmItem = { id, ...formData };
 
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      console.log("add new alarmItem sucessful");
-      console.log(newAlarmItem);
+      console.log("add new alarmItem sucessful:", newAlarmItem);
       setAlarmItems([...alarmItems, newAlarmItem]);
     });
   };
 
+
+
+  
   //Original alarm conditional below
 
   // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
@@ -174,8 +209,8 @@ useEffect(() => {
         setHasAlarm,
         alarmItems,
         // sounds,
-        contacts,
-        alarms,
+        // contacts,
+        // alarms,
         addNewParams,
         notification,
         setNotification,

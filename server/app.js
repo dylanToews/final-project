@@ -61,21 +61,7 @@ app.post("/upload", upload.single("sound"), (req, res) => {
   res.send("Sound uploaded!");
 });
 
-///Returns full item for each alarm
 
-const getAlarmItems = () => {
-  return Promise.resolve(alarmItems);
-};
-
-//gets specific information from alarmItems below
-
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
-
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
 
 const getTimes = () => {
   const alarmsBuffer = {};
@@ -121,9 +107,59 @@ app.post("/api/v1/sendSMS", (req, res) => {
   // sendTwilio(req.body.phoneNumber)
 })
 
-app.get("/api/v1/alarmItems", (req, res) => {
-  getAlarmItems().then((alarmItems) => res.json(alarmItems));
+
+
+
+
+
+
+///Returns full item for each alarm
+
+const getAlarmItems = (email) => {
+ // const alarmItemsBuffer = [];
+
+  // alarmItems.forEach((alarmItem)=> {
+  //   if(alarmItem.user_id == email){
+  //     alarmItemsBuffer.push(alarmItem)
+  //   }
+
+  // })  
+
+  // console.log(alarmItemsBuffer)
+
+
+  const sortedByUser = alarmItems.filter(function(el) {
+    return el.user_id == email
+  })
+
+  return Promise.resolve(sortedByUser);
+};
+
+
+
+
+//gets specific information from alarmItems below
+
+const getUsers = () => {
+  const alarmsBuffer = {};
+  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+  const users = Object.keys(alarmsBuffer);
+  return Promise.resolve(users);
+};
+
+
+
+app.get("/api/v1/alarmItems/:id", (req, res) => {
+  getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
 });
+
+
+
+
+
+
+
 
 app.get("/api/v1/users", (req, res) => {
   getUsers().then((users) => res.json(users));
