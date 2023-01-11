@@ -1,9 +1,9 @@
 import React from 'react';
-import "../About.css"
+import "../About.css";
 
 function About() {
     return (
-        <div>
+        <div className="App">
             <br/>
             <br/>
             <h1>LEARN</h1>

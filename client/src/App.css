@@ -3,6 +3,29 @@
   background-color: rgb(255, 167, 67);
 }
 
+.Form-at {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 260px;
+}
+
+.inputBox {
+  height: 35px;
+  font-size: 16px;
+  border-radius: 6px;
+  padding-left: 22px;
+}
+
+.submit {
+  height: 35px;
+  width: 180px;
+  font-size: 16px;
+  border-radius: 6px;
+  align-self: center;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -78,8 +101,8 @@ a {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
-  max-width: 968px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0 16px;
