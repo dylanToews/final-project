@@ -1,6 +1,20 @@
-h1{
-  font-size: 5;
+.App {
+  background-color: rgb(255, 167, 67);
 }
-h2{}
-h3{}
-p{}
+h1{
+  font-size: 55px;
+  color: #EEEEEE;
+}
+
+h2{
+  font-size: 28px;
+  color: rgb(251, 230, 206);
+}
+h3{
+  font-size: 24px;
+  color: rgb(255, 213, 180);
+}
+p{
+  font-size: 16px;
+  color: rgb(255, 213, 180);
+}
