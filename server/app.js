@@ -2,32 +2,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const multer = require("multer"); //Multer middleware for file uploading
 const cors = require("cors");
+const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms")
 const alarmItems = require("./data/mockAlarmItemData");
 
-//Multer middleware for file uploading
-const multer = require("multer");
-
-
-
-
 const app = express();
-
-// Multer storage
-const DIR = "./data/soundData" // Sound data file storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    console.log("file: ", file);
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-})
-
-const upload = multer({storage: storage});
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -36,9 +17,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
+// Multer storage
+const DIR = "./public/audio" // Sound data file storage - must be in public for current acceess methods
+const audioStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR);
+  },
+  filename: (req, file, cb) => {
+    console.log("file before rename: ", file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+})
+
+const uploadAudio = multer({storage: audioStorage});
+
+
+
 // DB Query test router
 const usersRouter = require('./routes/users');
-const contactsRouter = require("./routes/contacts")
+const contactsRouter = require("./routes/contacts");
 // DB query test app.use
 app.use('/users', usersRouter);
 app.use("/contacts", contactsRouter);
@@ -51,7 +48,6 @@ app.use("/login", (req, res) => {
 });
 
 
-
 // eventually write db queries in functions below, i think?
 
 // const getSomeDataExample = () => {
@@ -59,8 +55,15 @@ app.use("/login", (req, res) => {
 // }
 
 // Multer upload test
-app.post("/upload", upload.single("sound"), (req, res) => {
-  res.send("Sound uploaded!");
+app.post("/upload", uploadAudio.single("sound"), (req, res) => {
+  res.send(req.file.filename);
+  console.log(req.file.filename);
+
+  fs.readdir(DIR, (err, files) => {
+    files.forEach(file => {
+      console.log("files: ", file);
+    })
+  })
 });
 
 ///Returns full item for each alarm

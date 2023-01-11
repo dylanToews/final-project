@@ -1,8 +1,5 @@
-
-
 import { useEffect } from "react";
 import axios from "axios";
-import useRecordingsList from "../../hooks/useRecordingsList";
 import "./recordings-list.css";
 
 export default function RecordingsList(props) {
@@ -16,6 +13,7 @@ export default function RecordingsList(props) {
     if (recordings.length > 0) {
       const formData = new FormData();
       formData.append("sound", recordings[0].audio);
+      console.log(...formData);
       axios.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
