@@ -19,17 +19,26 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
-  const [sounds, setSounds] = useState([]);
+
+  // const [sounds, setSounds] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [alarms, setAlarms] = useState([]);
+
   const [notification, setNotification] = useState(false);
-
-
-
+  const [notificationDetails, setNotificationDetails] = useState();
 
   // This conditional is what fires off the alarms.
 
   let testNotification = false;
+
+  const notificationDetailsObject = {
+    sound_name:"",
+    sound_string:"",
+    contact_name:"",
+    contact_number:"",
+    alarm_time:""
+
+  };
 
   function checkAlarm() {
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
@@ -40,14 +49,27 @@ function ContextAlarm({ children }) {
         `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
       ) {
         testNotification = true;
-        // console.log("the alarm has gone off")
+    
+        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`
+        notificationDetailsObject.contact_name = alarmItem.contact
+        notificationDetailsObject.sound_name = alarmItem.sound
       }
     });
   }
 
   checkAlarm();
 
+useEffect(() => {
+  if(notificationDetailsObject.alarm_time){
+    setNotificationDetails(notificationDetailsObject)
+  }
+}, [notificationDetailsObject.alarm_time])
+
+
+
+
   useEffect(() => {
+
     const requests = [
       axios.get("/api/v1/alarmItems"),
       axios.get("/api/v1/users"),
@@ -66,7 +88,7 @@ function ContextAlarm({ children }) {
       .then(({ alarmItems, users, times, sounds, contacts }) => {
         setAlarmItems(alarmItems);
         // setUsers(users);
-        setSounds(sounds);
+        // setSounds(sounds);
         setContacts(contacts);
         setAlarms(times);
       });
@@ -151,12 +173,14 @@ function ContextAlarm({ children }) {
         hasAlarm,
         setHasAlarm,
         alarmItems,
-        sounds,
+        // sounds,
         contacts,
         alarms,
         addNewParams,
         notification,
         setNotification,
+        notificationDetails,
+        setNotificationDetails,
       }}
     >
       {children}

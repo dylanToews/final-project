@@ -2,7 +2,7 @@ import React from 'react';
 import AlarmOption from '../components/AlarmOption/AlarmOption';
 import DigitalClock from '../components/DigitalClock/DigitalClock';
 import Header from '../components/Header';
-import AlarmList from '../components/SetAlarms/AlarmList';
+import AlarmList from '../components/AlarmList/AlarmList';
 
 function Home() {
     return (

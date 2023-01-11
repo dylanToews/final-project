@@ -117,7 +117,7 @@ const addAlarmItem = (newAlarmItem) => {
 };
 
 app.post("/api/v1/sendSMS", (req, res) => {
-  console.log(req.body.phoneNumber)
+  console.log(req.body.contactName)
   // sendTwilio(req.body.phoneNumber)
 })
 
