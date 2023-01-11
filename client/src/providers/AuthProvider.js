@@ -5,7 +5,7 @@ export const authContext = createContext();
 export default function AuthProvider(props) {
   // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
   const [auth, setAuth] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ email: "test@test.ca", id:1, name: "TEST USER" });
 
 
 
@@ -23,9 +23,9 @@ export default function AuthProvider(props) {
 
   //auto login for development 
 
-  useEffect(() => {
-    setUser({ email: "test@test.ca", id:1, name: "TEST USER" });
-  }, [])
+  // useEffect(() => {
+  //   setUser({ email: "test@test.ca", id:1, name: "TEST USER" });
+  // }, [])
 
 
   // authContext will expose these items

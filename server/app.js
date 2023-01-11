@@ -129,7 +129,7 @@ const getAlarmItems = (email) => {
 
 
   const sortedByUser = alarmItems.filter(function(el) {
-    return el.user_id == email
+    return el.user_email == email
   })
 
   return Promise.resolve(sortedByUser);

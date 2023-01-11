@@ -38,10 +38,8 @@ function ContextAlarm({ children }) {
 
   
   // useEffect(() => {
-  //   if(auth){
-  //     const email = user.email
-  //   }
-  //   // console.log("user email", user.email)
+
+  //   console.log("user email", user.email)
 
   // },[])
   
@@ -93,13 +91,13 @@ useEffect(() => {
   }
 }, [notificationDetailsObject.alarm_time])
 
-const user_id = "test@test.ca"
+const user_email = user.email
 
 
   useEffect(() => {
 
     const requests = [
-      axios.get(`/api/v1/alarmItems/${user_id}`),
+      axios.get(`/api/v1/alarmItems/${user_email}`),
       // axios.get("/api/v1/users"),
       // axios.get("/api/v1/times"),
       // axios.get("/api/v1/sounds"),

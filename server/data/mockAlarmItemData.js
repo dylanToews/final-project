@@ -1,7 +1,7 @@
 const alarmItems = [
   {
     id: 1,
-    user_id: "test@test.ca",
+    user_email: "test@test.ca",
     contact_name: "Danny Devito",
     contact_number: "",
     sound_name: "Recording 1",
@@ -12,7 +12,7 @@ const alarmItems = [
   },
   {
     id: 2,
-    user_id: 2,
+    user_email: "test2",
     contact_name: "Bill Hader",
     contact_number: "",
     sound_name: "Recording 2",
@@ -23,7 +23,7 @@ const alarmItems = [
   },
   {
     id: 3,
-    user_id: "test@test.ca",
+    user_email: "test@test.ca",
     contact_name: "T-Swizzy",
     contact_number: "",
     sound_name: "Recording 3",
