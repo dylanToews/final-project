@@ -2,13 +2,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
 const alarmItems = require("./data/mockAlarmItemData");
 
 //Multer middleware for file uploading
 const multer = require("multer");
 
-// DB Query test router
-var usersRouter = require('./routes/users');
+
 
 
 const app = express();
@@ -33,9 +33,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
+// DB Query test router
+const usersRouter = require('./routes/users');
 // DB query test app.use
 app.use('/users', usersRouter);
+
+// first attempt at login routes
+app.use("/login", (req, res) => {
+  res.send({
+    token: "test123"
+  });
+});
 
 // eventually write db queries in functions below, i think?
 

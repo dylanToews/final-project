@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import axios from "axios";
-import useRecordingsList from "../../hook/useRecordingsList";
+import useRecordingsList from "../../hooks/useRecordingsList";
 import "./recordings-list.css";
 
 export default function RecordingsList(props) {
