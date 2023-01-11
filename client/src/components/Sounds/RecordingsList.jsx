@@ -15,7 +15,6 @@ export default function RecordingsList(props) {
   useEffect(() => {
     if (recordings.length > 0) {
       const formData = new FormData();
-      console.log(recordings[0]);
       formData.append("sound", recordings[0].audio);
       axios.post("/upload", formData, {
         headers: {
@@ -23,12 +22,15 @@ export default function RecordingsList(props) {
         }
       })
         .then(res => {
-          console.log("success?: ", res.data)
+          console.log("server: ", res.data)
         });
 
     } 
   }, [recordings])
 
+  // below src={record.audio} in audio element does not work, as it is expecting a file URL, and audio has changed to be the file itself.
+  // next steps will be to render a soundlist from the back end, and we won't need this map anymore (we will still need cancel button I think!)
+  // already fixed, actually - still a temporary measure in order to clear the temp file from the state
   return (
     <div className="recordings-container">
       {recordings.length > 0 ? (
@@ -37,17 +39,14 @@ export default function RecordingsList(props) {
           <div className="recordings-list">
             {recordings.map((record) => (
               <div className="record" key={record.key}>
-                <audio controls controlsList="nodownload" src={record.audio} />
                 <div className="delete-button-container">
                   <button
                     className="delete-button"
                     title="Delete this audio"
                     onClick={() => deleteAudio(record.key)}
                   >
-                    Cancel
-                  </button><br />
-                  <a href={record.audio} target="_blank">Download this audio</a>
-                  
+                    Record another!
+                  </button>
                 </div>
               </div>
             ))}
