@@ -11,4 +11,4 @@ const getContactsByUser = userId => {
     .then(data => data.rows);
 }
 
-module.exports = {getAllContacts, getContactsByUser}
+module.exports = { getAllContacts, getContactsByUser }
