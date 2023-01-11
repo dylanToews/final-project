@@ -112,6 +112,10 @@ a {
   display: grid;
 }
 
+.wrapper {
+  padding: 20px;
+}
+
 /*=============== CLOCK ===============*/
 .clock__container {
   /* height: 100vh; */

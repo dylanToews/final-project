@@ -2,6 +2,7 @@ import React from 'react';
 import "../App.css";
 
 function Contacts() {
+
 	return (
 		<div class="App">
 			<div class="container">
@@ -33,6 +34,7 @@ function Contacts() {
 			</div>
 		</div>
 	);
+
 }
 
 export default Contacts;

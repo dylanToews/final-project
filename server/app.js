@@ -2,22 +2,49 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
+const sendTwilio = require("./twilio/send_sms");
 const alarmItems = require("./data/mockAlarmItemData");
 
-// DB Query test router
-var usersRouter = require('./routes/users');
-
+//Multer middleware for file uploading
+const multer = require("multer");
 
 const app = express();
+
+// Multer storage
+const DIR = "./data/soundData"; // Sound data file storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR);
+  },
+  filename: (req, file, cb) => {
+    console.log("file: ", file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
+// DB Query test router
+const usersRouter = require('./routes/users');
+const contactsRouter = require("./routes/contacts")
 // DB query test app.use
 app.use('/users', usersRouter);
+app.use("/contacts", contactsRouter);
+
+// first attempt at login routes
+app.use("/login", (req, res) => {
+  res.send({
+    token: "test123",
+  });
+});
 
 // eventually write db queries in functions below, i think?
 
@@ -25,21 +52,10 @@ app.use('/users', usersRouter);
 //   return db.query("SELECT * FROM data")
 // }
 
-///Returns full item for each alarm
-
-const getAlarmItems = () => {
-  return Promise.resolve(alarmItems);
-};
-
-//gets specific information from alarmItems below
-
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
-
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
+// Multer upload test
+app.post("/upload", upload.single("sound"), (req, res) => {
+  res.send("Sound uploaded!");
+});
 
 const getTimes = () => {
   const alarmsBuffer = {};
@@ -65,8 +81,17 @@ const getSounds = () => {
   return Promise.resolve(sounds);
 };
 
-// functions to handle axios posts coming from front end
 
+
+const getUsers = () => {
+  const alarmsBuffer = {};
+  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+  const users = Object.keys(alarmsBuffer);
+  return Promise.resolve(users);
+};
+
+// functions to handle axios posts coming from front end
 
 const addTime = (time) => {
   alarmItems.push(time);
@@ -80,9 +105,38 @@ const addAlarmItem = (newAlarmItem) => {
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
 
-app.get("/api/v1/alarmItems", (req, res) => {
-  getAlarmItems().then((alarmItems) => res.json(alarmItems));
+app.post("/api/v1/sendSMS", (req, res) => {
+  console.log(req.body.contactName);
+  // sendTwilio(req.body.phoneNumber)
 });
+
+///Returns full item for each alarm based on user_email
+
+const getAlarmItems = (user_email) => {
+  
+  const sortedByUser = alarmItems.filter(function (el) {
+    return el.user_email == user_email;
+  });
+
+  return Promise.resolve(sortedByUser);
+};
+
+const getAlarmItemsLastId = () => {
+
+  const lastId = alarmItems.length
+
+  return Promise.resolve(lastId)
+}
+
+
+app.get("/api/v1/alarmItems/:id", (req, res) => {
+  getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
+});
+
+app.get("/api/v1/alarmItemLastId", (req, res) => (
+  getAlarmItemsLastId().then((lastId) => res.json(lastId))
+
+))
 
 app.get("/api/v1/users", (req, res) => {
   getUsers().then((users) => res.json(users));
@@ -99,11 +153,6 @@ app.get("/api/v1/contacts", (req, res) => {
 app.get("/api/v1/sounds", (req, res) => {
   getSounds().then((Sounds) => res.json(Sounds));
 });
-
-
-
-
-
 
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
