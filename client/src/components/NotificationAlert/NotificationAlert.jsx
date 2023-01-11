@@ -8,6 +8,7 @@ export default function NotificationAlert(props) {
  
 
   function sendText() {
+    setNotification(false)
     console.log("sending a text")
     return 
   }

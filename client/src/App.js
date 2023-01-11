@@ -10,7 +10,6 @@ import Notification from "./pages/Notification";
 import ContextAlarm from "./components/context/AlarmProvider";
 
 import "./App.css";
-import WaitingForAlarm from "./components/context/WaitingProvider";
 
 function App() {
   return (

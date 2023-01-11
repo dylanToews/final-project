@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 import months from "../../data";
 import axios from "axios";
 import Notification from "../../pages/Notification";
-import { WaitingContext } from "./WaitingProvider";
 // import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
 // const alarm = new Audio(Sound);
@@ -11,7 +10,7 @@ export const AlarmContext = createContext();
 function ContextAlarm({ children }) {
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
-  const [secondsDigital, setSecondsDigital] = useState("")
+  const [secondsDigital, setSecondsDigital] = useState("");
   const [amPm, setAmPm] = useState("");
   const [dayNow, setDayNow] = useState("");
   const [monthNow, setMonthNow] = useState("");
@@ -24,45 +23,31 @@ function ContextAlarm({ children }) {
   const [contacts, setContacts] = useState([]);
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(false);
-  const [waiting, setWaiting] = useState()
 
-  // const {waiting, setWaiting} = useContext(WaitingContext);
+
+
 
   // This conditional is what fires off the alarms.
 
   let testNotification = false;
 
-
- checkAlarm()
-
   function checkAlarm() {
-    // console.log("checking alarm...")
-    // console.log(`CLOCK ${hourDigital}:${minutesDigital} ${amPm}:0`)
-
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
-      const alarmSeconds = 0
+      const alarmSeconds = 0;
 
       if (
         `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}` ===
-          `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
-      ) { 
+        `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
+      ) {
         testNotification = true;
         // console.log("the alarm has gone off")
       }
     });
-
   }
 
-
-  const pauseAlarm = () => {
-    // alarm.pause();
-    setAlarmTime("");
-  };
+  checkAlarm();
 
   useEffect(() => {
-
-  setWaiting(false)
-
     const requests = [
       axios.get("/api/v1/alarmItems"),
       axios.get("/api/v1/users"),
@@ -145,7 +130,10 @@ function ContextAlarm({ children }) {
   //   console.log("alarm has occured")
   // }
 
-
+  const pauseAlarm = () => {
+    // alarm.pause();
+    setAlarmTime("");
+  };
 
   return (
     <AlarmContext.Provider
@@ -169,8 +157,6 @@ function ContextAlarm({ children }) {
         addNewParams,
         notification,
         setNotification,
-        waiting,
-        setWaiting
       }}
     >
       {children}
