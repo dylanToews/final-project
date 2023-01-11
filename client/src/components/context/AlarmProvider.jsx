@@ -22,7 +22,7 @@ function ContextAlarm({ children }) {
   const [sounds, setSounds] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [alarms, setAlarms] = useState([]);
-  const [notification, setNotification] = useState(true);
+  const [notification, setNotification] = useState(false);
 
 
 

@@ -9,7 +9,7 @@ export default function NotificationAlert(props) {
  const phoneNumber = "+17802386933"
 
   function sendText() {
-    // setNotification(false)
+    setNotification(false)
     console.log("sending a text")
     axios.post("/api/v1/sendSMS", { phoneNumber }).then((res) => {
     console.log("text sent !!!")  
