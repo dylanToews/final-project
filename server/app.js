@@ -38,8 +38,10 @@ app.use(cors());
 
 // DB Query test router
 const usersRouter = require('./routes/users');
+const contactsRouter = require("./routes/contacts")
 // DB query test app.use
 app.use('/users', usersRouter);
+app.use("/contacts", contactsRouter);
 
 // first attempt at login routes
 app.use("/login", (req, res) => {
