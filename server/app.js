@@ -27,8 +27,8 @@ const audioStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     console.log("file before rename: ", file);
     cb(null, Date.now() + path.extname(file.originalname));
-  }
-})
+  },
+});
 
 const uploadAudio = multer({storage: audioStorage});
 
@@ -44,7 +44,7 @@ app.use("/contacts", contactsRouter);
 // first attempt at login routes
 app.use("/login", (req, res) => {
   res.send({
-    token: "test123"
+    token: "test123",
   });
 });
 
@@ -66,22 +66,6 @@ app.post("/upload", uploadAudio.single("sound"), (req, res) => {
     })
   })
 });
-
-///Returns full item for each alarm
-
-const getAlarmItems = () => {
-  return Promise.resolve(alarmItems);
-};
-
-//gets specific information from alarmItems below
-
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
-
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
 
 const getTimes = () => {
   const alarmsBuffer = {};
@@ -107,12 +91,21 @@ const getSounds = () => {
   return Promise.resolve(sounds);
 };
 
+
+
+const getUsers = () => {
+  const alarmsBuffer = {};
+  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+  const users = Object.keys(alarmsBuffer);
+  return Promise.resolve(users);
+};
+
 const getMockSounds = () => {
   return Promise.resolve(soundsData);
 };
 
 // functions to handle axios posts coming from front end
-
 
 const addTime = (time) => {
   alarmItems.push(time);
@@ -133,13 +126,37 @@ const addNewSound = (newSound) => {
 }
 
 app.post("/api/v1/sendSMS", (req, res) => {
-  console.log(req.body.phoneNumber)
+  console.log(req.body.contactName);
   // sendTwilio(req.body.phoneNumber)
-})
-
-app.get("/api/v1/alarmItems", (req, res) => {
-  getAlarmItems().then((alarmItems) => res.json(alarmItems));
 });
+
+///Returns full item for each alarm based on user_email
+
+const getAlarmItems = (user_email) => {
+  
+  const sortedByUser = alarmItems.filter(function (el) {
+    return el.user_email == user_email;
+  });
+
+  return Promise.resolve(sortedByUser);
+};
+
+const getAlarmItemsLastId = () => {
+
+  const lastId = alarmItems.length
+
+  return Promise.resolve(lastId)
+}
+
+
+app.get("/api/v1/alarmItems/:id", (req, res) => {
+  getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
+});
+
+app.get("/api/v1/alarmItemLastId", (req, res) => (
+  getAlarmItemsLastId().then((lastId) => res.json(lastId))
+
+))
 
 app.get("/api/v1/users", (req, res) => {
   getUsers().then((users) => res.json(users));
@@ -182,5 +199,3 @@ app.post("/api/v1/times", (req, res) => {
   addTime(time).then((data) => res.send(data));
 });
 module.exports = app;
-
-

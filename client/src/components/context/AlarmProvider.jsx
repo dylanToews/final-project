@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import months from "../../data";
 import axios from "axios";
-import Notification from "../../pages/Notification";
+import { authContext } from "../../providers/AuthProvider";
 // import Sound from "../../mixkit-casino-win-alarm-and-coins-1990.mp3";
 
 // const alarm = new Audio(Sound);
@@ -19,17 +19,28 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
-  const [sounds, setSounds] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const [alarms, setAlarms] = useState([]);
+  const [lastId, setLastId]= useState([])
+
+  // const [sounds, setSounds] = useState([]);
+  // const [contacts, setContacts] = useState([]);
+  // const [alarms, setAlarms] = useState([]);
+
   const [notification, setNotification] = useState(false);
+  const [notificationDetails, setNotificationDetails] = useState();
 
+  const { auth, user } = useContext(authContext);
 
-
-
-  // This conditional is what fires off the alarms.
+  ///Notification and alarm logic///
 
   let testNotification = false;
+
+  const notificationDetailsObject = {
+    sound_name: "",
+    sound_string: "",
+    contact_name: "",
+    contact_number: "",
+    alarm_time: "",
+  };
 
   function checkAlarm() {
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
@@ -40,7 +51,10 @@ function ContextAlarm({ children }) {
         `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
       ) {
         testNotification = true;
-        // console.log("the alarm has gone off")
+
+        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`;
+        notificationDetailsObject.contact_name = alarmItem.contact;
+        notificationDetailsObject.sound_name = alarmItem.sound;
       }
     });
   }
@@ -48,28 +62,49 @@ function ContextAlarm({ children }) {
   checkAlarm();
 
   useEffect(() => {
+    if (notificationDetailsObject.alarm_time) {
+      setNotificationDetails(notificationDetailsObject);
+    }
+  }, [notificationDetailsObject.alarm_time]);
+
+  const user_email = user.email;
+
+  ///Axios calls and a bit of alarm logic
+
+  useEffect(() => {
     const requests = [
-      axios.get("/api/v1/alarmItems"),
-      axios.get("/api/v1/users"),
-      axios.get("/api/v1/times"),
-      axios.get("/api/v1/sounds"),
-      axios.get("/api/v1/contacts"),
+      axios.get(`/api/v1/alarmItems/${user_email}`),
+      axios.get("/api/v1/alarmItemLastId")
+      // axios.get("/api/v1/users"),
+      // axios.get("/api/v1/times"),
+      // axios.get("/api/v1/sounds"),
+      // axios.get("/api/v1/contacts"),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        users: responses[1].data,
-        times: responses[2].data,
-        sounds: responses[3].data,
-        contacts: responses[4].data,
+        lastId: responses[1].data
+        // users: responses[1].data,
+        // times: responses[2].data,
+        // sounds: responses[3].data,
+        // contacts: responses[4].data,
       }))
-      .then(({ alarmItems, users, times, sounds, contacts }) => {
-        setAlarmItems(alarmItems);
-        // setUsers(users);
-        setSounds(sounds);
-        setContacts(contacts);
-        setAlarms(times);
-      });
+      .then(
+        ({
+          alarmItems,
+          lastId
+          // users, times, sounds, contacts
+        }) => {
+          setAlarmItems(alarmItems);
+          setLastId(lastId)
+          // setUsers(users);
+          // setSounds(sounds);
+          // setContacts(contacts);
+          // setAlarms(times);
+        }
+      );
+
+    // clock functionality logic
 
     setInterval(() => {
       let date = new Date();
@@ -103,21 +138,22 @@ function ContextAlarm({ children }) {
       setYearNow(year);
     }, 1000);
 
+    // alarm logic - to be moved
+
     if (testNotification) {
       console.log("alarm has occured");
       setNotification(true);
     }
   }, [testNotification]);
 
-  // const parsedAlarmItems = `${alarmItems.hour}`
+  ///function for adding new alarms. function is called within AlarmOption
 
   const addNewParams = (formData) => {
-    const id = alarmItems.length + 1;
-    const newAlarmItem = { id, ...formData };
-
+    const id = lastId + 1;
+    const newAlarmItem = { id, user_email, ...formData };
+    setLastId(lastId + 1)
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      console.log("add new alarmItem sucessful");
-      console.log(newAlarmItem);
+      console.log("add new alarmItem sucessful:", newAlarmItem);
       setAlarmItems([...alarmItems, newAlarmItem]);
     });
   };
@@ -129,6 +165,8 @@ function ContextAlarm({ children }) {
   //   // alarm.loop = true;
   //   console.log("alarm has occured")
   // }
+
+  /// not really important but it gives me an error when i delete so im ignoring for now
 
   const pauseAlarm = () => {
     // alarm.pause();
@@ -151,12 +189,14 @@ function ContextAlarm({ children }) {
         hasAlarm,
         setHasAlarm,
         alarmItems,
-        sounds,
-        contacts,
-        alarms,
+        // sounds,
+        // contacts,
+        // alarms,
         addNewParams,
         notification,
         setNotification,
+        notificationDetails,
+        setNotificationDetails,
       }}
     >
       {children}

@@ -4,15 +4,15 @@ import { AlarmContext } from '../components/context/AlarmProvider';
 
 import NotificationAlert from '../components/NotificationAlert/NotificationAlert';
 
-//could be a good place to render sounds !!
-
-
 
 
 function Notification() {
-  const { notification, setNotification } = useContext(AlarmContext)
+  const { notification, notificationDetails } = useContext(AlarmContext)
+  
+  // console.log("notification details", notificationDetails)
+  
 
-    return (
+  return (
       <div>
       {notification === true && 
       <NotificationAlert/>}

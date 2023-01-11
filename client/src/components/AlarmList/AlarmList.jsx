@@ -1,17 +1,17 @@
 import { useState, useContext } from "react";
 import AlarmListItem from "./AlarmListItem";
-import { getFilteredUsers, getUserAlarms } from "../../helpers/userHelpers";
+// import { getFilteredUsers, getUserAlarms } from "../../helpers/userHelpers";
 import { AlarmContext } from "../context/AlarmProvider";
 
 export default function AlarmList(props) {
-  const [filter, setFilter] = useState(null)
+  // const [filter, setFilter] = useState(null)
   const { alarmItems } = useContext(AlarmContext)
 
 
 
-  const filteredAlarmItems = getFilteredUsers(alarmItems, filter)
+  // const filteredAlarmItems = getFilteredUsers(alarmItems, filter)
 
-  const parsedAlarmItems = filteredAlarmItems.map((alarmItem) => (
+  const parsedAlarmItems = alarmItems.map((alarmItem) => (
     <AlarmListItem key={alarmItem.id} {... alarmItem} />
   ))
 
