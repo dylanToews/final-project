@@ -8,7 +8,7 @@ function Navbar() {
 
   return (
     <nav className="navHeader">
-      <p>Logged in as {user.name}</p>
+      {user && <p>Logged in as {user.name}</p>}
       <ul>
         <Link to="/" className="navButton">Home</Link>
         {/* <Link to="/Login_Register" className="navButton">Account</Link> */}

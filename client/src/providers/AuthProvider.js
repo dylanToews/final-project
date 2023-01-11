@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const authContext = createContext();
 
 export default function AuthProvider(props) {
-  const [auth, setAuth] = useState(false);
+  // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
+  const [auth, setAuth] = useState(true);
   const [user, setUser] = useState(null);
 
   //Perform login process for the user & save authID, etc
