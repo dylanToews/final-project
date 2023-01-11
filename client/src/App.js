@@ -8,12 +8,10 @@ import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Sounds from "./pages/Sounds";
 import Login_Register from "./pages/Login_Register";
-
+import Notification from "./pages/Notification";
+import ContextAlarm from "./components/context/AlarmProvider";
 
 import "./App.css";
-
-//Views -- Mostly test views atm
-
 
 function App() {
   const [token, setToken] = useState();
@@ -29,6 +27,8 @@ function App() {
     <>
     {!auth && <Login_Register setToken={setToken}/>}
     { auth && <BrowserRouter>
+      <ContextAlarm>
+      <Notification />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -39,6 +39,7 @@ function App() {
           
         </Route>
       </Routes>
+      </ContextAlarm>
     </BrowserRouter> }
     </>
   );

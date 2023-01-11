@@ -3,6 +3,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const sendTwilio = require("./twilio/send_sms")
 const alarmItems = require("./data/mockAlarmItemData");
 
 //Multer middleware for file uploading
@@ -46,6 +47,8 @@ app.use("/login", (req, res) => {
     token: "test123"
   });
 });
+
+
 
 // eventually write db queries in functions below, i think?
 
@@ -113,6 +116,11 @@ const addAlarmItem = (newAlarmItem) => {
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
 
+app.post("/api/v1/sendSMS", (req, res) => {
+  console.log(req.body.phoneNumber)
+  // sendTwilio(req.body.phoneNumber)
+})
+
 app.get("/api/v1/alarmItems", (req, res) => {
   getAlarmItems().then((alarmItems) => res.json(alarmItems));
 });
@@ -148,3 +156,5 @@ app.post("/api/v1/times", (req, res) => {
   addTime(time).then((data) => res.send(data));
 });
 module.exports = app;
+
+

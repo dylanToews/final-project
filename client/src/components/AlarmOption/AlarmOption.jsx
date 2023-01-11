@@ -3,7 +3,7 @@ import "./AlarmOption.css";
 import "../Alarms.css";
 import { minutesNumber, hourNumber } from "../../func";
 import useSelect from "../../hooks/useSelect";
-import { AlarmContext } from "../context/ContextAlarm";
+import { AlarmContext } from "../context/AlarmProvider";
 
 function AlarmOption(props) {
   const [hour, setHour] = useSelect("Hour");
@@ -13,7 +13,7 @@ function AlarmOption(props) {
   const { setAlarmTime, pauseAlarm, hasAlarm, setHasAlarm, sounds, contacts, alarms, addNewParams } =
     useContext(AlarmContext);
 
-  const { onSubmit } = props;
+  // const { onSubmit } = props;
 
   const initialValues = {
     contact: "",
