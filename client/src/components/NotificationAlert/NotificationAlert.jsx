@@ -4,15 +4,22 @@ import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 
 export default function NotificationAlert(props) {
-  const { notification, setNotification } = useContext(AlarmContext);
+  const { setNotification, notificationDetails } = useContext(AlarmContext);
 
- const phoneNumber = "+17802386933"
+  const contactName = notificationDetails.contact_name
+
+  
+  useEffect(() => {
+    
+    console.log(`sound playing: ${notificationDetails.sound_name}`)
+  }, [])
+
 
   function sendText() {
     setNotification(false)
     console.log("sending a text")
-    axios.post("/api/v1/sendSMS", { phoneNumber }).then((res) => {
-    console.log("text sent !!!")  
+    axios.post("/api/v1/sendSMS", { contactName }).then((res) => {
+    console.log(`text sent to ${contactName}`)  
 
     })
     return 

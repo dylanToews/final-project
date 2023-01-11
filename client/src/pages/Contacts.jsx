@@ -3,8 +3,8 @@ import "../App.css";
 
 function Contacts() {
     return (
-        <div class="App">
-            <div class="container">
+        <div className="App">
+            <div className="container">
                 <h1>Contacts</h1>
                 <form className="Form-at">
                     <label>Name</label>
@@ -28,7 +28,7 @@ function Contacts() {
                         placeholder="Confirm contact phone..."
                         className="inputBox"
                     /><br/>
-                    <button type="submit" class="submit">Add Contact</button>
+                    <button type="submit" className="submit">Add Contact</button>
                 </form>
             </div>
         </div>
