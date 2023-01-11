@@ -8,8 +8,6 @@ import { authContext } from "../../providers/AuthProvider";
 export const AlarmContext = createContext();
 
 function ContextAlarm({ children }) {
-
-  
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [secondsDigital, setSecondsDigital] = useState("");
@@ -19,48 +17,28 @@ function ContextAlarm({ children }) {
   const [yearNow, setYearNow] = useState("");
   const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
-  
+
   const [alarmItems, setAlarmItems] = useState([]);
-  
+
   // const [sounds, setSounds] = useState([]);
   // const [contacts, setContacts] = useState([]);
   // const [alarms, setAlarms] = useState([]);
-  
+
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
-  
-  
-  const { auth, user } = useContext(authContext)
 
-  // const email = user.email
+  const { auth, user } = useContext(authContext);
 
-  // This conditional is what fires off the alarms.
+  ///Notification and alarm logic///
 
-  
-  // useEffect(() => {
-
-  //   console.log("user email", user.email)
-
-  // },[])
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   let testNotification = false;
 
   const notificationDetailsObject = {
-    sound_name:"",
-    sound_string:"",
-    contact_name:"",
-    contact_number:"",
-    alarm_time:""
-
+    sound_name: "",
+    sound_string: "",
+    contact_name: "",
+    contact_number: "",
+    alarm_time: "",
   };
 
   function checkAlarm() {
@@ -72,30 +50,27 @@ function ContextAlarm({ children }) {
         `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
       ) {
         testNotification = true;
-    
-        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`
-        notificationDetailsObject.contact_name = alarmItem.contact
-        notificationDetailsObject.sound_name = alarmItem.sound
+
+        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`;
+        notificationDetailsObject.contact_name = alarmItem.contact;
+        notificationDetailsObject.sound_name = alarmItem.sound;
       }
     });
   }
 
   checkAlarm();
 
+  useEffect(() => {
+    if (notificationDetailsObject.alarm_time) {
+      setNotificationDetails(notificationDetailsObject);
+    }
+  }, [notificationDetailsObject.alarm_time]);
 
+  const user_email = user.email;
 
-  
-useEffect(() => {
-  if(notificationDetailsObject.alarm_time){
-    setNotificationDetails(notificationDetailsObject)
-  }
-}, [notificationDetailsObject.alarm_time])
-
-const user_email = user.email
-
+  ///Axios calls and a bit of alarm logic
 
   useEffect(() => {
-
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
       // axios.get("/api/v1/users"),
@@ -111,15 +86,20 @@ const user_email = user.email
         // sounds: responses[3].data,
         // contacts: responses[4].data,
       }))
-      .then(({ alarmItems, 
-        // users, times, sounds, contacts
-       }) => {
-        setAlarmItems(alarmItems);
-        // setUsers(users);
-        // setSounds(sounds);
-        // setContacts(contacts);
-        // setAlarms(times);
-      });
+      .then(
+        ({
+          alarmItems,
+          // users, times, sounds, contacts
+        }) => {
+          setAlarmItems(alarmItems);
+          // setUsers(users);
+          // setSounds(sounds);
+          // setContacts(contacts);
+          // setAlarms(times);
+        }
+      );
+
+    // clock functionality logic
 
     setInterval(() => {
       let date = new Date();
@@ -153,16 +133,15 @@ const user_email = user.email
       setYearNow(year);
     }, 1000);
 
+    // alarm logic - to be moved
+
     if (testNotification) {
       console.log("alarm has occured");
       setNotification(true);
     }
   }, [testNotification]);
 
-
-
-
-
+  ///function for adding new alarms. function is called within AlarmOption
 
   const addNewParams = (formData) => {
     const id = alarmItems.length + 1;
@@ -174,9 +153,6 @@ const user_email = user.email
     });
   };
 
-
-
-  
   //Original alarm conditional below
 
   // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
@@ -184,6 +160,8 @@ const user_email = user.email
   //   // alarm.loop = true;
   //   console.log("alarm has occured")
   // }
+
+  /// not really important but it gives me an error when i delete so im ignoring for now
 
   const pauseAlarm = () => {
     // alarm.pause();
