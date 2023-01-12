@@ -153,12 +153,16 @@ const getSoundItemsLastId = () => {
 
 const addSoundItem = (newSoundItem) => {
   soundItems.push(newSoundItem);
-
+  console.log(soundItems)
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
 
 
+const deleteSoundItem = (id) => {
+  console.log("inside delete function with Sound id:", id);
 
+  return Promise.resolve("deleted");
+};
 
 // SOUND -  Routes //
 
@@ -173,10 +177,14 @@ app.get("/api/v1/soundItemsLastId", (req, res) =>
 
 app.post("/api/v1/soundItems", (req, res) => {
   const { newSoundItem } = req.body;
-  addAlarmItem(newSoundItem).then((data) => res.send(data));
+  addSoundItem(newSoundItem).then((data) => res.send(data));
 });
 
-
+app.delete("/api/v1/soundItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const soundItemId = req.params.id;
+  deleteSoundItem(soundItemId).then((data) => res.send(data));
+});
 
 
 

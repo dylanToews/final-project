@@ -228,6 +228,7 @@ function ContextAlarm({ children }) {
         soundItems,
         setSoundItems,
         soundLastId,
+        setSoundLastId,
         // sounds,
         // alarms,
         addNewParams,

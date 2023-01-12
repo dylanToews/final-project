@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { AlarmContext } from "../context/AlarmProvider";
+import { authContext } from "../../providers/AuthProvider";
 
 
 export default function RecordingsList(props) {
-  const { recordings, deleteAudio } = props;
+  const { soundItems, setSoundItems, soundLastId, setSoundLastId } = useContext(AlarmContext);
 
-  const initialValues = { title: "" };
+  const { recordings, deleteAudio } = props;
+  const {user} = useContext(authContext)
+
+  const user_email = user.email
+
+  const initialValues = {
+    user_email, 
+    sound_name: "",
+    sound_url: ""
+   };
 
   const [formData, setFormData] = useState(initialValues);
 
@@ -18,6 +29,9 @@ export default function RecordingsList(props) {
   // two-part submit: file goes to backend public folder, file references go to db
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const id = soundLastId + 1
+
     if (recordings.length > 0) {
       const audioFormData = new FormData();
       audioFormData.append("sound", recordings[0].audio);
@@ -29,12 +43,15 @@ export default function RecordingsList(props) {
       })
         .then(res => res.data) // server sending back filename only
         .then(filename => {
-          const newSound = {
+          const newSoundItem = {
+            id,
             ...formData,
-            url: filename
+            sound_url: `http://localhost:8080/audio/${filename}`
           };
-          console.log("new sound: ", newSound);
-          axios.post("/api/v2/sounds", {newSound}).then((res) => {
+          console.log("new sound: ", newSoundItem);
+          axios.post("/api/v1/soundItems", {newSoundItem}).then((res) => {
+            setSoundItems([...soundItems, newSoundItem])
+            // setSoundLastId([id])
             deleteAudio(recordings[0].key);
             setFormData(initialValues);
           });
@@ -56,10 +73,10 @@ export default function RecordingsList(props) {
           <form className="SoundForm">
             <input
               type="text"
-              name="title"
+              name="sound_name"
               placeholder="Enter a title for your new sound"
               onChange={handleChange}
-              value={formData.title}
+              value={formData.sound_name}
             />
             <button type="submit" onClick={handleSubmit}>
               Save
