@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import useSelect from "../../hooks/useSelect";
+// import useSelect from "../../hooks/useSelect";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
 import axios from "axios";
