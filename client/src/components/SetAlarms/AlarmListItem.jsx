@@ -3,11 +3,16 @@ export default function AlarmListItem(props) {
 
   
   return (
-    <li className="AlarmListItem">
-      <p>Time: {`${hour}:${minutes} ${amPmOption}`}</p>
-      <p>Contact Name: {contact}</p>
-      <p>Sound: {sound}</p>
-      <br></br>
-    </li>
+    <ul className="AlarmListItem">
+      <div className="TimeCardFormat">
+        <p className="TimeDisplay">{`${hour}:${minutes}`}</p>
+        <p className="AMPM">{`${amPmOption}`}</p>
+      </div>
+      <div>
+        <p className="ContactDisplay">Contacts: {contact}</p>
+        <p className="SoundDisplay">Sound: {sound}</p>
+      </div>
+      <br/>
+    </ul>
   );
 }
