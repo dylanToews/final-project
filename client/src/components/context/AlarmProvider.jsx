@@ -19,10 +19,10 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
+  const [contactItems, setContactItems] = useState([]);
   const [lastId, setLastId]= useState([])
 
   // const [sounds, setSounds] = useState([]);
-  // const [contacts, setContacts] = useState([]);
   // const [alarms, setAlarms] = useState([]);
 
   const [notification, setNotification] = useState(false);
@@ -74,16 +74,17 @@ function ContextAlarm({ children }) {
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
-      axios.get("/api/v1/alarmItemLastId")
+      axios.get("/api/v1/alarmItemLastId"),
+      axios.get(`/api/v1/contactItems/${user_email}`),
       // axios.get("/api/v1/users"),
       // axios.get("/api/v1/times"),
       // axios.get("/api/v1/sounds"),
-      // axios.get("/api/v1/contacts"),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        lastId: responses[1].data
+        lastId: responses[1].data,
+        contactItems: responses[2].data,
         // users: responses[1].data,
         // times: responses[2].data,
         // sounds: responses[3].data,
@@ -92,11 +93,13 @@ function ContextAlarm({ children }) {
       .then(
         ({
           alarmItems,
-          lastId
+          lastId,
+          contactItems,
           // users, times, sounds, contacts
         }) => {
           setAlarmItems(alarmItems);
           setLastId(lastId)
+          setContactItems(contactItems)
           // setUsers(users);
           // setSounds(sounds);
           // setContacts(contacts);
@@ -189,8 +192,8 @@ function ContextAlarm({ children }) {
         hasAlarm,
         setHasAlarm,
         alarmItems,
+        contactItems,
         // sounds,
-        // contacts,
         // alarms,
         addNewParams,
         notification,
