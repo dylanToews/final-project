@@ -1,5 +1,7 @@
 import RecorderControls from '../components/Sounds/RecorderControls';
 import SoundForm from '../components/Sounds/SoundForm';
+import SoundList from '../components/Sounds/SoundList';
+
 import useRecorder from '../hooks/useRecorder';
 import useRecordingsList from '../hooks/useRecordingsList';
 
@@ -15,6 +17,7 @@ function Sounds() {
         {recordings.length === 0 && <RecorderControls recorderState={recorderState} handlers={handlers} />}
         <SoundForm recordings={recordings} deleteAudio={deleteAudio} />
       </div>
+      <SoundList />
     </section>
     );
 }
