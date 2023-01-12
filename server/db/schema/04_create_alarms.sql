@@ -16,8 +16,10 @@ CREATE TABLE alarms (
   user_id integer REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   sound_id integer REFERENCES sounds(id) ON DELETE CASCADE NOT NULL,
   contact_id integer REFERENCES contacts(id) ON DELETE CASCADE NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  set_for TIME NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  hour VARCHAR(2) NOT NULL,
+  minute VARCHAR(2) NOT NULL,
+  am_pm VARCHAR(2) NOT NULL,
   active BOOL NOT NULL DEFAULT true,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
