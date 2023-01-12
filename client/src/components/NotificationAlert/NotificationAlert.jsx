@@ -2,17 +2,35 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
+import {Howl} from "howler";
+
 
 export default function NotificationAlert(props) {
   const { setNotification, notificationDetails } = useContext(AlarmContext);
 
   const contactName = notificationDetails.contact_name
 
-  
+  const audioTest = "http://localhost:8080/audio/1673469843174.ogg"
+
+const soundPlay = (src) => {
+  const sound = new Howl ({
+    src,
+    html5: true,
+    loop: true
+  })
+  sound.play()
+}
+
+
   useEffect(() => {
     
     console.log(`sound playing: ${notificationDetails.sound_name}`)
+
+    soundPlay(audioTest)
+    soundPlay.loop = true
+
   }, [])
+
 
 
   function sendText() {
