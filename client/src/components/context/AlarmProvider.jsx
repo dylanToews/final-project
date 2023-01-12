@@ -74,6 +74,7 @@ function ContextAlarm({ children }) {
         notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
         notificationDetailsObject.sound_url = currentSoundItem[0].sound_url
+        console.log(notificationDetailsObject)
       }
     });
   }
@@ -222,6 +223,7 @@ function ContextAlarm({ children }) {
         hasAlarm,
         setHasAlarm,
         alarmItems,
+        setAlarmItems,
         contactItems,
         setContactItems,
         contactLastId,
