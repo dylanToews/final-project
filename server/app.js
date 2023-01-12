@@ -124,7 +124,7 @@ const addAlarmItem = (newAlarmItem) => {
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
 
-///ALARM ITEMS - Gets/Posts
+///ALARM ITEMS - Routes
 
 app.get("/api/v1/alarmItems/:id", (req, res) => {
   getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
@@ -175,7 +175,12 @@ const getContactItemsLastId = () => {
   return Promise.resolve(lastId);
 };
 
-///CONTACTS - Gets/Posts ///
+const deleteContactItem = (id) => {
+  console.log("inside delete function with contact id:", id);
+
+  return Promise.resolve("deleted");
+};
+///CONTACTS - Routes ///
 
 app.get("/api/v1/contactItems/:id", (req, res) => {
   getContactItems(req.params.id).then((contactItems) => res.json(contactItems));
@@ -184,15 +189,19 @@ app.get("/api/v1/contactItems/:id", (req, res) => {
 app.post("/api/v1/contactItems", (req, res) => {
   const { newContactItem } = req.body;
   addContactItems(newContactItem)
-  .then((data) => res.send(data))
-  .then(console.log(contactItems));
+    .then((data) => res.send(data))
+    .then(console.log(contactItems));
 });
 
 app.get("/api/v1/contactItemsLastId", (req, res) => {
-  getContactItemsLastId().then((lastId) => res.json(lastId))
+  getContactItemsLastId().then((lastId) => res.json(lastId));
+});
 
-})
-
+app.delete("/api/v1/contactItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const contactItemId = req.params.id;
+  deleteContactItem(contactItemId).then((data) => res.send(data));
+});
 
 ///Not Used Currently///
 
