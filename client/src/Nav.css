@@ -2,15 +2,21 @@
   display: flex;
   justify-content:center;
   align-items: center;
-  padding: 25px 10%;
+  padding: 20px 10%;
   background-color: #f0932f;
 }
 
 .navButton {
   margin: 0px 10px 0px 10px;
-  padding: 10px;
+  padding: 20px 0px 20px 0px;
   display: inline;
   font-size: 20px;
   color: #EEEEEE;
   font-weight: 500;
+}
+
+.navButton:hover {
+  background-image: linear-gradient(rgba(240, 147, 47, 1)
+  ,rgba(255, 196, 35, 0.5), rgba(240, 147, 47, 1)
+  );
 }
