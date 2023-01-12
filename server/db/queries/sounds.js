@@ -6,9 +6,9 @@ const getAllSounds = () => {
   });
 }
 
-const getSoundsByUser = userId => {
+const getSoundsForUser = userId => {
   return db.query("SELECT * FROM sounds WHERE user_id = $1;", [userId])
     .then(data => data.rows);
 }
 
-module.exports = { getAllSounds, getSoundsByUser }
+module.exports = { getAllSounds, getSoundsForUser }

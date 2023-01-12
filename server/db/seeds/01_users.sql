@@ -5,8 +5,8 @@
 -- https://salsita.github.io/node-pg-migrate/#/
 
 -- users seeds
-INSERT INTO users (name, email, password) VALUES ('Rick', 'rick.sandchez@gmail.com', 'picklerick');
-INSERT INTO users (name, email, password) VALUES ('Lisa', 'lisa.simpson@gmail.com', 'ehhhhh');
-INSERT INTO users (name, email, password) VALUES ('Link', 'link@yahoo.com', 'hyrule');
-INSERT INTO users (name, email, password) VALUES ('Simon', 'simon_bel123@mail.ca', 'dracula');
-INSERT INTO users (name, email, password) VALUES ('Mario', 'mario@mushroomkindom.jp', 'plumber79');
+
+INSERT INTO users (name, email, password) VALUES ('Dylan', 'dylan@fakeemail.com', 'dylan');
+INSERT INTO users (name, email, password) VALUES ('Ryan', 'ryan@fakeemail.com', 'ryan');
+INSERT INTO users (name, email, password) VALUES ('Cheever', 'cheever@fakeemail.com', 'cheever');
+INSERT INTO users (name, email, password) VALUES ('guest_test', 'guest-test@fakeemail.com', 'guest');

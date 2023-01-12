@@ -1,5 +1,7 @@
 import { formatMinutes, formatSeconds } from "../../helpers/format-time";
 
+import "./recorder-controls.css"
+
 export default function RecorderControls({ recorderState, handlers}) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
   const { startRecording, saveRecording, cancelRecording } = handlers;
