@@ -14,25 +14,17 @@ import ContextAlarm from "./components/context/AlarmProvider";
 import "./App.css";
 
 function App() {
-  const [token, setToken] = useState();
   const { auth } = useContext(authContext);
-
-  // if (!token) {
-  //   return (
-  //     <Login_Register setToken={setToken}/>
-  //   );
-  // }
 
   return (
     <>
-    {!auth && <Login_Register setToken={setToken}/>}
+    {!auth && <Login_Register />}
     { auth && <BrowserRouter>
       <ContextAlarm>
       <Notification />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* <Route path="login_register" element={<Login_Register />} /> */}
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="sounds" element={<Sounds />}/>

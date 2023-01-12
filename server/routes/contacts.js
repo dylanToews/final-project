@@ -10,4 +10,14 @@ router.get("/", (req, res) => {
   })
 });
 
+// get contacts for user
+router.get("/:id", (req, res) => {
+  userID = req.params.id;
+  contacts.getContactsForUser(userID).then(data => {
+    console.log(data);
+    res.json({contacts: data});
+  })
+
+});
+
 module.exports = router;

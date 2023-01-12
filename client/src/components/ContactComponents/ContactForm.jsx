@@ -9,7 +9,7 @@ function ContactForm() {
   const { contactItems, setContactItems, contactLastId } = useContext(AlarmContext);
   const {user} = useContext(authContext)
 
-  const user_email = user.email
+  const user_email = user.email;
 
   const initialValues = {
     id:"",
