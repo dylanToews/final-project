@@ -222,6 +222,7 @@ function ContextAlarm({ children }) {
         hasAlarm,
         setHasAlarm,
         alarmItems,
+        setAlarmItems,
         contactItems,
         setContactItems,
         contactLastId,

@@ -121,6 +121,11 @@ const addAlarmItem = (newAlarmItem) => {
   return Promise.resolve("ok"); // if this was DB call, return the created id
 };
 
+const deleteAlarmItem = (id) => {
+  console.log("inside delete function with Alarm id:", id);
+
+  return Promise.resolve("deleted");
+};
 ///ALARM ITEMS - Routes
 
 app.get("/api/v1/alarmItems/:id", (req, res) => {
@@ -135,6 +140,13 @@ app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
   addAlarmItem(newAlarmItem).then((data) => res.send(data));
 });
+
+app.delete("/api/v1/alarmItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const alarmItemId = req.params.id;
+  deleteAlarmItem(alarmItemId).then((data) => res.send(data));
+});
+
 
 /// SOUND - Functions ///
 
