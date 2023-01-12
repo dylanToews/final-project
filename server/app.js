@@ -13,7 +13,7 @@ const multer = require("multer");
 const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms");
 const alarmItems = require("./data/mockAlarmItemData");
-const soundsData = require("./data/mockSoundData");
+const soundItems = require("./data/mockSoundData");
 
 const app = express();
 
@@ -80,10 +80,6 @@ const getUsers = () => {
   return Promise.resolve(users);
 };
 
-const getMockSounds = () => {
-  return Promise.resolve(soundsData);
-};
-
 // functions to handle axios posts coming from front end
 
 const addTime = (time) => {
@@ -93,7 +89,7 @@ const addTime = (time) => {
 };
 
 const addNewSound = (newSound) => {
-  soundsData.push(newSound);
+  soundItems.push(newSound);
 
   return Promise.resolve("ok sound");
 };
@@ -118,6 +114,7 @@ const getAlarmItemsLastId = () => {
 
   return Promise.resolve(lastId);
 };
+
 const addAlarmItem = (newAlarmItem) => {
   alarmItems.push(newAlarmItem);
 
@@ -139,19 +136,71 @@ app.post("/api/v1/alarmItems", (req, res) => {
   addAlarmItem(newAlarmItem).then((data) => res.send(data));
 });
 
+/// SOUND - Functions ///
+
+const getSoundItems = (user_email) => {
+  const sortedByUser = soundItems.filter(function (el) {
+    return el.user_email == user_email;
+  });
+  return Promise.resolve(sortedByUser);
+};
+
+const getSoundItemsLastId = () => {
+  const lastId = soundItems.length;
+
+  return Promise.resolve(lastId);
+};
+
+const addSoundItem = (newSoundItem) => {
+  soundItems.push(newSoundItem);
+  console.log(soundItems)
+  return Promise.resolve("ok"); // if this was DB call, return the created id
+};
+
+
+const deleteSoundItem = (id) => {
+  console.log("inside delete function with Sound id:", id);
+
+  return Promise.resolve("deleted");
+};
+
 // SOUND -  Routes //
 
-// extra route needed for testing sound without breaking alarms
-app.get("/api/v2/sounds", (req, res) => {
-  getMockSounds().then((sounds) => res.json(sounds));
+
+app.get("/api/v1/soundItems/:id", (req, res) => {
+  getSoundItems(req.params.id).then((soundItems) => res.json(soundItems));
 });
 
-// extra route needed for testing sounds without breaking alarms
-app.post("/api/v2/sounds", (req, res) => {
-  const { newSound } = req.body;
-  console.log(req.body);
-  addNewSound(newSound).then((data) => res.send(data));
+app.get("/api/v1/soundItemsLastId", (req, res) =>
+  getSoundItemsLastId().then((lastId) => res.json(lastId))
+);
+
+app.post("/api/v1/soundItems", (req, res) => {
+  const { newSoundItem } = req.body;
+  addSoundItem(newSoundItem).then((data) => res.send(data));
 });
+
+app.delete("/api/v1/soundItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const soundItemId = req.params.id;
+  deleteSoundItem(soundItemId).then((data) => res.send(data));
+});
+
+
+
+
+
+// // extra route needed for testing sound without breaking alarms
+// app.get("/api/v2/sounds", (req, res) => {
+//   getMockSounds().then((sounds) => res.json(sounds));
+// });
+
+// // extra route needed for testing sounds without breaking alarms
+// app.post("/api/v2/sounds", (req, res) => {
+//   const { newSound } = req.body;
+//   console.log(req.body);
+//   addNewSound(newSound).then((data) => res.send(data));
+// });
 
 /// CONTACTS - FUNCTIONS ////////
 

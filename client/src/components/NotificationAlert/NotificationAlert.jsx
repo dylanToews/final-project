@@ -6,19 +6,26 @@ import {Howl} from "howler";
 
 
 export default function NotificationAlert(props) {
-  const { setNotification, notificationDetails } = useContext(AlarmContext);
+  const { setNotification, notificationDetails, soundItems } = useContext(AlarmContext);
 
   const contactName = notificationDetails.contact_name
 
+  const soundUrl = notificationDetails.sound_url
+
   const audioTest = "http://localhost:8080/audio/1673469843174.ogg"
 
-const soundPlay = (src) => {
+const soundPlay = (src, status) => {
   const sound = new Howl ({
     src,
     html5: true,
     loop: true
   })
-  sound.play()
+  if (status=== "play"){
+    sound.play()
+    }
+    if(status=== "stop"){
+    sound.stop()
+    }
 }
 
 
@@ -26,8 +33,7 @@ const soundPlay = (src) => {
     
     console.log(`sound playing: ${notificationDetails.sound_name}`)
 
-    soundPlay(audioTest)
-    soundPlay.loop = true
+    soundPlay(soundUrl, "play")
 
   }, [])
 
@@ -46,6 +52,7 @@ const soundPlay = (src) => {
 
   function changeNotification() {
     setNotification(false)
+    soundPlay(soundUrl, "stop")
     console.log("accept button pressed")
     return
   }
