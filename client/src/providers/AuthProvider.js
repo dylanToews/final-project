@@ -13,12 +13,20 @@ export default function AuthProvider(props) {
   //Perform login process for the user & save authID, etc
   const login = function (email, password) {
     axios.get(`/api/v1/users/${email}`)
-      .then(res => {
-        console.log("server response: ", res.data.user);
+      .then(res => res.data.user)
+      .then(user => {
+        console.log("server response: ", user);
+        if (user) {
+          setAuth(true);
+          setUser({ 
+            email:  user.email,
+            id: user.id,
+            name: user.name
+          });
+          
+        }
       });
-    setAuth(true);
-    const id = "USER_ID"; // axios call here? get user id from DB
-    setUser({ email, id, name: "TEST USER" });
+    // const id = "USER_ID"; // axios call here? get user id from DB
   };
 
   const logout = function() {
