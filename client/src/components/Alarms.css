@@ -10,7 +10,33 @@
   padding-top: 20px;
 }
 
-.SpaceTime {
+.Minkowski {
   padding: 5px;
   margin: 5px;
+}
+
+.TimeCardFormat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.TimeDisplay {
+  color: #333333;
+  font-size: 48px;
+  margin-top: -16px;
+}
+
+.AMPM {
+  color: #333333;
+}
+
+.ContactDisplay {
+  color: #333333;
+}
+
+.SoundDisplay {
+  color: #222222;
+  font-size: larger;
 }

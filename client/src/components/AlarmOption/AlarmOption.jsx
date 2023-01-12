@@ -93,7 +93,7 @@ function AlarmOption(props) {
             name="hour"
             value={formData.hour}
             onChange={handleChange}
-            className="SpaceTime"
+            className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
               Hour
@@ -108,7 +108,7 @@ function AlarmOption(props) {
             name="minutes"
             value={formData.minutes}
             onChange={handleChange}
-            className="SpaceTime"
+            className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
               Minutes
@@ -123,7 +123,7 @@ function AlarmOption(props) {
             name="amPmOption"
             value={formData.amPmOption}
             onChange={handleChange}
-            className="SpaceTime"
+            className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
               Am/Pm
