@@ -13,6 +13,9 @@ export default function AuthProvider(props) {
   //Perform login process for the user & save authID, etc
   const login = function (email, password) {
     axios.get(`/api/v1/users/${email}`)
+      .then(res => {
+        console.log("server response: ", res.data.user);
+      });
     setAuth(true);
     const id = "USER_ID"; // axios call here? get user id from DB
     setUser({ email, id, name: "TEST USER" });
