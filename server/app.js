@@ -42,7 +42,7 @@ const uploadAudio = multer({ storage: audioStorage });
 const usersRouter = require("./routes/users");
 const contactsRouter = require("./routes/contacts");
 // DB query test app.use
-app.use("/users", usersRouter);
+app.use("/api/v1/users", usersRouter);
 app.use("/contacts", contactsRouter);
 
 // first attempt at login routes

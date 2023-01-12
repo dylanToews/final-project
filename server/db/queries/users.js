@@ -8,10 +8,10 @@ const getAllUsers = () => {
 	});
 }
 
-const getUserById = id => {
-	return db.query("SELECT * FROM users WHERE id = $1;", [id]).then(data => {
+const getUserByEmail = email => {
+	return db.query("SELECT * FROM users WHERE email = $1;", [email]).then(data => {
 		return data.rows;
 	});
 }
 
-module.exports = { getAllUsers, getUserById }
+module.exports = { getAllUsers, getUserByEmail }

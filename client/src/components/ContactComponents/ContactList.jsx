@@ -6,7 +6,7 @@ import ContactListItem from "./ContactListItem";
 
 export default function ContactList() {
 
-  const { alarmItems, contactItems } = useContext(AlarmContext)
+  const { alarmItems, contactItems } = useContext(AlarmContext);
 
   const parsedContactItems = contactItems.map((contactItem) => (
     <ContactListItem key={contactItem.id} {... contactItem} />

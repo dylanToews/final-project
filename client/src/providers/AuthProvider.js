@@ -1,16 +1,18 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 export const authContext = createContext();
 
 export default function AuthProvider(props) {
   // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
-  const [auth, setAuth] = useState(true);
-  const [user, setUser] = useState({ email: "test@test.ca", id:1, name: "TEST USER" });
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
 
 
 
   //Perform login process for the user & save authID, etc
   const login = function (email, password) {
+    axios.get(`/api/v1/users/${email}`)
     setAuth(true);
     const id = "USER_ID"; // axios call here? get user id from DB
     setUser({ email, id, name: "TEST USER" });

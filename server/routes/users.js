@@ -11,4 +11,14 @@ router.get('/', (req, res) => {
   })
 });
 
+router.get("/:email", (req, res) => {
+  const userEmail = req.params.email;
+  console.log("login attempt by ", userEmail);
+  users.getUserByEmail(userEmail).then(data => {
+    console.log(data);
+    res.json({user: data});
+  })
+
+})
+
 module.exports = router;
