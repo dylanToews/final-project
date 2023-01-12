@@ -1,55 +1,53 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import "./recordings-list.css";
+
 
 export default function RecordingsList(props) {
   const { recordings, deleteAudio } = props;
 
-  const initialValues = {
-    title: "",
-    url: ""
-  };
+  const initialValues = { title: "" };
 
   const [formData, setFormData] = useState(initialValues);
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData({ ...formData, [name]: value });
+
   };
   
-
+  // two-part submit: file goes to backend public folder, file references go to db
   const handleSubmit = (event) => {
     event.preventDefault();
     if (recordings.length > 0) {
       const audioFormData = new FormData();
       audioFormData.append("sound", recordings[0].audio);
-      console.log(...audioFormData);
+      // console.log(...audioFormData);
       axios.post("/upload", audioFormData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       })
-        .then(res => res.data)
+        .then(res => res.data) // server sending back filename only
         .then(filename => {
           const newSound = {
             ...formData,
             url: filename
           };
-          console.log("new sound?: ", newSound);
+          console.log("new sound: ", newSound);
           axios.post("/api/v2/sounds", {newSound}).then((res) => {
             deleteAudio(recordings[0].key);
             setFormData(initialValues);
           });
         });
+    }
 
-    } 
   }
 
-  // below src={record.audio} in audio element does not work, as it is expecting a file URL, and audio has changed to be the file itself.
-  // next steps will be to render a soundlist from the back end, and we won't need this map anymore (we will still need cancel button I think!)
-  // already fixed, actually - still a temporary measure in order to clear the temp file from the state
+  const handleReset = () => {
+    deleteAudio(recordings[0].key);
+    setFormData(initialValues);
+  }
+
   return (
     <div className="App">
       {recordings.length > 0 ? (
@@ -63,8 +61,11 @@ export default function RecordingsList(props) {
               onChange={handleChange}
               value={formData.title}
             />
-            <button onClick={handleSubmit}>
-              Save and go back
+            <button type="submit" onClick={handleSubmit}>
+              Save
+            </button>
+            <button type="reset" onClick={handleReset}>
+              Cancel
             </button>
           </form>
         </>
