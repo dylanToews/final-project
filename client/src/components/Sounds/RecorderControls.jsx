@@ -8,7 +8,7 @@ export default function RecorderControls({ recorderState, handlers}) {
   const { startRecording, saveRecording, cancelRecording } = handlers;
 
   return (
-    <div className="controls-contrainer">
+    <div className="App">
       <div className="recorder-display">
         <div className="recording-time">
           {initRecording && <div className="recording-indicator"></div>}
@@ -35,8 +35,8 @@ export default function RecorderControls({ recorderState, handlers}) {
             Save
           </button>
         ) : (
-          <button className="start-button" title="Start recording" onClick={startRecording}>
-            Start
+          <button onClick={startRecording}>
+            New Sound
           </button>
         )}
       </div>
