@@ -41,16 +41,21 @@ const uploadAudio = multer({ storage: audioStorage });
 // DB Query test router
 const usersRouter = require("./routes/users");
 const contactsRouter = require("./routes/contacts");
+const soundsRouter = require("./routes/sounds");
+const alarmsRouter = require("./routes/alarms");
 // DB query test app.use
 app.use("/api/v1/users", usersRouter);
-app.use("/contacts", contactsRouter);
+app.use("/api/v1/contacts", contactsRouter);
+app.use("/api/v1/sounds", soundsRouter);
+app.use("/api/v1/alarms", alarmsRouter);
+
 
 // first attempt at login routes
-app.use("/login", (req, res) => {
-  res.send({
-    token: "test123",
-  });
-});
+// app.use("/login", (req, res) => {
+//   res.send({
+//     token: "test123",
+//   });
+// });
 
 // eventually write db queries in functions below, i think?
 

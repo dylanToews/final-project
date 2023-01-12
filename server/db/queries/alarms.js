@@ -6,7 +6,7 @@ const getAllAlarms = () => {
   });
 };
 
-const getAlarmsByUser = userId => {
+const getAlarmsForUser = userId => {
   return db.query("SELECT * FROM alarms WHERE user_id = $1;", [userId])
     .then(data => data.rows);
 };
@@ -24,4 +24,4 @@ const getAlarmDataById = id => {
   .then((data) => data.rows);
 };
 
-module.exports = { getAllAlarms, getAlarmsByUser, getAlarmDataById }
+module.exports = { getAllAlarms, getAlarmsForUser, getAlarmDataById }

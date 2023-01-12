@@ -6,9 +6,9 @@ const getAllContacts = () => {
   });
 }
 
-const getContactsByUser = userId => {
+const getContactsForUser = userId => {
   return db.query("SELECT * FROM contacts WHERE user_id = $1;", [userId])
     .then(data => data.rows);
 }
 
-module.exports = { getAllContacts, getContactsByUser }
+module.exports = { getAllContacts, getContactsForUser }

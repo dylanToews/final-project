@@ -16,6 +16,6 @@ INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Dylan', '1647530202
 INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Ryan', '17802386933');
 
 -- Seed Guest
-INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Cheever', '19022926082');
-INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Dylan', '16475302024');
-INSERT INTO contacts (user_id, name, tel_number) VALUES (3, 'Ryan', '17802386933');
+INSERT INTO contacts (user_id, name, tel_number) VALUES (4, 'Cheever', '19022926082');
+INSERT INTO contacts (user_id, name, tel_number) VALUES (4, 'Dylan', '16475302024');
+INSERT INTO contacts (user_id, name, tel_number) VALUES (4, 'Ryan', '17802386933');
