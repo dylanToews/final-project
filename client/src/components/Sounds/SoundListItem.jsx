@@ -1,19 +1,19 @@
-import {Howl} from "howler";
+// import {Howl} from "howler";
 
 export default function SoundListItem(props) {
 
-const audioTest = "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3"
+// const audioTest = "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3"
 
-const soundPlay = (src) => {
-  const sound = new Howl ({
-    src,
-    html5: true,
-    loop: true
-  })
-  sound.play()
-}
+// const soundPlay = (src) => {
+//   const sound = new Howl ({
+//     src,
+//     html5: true,
+//     loop: true
+//   })
+//   sound.play()
+// }
 
-soundPlay(audioTest)
+// soundPlay(audioTest)
 
 
   return (
