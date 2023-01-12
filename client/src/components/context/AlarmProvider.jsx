@@ -19,12 +19,13 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
-  const [contactItems, setContactItems] = useState([]);
   const [lastId, setLastId]= useState([])
+
+  const [contactItems, setContactItems] = useState([]);
   const [contactLastId, setContactLastId]= useState([])
 
-  // const [sounds, setSounds] = useState([]);
-  // const [alarms, setAlarms] = useState([]);
+  const [soundItems, setSoundItems] = useState([])
+  const [soundLastId, setSoundLastId] = useState([])
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -40,18 +41,28 @@ function ContextAlarm({ children }) {
 
   let testNotification = false;
 
+
+
   const notificationDetailsObject = {
     sound_name: "",
-    sound_string: "",
+    sound_url: "",
     contact_name: "",
     contact_number: "",
     alarm_time: "",
   };
 
+
   function checkAlarm() {
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
       const alarmSeconds = 0;
 
+      const currentSoundItem = soundItems.filter(function (e) {
+        return e.sound_name === alarmItem.sound_name
+      })
+
+      const currentContactItem = contactItems.filter(function (e) { 
+        return e.contact_name === alarmItem.contact_name
+      })
       if (
         `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}` ===
         `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
@@ -59,8 +70,10 @@ function ContextAlarm({ children }) {
         testNotification = true;
 
         notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`;
-        notificationDetailsObject.contact_name = alarmItem.contact;
-        notificationDetailsObject.sound_name = alarmItem.sound;
+        notificationDetailsObject.contact_name = alarmItem.contact_name;
+        notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
+        notificationDetailsObject.sound_name = alarmItem.sound_name;
+        notificationDetailsObject.sound_url = currentSoundItem[0].sound_url
       }
     });
   }
@@ -82,7 +95,9 @@ function ContextAlarm({ children }) {
       axios.get(`/api/v1/alarmItems/${user_email}`),
       axios.get("/api/v1/alarmItemLastId"),
       axios.get(`/api/v1/contactItems/${user_email}`),
-      axios.get("/api/v1/contactItemsLastId")
+      axios.get("/api/v1/contactItemsLastId"),
+      axios.get(`/api/v1/soundItems/${user_email}`),
+      axios.get("/api/v1/soundItemsLastId")
       // axios.get("/api/v1/users"),
       // axios.get("/api/v1/times"),
       // axios.get("/api/v1/sounds"),
@@ -92,7 +107,9 @@ function ContextAlarm({ children }) {
         alarmItems: responses[0].data,
         lastId: responses[1].data,
         contactItems: responses[2].data,
-        contactLastId: responses[3].data
+        contactLastId: responses[3].data,
+        soundItems: responses[4].data,
+        soundLastId: responses[5].data,
         // users: responses[1].data,
         // times: responses[2].data,
         // sounds: responses[3].data,
@@ -104,19 +121,22 @@ function ContextAlarm({ children }) {
           lastId,
           contactItems,
           contactLastId,
+          soundItems,
+          soundLastId,
           // users, times, sounds, contacts
         }) => {
           setAlarmItems(alarmItems);
           setLastId(lastId)
           setContactItems(contactItems)
           setContactLastId(contactLastId)
+          setSoundItems(soundItems)
+          setSoundLastId(soundLastId)
           // setUsers(users);
           // setSounds(sounds);
           // setContacts(contacts);
           // setAlarms(times);
         }
       );
-
     // clock functionality logic
 
     setInterval(() => {
@@ -205,6 +225,9 @@ function ContextAlarm({ children }) {
         contactItems,
         setContactItems,
         contactLastId,
+        soundItems,
+        setSoundItems,
+        soundLastId,
         // sounds,
         // alarms,
         addNewParams,

@@ -6,9 +6,11 @@ import {Howl} from "howler";
 
 
 export default function NotificationAlert(props) {
-  const { setNotification, notificationDetails } = useContext(AlarmContext);
+  const { setNotification, notificationDetails, soundItems } = useContext(AlarmContext);
 
   const contactName = notificationDetails.contact_name
+
+  const soundUrl = notificationDetails.sound_url
 
   const audioTest = "http://localhost:8080/audio/1673469843174.ogg"
 
@@ -16,9 +18,9 @@ const soundPlay = (src) => {
   const sound = new Howl ({
     src,
     html5: true,
-    loop: true
+    // loop: true
   })
-  sound.play()
+  // sound.play()
 }
 
 
@@ -26,8 +28,7 @@ const soundPlay = (src) => {
     
     console.log(`sound playing: ${notificationDetails.sound_name}`)
 
-    soundPlay(audioTest)
-    soundPlay.loop = true
+    soundPlay(soundUrl)
 
   }, [])
 

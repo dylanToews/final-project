@@ -4,7 +4,7 @@ import {Howl} from "howler";
 
 function About() {
 
-const audioTest = "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3"
+const audioTest = "http://localhost:8080/audio/1673540108800.ogg"
 
 const soundPlay = (src) => {
   const sound = new Howl ({
@@ -15,7 +15,7 @@ const soundPlay = (src) => {
   sound.play()
 }
 
-soundPlay(audioTest)
+// soundPlay(audioTest)
 
 
     return (

@@ -18,8 +18,8 @@ function AlarmOption(props) {
     addNewParams,
     alarmItems,
     contactItems,
+    soundItems,
   } = useContext(AlarmContext);
-
 
   const initialValues = {
     contact_name: "",
@@ -32,8 +32,8 @@ function AlarmOption(props) {
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value } = event.target;  
+    setFormData({ ...formData, [name]: value});
   };
 
 
@@ -47,9 +47,9 @@ function AlarmOption(props) {
   );
 
   const parsedSounds = Object.values(
-    alarmItems.map((alarmItem) => (
-      <option key={alarmItem.id} value={alarmItem.sound_name}>
-        {alarmItem.sound_name}
+    soundItems.map((soundItem) => (
+      <option key={soundItem.id} value={soundItem.sound_name}>
+        {soundItem.sound_name}
       </option>
     ))
   );
@@ -138,7 +138,7 @@ function AlarmOption(props) {
           {parsedContacts}
         </select>
 
-        <select name="sound_name" value={formData.sound_name} onChange={handleChange}>
+        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange}>
           <option value="">Please Select A Sound</option>
           {parsedSounds}
         </select>
