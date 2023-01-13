@@ -27,6 +27,7 @@ function AlarmOption(props) {
     hour: "",
     minutes: "",
     am_pm: "",
+    active: true
   };
 
   const [formData, setFormData] = useState(initialValues);

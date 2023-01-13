@@ -49,6 +49,7 @@ function ContextAlarm({ children }) {
     contact_name: "",
     contact_number: "",
     alarm_time: "",
+    active: null
   };
 
 

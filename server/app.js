@@ -116,7 +116,8 @@ const getAlarmDataByEmail = email => {
       sounds.file_name AS sound_string,
       hour,
       minute AS minutes,
-      am_pm
+      am_pm,
+      active
       FROM alarms
       JOIN sounds ON sound_id = sounds.id
       JOIN contacts ON contact_id = contacts.id
@@ -149,6 +150,15 @@ const deleteAlarmItem = (id) => {
     .then((data) => data.rows)
     .catch((err) => console.error(err.stack));
 };
+
+// update to toggle active true/false
+
+const toggleAlarmActive = (id) => {
+  return db
+    .query(`UPDATE alarms SET active = NOT active WHERE id = $1`, [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
+}
 
 ///ALARM ITEMS - Routes
 
@@ -187,6 +197,12 @@ app.delete("/api/v1/alarmItems/:id", (req, res) => {
   //Delete function with query goes here !!
   const alarmItemId = req.params.id;
   deleteAlarmItem(alarmItemId).then((data) => res.send(data));
+});
+
+// PUT for toggle active / inactive
+app.put("/api/v1/alarmItems/:id", (req, res) => {
+  const alarmItemId = req.params.id;
+  toggleAlarmActive(alarmItemId).then((data) => res.send(data));
 });
 
 /// SOUND - Functions ///

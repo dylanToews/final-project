@@ -1,26 +1,8 @@
 import React from 'react';
 import "../About.css";
-import {Howl} from "howler";
 
 function About() {
 
-const audioTest = "http://localhost:8080/audio/1673540108800.ogg"
-
-const soundPlay = (src, status) => {
-  const sound = new Howl ({
-    src,
-    html5: true,
-    loop: true
-  })
-  if (status=== "play"){
-  sound.play()
-  }
-  if(status=== "stop"){
-  sound.stop()
-  }
-}
-
-// soundPlay(audioTest, "play")
 
 
     return (
