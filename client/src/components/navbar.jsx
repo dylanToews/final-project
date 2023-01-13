@@ -15,7 +15,7 @@ function Navbar() {
         <Link to="/Contacts" className="navButton">Contacts</Link>
         <Link to="/Sounds" className="navButton">Sounds</Link>
         <Link to="/About" className="navButton">About</Link>
-        <button type="button" onClick={logout}>Logout</button>
+        <button type="button" className="navLogout" onClick={logout}>Logout</button>
       </ul>
     </nav>
   );

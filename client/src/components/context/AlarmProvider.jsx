@@ -87,7 +87,7 @@ function ContextAlarm({ children }) {
   }, [notificationDetailsObject.alarm_time]);
 
   const user_email = user.email;
-
+  
   ///Axios calls and a bit of alarm logic
 
   useEffect(() => {
@@ -142,9 +142,13 @@ function ContextAlarm({ children }) {
     setInterval(() => {
       let date = new Date();
 
+      const addZero = (t) => {
+        return ((t < 10) ? '0'+t : t);
+      }
+      let sec = date.getSeconds()
       let HH = date.getHours(),
         MM = date.getMinutes(),
-        SS = date.getSeconds(),
+        SS = addZero(sec),
         day = date.getDate(),
         month = date.getMonth(),
         year = date.getFullYear(),
@@ -160,11 +164,11 @@ function ContextAlarm({ children }) {
       if (HH === 0) HH = 12;
       if (HH < 10) HH = `0${HH}`;
       if (MM < 10) MM = `0${MM}`;
-      // if (SS <10) SS = `0${SS}`;
+      //if (SS <10) SS = `0${SS}`;
 
       setHourDigital(HH);
       setMinutesDigital(MM);
-      setSecondsDigital(SS);
+      setSecondsDigital(addZero(sec));
       setAmPm(ampm);
       setDayNow(day);
       setMonthNow(months[month]);
