@@ -8,7 +8,7 @@ import { AlarmContext } from "../context/AlarmProvider";
 function AlarmOption(props) {
   const [hour, setHour] = useSelect("Hour");
   const [minutes, setMinutes] = useSelect("Minutes");
-  const [amPmOption, setAmPmOption] = useSelect("Am-Pm");
+  const [am_pm, setam_pm] = useSelect("Am-Pm");
 
   const {
     setAlarmTime,
@@ -26,7 +26,7 @@ function AlarmOption(props) {
     sound_name: "",
     hour: "",
     minutes: "",
-    amPmOption: "",
+    am_pm: "",
   };
 
   const [formData, setFormData] = useState(initialValues);
@@ -62,13 +62,13 @@ function AlarmOption(props) {
       return;
     }
     setHasAlarm(true);
-    setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
+    setAlarmTime(`${hour}:${minutes} ${am_pm}`);
     if (
       formData.contact_name &&
       formData.sound_name &&
       formData.hour &&
       formData.minutes &&
-      formData.amPmOption
+      formData.am_pm
     ) {
       addNewParams(formData);
     }
@@ -120,8 +120,8 @@ function AlarmOption(props) {
             ))}
           </select>
           <select
-            name="amPmOption"
-            value={formData.amPmOption}
+            name="am_pm"
+            value={formData.am_pm}
             onChange={handleChange}
             className="Minkowski"
           >

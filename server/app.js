@@ -106,7 +106,7 @@ const addNewSound = (newSound) => {
 
 app.post("/api/v1/sendSMS", (req, res) => {
   console.log(req.body.contactName);
-  // sendTwilio(req.body.phoneNumber)
+  // sendTwilio(req.body.phoneNumber) // comented out during development
 });
 
 ///ALARM ITEMS  - Functions///
@@ -149,9 +149,12 @@ const getAlarmItemsLastId = () => {
 
 const addAlarmItem = (newAlarmItem) => {
   return db.query(`
-  INSERT INTO alarms (user_id, sound_id, contact_id, hour, minute, am_pm) 
-  VALUES (
-  )`)
+    INSERT INTO alarms (user_id, sound_id, contact_id, hour, minute, am_pm) 
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING id
+    `, [newAlarmItem.user_id, newAlarmItem.sound_id, newAlarmItem.contact_id, newAlarmItem.hour, newAlarmItem.minutes, newAlarmItem.am_pm]
+  )
+  .then((data) => data.rows[0])
   // if this was DB call, return the created id
 };
 
@@ -185,7 +188,7 @@ app.get("/api/v1/alarmItems/:email", (req, res) => {
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
   console.log("new alarm: ", newAlarmItem);
-  addAlarmItem(newAlarmItem).then((data) => res.send(data));
+  addAlarmItem(newAlarmItem).then((data) => res.json(data));
 });
 
 /// SOUND - Functions ///

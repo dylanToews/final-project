@@ -182,10 +182,23 @@ function ContextAlarm({ children }) {
 
   const addNewParams = (formData) => {
     // const id = lastId + 1;
-    const newAlarmItem = { user_email, ...formData };
-    // setLastId(lastId + 1)
+    const currentSoundItem = soundItems.filter( (e) => {
+      return e.sound_name === formData.sound_name
+    })
+    // console.log(currentSoundItem)
+    const currentContactItem = contactItems.filter( (e) => {
+      return e.contact_name === formData.contact_name
+    })
+    const newAlarmItem = { 
+      user_id: user.id,
+      sound_id: currentSoundItem[0].id,
+      contact_id: currentContactItem[0].id,
+      ...formData
+
+    };
+    console.log("newAlarmItem", newAlarmItem);
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      console.log("add new alarmItem sucessful:", newAlarmItem);
+      newAlarmItem.id = res.data.id;
       setAlarmItems([...alarmItems, newAlarmItem]);
     });
   };

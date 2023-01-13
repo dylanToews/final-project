@@ -8,9 +8,9 @@ import {Howl} from "howler";
 export default function NotificationAlert(props) {
   const { setNotification, notificationDetails, soundItems } = useContext(AlarmContext);
 
-  const contactName = notificationDetails.contact_name
+  const contactName = notificationDetails.contact_name;
 
-  const soundUrl = notificationDetails.sound_url
+  const soundUrl = "/audio/" + notificationDetails.sound_url;
 
   const audioTest = "http://localhost:8080/audio/1673469843174.ogg"
 
