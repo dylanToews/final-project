@@ -11,7 +11,7 @@ function DigitalClock() {
       <div className="clock__text">
         <div className="clock__text-hour">{`${hourDigital}:`}</div>
         <div className="clock__text-minutes">{minutesDigital}</div>
-        <div className="clock_test-seconds">{secondsDigital}</div>
+        <div className="clock__text-seconds">{secondsDigital}</div>
         <div className="clock__text-ampm">{amPm}</div>
       </div>
 
