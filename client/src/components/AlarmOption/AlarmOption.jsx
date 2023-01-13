@@ -8,7 +8,7 @@ import { AlarmContext } from "../context/AlarmProvider";
 function AlarmOption(props) {
   const [hour, setHour] = useSelect("Hour");
   const [minutes, setMinutes] = useSelect("Minutes");
-  const [amPmOption, setAmPmOption] = useSelect("Am-Pm");
+  const [am_pm, setam_pm] = useSelect("Am-Pm");
 
   const {
     setAlarmTime,
@@ -18,22 +18,22 @@ function AlarmOption(props) {
     addNewParams,
     alarmItems,
     contactItems,
+    soundItems,
   } = useContext(AlarmContext);
-
 
   const initialValues = {
     contact_name: "",
     sound_name: "",
     hour: "",
     minutes: "",
-    amPmOption: "",
+    am_pm: "",
   };
 
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value } = event.target;  
+    setFormData({ ...formData, [name]: value});
   };
 
 
@@ -47,9 +47,9 @@ function AlarmOption(props) {
   );
 
   const parsedSounds = Object.values(
-    alarmItems.map((alarmItem) => (
-      <option key={alarmItem.id} value={alarmItem.sound_name}>
-        {alarmItem.sound_name}
+    soundItems.map((soundItem) => (
+      <option key={soundItem.id} value={soundItem.sound_name}>
+        {soundItem.sound_name}
       </option>
     ))
   );
@@ -62,13 +62,13 @@ function AlarmOption(props) {
       return;
     }
     setHasAlarm(true);
-    setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
+    setAlarmTime(`${hour}:${minutes} ${am_pm}`);
     if (
       formData.contact_name &&
       formData.sound_name &&
       formData.hour &&
       formData.minutes &&
-      formData.amPmOption
+      formData.am_pm
     ) {
       addNewParams(formData);
     }
@@ -120,8 +120,8 @@ function AlarmOption(props) {
             ))}
           </select>
           <select
-            name="amPmOption"
-            value={formData.amPmOption}
+            name="am_pm"
+            value={formData.am_pm}
             onChange={handleChange}
             className="Minkowski"
           >
@@ -138,7 +138,7 @@ function AlarmOption(props) {
           {parsedContacts}
         </select>
 
-        <select name="sound_name" value={formData.sound_name} onChange={handleChange}>
+        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange}>
           <option value="">Please Select A Sound</option>
           {parsedSounds}
         </select>

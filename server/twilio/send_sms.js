@@ -7,17 +7,17 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-recipientList = ['+19022926082', '+16475302024']
+// recipientList = ['+19022926082', '+16475302024']
 
 
-const sendTwilio = (numberArray) =>{
-  console.log("send message to", numberArray)
-  // for(recipient of numberArray){
+const sendTwilio = (twilioData) =>{
+  console.log("insidefunction",twilioData)
+
     client.messages
     .create({
-      body: 'I like eggs',
+      body: `Hello ${twilioData.contact_number}! This is a message from Startle to inform you that ${twilioData.user_name} has snoozed through their alarm. Please use this information to convince ${twilioData.user_name} they need to examine their sleeping habits. `,
       from: process.env.SEND_FROM_NUMBER,
-      to: numberArray
+      to: `+1${twilioData.contact_number}`
     })
     .then(message => console.log(message.sid));
   // }

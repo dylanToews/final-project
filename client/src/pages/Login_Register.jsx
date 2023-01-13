@@ -5,22 +5,9 @@ import { authContext } from "../providers/AuthProvider";
 
 
 export default function Login_Register(props) {
-  const { setToken } = props;
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(authContext);
-
-  async function loginUser(credentials) {
-    return fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(credentials)
-    })
-    .then(data => data.json())
-  }
 
   const handleEmail = (ev => setEmail(ev.target.value));
   const handlePassword = (ev => setPassword(ev.target.value));
@@ -28,14 +15,10 @@ export default function Login_Register(props) {
   const handleSubmit = async ev => {
     ev.preventDefault();
     email && login(email, password);
-    const token = await loginUser({
-      email,
-      password
-    });
-    setToken(token);
   }
 
   return (
+    <div className="Login">
       <form className="wrapper" onSubmit={handleSubmit}>
         <label>
           <p>Email:</p>
@@ -49,5 +32,6 @@ export default function Login_Register(props) {
           <button type="submit">Log In</button>
         </div>
       </form>
+    </div>
   );
 }

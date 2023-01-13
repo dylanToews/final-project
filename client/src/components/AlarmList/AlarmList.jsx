@@ -5,8 +5,7 @@ import { AlarmContext } from "../context/AlarmProvider";
 
 export default function AlarmList(props) {
   // const [filter, setFilter] = useState(null)
-  const { alarmItems } = useContext(AlarmContext)
-
+  const { alarmItems } = useContext(AlarmContext);
 
 
   // const filteredAlarmItems = getFilteredUsers(alarmItems, filter)

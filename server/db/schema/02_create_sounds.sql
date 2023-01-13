@@ -14,8 +14,8 @@ $$ LANGUAGE plpgsql;
 CREATE TABLE sounds (
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users(id) ON DELETE CASCADE NOT NULL,
-  title VARCHAR(100) NOT NULL,
-  url TEXT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  file_name TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

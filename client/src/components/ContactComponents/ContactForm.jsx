@@ -9,7 +9,7 @@ function ContactForm() {
   const { contactItems, setContactItems, contactLastId } = useContext(AlarmContext);
   const {user} = useContext(authContext)
 
-  const user_email = user.email
+  const user_email = user.email;
 
   const initialValues = {
     id:"",
@@ -40,9 +40,9 @@ function ContactForm() {
     
     const id = contactLastId + 1
 
-    const newContactItem = { 
-      id, 
-      user_email, 
+    const newContactItem = {
+      user_email,
+      user_id: user.id, 
       contact_name: formData.contact_name, 
       contact_number: formData.contact_number
     }
@@ -52,6 +52,7 @@ function ContactForm() {
       console.log("confirmed")
       axios.post("/api/v1/contactItems", {newContactItem}).then((res) => {
         console.log("add new alarmItem Successful:", newContactItem)
+        newContactItem.id = res.data.id;
         setContactItems([...contactItems, newContactItem])
         setFormData(initialValues);
       })

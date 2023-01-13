@@ -1,25 +1,32 @@
-// import {Howl} from "howler";
+import { useContext } from "react"
+import { AlarmContext } from "../context/AlarmProvider"
+import axios from "axios"
+
 
 export default function SoundListItem(props) {
+  const { sound_name, sound_url, id, user_email } = props;
+  const { soundItems, setSoundItems } = useContext(AlarmContext);
 
-// const audioTest = "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3"
-
-// const soundPlay = (src) => {
-//   const sound = new Howl ({
-//     src,
-//     html5: true,
-//     loop: true
-//   })
-//   sound.play()
-// }
-
-// soundPlay(audioTest)
-
+  const removeSound = (id) => {
+    const filtered = (current) =>
+      current.filter((sound) => {
+        return sound.id !== id;
+      });
+      setSoundItems(filtered)
+      console.log(id)
+      axios.delete(`api/v1/soundItems/${id}`).then((res) => {
+      console.log("deleted sound with id:", id )
+  })
+  }
 
   return (
     <li className="SoundListItem">
-      <p>Sound Title</p><br />
-      <audio controls controlsList="nodownload" src="http://localhost:8080/audio/1673469843174.ogg"></audio>
+      <div key={id}>
+      <p>Sound Title: {sound_name}</p><br />
+      <audio controls controlsList="nodownload" src={`/audio/${sound_url}`}></audio>
+      <button onClick={() => removeSound(id)}>Delete</button>
+
+      </div>
     </li>
   )
 }
