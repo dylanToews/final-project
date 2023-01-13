@@ -27,6 +27,15 @@ function ContextAlarm({ children }) {
   const [soundItems, setSoundItems] = useState([])
   const [soundLastId, setSoundLastId] = useState([])
 
+
+  const testingNotificationDetails = {
+    alarm_time: "11:37 AM:00",
+    contact_name: "Dylan",
+    contact_number: "7802386933",
+    sound_name: "Test recording ",
+    sound_url: "soft_wakeup.ogg"}
+
+
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
 
@@ -34,6 +43,7 @@ function ContextAlarm({ children }) {
 
   ///Notification and alarm logic///
 
+  // hard coded notification details object for testing purposes
 
 
 

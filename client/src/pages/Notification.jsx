@@ -5,6 +5,7 @@ import { AlarmContext } from "../components/context/AlarmProvider";
 import ReactHowler from "react-howler";
 import NotificationAlert from "../components/NotificationAlert/NotificationAlert";
 
+
 function Notification() {
   const { notification, notificationDetails } = useContext(AlarmContext);
 
@@ -16,13 +17,13 @@ function Notification() {
 
   return (
     <div>
-      {notification === true && (
+      {/* {notification === true && (
         <ReactHowler
           src={parsedSoundString}
           playing={notification}
           loop={notification}
         />
-      )}
+      )} */}
       {notification === true && <NotificationAlert />}
     </div>
   );
