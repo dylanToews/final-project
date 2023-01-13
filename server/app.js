@@ -80,33 +80,20 @@ app.post("/upload", uploadAudio.single("sound"), (req, res) => {
   });
 });
 
-/// Twilio Related ///
 
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
 
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
 
-// functions to handle axios posts coming from front end
 
-const addTime = (time) => {
-  alarmItems.push(time);
 
-  return Promise.resolve("ok"); // if this was DB call, return the created id
-};
 
-const addNewSound = (newSound) => {
-  soundItems.push(newSound);
 
-  return Promise.resolve("ok sound");
-};
+// TWILIO //
 
 app.post("/api/v1/sendSMS", (req, res) => {
-  console.log(req.body.contactName);
-  // sendTwilio(req.body.phoneNumber) // comented out during development
+  const twilioData = req.body.twilioData
+  console.log("twilioData:", twilioData);
+
+  sendTwilio(twilioData)
 });
 
 ///ALARM ITEMS  - Functions///
@@ -115,7 +102,6 @@ const getAlarmItems = (user_email) => {
   const sortedByUser = alarmItems.filter(function (el) {
     return el.user_email == user_email;
   });
-
   return Promise.resolve(sortedByUser);
 };
 
@@ -143,7 +129,6 @@ const getAlarmDataByEmail = email => {
 
 const getAlarmItemsLastId = () => {
   const lastId = alarmItems.length;
-
   return Promise.resolve(lastId);
 };
 
@@ -156,6 +141,11 @@ const addAlarmItem = (newAlarmItem) => {
   )
   .then((data) => data.rows[0])
   // if this was DB call, return the created id
+};
+
+const deleteAlarmItem = (id) => {
+  console.log("inside delete function with Alarm id:", id);
+  return Promise.resolve("deleted");
 };
 
 ///ALARM ITEMS - Routes
@@ -187,8 +177,14 @@ app.get("/api/v1/alarmItems/:email", (req, res) => {
 
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
-  console.log("new alarm: ", newAlarmItem);
+
   addAlarmItem(newAlarmItem).then((data) => res.json(data));
+});
+
+app.delete("/api/v1/alarmItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const alarmItemId = req.params.id;
+  deleteAlarmItem(alarmItemId).then((data) => res.send(data));
 });
 
 /// SOUND - Functions ///
@@ -210,7 +206,6 @@ const getSoundItems = (user_email) => {
 
 const getSoundItemsLastId = () => {
   const lastId = soundItems.length;
-
   return Promise.resolve(lastId);
 };
 
@@ -228,7 +223,6 @@ const addSoundItem = (newSoundItem) => {
 
 const deleteSoundItem = (id) => {
   console.log("inside delete function with Sound id:", id);
-
   return Promise.resolve("deleted");
 };
 
@@ -261,17 +255,7 @@ app.delete("/api/v1/soundItems/:id", (req, res) => {
 
 
 
-// // extra route needed for testing sound without breaking alarms
-// app.get("/api/v2/sounds", (req, res) => {
-//   getMockSounds().then((sounds) => res.json(sounds));
-// });
 
-// // extra route needed for testing sounds without breaking alarms
-// app.post("/api/v2/sounds", (req, res) => {
-//   const { newSound } = req.body;
-//   console.log(req.body);
-//   addNewSound(newSound).then((data) => res.send(data));
-// });
 
 /// CONTACTS - FUNCTIONS ////////
 
@@ -303,15 +287,14 @@ const addContactItems = (newContactItem) => {
 
 const getContactItemsLastId = () => {
   const lastId = contactItems.length;
-
   return Promise.resolve(lastId);
 };
 
 const deleteContactItem = (id) => {
   console.log("inside delete function with contact id:", id);
-
   return Promise.resolve("deleted");
 };
+
 ///CONTACTS - Routes ///
 
 app.get("/api/v1/contactItems/:email", (req, res) => {
@@ -336,6 +319,31 @@ app.delete("/api/v1/contactItems/:id", (req, res) => {
 });
 
 ///Not Used Currently///
+
+
+// const getUsers = () => {
+//   const alarmsBuffer = {};
+//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+//   const users = Object.keys(alarmsBuffer);
+//   return Promise.resolve(users);
+// };
+
+// // functions to handle axios posts coming from front end
+
+// const addTime = (time) => {
+//   alarmItems.push(time);
+
+//   return Promise.resolve("ok"); // if this was DB call, return the created id
+// };
+
+
+// const addNewSound = (newSound) => {
+//   soundItems.push(newSound);
+
+//   return Promise.resolve("ok sound");
+// };
+
 
 // app.get("/api/v1/sounds", (req, res) => {
 //   getSounds().then((Sounds) => res.json(Sounds));
@@ -390,5 +398,17 @@ app.delete("/api/v1/contactItems/:id", (req, res) => {
 
 //   return Promise.resolve("ok"); // if this was DB call, return the created id
 // };
+
+// // extra route needed for testing sound without breaking alarms
+// app.get("/api/v2/sounds", (req, res) => {
+//   getMockSounds().then((sounds) => res.json(sounds));
+// });
+
+// // extra route needed for testing sounds without breaking alarms
+// app.post("/api/v2/sounds", (req, res) => {
+//   const { newSound } = req.body;
+//   console.log(req.body);
+//   addNewSound(newSound).then((data) => res.send(data));
+// });
 
 module.exports = app;

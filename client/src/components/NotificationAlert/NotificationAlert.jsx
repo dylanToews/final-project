@@ -2,13 +2,21 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
+import { authContext } from "../../providers/AuthProvider";
+
 import {Howl} from "howler";
 
 
 export default function NotificationAlert(props) {
   const { setNotification, notificationDetails, soundItems } = useContext(AlarmContext);
+  const { user } = useContext(authContext)
 
-  const contactName = notificationDetails.contact_name;
+  const twilioData = {
+    contact_name: notificationDetails.contact_name,
+    contact_number: notificationDetails.contact_number,
+    user_name: user.name
+  }
+  const contactName = notificationDetails.contact_name
 
   const soundUrl = "/audio/" + notificationDetails.sound_url;
 
@@ -33,7 +41,7 @@ const soundPlay = (src, status) => {
     
     console.log(`sound playing: ${notificationDetails.sound_name}`)
 
-    soundPlay(soundUrl, "play")
+    // soundPlay(soundUrl, "play")
 
   }, [])
 
@@ -41,9 +49,8 @@ const soundPlay = (src, status) => {
 
   function sendText() {
     setNotification(false)
-    console.log("sending a text")
-    axios.post("/api/v1/sendSMS", { contactName }).then((res) => {
-    console.log(`text sent to ${contactName}`)  
+    axios.post('/api/v1/sendSMS', {twilioData}).then((res) => {
+    console.log(`text sent to ${twilioData}`)  
 
     })
     return 
