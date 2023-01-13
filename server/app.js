@@ -7,13 +7,18 @@ const cors = require("cors");
 ///Mock Data///
 
 const contactItems = require("./data/mockContactsData");
+const alarmItems = require("./data/mockAlarmItemData");
+const soundItems = require("./data/mockSoundData");
+
+// Real Data //
+
+const db = require("./configs/db.config");
 
 //Multer middleware for file uploading
 const multer = require("multer");
 const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms");
-const alarmItems = require("./data/mockAlarmItemData");
-const soundItems = require("./data/mockSoundData");
+
 
 const app = express();
 
@@ -114,6 +119,28 @@ const getAlarmItems = (user_email) => {
   return Promise.resolve(sortedByUser);
 };
 
+const getAlarmDataByEmail = email => {
+  return db.query(
+    `SELECT 
+      alarms.id AS id,
+      users.email AS user_email,
+      contacts.name AS contact_name,
+      contacts.tel_number AS contact_number,
+      sounds.name AS sound_name,
+      sounds.file_name AS sound_string,
+      hour,
+      minute,
+      am_pm AS amPmOption
+      FROM alarms
+      JOIN sounds ON sound_id = sounds.id
+      JOIN contacts ON contact_id = contacts.id
+      JOIN users ON alarms.user_id = users.id
+      WHERE users.email = $1;
+    `, [email]
+  )
+  .then((data) => data.rows)
+};
+
 const getAlarmItemsLastId = () => {
   const lastId = alarmItems.length;
 
@@ -128,9 +155,12 @@ const addAlarmItem = (newAlarmItem) => {
 
 ///ALARM ITEMS - Routes
 
-app.get("/api/v1/alarmItems/:id", (req, res) => {
-  getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
+app.get("/api/v1/alarmItems/:email", (req, res) => {
+  getAlarmDataByEmail(req.params.email).then((alarmItems) => res.json(alarmItems));
 });
+
+
+
 
 app.get("/api/v1/alarmItemLastId", (req, res) =>
   getAlarmItemsLastId().then((lastId) => res.json(lastId))

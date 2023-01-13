@@ -5,10 +5,10 @@ export const authContext = createContext();
 
 export default function AuthProvider(props) {
   // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
-  const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(null); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
+  const [auth, setAuth] = useState(true);
+  const [user, setUser] = useState({ email: "test@test.ca", id:1, name: "TEST USER" }); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
 
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
 
 
 
@@ -39,38 +39,38 @@ export default function AuthProvider(props) {
     setUser(null);
   };
 
-  useEffect(() => {
-    if (user) {
-      console.log("user is valid!")
-      const requests = [
-        axios.get(`api/v1/contacts/${user.id}`),
-        axios.get(`api/v1/sounds/${user.id}`),
-        axios.get(`api/v1/alarms/${user.id}`)
-      ];
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log("user is valid!")
+  //     const requests = [
+  //       axios.get(`api/v1/contacts/${user.id}`),
+  //       axios.get(`api/v1/sounds/${user.id}`),
+  //       axios.get(`api/v1/alarms/${user.id}`)
+  //     ];
 
-      Promise.all(requests)
-        .then((responses) => ({
-          contacts: responses[0].data.contacts,
-          sounds: responses[1].data.sounds,
-          alarms: responses[2].data.alarms
-        }))
-        .then(
-          ({
-            contacts,
-            sounds,
-            alarms
-          }) => {
-            setUserData({
-              contacts,
-              sounds,
-              alarms
-            })
-          }
-        );
-    } else {
-      setUserData(null);
-    }
-  }, [user]);
+  //     Promise.all(requests)
+  //       .then((responses) => ({
+  //         contacts: responses[0].data.contacts,
+  //         sounds: responses[1].data.sounds,
+  //         alarms: responses[2].data.alarms
+  //       }))
+  //       .then(
+  //         ({
+  //           contacts,
+  //           sounds,
+  //           alarms
+  //         }) => {
+  //           setUserData({
+  //             contacts,
+  //             sounds,
+  //             alarms
+  //           })
+  //         }
+  //       );
+  //   } else {
+  //     setUserData(null);
+  //   }
+  // }, [user]);
 
   //auto login for development 
 
@@ -80,7 +80,7 @@ export default function AuthProvider(props) {
 
 
   // authContext will expose these items
-  const authData = { auth, user, login, logout, userData};
+  const authData = { auth, user, login, logout}; // userData
 
   // console.log(userData)
   return (

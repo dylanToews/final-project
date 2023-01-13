@@ -126,11 +126,11 @@ function ContextAlarm({ children }) {
           // users, times, sounds, contacts
         }) => {
           setAlarmItems(alarmItems);
-          setLastId(lastId)
-          setContactItems(contactItems)
-          setContactLastId(contactLastId)
-          setSoundItems(soundItems)
-          setSoundLastId(soundLastId)
+          setLastId(lastId);
+          setContactItems(contactItems);
+          setContactLastId(contactLastId);
+          setSoundItems(soundItems);
+          setSoundLastId(soundLastId);
           // setUsers(users);
           // setSounds(sounds);
           // setContacts(contacts);
