@@ -2,6 +2,7 @@ const db = require("../../configs/db.config");
 
 const getAllContacts = () => {
   return db.query("SELECT * FROM contacts;").then(data => {
+    console.log(data.rows);
     return data.rows;
   });
 }

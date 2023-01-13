@@ -3,7 +3,7 @@ import axios from "axios";
 import { AlarmContext } from "../context/AlarmProvider";
 
 export default function AlarmListItem(props) {
-    const { id, user, hour, minutes, amPmOption, contact_name, sound_name } = props;
+    const { id, user, hour, minutes, am_pm, contact_name, sound_name } = props;
     const {alarmItems, setAlarmItems} = useContext(AlarmContext)
   
     const removeAlarm = (id) => {
@@ -17,11 +17,12 @@ export default function AlarmListItem(props) {
         console.log("deleted alarm with id:", id )
     })
   };
+  
   return (
-    <ul className="AlarmListItem">
+    <li className="AlarmListItem">
       <div className="TimeCardFormat">
         <p className="TimeDisplay">{`${hour}:${minutes}`}</p>
-        <p className="AMPM">{`${amPmOption}`}</p>
+        <p className="AMPM">{`${am_pm}`}</p>
       </div>
       <div>
         <p className="ContactDisplay">Contacts: {contact_name}</p>
@@ -29,6 +30,6 @@ export default function AlarmListItem(props) {
         <button onClick={() => removeAlarm(id)}>Delete</button>
       </div>
       <br/>
-    </ul>
+    </li>
   );
 }

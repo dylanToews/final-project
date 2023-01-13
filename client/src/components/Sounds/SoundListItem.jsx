@@ -23,7 +23,7 @@ export default function SoundListItem(props) {
     <li className="SoundListItem">
       <div key={id}>
       <p>Sound Title: {sound_name}</p><br />
-      <audio controls controlsList="nodownload" src={sound_url}></audio>
+      <audio controls controlsList="nodownload" src={`/audio/${sound_url}`}></audio>
       <button onClick={() => removeSound(id)}>Delete</button>
 
       </div>
