@@ -7,13 +7,18 @@ const cors = require("cors");
 ///Mock Data///
 
 const contactItems = require("./data/mockContactsData");
+const alarmItems = require("./data/mockAlarmItemData");
+const soundItems = require("./data/mockSoundData");
+
+// Real Data //
+
+const db = require("./configs/db.config");
 
 //Multer middleware for file uploading
 const multer = require("multer");
 const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms");
-const alarmItems = require("./data/mockAlarmItemData");
-const soundsData = require("./data/mockSoundData");
+
 
 const app = express();
 
@@ -41,16 +46,21 @@ const uploadAudio = multer({ storage: audioStorage });
 // DB Query test router
 const usersRouter = require("./routes/users");
 const contactsRouter = require("./routes/contacts");
+const soundsRouter = require("./routes/sounds");
+const alarmsRouter = require("./routes/alarms");
 // DB query test app.use
-app.use("/users", usersRouter);
-app.use("/contacts", contactsRouter);
+app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/contacts", contactsRouter);
+app.use("/api/v1/sounds", soundsRouter);
+app.use("/api/v1/alarms", alarmsRouter);
+
 
 // first attempt at login routes
-app.use("/login", (req, res) => {
-  res.send({
-    token: "test123",
-  });
-});
+// app.use("/login", (req, res) => {
+//   res.send({
+//     token: "test123",
+//   });
+// });
 
 // eventually write db queries in functions below, i think?
 
@@ -70,37 +80,20 @@ app.post("/upload", uploadAudio.single("sound"), (req, res) => {
   });
 });
 
-/// Twilio Related ///
 
-const getUsers = () => {
-  const alarmsBuffer = {};
-  alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
 
-  const users = Object.keys(alarmsBuffer);
-  return Promise.resolve(users);
-};
 
-const getMockSounds = () => {
-  return Promise.resolve(soundsData);
-};
 
-// functions to handle axios posts coming from front end
 
-const addTime = (time) => {
-  alarmItems.push(time);
 
-  return Promise.resolve("ok"); // if this was DB call, return the created id
-};
 
-const addNewSound = (newSound) => {
-  soundsData.push(newSound);
-
-  return Promise.resolve("ok sound");
-};
+// TWILIO //
 
 app.post("/api/v1/sendSMS", (req, res) => {
-  console.log(req.body.contactName);
-  // sendTwilio(req.body.phoneNumber)
+  const twilioData = req.body.twilioData
+  console.log("twilioData:", twilioData);
+
+  sendTwilio(twilioData)
 });
 
 ///ALARM ITEMS  - Functions///
@@ -109,81 +102,203 @@ const getAlarmItems = (user_email) => {
   const sortedByUser = alarmItems.filter(function (el) {
     return el.user_email == user_email;
   });
-
   return Promise.resolve(sortedByUser);
+};
+
+const getAlarmDataByEmail = email => {
+  return db.query(
+    `SELECT 
+      alarms.id AS id,
+      users.email AS user_email,
+      contacts.name AS contact_name,
+      contacts.tel_number AS contact_number,
+      sounds.name AS sound_name,
+      sounds.file_name AS sound_string,
+      hour,
+      minute AS minutes,
+      am_pm
+      FROM alarms
+      JOIN sounds ON sound_id = sounds.id
+      JOIN contacts ON contact_id = contacts.id
+      JOIN users ON alarms.user_id = users.id
+      WHERE users.email = $1;
+    `, [email]
+  )
+  .then((data) => data.rows)
 };
 
 const getAlarmItemsLastId = () => {
   const lastId = alarmItems.length;
-
   return Promise.resolve(lastId);
 };
-const addAlarmItem = (newAlarmItem) => {
-  alarmItems.push(newAlarmItem);
 
-  return Promise.resolve("ok"); // if this was DB call, return the created id
+const addAlarmItem = (newAlarmItem) => {
+  return db.query(`
+    INSERT INTO alarms (user_id, sound_id, contact_id, hour, minute, am_pm) 
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING id
+    `, [newAlarmItem.user_id, newAlarmItem.sound_id, newAlarmItem.contact_id, newAlarmItem.hour, newAlarmItem.minutes, newAlarmItem.am_pm]
+  )
+  .then((data) => data.rows[0])
+  // if this was DB call, return the created id
+};
+
+const deleteAlarmItem = (id) => {
+  console.log("inside delete function with Alarm id:", id);
+  return Promise.resolve("deleted");
 };
 
 ///ALARM ITEMS - Routes
 
-app.get("/api/v1/alarmItems/:id", (req, res) => {
-  getAlarmItems(req.params.id).then((alarmItems) => res.json(alarmItems));
+app.get("/api/v1/alarmItems/:email", (req, res) => {
+  getAlarmDataByEmail(req.params.email).then((alarmItems) => res.json(alarmItems));
 });
 
-app.get("/api/v1/alarmItemLastId", (req, res) =>
-  getAlarmItemsLastId().then((lastId) => res.json(lastId))
-);
+
+
+
+// app.get("/api/v1/alarmItemLastId", (req, res) =>
+//   getAlarmItemsLastId().then((lastId) => res.json(lastId))
+// );
+
+
+// user_id instead of user_email
+// sound_id instead of sound_name
+// contact_id instead of contact_name
+
+// below wil not work - need to get IDs from frontend. try above^
+// newAlarmItem format coming from frontend:
+// user_email: "cheever@fakeemail.com"
+// sound_name: "Soft Wakeup"
+// contact_name: "me"
+// hour: "03"
+// minutes: "03"
+// amPmOption: "AM"
 
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
-  addAlarmItem(newAlarmItem).then((data) => res.send(data));
+
+  addAlarmItem(newAlarmItem).then((data) => res.json(data));
 });
+
+app.delete("/api/v1/alarmItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const alarmItemId = req.params.id;
+  deleteAlarmItem(alarmItemId).then((data) => res.send(data));
+});
+
+/// SOUND - Functions ///
+
+const getSoundItems = (user_email) => {
+  return db.query(`
+    SELECT
+      sounds.id AS id,
+      users.email AS user_email,
+      sounds.name AS sound_name,
+      sounds.file_name AS sound_url
+      FROM sounds
+      JOIN users ON sounds.user_id = users.id
+      WHERE users.email = $1
+    `, [user_email]
+  )
+  .then((data) => data.rows);
+};
+
+const getSoundItemsLastId = () => {
+  const lastId = soundItems.length;
+  return Promise.resolve(lastId);
+};
+
+const addSoundItem = (newSoundItem) => {
+  return db.query(`
+    INSERT INTO sounds (user_id, name, file_name)
+    VALUES ($1, $2, $3)
+    RETURNING id
+  `, [newSoundItem.user_id, newSoundItem.sound_name, newSoundItem.sound_url]
+  )
+  .then((data) => data.rows[0])
+   // if this was DB call, return the created id
+};
+
+
+const deleteSoundItem = (id) => {
+  console.log("inside delete function with Sound id:", id);
+  return Promise.resolve("deleted");
+};
 
 // SOUND -  Routes //
 
-// extra route needed for testing sound without breaking alarms
-app.get("/api/v2/sounds", (req, res) => {
-  getMockSounds().then((sounds) => res.json(sounds));
+
+app.get("/api/v1/soundItems/:email", (req, res) => {
+  getSoundItems(req.params.email).then((soundItems) => {
+    res.json(soundItems)
+  });
 });
 
-// extra route needed for testing sounds without breaking alarms
-app.post("/api/v2/sounds", (req, res) => {
-  const { newSound } = req.body;
-  console.log(req.body);
-  addNewSound(newSound).then((data) => res.send(data));
+app.get("/api/v1/soundItemsLastId", (req, res) =>
+  getSoundItemsLastId().then((lastId) => res.json(lastId))
+);
+
+app.post("/api/v1/soundItems", (req, res) => {
+  const { newSoundItem } = req.body;
+  console.log(newSoundItem);
+  addSoundItem(newSoundItem).then((data) => res.send(data));
 });
+
+app.delete("/api/v1/soundItems/:id", (req, res) => {
+  //Delete function with query goes here !!
+  const soundItemId = req.params.id;
+  deleteSoundItem(soundItemId).then((data) => res.send(data));
+});
+
+
+
+
+
+
 
 /// CONTACTS - FUNCTIONS ////////
 
 const getContactItems = (user_email) => {
-  const sortedByUser = contactItems.filter(function (el) {
-    return el.user_email == user_email;
-  });
-
-  return Promise.resolve(sortedByUser);
+  return db.query(`
+    SELECT 
+      contacts.id AS id,
+      users.email AS user_email,
+      contacts.name AS contact_name,
+      contacts.tel_number AS contact_number
+      FROM contacts
+      JOIN users ON contacts.user_id = users.id
+      WHERE users.email = $1
+    `, [user_email]
+    )
+    .then((data) => data.rows);
 };
 
 const addContactItems = (newContactItem) => {
-  contactItems.push(newContactItem);
-
-  return Promise.resolve("ok"); // if this was DB call, return the created id
+  return db.query(`
+    INSERT INTO contacts (user_id, name, tel_number)
+    VALUES ($1, $2, $3)
+    RETURNING id
+  `, [newContactItem.user_id, newContactItem.contact_name, newContactItem.contact_number]
+  )
+  .then((data) => data.rows[0])
+   // if this was DB call, return the created id
 };
 
 const getContactItemsLastId = () => {
   const lastId = contactItems.length;
-
   return Promise.resolve(lastId);
 };
 
 const deleteContactItem = (id) => {
   console.log("inside delete function with contact id:", id);
-
   return Promise.resolve("deleted");
 };
+
 ///CONTACTS - Routes ///
 
-app.get("/api/v1/contactItems/:id", (req, res) => {
-  getContactItems(req.params.id).then((contactItems) => res.json(contactItems));
+app.get("/api/v1/contactItems/:email", (req, res) => {
+  getContactItems(req.params.email).then((contactItems) => res.json(contactItems));
 });
 
 app.post("/api/v1/contactItems", (req, res) => {
@@ -204,6 +319,31 @@ app.delete("/api/v1/contactItems/:id", (req, res) => {
 });
 
 ///Not Used Currently///
+
+
+// const getUsers = () => {
+//   const alarmsBuffer = {};
+//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
+
+//   const users = Object.keys(alarmsBuffer);
+//   return Promise.resolve(users);
+// };
+
+// // functions to handle axios posts coming from front end
+
+// const addTime = (time) => {
+//   alarmItems.push(time);
+
+//   return Promise.resolve("ok"); // if this was DB call, return the created id
+// };
+
+
+// const addNewSound = (newSound) => {
+//   soundItems.push(newSound);
+
+//   return Promise.resolve("ok sound");
+// };
+
 
 // app.get("/api/v1/sounds", (req, res) => {
 //   getSounds().then((Sounds) => res.json(Sounds));
@@ -258,5 +398,17 @@ app.delete("/api/v1/contactItems/:id", (req, res) => {
 
 //   return Promise.resolve("ok"); // if this was DB call, return the created id
 // };
+
+// // extra route needed for testing sound without breaking alarms
+// app.get("/api/v2/sounds", (req, res) => {
+//   getMockSounds().then((sounds) => res.json(sounds));
+// });
+
+// // extra route needed for testing sounds without breaking alarms
+// app.post("/api/v2/sounds", (req, res) => {
+//   const { newSound } = req.body;
+//   console.log(req.body);
+//   addNewSound(newSound).then((data) => res.send(data));
+// });
 
 module.exports = app;
