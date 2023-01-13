@@ -12,8 +12,10 @@ function Home() {
         <section className="clock container">
           <div className="clock__container grid">
             <div className="clock__content grid">
-                <DigitalClock />
-                <AlarmOption/>
+                <div className="card">
+                  <DigitalClock />
+                  <AlarmOption/>
+                </div>
                 <AlarmList />
             </div>
           </div>

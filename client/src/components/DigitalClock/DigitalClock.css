@@ -39,3 +39,13 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 6px;
+  border-radius: 15px;
+  border-color: #70ACB1;
+  padding: 20px 10px 30px 10px;
+}
