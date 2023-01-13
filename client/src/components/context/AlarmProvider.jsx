@@ -54,7 +54,8 @@ function ContextAlarm({ children }) {
 
   function checkAlarm() {
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
-      const alarmSeconds = 0;
+      const alarmSeconds = "00";
+      const parsedAlarmSeconds = parseInt(alarmSeconds)
       const currentSoundItem = soundItems.filter( (e) => {
         return e.sound_name === alarmItem.sound_name
       })
