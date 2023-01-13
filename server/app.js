@@ -284,9 +284,14 @@ const getContactItems = (user_email) => {
 };
 
 const addContactItems = (newContactItem) => {
-  contactItems.push(newContactItem);
-
-  return Promise.resolve("ok"); // if this was DB call, return the created id
+  return db.query(`
+    INSERT INTO contacts (user_id, name, tel_number)
+    VALUES ($1, $2, $3)
+    RETURNING id
+  `, [newContactItem.user_id, newContactItem.contact_name, newContactItem.contact_number]
+  )
+  .then((data) => data.rows[0])
+   // if this was DB call, return the created id
 };
 
 const getContactItemsLastId = () => {
