@@ -36,9 +36,9 @@ export default function NotificationAlert(props) {
       setNotification(true)
     }, 30000);
     setNotification(false);
-    // axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
-    //   console.log(`text sent to ${twilioData}`);
-    // });
+    axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
+      console.log(`text sent to ${twilioData}`);
+    });
     return;
   }
 
@@ -53,20 +53,26 @@ export default function NotificationAlert(props) {
     className="modal show"
     style={{ display: 'block', position: 'initial' }}
   >
+    <Modal
+    show="true"
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered>
     <Modal.Dialog>
       <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Your Alarm Has Gone Off!!</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <p>Modal body text goes here.</p>
+        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary">Save changes</Button>
+        <Button variant="secondary" onClick={acceptNotification}>Accept Alarm</Button>
+        <Button variant="primary" onClick={snoozeAlarm}>Snooze Alarm</Button>
       </Modal.Footer>
     </Modal.Dialog>
+    </Modal>
   </div>
 
     

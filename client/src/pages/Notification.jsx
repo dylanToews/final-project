@@ -17,13 +17,13 @@ function Notification() {
 
   return (
     <div>
-      {/* {notification === true && (
+      {notification === true && (
         <ReactHowler
           src={parsedSoundString}
           playing={notification}
           loop={notification}
         />
-      )} */}
+      )}
       {notification === true && <NotificationAlert />}
     </div>
   );
