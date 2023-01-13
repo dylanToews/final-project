@@ -42,7 +42,7 @@ export default function AlarmListItem(props) {
 
   
   return (
-    <li className="AlarmListItem">
+    <ul className="AlarmListItem">
       <div className="TimeCardFormat">
         <p className="TimeDisplay">{`${hour}:${minutes}`}</p>
         <p className="AMPM">{`${am_pm}`}</p>
@@ -56,6 +56,6 @@ export default function AlarmListItem(props) {
         <button onClick={() => removeAlarm(id)}>Delete</button>
       </div>
       <br/>
-    </li>
+    </ul>
   );
 }
