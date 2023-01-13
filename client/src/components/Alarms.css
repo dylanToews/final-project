@@ -1,15 +1,15 @@
 .AlarmListItem{
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: #ff9d56;
+  background-color: #C6F1E7;
   border-style: solid;
-  border-color: #BB3812;
+  border-color: #70ACB1;
   border-width: 5px;
   border-radius: 15px;
-  color: #EEEEEE;
   padding-top: 20px;
 }
 
+.Minkowski {
 .Minkowski {
   padding: 5px;
   margin: 5px;
@@ -23,20 +23,20 @@
 }
 
 .TimeDisplay {
-  color: #333333;
+  color: #70ACB1;
   font-size: 48px;
   margin-top: -16px;
 }
 
 .AMPM {
-  color: #333333;
+  color: #70ACB1;
 }
 
 .ContactDisplay {
-  color: #333333;
+  color: #56606D;
 }
 
 .SoundDisplay {
-  color: #222222;
+  color: #56606D;
   font-size: larger;
 }

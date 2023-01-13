@@ -1,7 +1,4 @@
-
-
 import { formatMinutes, formatSeconds } from "../../helpers/format-time";
-import "./recorder-controls.css"
 
 export default function RecorderControls({ recorderState, handlers}) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
@@ -32,10 +29,10 @@ export default function RecorderControls({ recorderState, handlers}) {
             disabled={recordingSeconds === 0}
             onClick={saveRecording}
           >
-            Save
+            Stop
           </button>
         ) : (
-          <button className="start-button" title="Start recording" onClick={startRecording}>
+          <button onClick={startRecording} className="start-button">
             Start
           </button>
         )}

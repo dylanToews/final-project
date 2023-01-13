@@ -1,9 +1,9 @@
-import { useState } from 'react';
-
 import RecorderControls from '../components/Sounds/RecorderControls';
-import RecordingsList from '../components/Sounds/RecordingsList';
-import useRecorder from '../hook/useRecorder';
-import useRecordingsList from '../hook/useRecordingsList';
+import SoundForm from '../components/Sounds/SoundForm';
+import SoundList from '../components/Sounds/SoundList';
+
+import useRecorder from '../hooks/useRecorder';
+import useRecordingsList from '../hooks/useRecordingsList';
 
 function Sounds() {
   const { recorderState, ...handlers } = useRecorder();
@@ -11,12 +11,18 @@ function Sounds() {
   const { recordings, deleteAudio } = useRecordingsList(audio);
 
     return (
-      <section className="voice-recorder">
-      <h1 className="title">Voice Recorder</h1>
+      <section className="App">
       <div className="recorder-container">
-        {recordings.length === 0 && <RecorderControls recorderState={recorderState} handlers={handlers} />}
-        <RecordingsList recordings={recordings} deleteAudio={deleteAudio} />
+      
+        {recordings.length === 0 && 
+        <>
+          <h1 className="title">Alarm Tones</h1>
+          <RecorderControls recorderState={recorderState} handlers={handlers} />
+        </>
+        }
+        <SoundForm recordings={recordings} deleteAudio={deleteAudio} />
       </div>
+      <SoundList />
     </section>
     );
 }

@@ -1,5 +1,8 @@
+import { AlarmContext } from "../context/AlarmProvider";
+
 export default function AlarmListItem(props) {
-  const { user, hour, minutes, amPmOption, contact, sound } = props;
+  
+  const { user, hour, minutes, amPmOption, contact_name, sound_name } = props;
 
   
   return (
@@ -9,8 +12,8 @@ export default function AlarmListItem(props) {
         <p className="AMPM">{`${amPmOption}`}</p>
       </div>
       <div>
-        <p className="ContactDisplay">Contacts: {contact}</p>
-        <p className="SoundDisplay">Sound: {sound}</p>
+        <p className="ContactDisplay">Contacts: {contact_name}</p>
+        <p className="SoundDisplay">Sound: {sound_name}</p>
       </div>
       <br/>
     </ul>

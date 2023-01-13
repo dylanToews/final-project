@@ -48,21 +48,20 @@
 }
 
 .start-button,
-.cancel-button {
+.cancel-button,
+.save-button {
   text-align: center;
   border: none;
   border-radius: 50%;
   background-color: #fff;
   cursor: pointer;
+  width: 52px;
+  height: 52px;
+  font-size: 16px;
 }
 
 .cancel-button:hover {
   color: #fd1c03;
-}
-
-.cancel-button {
-  width: 52px;
-  height: 52px;
 }
 
 .start-button-container {
@@ -71,12 +70,8 @@
   place-content: center;
 }
 
-.start-button {
-  width: 52px;
-  height: 52px;
-  font-size: 16px;
-}
-
-.start-button:hover {
+.start-button:hover,
+.cancel-button:hover,
+.save-button {
   background: radial-gradient(rgb(255, 59, 59), rgba(255, 205, 205, 0));
 }
