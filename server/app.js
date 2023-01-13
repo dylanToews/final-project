@@ -144,8 +144,10 @@ const addAlarmItem = (newAlarmItem) => {
 };
 
 const deleteAlarmItem = (id) => {
-  console.log("inside delete function with Alarm id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM alarms WHERE id = $1", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 ///ALARM ITEMS - Routes
@@ -222,8 +224,10 @@ const addSoundItem = (newSoundItem) => {
 
 
 const deleteSoundItem = (id) => {
-  console.log("inside delete function with Sound id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM sounds WHERE id = $1 RETURNING file_name;", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 // SOUND -  Routes //
@@ -248,7 +252,10 @@ app.post("/api/v1/soundItems", (req, res) => {
 app.delete("/api/v1/soundItems/:id", (req, res) => {
   //Delete function with query goes here !!
   const soundItemId = req.params.id;
-  deleteSoundItem(soundItemId).then((data) => res.send(data));
+  deleteSoundItem(soundItemId).then((data) => {
+    console.log("data after deleting: ", data);
+    res.send(data);
+  });
 });
 
 
@@ -291,8 +298,10 @@ const getContactItemsLastId = () => {
 };
 
 const deleteContactItem = (id) => {
-  console.log("inside delete function with contact id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM contacts WHERE id = $1", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 ///CONTACTS - Routes ///
