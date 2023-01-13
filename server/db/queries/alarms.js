@@ -11,6 +11,7 @@ const getAlarmsForUser = userId => {
     .then(data => data.rows);
 };
 
+
 const getAlarmDataByEmail = email => {
   return db.query(
     `SELECT 
