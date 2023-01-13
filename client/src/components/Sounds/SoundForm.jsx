@@ -44,12 +44,13 @@ export default function RecordingsList(props) {
         .then(res => res.data) // server sending back filename only
         .then(filename => {
           const newSoundItem = {
-            id,
             ...formData,
-            sound_url: `http://localhost:8080/audio/${filename}`
+            user_id: user.id,
+            sound_url: filename
           };
           console.log("new sound: ", newSoundItem);
           axios.post("/api/v1/soundItems", {newSoundItem}).then((res) => {
+            newSoundItem.id = res.data.id;
             setSoundItems([...soundItems, newSoundItem])
             // setSoundLastId([id])
             deleteAudio(recordings[0].key);

@@ -215,8 +215,14 @@ const getSoundItemsLastId = () => {
 };
 
 const addSoundItem = (newSoundItem) => {
-  soundItems.push(newSoundItem);
-  return Promise.resolve("ok"); // if this was DB call, return the created id
+  return db.query(`
+    INSERT INTO sounds (user_id, name, file_name)
+    VALUES ($1, $2, $3)
+    RETURNING id
+  `, [newSoundItem.user_id, newSoundItem.sound_name, newSoundItem.sound_url]
+  )
+  .then((data) => data.rows[0])
+   // if this was DB call, return the created id
 };
 
 
@@ -241,6 +247,7 @@ app.get("/api/v1/soundItemsLastId", (req, res) =>
 
 app.post("/api/v1/soundItems", (req, res) => {
   const { newSoundItem } = req.body;
+  console.log(newSoundItem);
   addSoundItem(newSoundItem).then((data) => res.send(data));
 });
 
