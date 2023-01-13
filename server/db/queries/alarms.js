@@ -22,7 +22,7 @@ const getAlarmDataByEmail = email => {
       sounds.file_name AS sound_string,
       hour,
       minute,
-      am_pm AS amPmOption
+      am_pm
       FROM alarms
       JOIN sounds ON sound_id = sounds.id
       JOIN contacts ON contact_id = contacts.id

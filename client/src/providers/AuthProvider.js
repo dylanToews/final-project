@@ -6,7 +6,7 @@ export const authContext = createContext();
 export default function AuthProvider(props) {
   // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
   const [auth, setAuth] = useState(true);
-  const [user, setUser] = useState({ email: "test@test.ca", id:1, name: "TEST USER" }); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
+  const [user, setUser] = useState({email: "cheever@fakeemail.com"}); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
 
   // const [userData, setUserData] = useState(null);
 

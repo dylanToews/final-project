@@ -55,8 +55,7 @@ function ContextAlarm({ children }) {
   function checkAlarm() {
     const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
       const alarmSeconds = 0;
-
-      const currentSoundItem = soundItems.filter(function (e) {
+      const currentSoundItem = soundItems.filter( (e) => {
         return e.sound_name === alarmItem.sound_name
       })
 
@@ -64,12 +63,12 @@ function ContextAlarm({ children }) {
         return e.contact_name === alarmItem.contact_name
       })
       if (
-        `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}` ===
+        `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}` ===
         `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
       ) {
         testNotification = true;
 
-        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.amPmOption}:${secondsDigital}`;
+        notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}`;
         notificationDetailsObject.contact_name = alarmItem.contact_name;
         notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
@@ -93,11 +92,11 @@ function ContextAlarm({ children }) {
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
-      axios.get("/api/v1/alarmItemLastId"),
+      // axios.get("/api/v1/alarmItemLastId"),
       axios.get(`/api/v1/contactItems/${user_email}`),
-      axios.get("/api/v1/contactItemsLastId"),
-      axios.get(`/api/v1/soundItems/${user_email}`),
-      axios.get("/api/v1/soundItemsLastId")
+      // axios.get("/api/v1/contactItemsLastId"),
+      axios.get(`/api/v1/soundItems/${user_email}`)
+      // axios.get("/api/v1/soundItemsLastId")
       // axios.get("/api/v1/users"),
       // axios.get("/api/v1/times"),
       // axios.get("/api/v1/sounds"),
@@ -105,11 +104,11 @@ function ContextAlarm({ children }) {
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        lastId: responses[1].data,
-        contactItems: responses[2].data,
-        contactLastId: responses[3].data,
-        soundItems: responses[4].data,
-        soundLastId: responses[5].data,
+        lastId: responses[0].data.id,
+        contactItems: responses[1].data,
+        contactLastId: responses[1].data.id,
+        soundItems: responses[2].data,
+        soundLastId: responses[2].data.id,
         // users: responses[1].data,
         // times: responses[2].data,
         // sounds: responses[3].data,
@@ -182,9 +181,9 @@ function ContextAlarm({ children }) {
   ///function for adding new alarms. function is called within AlarmOption
 
   const addNewParams = (formData) => {
-    const id = lastId + 1;
-    const newAlarmItem = { id, user_email, ...formData };
-    setLastId(lastId + 1)
+    // const id = lastId + 1;
+    const newAlarmItem = { user_email, ...formData };
+    // setLastId(lastId + 1)
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
       console.log("add new alarmItem sucessful:", newAlarmItem);
       setAlarmItems([...alarmItems, newAlarmItem]);
