@@ -20,7 +20,7 @@ const soundPlay = (src, status) => {
   }
 }
 
-soundPlay(audioTest, "play")
+// soundPlay(audioTest, "play")
 
 
     return (

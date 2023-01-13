@@ -41,7 +41,7 @@ const soundPlay = (src, status) => {
     
     console.log(`sound playing: ${notificationDetails.sound_name}`)
 
-    // soundPlay(soundUrl, "play")
+    soundPlay(soundUrl, "play")
 
   }, [])
 
