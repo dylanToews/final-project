@@ -144,8 +144,10 @@ const addAlarmItem = (newAlarmItem) => {
 };
 
 const deleteAlarmItem = (id) => {
-  console.log("inside delete function with Alarm id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM alarms WHERE id = $1", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 ///ALARM ITEMS - Routes
@@ -222,8 +224,10 @@ const addSoundItem = (newSoundItem) => {
 
 
 const deleteSoundItem = (id) => {
-  console.log("inside delete function with Sound id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM sounds WHERE id = $1 RETURNING file_name;", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 // SOUND -  Routes //
@@ -248,8 +252,30 @@ app.post("/api/v1/soundItems", (req, res) => {
 app.delete("/api/v1/soundItems/:id", (req, res) => {
   //Delete function with query goes here !!
   const soundItemId = req.params.id;
-  deleteSoundItem(soundItemId).then((data) => res.send(data));
+  getFilesInDirectory("./public/audio");
+
+  deleteSoundItem(soundItemId).then((data) => {
+    const deletedFile = data[0].file_name;
+    console.log("data after deleting: ", data[0].file_name);
+    fs.unlink(`./public/audio/${deletedFile}`, (err => {
+      if (err) console.log(err);
+      else {
+        console.log(`\nDeleted file: ${deletedFile}`);
+        getFilesInDirectory("./public/audio");
+      }
+    }));
+    res.send(data);
+  });
 });
+
+// filesystem delete testing
+const getFilesInDirectory = (dir) => {
+  console.log("\nFiles present in audio directory: ");
+  const files = fs.readdirSync(dir);
+  files.forEach(file => {
+    console.log(file);
+  });
+}
 
 
 
@@ -291,8 +317,10 @@ const getContactItemsLastId = () => {
 };
 
 const deleteContactItem = (id) => {
-  console.log("inside delete function with contact id:", id);
-  return Promise.resolve("deleted");
+  return db
+    .query("DELETE FROM contacts WHERE id = $1", [id])
+    .then((data) => data.rows)
+    .catch((err) => console.error(err.stack));
 };
 
 ///CONTACTS - Routes ///
