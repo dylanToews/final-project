@@ -66,7 +66,7 @@ function ContextAlarm({ children }) {
       })
       if (
         `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}` ===
-        `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}`
+        `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}` && alarmItem.active === true
       ) {
         testNotification = true;
 
