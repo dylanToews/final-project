@@ -5,13 +5,8 @@ export const authContext = createContext();
 
 export default function AuthProvider(props) {
   // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
-  const [auth, setAuth] = useState(true);
-  const [user, setUser] = useState({email: "cheever@fakeemail.com", id: 3}); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
-
-  // const [userData, setUserData] = useState(null);
-
-
-
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
 
 
   //Perform login process for the user & save authID, etc
@@ -30,53 +25,29 @@ export default function AuthProvider(props) {
           
         }
       });
-    // const id = "USER_ID"; // axios call here? get user id from DB
+
   };
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("BASIC_USER_AUTH");
+    if ( data !== null ) {
+      const prevUser = JSON.parse(data);
+      login(prevUser.email, prevUser.password);
+
+    } 
+
+  }, [])
+  
+  useEffect(() => {
+    if (user !== null ) window.localStorage.setItem("BASIC_USER_AUTH", JSON.stringify(user));
+  }, [user])
+
 
 
   const logout = function() {
     setAuth(false);
     setUser(null);
   };
-
-  // useEffect(() => {
-  //   if (user) {
-  //     console.log("user is valid!")
-  //     const requests = [
-  //       axios.get(`api/v1/contacts/${user.id}`),
-  //       axios.get(`api/v1/sounds/${user.id}`),
-  //       axios.get(`api/v1/alarms/${user.id}`)
-  //     ];
-
-  //     Promise.all(requests)
-  //       .then((responses) => ({
-  //         contacts: responses[0].data.contacts,
-  //         sounds: responses[1].data.sounds,
-  //         alarms: responses[2].data.alarms
-  //       }))
-  //       .then(
-  //         ({
-  //           contacts,
-  //           sounds,
-  //           alarms
-  //         }) => {
-  //           setUserData({
-  //             contacts,
-  //             sounds,
-  //             alarms
-  //           })
-  //         }
-  //       );
-  //   } else {
-  //     setUserData(null);
-  //   }
-  // }, [user]);
-
-  //auto login for development 
-
-  // useEffect(() => {
-  //   setUser({ email: "test@test.ca", id:1, name: "TEST USER" });
-  // }, [])
 
 
   // authContext will expose these items
