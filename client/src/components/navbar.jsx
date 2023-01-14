@@ -17,6 +17,7 @@ function NavbarComponent() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="p-3">
 
       <Navbar.Brand className="me-auto">Hello {user.name}</Navbar.Brand>
+      <button type="button" className="navLogout" onClick={logout}>Logout</button>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav" className="nav-item dropright">
         <Nav className="me-auto">

@@ -54,7 +54,7 @@ export default function AuthProvider(props) {
 
 
   // authContext will expose these items
-  const authData = { auth, user, login, logout}; // userData
+  const authData = { auth, setAuth, user, login, logout}; // userData
 
   // console.log(userData)
   return (

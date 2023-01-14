@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 export default function Login_Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(authContext);
+  const { login, setAuth } = useContext(authContext);
 
   const handleEmail = (ev => setEmail(ev.target.value));
   const handlePassword = (ev => setPassword(ev.target.value));
@@ -19,26 +19,34 @@ export default function Login_Register(props) {
   }
 
   return (
-    <Form className="wrapper" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" onChange={handleEmail}/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
+<div className="Login">
+<Form className="wrapper" onSubmit={handleSubmit}>
+  <Form.Group className="mb-3" controlId="email"onChange={handleEmail}>
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" />
+    <Form.Text className="text-muted">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" onChange={handlePassword}/>
-      </Form.Group>
- 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+  <Form.Group className="mb-3" controlId="password"onChange={handlePassword}>
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" />
+  </Form.Group>
+
+  <Button variant="primary" type="submit"onSubmit={handleSubmit}>
+    Submit
+  </Button>
+</Form>
+</div> 
   );
 }
+
+
+
+
+
+
 
 
 {/* <div className="Login">
@@ -55,4 +63,4 @@ export default function Login_Register(props) {
     <button type="submit">Log In</button>
   </div>
 </form>
-</div> */}
+</div>  */}
