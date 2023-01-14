@@ -24,7 +24,7 @@ function NavbarComponent() {
         <Nav.Link as={Link} to="/Contacts">Contacts</Nav.Link>
         <Nav.Link as={Link} to="/Sounds">Sounds</Nav.Link>
         <Nav.Link as={Link} to="/About">About</Nav.Link>
-        <Nav.Link as={Link} to="/Login_Register">Login - not working currently </Nav.Link>
+        <Nav.Link as={Link} to="/Login_Register">Login </Nav.Link>
         </Nav>
       </Navbar.Collapse>
   
