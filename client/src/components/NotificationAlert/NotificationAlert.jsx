@@ -1,23 +1,26 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function NotificationAlert(props) {
-  const { notification, setNotification, notificationDetails, soundItems } =
+  const { notification, setNotification, 
+    // notificationDetails, 
+    soundItems } =
     useContext(AlarmContext);
   const { user } = useContext(authContext);
   const [snooze, setSnooze] = useState([]);
 
   // hard coded notification details object for testing purposes
 
-  // const notificationDetails = {
-  //   alarm_time: "11:37 AM:00",
-  //   contact_name: "Dylan",
-  //   contact_number: "7802386933",
-  //   sound_name: "Test recording ",
-  //   sound_url: "1673633900965.ogg"}
+  const notificationDetails = {
+    alarm_time: "11:37 AM:00",
+    contact_name: "Dylan",
+    contact_number: "7802386933",
+    sound_name: "Test recording ",
+    sound_url: "1673633900965.ogg"}
 
   const twilioData = {
     contact_name: notificationDetails.contact_name,
@@ -33,9 +36,9 @@ export default function NotificationAlert(props) {
       setNotification(true)
     }, 30000);
     setNotification(false);
-    // axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
-    //   console.log(`text sent to ${twilioData}`);
-    // });
+    axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
+      console.log(`text sent to ${twilioData}`);
+    });
     return;
   }
 
@@ -46,10 +49,39 @@ export default function NotificationAlert(props) {
   }
 
   return (
-    <div>
-      <h1>THE ALARM HAS GONE OFF!!!!</h1>
-      <button onClick={acceptNotification}>ACCEPT</button>
-      <button onClick={snoozeAlarm}>SNOOZE</button>
-    </div>
+    <div
+    className="modal show"
+    style={{ display: 'block', position: 'initial' }}
+  >
+    <Modal
+    show="true"
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered>
+    <Modal.Dialog>
+      <Modal.Header closeButton>
+        <Modal.Title>Your Alarm Has Gone Off!!</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button variant="secondary" onClick={acceptNotification}>Accept Alarm</Button>
+        <Button variant="primary" onClick={snoozeAlarm}>Snooze Alarm</Button>
+      </Modal.Footer>
+    </Modal.Dialog>
+    </Modal>
+  </div>
+
+    
   );
 }
+
+
+    // <div>
+    //   <h1>THE ALARM HAS GONE OFF!!!!</h1>
+    //   <button onClick={acceptNotification}>ACCEPT</button>
+    //   <button onClick={snoozeAlarm}>SNOOZE</button>
+    // </div>
