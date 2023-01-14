@@ -11,7 +11,7 @@ import Login_Register from "./pages/Login_Register";
 import Notification from "./pages/Notification";
 import ContextAlarm from "./components/context/AlarmProvider";
 
-import "./App.css";
+// import "./App.css";
 
 function App() {
   const { auth } = useContext(authContext);
