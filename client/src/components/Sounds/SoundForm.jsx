@@ -5,7 +5,7 @@ import { authContext } from "../../providers/AuthProvider";
 
 
 export default function RecordingsList(props) {
-  const { soundItems, setSoundItems, soundLastId, setSoundLastId } = useContext(AlarmContext);
+  const { soundItems, setSoundItems } = useContext(AlarmContext);
 
   const { recordings, deleteAudio } = props;
   const {user} = useContext(authContext)
@@ -30,8 +30,6 @@ export default function RecordingsList(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const id = soundLastId + 1
-
     if (recordings.length > 0) {
       const audioFormData = new FormData();
       audioFormData.append("sound", recordings[0].audio);
@@ -51,8 +49,7 @@ export default function RecordingsList(props) {
           console.log("new sound: ", newSoundItem);
           axios.post("/api/v1/soundItems", {newSoundItem}).then((res) => {
             newSoundItem.id = res.data.id;
-            setSoundItems([...soundItems, newSoundItem])
-            // setSoundLastId([id])
+            setSoundItems([...soundItems, newSoundItem]);
             deleteAudio(recordings[0].key);
             setFormData(initialValues);
           });

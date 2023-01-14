@@ -13,15 +13,11 @@ export default function NotificationAlert(props) {
   const { user } = useContext(authContext);
   const [snooze, setSnooze] = useState([]);
 
-  // hard coded notification details object for testing purposes
-
-
   const twilioData = {
     contact_name: notificationDetails.contact_name,
     contact_number: notificationDetails.contact_number,
     user_name: user.name,
   };
-  const contactName = notificationDetails.contact_name;
 
   function snoozeAlarm() {
     console.log(`text sent to:${notificationDetails.contact_number}`)

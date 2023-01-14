@@ -16,22 +16,8 @@ function ContextAlarm({ children }) {
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
-  const [lastId, setLastId]= useState([])
-
   const [contactItems, setContactItems] = useState([]);
-  const [contactLastId, setContactLastId]= useState([])
-
   const [soundItems, setSoundItems] = useState([])
-  const [soundLastId, setSoundLastId] = useState([])
-
-
-  const testingNotificationDetails = {
-    alarm_time: "11:37 AM:00",
-    contact_name: "Dylan",
-    contact_number: "7802386933",
-    sound_name: "Test recording ",
-    sound_url: "soft_wakeup.ogg"}
-
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -40,15 +26,7 @@ function ContextAlarm({ children }) {
 
   ///Notification and alarm logic///
 
-  // hard coded notification details object for testing purposes
-
-
-
-
-
   let testNotification = false;
-
-
 
   const notificationDetailsObject = {
     sound_name: "",
@@ -102,50 +80,27 @@ function ContextAlarm({ children }) {
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
-      // axios.get("/api/v1/alarmItemLastId"),
       axios.get(`/api/v1/contactItems/${user_email}`),
-      // axios.get("/api/v1/contactItemsLastId"),
       axios.get(`/api/v1/soundItems/${user_email}`)
-      // axios.get("/api/v1/soundItemsLastId")
-      // axios.get("/api/v1/users"),
-      // axios.get("/api/v1/times"),
-      // axios.get("/api/v1/sounds"),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        lastId: responses[0].data.id,
         contactItems: responses[1].data,
-        contactLastId: responses[1].data.id,
-        soundItems: responses[2].data,
-        soundLastId: responses[2].data.id,
-        // users: responses[1].data,
-        // times: responses[2].data,
-        // sounds: responses[3].data,
-        // contacts: responses[4].data,
+        soundItems: responses[2].data
       }))
       .then(
         ({
           alarmItems,
-          lastId,
           contactItems,
-          contactLastId,
-          soundItems,
-          soundLastId,
-          // users, times, sounds, contacts
+          soundItems
         }) => {
           setAlarmItems(alarmItems);
-          setLastId(lastId);
           setContactItems(contactItems);
-          setContactLastId(contactLastId);
           setSoundItems(soundItems);
-          setSoundLastId(soundLastId);
-          // setUsers(users);
-          // setSounds(sounds);
-          // setContacts(contacts);
-          // setAlarms(times);
         }
       );
+
     // clock functionality logic
 
     setInterval(() => {
@@ -232,11 +187,8 @@ function ContextAlarm({ children }) {
         setAlarmItems,
         contactItems,
         setContactItems,
-        contactLastId,
         soundItems,
         setSoundItems,
-        soundLastId,
-        setSoundLastId,
         addNewParams,
         notification,
         setNotification,
