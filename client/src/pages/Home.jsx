@@ -29,6 +29,14 @@ function Home() {
         <section className="clock container">
           <div className="clock__container grid">
             <div className="clock__content grid">
+<<<<<<< HEAD
+                <div className="card">
+                  <button onClick={setTestStart}>Test Notification</button>
+                  <DigitalClock />
+                  <AlarmOption/>
+                </div>
+                <AlarmList />
+=======
 
               <div className="card">
                 <button onClick={setTestStart}>Test Notification</button>
@@ -37,6 +45,7 @@ function Home() {
               </div>
               <AlarmList />
 
+>>>>>>> 24477f1476bb7a32152a6af966c98f80060f3b7b
             </div>
           </div>
         </section>
