@@ -17,6 +17,7 @@ function NavbarComponent() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="p-3">
 
       <Navbar.Brand className="me-auto">Hello {user.name}</Navbar.Brand>
+      <button type="button" className="navLogout" onClick={logout}>Logout</button>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav" className="nav-item dropright">
         <Nav className="me-auto">
@@ -24,7 +25,7 @@ function NavbarComponent() {
         <Nav.Link as={Link} to="/Contacts">Contacts</Nav.Link>
         <Nav.Link as={Link} to="/Sounds">Sounds</Nav.Link>
         <Nav.Link as={Link} to="/About">About</Nav.Link>
-        <Nav.Link as={Link} to="/Login_Register">Login - not working currently </Nav.Link>
+        <Nav.Link as={Link} to="/Login_Register">Login </Nav.Link>
         </Nav>
       </Navbar.Collapse>
   
