@@ -36,13 +36,13 @@ export default function AlarmListItem(props) {
         <p className="TimeDisplay">{`${hour}:${minutes}`}</p>
         <p className="AMPM">{`${am_pm}`}</p>
       </div>
-      <div className="alarm-toggle">
-        <button onClick={() => onToggle(id)}>{active && "ON"}{!active && "OFF"}</button>
+      <div>
+        <button onClick={() => onToggle(id)} className="alarm-toggle">{active && "ON"}{!active && "OFF"}</button>
       </div>
       <div>
         <p className="ContactDisplay">Contacts: {contact_name}</p>
         <p className="SoundDisplay">Sound: {sound_name}</p>
-        <button onClick={() => removeAlarm(id)}>Delete</button>
+        <button onClick={() => removeAlarm(id)} className="deleteButton">Delete</button>
       </div>
       <br/>
     </ul>
