@@ -81,7 +81,8 @@ const getAlarmDataByEmail = email => {
       JOIN sounds ON sound_id = sounds.id
       JOIN contacts ON contact_id = contacts.id
       JOIN users ON alarms.user_id = users.id
-      WHERE users.email = $1;
+      WHERE users.email = $1
+      ORDER BY am_pm, alarms.hour, alarms.minute;
     `, [email]
   )
   .then((data) => data.rows)
