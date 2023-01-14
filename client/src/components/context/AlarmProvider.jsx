@@ -22,7 +22,7 @@ function ContextAlarm({ children }) {
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
 
-  const { auth, user } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   ///Notification and alarm logic///
 
@@ -39,9 +39,8 @@ function ContextAlarm({ children }) {
 
 
   function checkAlarm() {
-    const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
+    Object.values(alarmItems).forEach((alarmItem) => {
       const alarmSeconds = "00";
-      const parsedAlarmSeconds = parseInt(alarmSeconds)
       const currentSoundItem = soundItems.filter( (e) => {
         return e.sound_name === alarmItem.sound_name
       })
@@ -60,7 +59,6 @@ function ContextAlarm({ children }) {
         notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
         notificationDetailsObject.sound_url = currentSoundItem[0].sound_url
-        console.log(notificationDetailsObject)
       }
     });
   }
