@@ -31,7 +31,7 @@ function Home() {
             <div className="clock__content grid">
 
               <div className="card">
-                <button onClick={setTestStart}>Test Notification</button>
+                <button onClick={setTestStart} className="submit">Test Notification</button>
                 <DigitalClock />
                 <AlarmOption/>
               </div>
