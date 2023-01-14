@@ -26,6 +26,17 @@
   color: #70ACB1;
 }
 
+.deleteButton {
+  margin-top: 16px;
+  padding: 6px;
+  border-color: #70ACB1;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 2px;
+  background-color: #C6F1E7;
+  color: #70ACB1;
+}
+
 ::placeholder {
   color: #70ACB1;
 }

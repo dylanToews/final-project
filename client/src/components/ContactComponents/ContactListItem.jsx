@@ -35,7 +35,7 @@ export default function ContactListItem(props) {
       <div key={id}>
         <p>Contact Name: {contact_name}</p>
         <p>Phone Number: {formatPhoneNumber(contact_number)}</p>
-        <button onClick={() => removeContact(id)}>Delete</button>
+        <button onClick={() => removeContact(id)} className="deleteButton">Delete</button>
       </div>
       <br></br>
     </li>
