@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function NotificationAlert(props) {
   const { notification, setNotification, 
-    // notificationDetails, 
+    notificationDetails, 
     soundItems } =
     useContext(AlarmContext);
   const { user } = useContext(authContext);
@@ -15,12 +15,6 @@ export default function NotificationAlert(props) {
 
   // hard coded notification details object for testing purposes
 
-  const notificationDetails = {
-    alarm_time: "11:37 AM:00",
-    contact_name: "Dylan",
-    contact_number: "7802386933",
-    sound_name: "Test recording ",
-    sound_url: "1673633900965.ogg"}
 
   const twilioData = {
     contact_name: notificationDetails.contact_name,
