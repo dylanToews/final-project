@@ -29,6 +29,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="sounds" element={<Sounds />}/>
+          <Route path="login" element={<Login_Register />}/>
           
         </Route>
       </Routes>

@@ -7,24 +7,27 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Badge from 'react-bootstrap/Badge';
 
 function NavbarComponent() {
   const { user, logout } = useContext(authContext);
 
   return (
+    
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="p-3">
-    <Container>
-      <Navbar.Brand className="ml-auto">Hello {user.name}</Navbar.Brand>
+
+      <Navbar.Brand className="me-auto">Hello {user.name}</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
+      <Navbar.Collapse id="responsive-navbar-nav" className="nav-item dropright">
         <Nav className="me-auto">
         <Nav.Link as={Link} to="/">Home</Nav.Link>
         <Nav.Link as={Link} to="/Contacts">Contacts</Nav.Link>
         <Nav.Link as={Link} to="/Sounds">Sounds</Nav.Link>
         <Nav.Link as={Link} to="/About">About</Nav.Link>
+        <Nav.Link as={Link} to="/Login_Register">Login - not working currently </Nav.Link>
         </Nav>
       </Navbar.Collapse>
-    </Container>
+  
   </Navbar>
   );
 }
