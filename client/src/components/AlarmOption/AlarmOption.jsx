@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { AlarmContext } from "../context/AlarmProvider";
+import { minutesNumber, hourNumber } from "../../func";
+import useSelect from "../../hooks/useSelect";
 import "./AlarmOption.css";
 import "../Alarms.css";
 import "../Dropdowns.css";
-import { minutesNumber, hourNumber } from "../../func";
-import useSelect from "../../hooks/useSelect";
-import { AlarmContext } from "../context/AlarmProvider";
 
-function AlarmOption(props) {
+function AlarmOption() {
   const [hour, setHour] = useSelect("Hour");
   const [minutes, setMinutes] = useSelect("Minutes");
   const [am_pm, setam_pm] = useSelect("Am-Pm");
@@ -37,8 +37,6 @@ function AlarmOption(props) {
     const { name, value } = event.target;  
     setFormData({ ...formData, [name]: value});
   };
-
-
 
   const parsedContacts = Object.values(
     contactItems.map((alarmItem) => (
@@ -71,21 +69,11 @@ function AlarmOption(props) {
       formData.hour &&
       formData.minutes &&
       formData.am_pm
-    ) {
+      //could add error state here -- populate error state if all forms are not selected
+      ) {
       addNewParams(formData);
     }
   };
-
-  //Function below moved into setAlarm
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (formData.contact && formData.sound) {
-  //     addNewParams(formData);
-  //     setFormData(initialValues);
-  //   }
-  //   //could add error state here -- populate error state if all forms are not selected
-  // };
 
   return (
     <div className="option-Container">

@@ -31,14 +31,17 @@ export default function AlarmListItem(props) {
     };
     const updatedAlarmItems = [...alarmItems];
     updatedAlarmItems[alarmItemIndex].active = nextToggle;
-
     axios.put(`/api/v1/alarmItems/${id}`).then((res) => {
-      console.log("active status changed for alarm with id: ", id);
-
       setAlarmItems(updatedAlarmItems);
+<<<<<<< HEAD
     });
   };
 
+=======
+    })
+  }
+  
+>>>>>>> main
   return (
     <Container fluid>
       <Card className="mt-2 shadow-lg">
