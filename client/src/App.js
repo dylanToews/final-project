@@ -12,7 +12,7 @@ import Notification from "./pages/Notification";
 import ContextAlarm from "./components/context/AlarmProvider";
 // import { AlarmContext } from "../context/AlarmProvider";
 
-import "./App.css";
+// import "./App.css";
 
 function App() {
   const { auth } = useContext(authContext);
