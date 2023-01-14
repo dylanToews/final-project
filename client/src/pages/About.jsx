@@ -8,7 +8,8 @@ function About() {
         <div className="App">
             <br/>
             <br/>
-            <h1>LEARN</h1>
+            <h1>About Startle</h1>
+            <img src={require('../startle.png')}/>
             <br/>
             <h2>Welcome to Startle, the App that does... something.</h2>
             <br/>
