@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import axios from "axios";
 import { AlarmContext } from "../context/AlarmProvider";
-import { Card, Button, Container, Row, Col, Accordion, Dropdown } from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Accordion, Dropdown, Modal } from "react-bootstrap";
+// import "../../styles/ButtonsWrappers.css"
+import "../../styles/AlarmOption.css";
+import AlarmOption from "../AlarmOption/AlarmOption";
+
+
 export default function AlarmListItem(props) {
   const { id, user, hour, minutes, am_pm, contact_name, sound_name, active } =
     props;
@@ -36,10 +41,53 @@ export default function AlarmListItem(props) {
     });
   };
 
+
+  const editAlarm = (id) => {
+    console.log("edit alarm")
+    return (
+      <div
+      className="modal show"
+      style={{ display: 'block', position: 'initial' }}
+    >
+      <Modal
+      show="true"
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+      <Modal.Dialog>
+        <Modal.Header closeButton>
+          <Modal.Title>Your Alarm Has Gone Off!!</Modal.Title>
+        </Modal.Header>
+  
+        <Modal.Body>
+          {/* <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p> */}
+          <AlarmOption/>
+        </Modal.Body>
+  
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal.Dialog>
+      </Modal>
+    </div>
+    )
+  }
   return (
     <Container fluid>
-      <Card className="mt-2 shadow-lg">
+      <Card className="mt-2 shadow-lg ">
         <Card.Body>
+          <Row>
+            <Col className="display-10">
+            Alarm Title
+            </Col>
+            <Col>
+            <Button
+                variant="outline-secondary"
+                onClick={() => editAlarm(id)}
+              >
+                Edit
+              </Button>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Card.Title className="display-10">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
@@ -56,7 +104,7 @@ export default function AlarmListItem(props) {
           <Row>
             <Col>
               <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <Dropdown.Toggle className="wrapper-option select" id="dropdown-basic">
                   Details
                 </Dropdown.Toggle>
 

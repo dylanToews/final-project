@@ -4,6 +4,7 @@ import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import AlarmOption from "../AlarmOption/AlarmOption";
 
 export default function NotificationAlert(props) {
   const { notification, setNotification, 
@@ -58,7 +59,8 @@ export default function NotificationAlert(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p>
+        {/* <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p> */}
+        <AlarmOption/>
       </Modal.Body>
 
       <Modal.Footer>

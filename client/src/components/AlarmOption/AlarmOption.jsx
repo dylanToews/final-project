@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { minutesNumber, hourNumber } from "../../func";
 import useSelect from "../../hooks/useSelect";
-import "./AlarmOption.css";
-import "../Alarms.css";
-import "../Dropdowns.css";
+import "../../styles/AlarmOption.css";
+import "../../styles/Alarms.css";
+import "../../styles/Dropdowns.css"
 
 function AlarmOption() {
   const [hour, setHour] = useSelect("Hour");
@@ -122,6 +122,7 @@ function AlarmOption() {
             <option value="PM">Pm</option>
           </select>
         </div>
+        <div className="option-Container">
 
         <select name="contact_name" value={formData.contact_name} onChange={handleChange} className="Selection">
           <option value="">Please Select A Contact</option>
@@ -140,6 +141,7 @@ function AlarmOption() {
       >
         {hasAlarm ? "Clear Alarm" : "Set Alarm"}
       </button>
+      </div>
     </div>
   );
 }

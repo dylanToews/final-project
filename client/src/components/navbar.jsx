@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "../Nav.css";
+// import "../../styles/Nav.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { authContext } from "../providers/AuthProvider";
 

@@ -14,9 +14,9 @@ export default function AlarmList(props) {
       <br/><br/>
       <h2>Existing Alarms</h2>
       <br/>
-      <ul>
+      
         {[parsedAlarmItems]}
-      </ul>
+      
     </section>
   );
 }
