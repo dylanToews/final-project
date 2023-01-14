@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
-
-import { AlarmContext } from "../context/AlarmProvider";
 import axios from "axios";
+import { useContext, useState } from "react";
+import { AlarmContext } from "../context/AlarmProvider";
 import "../Contacts.css";
 
 export default function ContactListItem(props) {
   const { contact_name, contact_number, id, user_email } = props;
-  const { contactItems, setContactItems } = useContext(AlarmContext);
+  const { setContactItems } = useContext(AlarmContext);
 
   function formatPhoneNumber(phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -16,7 +15,6 @@ export default function ContactListItem(props) {
     }
     return null;
   }
-
 
   const removeContact = (id) => {
     const filtered = (current) =>

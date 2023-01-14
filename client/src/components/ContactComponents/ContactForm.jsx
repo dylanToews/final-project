@@ -1,14 +1,12 @@
-import React from "react";
+import axios from "axios";
 import { useContext, useState } from "react";
-// import useSelect from "../../hooks/useSelect";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
-import axios from "axios";
 import "../Contacts.css"
 
 function ContactForm() {
   const { contactItems, setContactItems, contactLastId } = useContext(AlarmContext);
-  const {user} = useContext(authContext)
+  const { user } = useContext(authContext)
 
   const user_email = user.email;
 
