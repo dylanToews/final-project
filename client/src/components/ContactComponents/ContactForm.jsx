@@ -32,8 +32,7 @@ function ContactForm() {
 
   const checkNumber = (number1, number2) =>{
     if(number1 === number2)
-
-    return true 
+    return true;
   }
 
   const handleSubmit = (event) => {

@@ -50,15 +50,3 @@ export const getAlarmContact = (users) => {
 
   return Object.keys(alarmsBuffer);
 };
-
-//Get time values from alarmItemData
-
-export const getAlarmTime = (users) => {
-  if (!Array.isArray(users)) {
-    return [];
-  }
-  const alarmsBuffer = {};
-  users.forEach((user) => (alarmsBuffer[user.time] = 0));
-
-  return Object.keys(alarmsBuffer);
-};

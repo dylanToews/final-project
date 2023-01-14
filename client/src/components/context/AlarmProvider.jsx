@@ -13,7 +13,6 @@ function ContextAlarm({ children }) {
   const [dayNow, setDayNow] = useState("");
   const [monthNow, setMonthNow] = useState("");
   const [yearNow, setYearNow] = useState("");
-  const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
@@ -194,13 +193,12 @@ function ContextAlarm({ children }) {
   }, [testNotification]);
 
   ///function for adding new alarms. function is called within AlarmOption
-
   const addNewParams = (formData) => {
-    // const id = lastId + 1;
+
     const currentSoundItem = soundItems.filter( (e) => {
       return e.sound_name === formData.sound_name
     })
-    // console.log(currentSoundItem)
+
     const currentContactItem = contactItems.filter( (e) => {
       return e.contact_name === formData.contact_name
     })
@@ -211,27 +209,12 @@ function ContextAlarm({ children }) {
       ...formData
 
     };
-    console.log("newAlarmItem", newAlarmItem);
     axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
       newAlarmItem.id = res.data.id;
       setAlarmItems([...alarmItems, newAlarmItem]);
     });
   };
 
-  //Original alarm conditional below
-
-  // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
-  //   // alarm.play();
-  //   // alarm.loop = true;
-  //   console.log("alarm has occured")
-  // }
-
-  /// not really important but it gives me an error when i delete so im ignoring for now
-
-  const pauseAlarm = () => {
-    // alarm.pause();
-    setAlarmTime("");
-  };
 
   return (
     <AlarmContext.Provider
@@ -243,9 +226,6 @@ function ContextAlarm({ children }) {
         dayNow,
         monthNow,
         yearNow,
-        alarmTime,
-        setAlarmTime,
-        pauseAlarm,
         hasAlarm,
         setHasAlarm,
         alarmItems,
@@ -257,8 +237,6 @@ function ContextAlarm({ children }) {
         setSoundItems,
         soundLastId,
         setSoundLastId,
-        // sounds,
-        // alarms,
         addNewParams,
         notification,
         setNotification,
