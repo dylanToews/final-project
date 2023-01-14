@@ -30,8 +30,10 @@ export default function AuthProvider(props) {
 
   useEffect(() => {
     const data = window.localStorage.getItem("BASIC_USER_AUTH");
-    if ( data !== null ) {
-      const prevUser = JSON.parse(data);
+    console.log(data);
+    const prevUser = JSON.parse(data);
+    console.log(prevUser);
+    if (prevUser) {
       login(prevUser.email, prevUser.password);
 
     } 
@@ -47,6 +49,7 @@ export default function AuthProvider(props) {
   const logout = function() {
     setAuth(false);
     setUser(null);
+    window.localStorage.setItem("BASIC_USER_AUTH", null)
   };
 
 
