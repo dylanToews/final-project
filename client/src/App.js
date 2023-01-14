@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { authContext } from "./providers/AuthProvider";
@@ -10,7 +10,6 @@ import Sounds from "./pages/Sounds";
 import Login_Register from "./pages/Login_Register";
 import Notification from "./pages/Notification";
 import ContextAlarm from "./components/context/AlarmProvider";
-// import { AlarmContext } from "../context/AlarmProvider";
 
 import "./App.css";
 

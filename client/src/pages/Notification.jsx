@@ -1,4 +1,3 @@
-import React from "react";
 import ReactHowler from "react-howler";
 import { useContext } from "react";
 import { AlarmContext } from "../components/context/AlarmProvider";

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import AlarmOption from '../components/AlarmOption/AlarmOption';
 import DigitalClock from '../components/DigitalClock/DigitalClock';
 import Header from '../components/Header';
@@ -8,7 +7,7 @@ import { AlarmContext } from "../components/context/AlarmProvider";
 
 function Home() {
 
-  const { notification, setNotification, notificationDetails, setNotificationDetails } = useContext(AlarmContext);
+  const { setNotification, setNotificationDetails } = useContext(AlarmContext);
 
   const testingNotificationDetails = {
     alarm_time: "11:37 AM:00",

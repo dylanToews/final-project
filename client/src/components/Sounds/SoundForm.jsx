@@ -33,7 +33,6 @@ export default function RecordingsList(props) {
     if (recordings.length > 0) {
       const audioFormData = new FormData();
       audioFormData.append("sound", recordings[0].audio);
-      // console.log(...audioFormData);
       axios.post("/upload", audioFormData, {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -46,7 +45,6 @@ export default function RecordingsList(props) {
             user_id: user.id,
             sound_url: filename
           };
-          console.log("new sound: ", newSoundItem);
           axios.post("/api/v1/soundItems", {newSoundItem}).then((res) => {
             newSoundItem.id = res.data.id;
             setSoundItems([...soundItems, newSoundItem]);
