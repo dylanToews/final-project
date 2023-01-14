@@ -17,7 +17,6 @@ function AlarmOption() {
     hasAlarm,
     setHasAlarm,
     addNewParams,
-    alarmItems,
     contactItems,
     soundItems,
   } = useContext(AlarmContext);

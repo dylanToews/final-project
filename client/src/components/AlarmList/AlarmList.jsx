@@ -12,7 +12,7 @@ export default function AlarmList(props) {
   return (
     <section className="AlarmList">
       <br/><br/>
-      <h2>Existing Alarms</h2>
+      <h2>My Alarms</h2>
       <br/>
       <ul>
         {[parsedAlarmItems]}

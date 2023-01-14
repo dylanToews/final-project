@@ -2,17 +2,15 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
+
+
 import "../Contacts.css"
 
 function ContactForm() {
-  const { contactItems, setContactItems, contactLastId } = useContext(AlarmContext);
-  const { user } = useContext(authContext)
-
-  const user_email = user.email;
+  const { contactItems, setContactItems } = useContext(AlarmContext);
+  const { user } = useContext(authContext);
 
   const initialValues = {
-    id:"",
-    user_email,
     contact_name: "",
     contact_number: "",
     confirm_number: ""
@@ -20,16 +18,14 @@ function ContactForm() {
 
   const [formData, setFormData] = useState(initialValues);
 
-  const handleChange = (event) => {
+  const handleNumberChange = (event) => {
     const x = event.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
     event.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  let number2 = ""
-
-  const handleNameChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -40,25 +36,20 @@ function ContactForm() {
     return true 
   }
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    const id = contactLastId + 1
 
     const newContactItem = {
-      user_email,
+      user_email: user.email,
       user_id: user.id, 
       contact_name: formData.contact_name, 
       contact_number: formData.contact_number
     }
 
     if (formData.contact_name && checkNumber(formData.contact_number, formData.confirm_number)) {
-      // onSubmit(formData);
-      console.log("confirmed")
       axios.post("/api/v1/contactItems", {newContactItem}).then((res) => {
         newContactItem.id = res.data.id;
-        setContactItems([...contactItems, newContactItem])
+        setContactItems([...contactItems, newContactItem]);
         setFormData(initialValues);
       })
     }
@@ -75,7 +66,7 @@ function ContactForm() {
             name="contact_name"
             type="text"
             value={formData.contact_name}
-            onChange={handleNameChange}
+            onChange={handleChange}
             placeholder="Enter contact name..."
             className="inputBox"
           />
@@ -86,7 +77,7 @@ function ContactForm() {
             type="tel"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             value={formData.contact_number}
-            onChange={handleChange}
+            onChange={handleNumberChange}
             placeholder="Enter contact phone..."
             className="inputBox"
           />
@@ -97,7 +88,7 @@ function ContactForm() {
             type="tel"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             value={formData.confirm_number}
-            onChange={handleChange}
+            onChange={handleNumberChange}
             placeholder="Confirm contact phone..."
             className="inputBox"
           />

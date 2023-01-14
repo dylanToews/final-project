@@ -16,7 +16,7 @@ export default function AlarmListItem(props) {
     })
   };
 
-  // find current alarmItem, index, opposite active state
+  // find current alarmItem, index, and opposite active state
   const currentAlarmItem = alarmItems.find(alarm => alarm.id === id);
   const alarmItemIndex = alarmItems.map((alarm) => alarm.id).indexOf(id);
   const nextToggle = currentAlarmItem.active ? false : true;
