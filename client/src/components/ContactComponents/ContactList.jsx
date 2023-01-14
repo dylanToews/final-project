@@ -1,17 +1,13 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
-// import { authContext } from "../../providers/AuthProvider";
-
 import ContactListItem from "./ContactListItem";
 
 export default function ContactList() {
-
-  const { alarmItems, contactItems } = useContext(AlarmContext);
+  const { contactItems } = useContext(AlarmContext);
 
   const parsedContactItems = contactItems.map((contactItem) => (
     <ContactListItem key={contactItem.id} {... contactItem} />
   ))
-
 
   return (
     <section className="ContactList">

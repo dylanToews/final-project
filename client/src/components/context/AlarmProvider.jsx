@@ -1,10 +1,8 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
-import months from "../../data";
 import axios from "axios";
+import months from "../../data";
 import { authContext } from "../../providers/AuthProvider";
-// import Sound from "http://localhost:8080/audio/1673469843174.ogg";
 
-// const alarm = new Audio(Sound);
 export const AlarmContext = createContext();
 
 function ContextAlarm({ children }) {
