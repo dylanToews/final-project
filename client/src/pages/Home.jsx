@@ -29,12 +29,14 @@ function Home() {
         <section className="clock container">
           <div className="clock__container grid">
             <div className="clock__content grid">
-                <div className="card">
-                  <button onClick={setTestStart}>Test Notification</button>
-                  <DigitalClock />
-                  <AlarmOption/>
-                </div>
-                <AlarmList />
+
+              <div className="card">
+                <button onClick={setTestStart}>Test Notification</button>
+                <DigitalClock />
+                <AlarmOption/>
+              </div>
+              <AlarmList />
+
             </div>
           </div>
         </section>
