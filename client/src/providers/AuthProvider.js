@@ -4,10 +4,8 @@ import { createContext, useEffect, useState } from "react";
 export const authContext = createContext();
 
 export default function AuthProvider(props) {
-  // AUTH SET TRUE FOR DEV PURPOSES, so login not necessary on refresh
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(null); //{ email: "test@test.ca", id:1, name: "TEST USER" } previously used for testing
-
+  const [user, setUser] = useState(null); 
 
   //Perform login process for the user & save authID, etc
   const login = function (email, password) {
@@ -54,9 +52,8 @@ export default function AuthProvider(props) {
 
 
   // authContext will expose these items
-  const authData = { auth, setAuth, user, login, logout}; // userData
+  const authData = { auth, setAuth, user, login, logout}; 
 
-  // console.log(userData)
   return (
     <authContext.Provider value={authData}>
       {props.children}

@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import "../Contacts.css";
 
 export default function ContactListItem(props) {
-  const { contact_name, contact_number, id, user_email } = props;
+  const { contact_name, contact_number, id } = props;
   const { setContactItems } = useContext(AlarmContext);
 
   function formatPhoneNumber(phoneNumberString) {

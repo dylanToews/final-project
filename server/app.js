@@ -60,13 +60,6 @@ app.post("/upload", uploadAudio.single("sound"), (req, res) => {
   });
 });
 
-
-
-
-
-
-
-
 // TWILIO //
 
 app.post("/api/v1/sendSMS", (req, res) => {
@@ -76,13 +69,6 @@ app.post("/api/v1/sendSMS", (req, res) => {
 });
 
 ///ALARM ITEMS  - Functions///
-
-const getAlarmItems = (user_email) => {
-  const sortedByUser = alarmItems.filter(function (el) {
-    return el.user_email == user_email;
-  });
-  return Promise.resolve(sortedByUser);
-};
 
 const getAlarmDataByEmail = email => {
   return db.query(
@@ -105,11 +91,6 @@ const getAlarmDataByEmail = email => {
     `, [email]
   )
   .then((data) => data.rows)
-};
-
-const getAlarmItemsLastId = () => {
-  const lastId = alarmItems.length;
-  return Promise.resolve(lastId);
 };
 
 const addAlarmItem = (newAlarmItem) => {
@@ -144,27 +125,6 @@ const toggleAlarmActive = (id) => {
 app.get("/api/v1/alarmItems/:email", (req, res) => {
   getAlarmDataByEmail(req.params.email).then((alarmItems) => res.json(alarmItems));
 });
-
-
-
-
-// app.get("/api/v1/alarmItemLastId", (req, res) =>
-//   getAlarmItemsLastId().then((lastId) => res.json(lastId))
-// );
-
-
-// user_id instead of user_email
-// sound_id instead of sound_name
-// contact_id instead of contact_name
-
-// below wil not work - need to get IDs from frontend. try above^
-// newAlarmItem format coming from frontend:
-// user_email: "cheever@fakeemail.com"
-// sound_name: "Soft Wakeup"
-// contact_name: "me"
-// hour: "03"
-// minutes: "03"
-// amPmOption: "AM"
 
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
@@ -201,10 +161,6 @@ const getSoundItems = (user_email) => {
   .then((data) => data.rows);
 };
 
-const getSoundItemsLastId = () => {
-  const lastId = soundItems.length;
-  return Promise.resolve(lastId);
-};
 
 const addSoundItem = (newSoundItem) => {
   return db.query(`
@@ -234,9 +190,6 @@ app.get("/api/v1/soundItems/:email", (req, res) => {
   });
 });
 
-app.get("/api/v1/soundItemsLastId", (req, res) =>
-  getSoundItemsLastId().then((lastId) => res.json(lastId))
-);
 
 app.post("/api/v1/soundItems", (req, res) => {
   const { newSoundItem } = req.body;
@@ -272,12 +225,6 @@ const getFilesInDirectory = (dir) => {
   });
 }
 
-
-
-
-
-
-
 /// CONTACTS - FUNCTIONS ////////
 
 const getContactItems = (user_email) => {
@@ -303,13 +250,9 @@ const addContactItems = (newContactItem) => {
   `, [newContactItem.user_id, newContactItem.contact_name, newContactItem.contact_number]
   )
   .then((data) => data.rows[0])
-   // if this was DB call, return the created id
+   // returning the created contact id
 };
 
-const getContactItemsLastId = () => {
-  const lastId = contactItems.length;
-  return Promise.resolve(lastId);
-};
 
 const deleteContactItem = (id) => {
   return db
@@ -332,107 +275,10 @@ app.post("/api/v1/contactItems", (req, res) => {
     .then((data) => res.send(data))
 });
 
-app.get("/api/v1/contactItemsLastId", (req, res) => {
-  getContactItemsLastId().then((lastId) => res.json(lastId));
-});
 
 app.delete("/api/v1/contactItems/:id", (req, res) => {
-  //Delete function with query goes here !!
   const contactItemId = req.params.id;
   deleteContactItem(contactItemId).then((data) => res.send(data));
 });
-
-///Not Used Currently///
-
-
-// const getUsers = () => {
-//   const alarmsBuffer = {};
-//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
-
-//   const users = Object.keys(alarmsBuffer);
-//   return Promise.resolve(users);
-// };
-
-// // functions to handle axios posts coming from front end
-
-// const addTime = (time) => {
-//   alarmItems.push(time);
-
-//   return Promise.resolve("ok"); // if this was DB call, return the created id
-// };
-
-
-// const addNewSound = (newSound) => {
-//   soundItems.push(newSound);
-
-//   return Promise.resolve("ok sound");
-// };
-
-
-// app.get("/api/v1/sounds", (req, res) => {
-//   getSounds().then((Sounds) => res.json(Sounds));
-// });
-
-// app.get("/api/v1/users", (req, res) => {
-//   getUsers().then((users) => res.json(users));
-// });
-
-// app.get("/api/v1/times", (req, res) => {
-//   getTimes().then((times) => res.json(times));
-// });
-
-// app.post("/api/v1/times", (req, res) => {
-//   const { time } = req.body;
-//   addTime(time).then((data) => res.send(data));
-// });
-// const getTimes = () => {
-//   const alarmsBuffer = {};
-//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.time] = 0));
-
-//   const times = Object.keys(alarmsBuffer);
-//   return Promise.resolve(times);
-// };
-
-// const getContacts = () => {
-//   const alarmsBuffer = {};
-//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.contact] = 0));
-
-//   const contacts = Object.keys(alarmsBuffer);
-//   return Promise.resolve(contacts);
-// };
-
-// const getSounds = () => {
-//   const alarmsBuffer = {};
-//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.sound] = 0));
-
-//   const sounds = Object.keys(alarmsBuffer);
-//   return Promise.resolve(sounds);
-// };
-
-// const getUsers = () => {
-//   const alarmsBuffer = {};
-//   alarmItems.forEach((alarmItem) => (alarmsBuffer[alarmItem.user] = 0));
-
-//   const users = Object.keys(alarmsBuffer);
-//   return Promise.resolve(users);
-// };
-
-// const addTime = (time) => {
-//   alarmItems.push(time);
-
-//   return Promise.resolve("ok"); // if this was DB call, return the created id
-// };
-
-// // extra route needed for testing sound without breaking alarms
-// app.get("/api/v2/sounds", (req, res) => {
-//   getMockSounds().then((sounds) => res.json(sounds));
-// });
-
-// // extra route needed for testing sounds without breaking alarms
-// app.post("/api/v2/sounds", (req, res) => {
-//   const { newSound } = req.body;
-//   console.log(req.body);
-//   addNewSound(newSound).then((data) => res.send(data));
-// });
 
 module.exports = app;

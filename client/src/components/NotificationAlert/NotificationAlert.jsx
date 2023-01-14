@@ -6,26 +6,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export default function NotificationAlert(props) {
-  const { notification, setNotification, 
-    notificationDetails, 
-    soundItems } =
-    useContext(AlarmContext);
+  const { setNotification, notificationDetails } = useContext(AlarmContext);
   const { user } = useContext(authContext);
-  const [snooze, setSnooze] = useState([]);
-
-  // hard coded notification details object for testing purposes
-
 
   const twilioData = {
     contact_name: notificationDetails.contact_name,
     contact_number: notificationDetails.contact_number,
     user_name: user.name,
   };
-  const contactName = notificationDetails.contact_name;
 
   function snoozeAlarm() {
     console.log(`text sent to:${notificationDetails.contact_number}`)
-    setSnooze(notificationDetails)
     setTimeout(() => {
       setNotification(true)
     }, 30000);
@@ -72,10 +63,3 @@ export default function NotificationAlert(props) {
     
   );
 }
-
-
-    // <div>
-    //   <h1>THE ALARM HAS GONE OFF!!!!</h1>
-    //   <button onClick={acceptNotification}>ACCEPT</button>
-    //   <button onClick={snoozeAlarm}>SNOOZE</button>
-    // </div>

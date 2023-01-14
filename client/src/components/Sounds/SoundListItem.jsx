@@ -4,8 +4,8 @@ import axios from "axios"
 
 
 export default function SoundListItem(props) {
-  const { sound_name, sound_url, id, user_email } = props;
-  const { soundItems, setSoundItems } = useContext(AlarmContext);
+  const { sound_name, sound_url, id } = props;
+  const { setSoundItems } = useContext(AlarmContext);
 
   const removeSound = (id) => {
     const filtered = (current) =>
@@ -13,9 +13,7 @@ export default function SoundListItem(props) {
         return sound.id !== id;
       });
       setSoundItems(filtered)
-      console.log(id)
       axios.delete(`api/v1/soundItems/${id}`).then((res) => {
-      console.log("deleted sound with id:", id )
   })
   }
 
