@@ -48,7 +48,7 @@
   --text-color: hsl(var(--hue-color), 12%, 35%);
   --text-color-light: hsl(var(--hue-color), 12%, 65%);
   --white-color: #fff;
-  --body-color: hsl(var(--hue-color), 24%, 94%);
+  --body-color: hsl(var(--hue-color), 24%, 94%); 
 
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
