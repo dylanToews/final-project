@@ -147,27 +147,48 @@ function ContextAlarm({ children }) {
 
   ///function for adding new alarms. function is called within AlarmOption
   const addNewParams = (formData) => {
-
+    
+    
     const currentSoundItem = soundItems.filter( (e) => {
       return e.sound_name === formData.sound_name
     })
-
+    
     const currentContactItem = contactItems.filter( (e) => {
       return e.contact_name === formData.contact_name
     })
+    if (!formData.id) {
+
     const newAlarmItem = { 
-      user_id: user.id,
-      sound_id: currentSoundItem[0].id,
-      contact_id: currentContactItem[0].id,
-      ...formData
+        user_id: user.id,
+        sound_id: currentSoundItem[0].id,
+        contact_id: currentContactItem[0].id,
+        ...formData
+        
+      };
+      axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
+        newAlarmItem.id = res.data.id;
+        setAlarmItems([...alarmItems, newAlarmItem]);
+      });
+    } else {
+      const updatedAlarmItem = {
+        sound_id: currentSoundItem[0].id,
+        contact_id: currentContactItem[0].id,
+        ...formData
+      };
+      axios.put("/api/v1/alarmItems/update", { updatedAlarmItem }).then((res) => {
+        const copiedAlarmItems = [...alarmItems];
+        const filteredAlarmItems = copiedAlarmItems.filter((alarm) => {
+          return alarm.id !== formData.id;
+        });
+        console.log("server response: ", res.data);
+        setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
 
-    };
-    axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      newAlarmItem.id = res.data.id;
-      setAlarmItems([...alarmItems, newAlarmItem]);
-    });
-  };
 
+      })
+
+    }
+  }
+    
 
   return (
     <AlarmContext.Provider

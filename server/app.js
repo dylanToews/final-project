@@ -92,7 +92,7 @@ const addAlarmItem = (newAlarmItem) => {
   return db.query(`
     INSERT INTO alarms (user_id, sound_id, contact_id, hour, minute, am_pm) 
     VALUES ($1, $2, $3, $4, $5, $6)
-    RETURNING id
+    RETURNING id;
     `, [
         newAlarmItem.user_id, 
         newAlarmItem.sound_id, 
@@ -108,15 +108,36 @@ const addAlarmItem = (newAlarmItem) => {
 
 const deleteAlarmItem = (id) => {
   return db
-    .query("DELETE FROM alarms WHERE id = $1", [id])
+    .query("DELETE FROM alarms WHERE id = $1;", [id])
     .then((data) => data.rows)
     .catch((err) => console.error(err.stack));
 };
 
+const updateAlarmItem = (alarmUpdateParams) => {
+  return db
+    .query(`UPDATE alarms 
+    SET sound_id = $1, 
+      contact_id = $2, 
+      hour = $3, 
+      minute = $4, 
+      am_pm = $5 
+    WHERE id = $6
+    RETURNING *;
+    `, [
+        alarmUpdateParams.sound_id, 
+        alarmUpdateParams.contact_id,
+        alarmUpdateParams.hour,
+        alarmUpdateParams.minutes,
+        alarmUpdateParams.am_pm
+      ]
+  )
+  .then((data) => data.rows)
+}
+
 // update query to toggle active state true/false
 const toggleAlarmActive = (id) => {
   return db
-    .query(`UPDATE alarms SET active = NOT active WHERE id = $1`, [id])
+    .query(`UPDATE alarms SET active = NOT active WHERE id = $1;`, [id])
     .then((data) => data.rows)
     .catch((err) => console.error(err.stack));
 }
@@ -138,6 +159,12 @@ app.delete("/api/v1/alarmItems/:id", (req, res) => {
   deleteAlarmItem(alarmItemId).then((data) => res.send(data));
 });
 
+app.put("/api/v1/alarmItems/update"), (req, res) => {
+  const { updatedAlarmItem } = req.body;
+
+  updateAlarmItem(updatedAlarmItem).then((updatedAlarmInfo) => res.json(updatedAlarmInfo));
+}
+
 // PUT for toggle active / inactive
 app.put("/api/v1/alarmItems/:id", (req, res) => {
   const alarmItemId = req.params.id;
@@ -155,7 +182,7 @@ const getSoundItems = (user_email) => {
       sounds.file_name AS sound_url
       FROM sounds
       JOIN users ON sounds.user_id = users.id
-      WHERE users.email = $1
+      WHERE users.email = $1;
     `, [user_email]
   )
   .then((data) => data.rows);
@@ -165,7 +192,7 @@ const addSoundItem = (newSoundItem) => {
   return db.query(`
     INSERT INTO sounds (user_id, name, file_name)
     VALUES ($1, $2, $3)
-    RETURNING id
+    RETURNING id;
   `, [newSoundItem.user_id, newSoundItem.sound_name, newSoundItem.sound_url]
   )
   .then((data) => data.rows[0])
@@ -219,7 +246,7 @@ const getContactItems = (user_email) => {
       contacts.tel_number AS contact_number
       FROM contacts
       JOIN users ON contacts.user_id = users.id
-      WHERE users.email = $1
+      WHERE users.email = $1;
     `, [user_email]
     )
     .then((data) => data.rows);
@@ -229,7 +256,7 @@ const addContactItems = (newContactItem) => {
   return db.query(`
     INSERT INTO contacts (user_id, name, tel_number)
     VALUES ($1, $2, $3)
-    RETURNING id
+    RETURNING id;
   `, [newContactItem.user_id, newContactItem.contact_name, newContactItem.contact_number]
   )
   .then((data) => data.rows[0])
@@ -239,7 +266,7 @@ const addContactItems = (newContactItem) => {
 
 const deleteContactItem = (id) => {
   return db
-    .query("DELETE FROM contacts WHERE id = $1", [id])
+    .query("DELETE FROM contacts WHERE id = $1;", [id])
     .then((data) => data.rows)
     .catch((err) => console.error(err.stack));
 };

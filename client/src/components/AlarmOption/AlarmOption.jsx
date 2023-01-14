@@ -5,7 +5,8 @@ import "./AlarmOption.css";
 import "../Alarms.css";
 import "../Dropdowns.css";
 
-function AlarmOption() {
+function AlarmOption(props) {
+  const { id } = props;
 
   const {
     hasAlarm,
@@ -16,6 +17,7 @@ function AlarmOption() {
   } = useContext(AlarmContext);
 
   const initialValues = {
+    id: id || "",
     contact_name: "",
     sound_name: "",
     hour: "",
@@ -63,6 +65,7 @@ function AlarmOption() {
       //could add error state here -- populate error state if all forms are not selected
       ) {
       addNewParams(formData);
+      setFormData(initialValues);
     }
   };
 
