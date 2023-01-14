@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./AlarmOption.css";
 import "../Alarms.css";
+import "../Dropdowns.css";
 import { minutesNumber, hourNumber } from "../../func";
 import useSelect from "../../hooks/useSelect";
 import { AlarmContext } from "../context/AlarmProvider";
@@ -134,12 +135,12 @@ function AlarmOption(props) {
           </select>
         </div>
 
-        <select name="contact_name" value={formData.contact_name} onChange={handleChange}>
+        <select name="contact_name" value={formData.contact_name} onChange={handleChange} className="Selection">
           <option value="">Please Select A Contact</option>
           {parsedContacts}
         </select>
 
-        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange}>
+        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange} className="Selection">
           <option value="">Please Select A Sound</option>
           {parsedSounds}
         </select>
