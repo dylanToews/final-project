@@ -1,27 +1,20 @@
+// setup and middleware imports
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-
-///Mock Data///
-
-const contactItems = require("./data/mockContactsData");
-const alarmItems = require("./data/mockAlarmItemData");
-const soundItems = require("./data/mockSoundData");
-
-// Real Data //
-
-const db = require("./configs/db.config");
-
-//Multer middleware for file uploading
 const multer = require("multer");
 const fs = require("fs");
 const sendTwilio = require("./twilio/send_sms");
 
+// database
+const db = require("./configs/db.config");
 
+// express app
 const app = express();
 
+// start middleware and configs
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,19 +48,6 @@ app.use("/api/v1/sounds", soundsRouter);
 app.use("/api/v1/alarms", alarmsRouter);
 
 
-// first attempt at login routes
-// app.use("/login", (req, res) => {
-//   res.send({
-//     token: "test123",
-//   });
-// });
-
-// eventually write db queries in functions below, i think?
-
-// const getSomeDataExample = () => {
-//   return db.query("SELECT * FROM data")
-// }
-
 // Multer upload test
 app.post("/upload", uploadAudio.single("sound"), (req, res) => {
   res.send(req.file.filename);
@@ -90,10 +70,9 @@ app.post("/upload", uploadAudio.single("sound"), (req, res) => {
 // TWILIO //
 
 app.post("/api/v1/sendSMS", (req, res) => {
-  const twilioData = req.body.twilioData
+  const twilioData = req.body.twilioData;
   console.log("twilioData:", twilioData);
-
-  sendTwilio(twilioData)
+  sendTwilio(twilioData);
 });
 
 ///ALARM ITEMS  - Functions///
@@ -347,9 +326,10 @@ app.get("/api/v1/contactItems/:email", (req, res) => {
 
 app.post("/api/v1/contactItems", (req, res) => {
   const { newContactItem } = req.body;
+  const formattedNumber = newContactItem.contact_number.replace(/\D/g,'');
+  newContactItem.contact_number = formattedNumber;
   addContactItems(newContactItem)
     .then((data) => res.send(data))
-    .then(console.log(contactItems));
 });
 
 app.get("/api/v1/contactItemsLastId", (req, res) => {
