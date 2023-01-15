@@ -51,7 +51,7 @@ export default function NotificationAlert(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p>
+        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_name} alarm has gone off</p>
       </Modal.Body>
 
       <Modal.Footer>
