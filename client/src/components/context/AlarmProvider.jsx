@@ -25,6 +25,7 @@ function ContextAlarm({ children }) {
   const [soundItems, setSoundItems] = useState([])
   const [soundLastId, setSoundLastId] = useState([])
 
+  const [flip, setFlip] = useState(false)
 
   const testingNotificationDetails = {
     alarm_time: "11:37 AM:00",
@@ -264,6 +265,8 @@ function ContextAlarm({ children }) {
         setNotification,
         notificationDetails,
         setNotificationDetails,
+        flip,
+        setFlip
       }}
     >
       {children}

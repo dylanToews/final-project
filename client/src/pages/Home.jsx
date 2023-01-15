@@ -5,6 +5,7 @@ import DigitalClock from "../components/DigitalClock/DigitalClock";
 import Header from "../components/Header";
 import AlarmList from "../components/AlarmList/AlarmList";
 import { AlarmContext } from "../components/context/AlarmProvider";
+import ReactCardFlip from "react-card-flip";
 
 function Home() {
   const {
@@ -12,6 +13,8 @@ function Home() {
     setNotification,
     notificationDetails,
     setNotificationDetails,
+    flip,
+    setFlip
   } = useContext(AlarmContext);
 
   const testingNotificationDetails = {
@@ -21,6 +24,7 @@ function Home() {
     sound_name: "Test recording ",
     sound_url: "soft_wakeup.ogg",
   };
+
 
   function setTestStart() {
     setNotificationDetails(testingNotificationDetails);
@@ -35,7 +39,14 @@ function Home() {
           <div className="clock__container grid">
             <DigitalClock />
             <div className="card">
-              <AlarmOption />
+              <ReactCardFlip isFlipped={flip} flipDirection="vertical">
+                <>
+                  <button onClick={() => setFlip(!flip)}> Create New Alarm</button>
+                </>
+                <AlarmOption/>
+              </ReactCardFlip>
+
+              {/* <AlarmOption /> */}
             </div>
             <AlarmList />
             <button onClick={setTestStart} className="submit">

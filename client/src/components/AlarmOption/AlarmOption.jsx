@@ -4,7 +4,7 @@ import { minutesNumber, hourNumber } from "../../func";
 import useSelect from "../../hooks/useSelect";
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
-import "../../styles/Dropdowns.css"
+import "../../styles/Dropdowns.css";
 
 function AlarmOption() {
   const [hour, setHour] = useSelect("Hour");
@@ -20,6 +20,8 @@ function AlarmOption() {
     alarmItems,
     contactItems,
     soundItems,
+    flip,
+    setFlip,
   } = useContext(AlarmContext);
 
   const initialValues = {
@@ -28,14 +30,14 @@ function AlarmOption() {
     hour: "",
     minutes: "",
     am_pm: "",
-    active: true
+    active: true,
   };
 
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;  
-    setFormData({ ...formData, [name]: value});
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const parsedContacts = Object.values(
@@ -54,14 +56,13 @@ function AlarmOption() {
     ))
   );
 
-
   const setAlarm = (event) => {
-    if (hasAlarm) {
-      pauseAlarm();
-      setHasAlarm(false);
-      return;
-    }
-    setHasAlarm(true);
+    // if (hasAlarm) {
+    //   pauseAlarm();
+    //   setHasAlarm(false);
+    //   return;
+    // }
+    // setHasAlarm(true);
     setAlarmTime(`${hour}:${minutes} ${am_pm}`);
     if (
       formData.contact_name &&
@@ -70,8 +71,9 @@ function AlarmOption() {
       formData.minutes &&
       formData.am_pm
       //could add error state here -- populate error state if all forms are not selected
-      ) {
+    ) {
       addNewParams(formData);
+      setFlip(!flip);
     }
   };
 
@@ -123,24 +125,30 @@ function AlarmOption() {
           </select>
         </div>
         <div className="option-Container">
+          <select
+            name="contact_name"
+            value={formData.contact_name}
+            onChange={handleChange}
+            className="Selection"
+          >
+            <option value="">Please Select A Contact</option>
+            {parsedContacts}
+          </select>
 
-        <select name="contact_name" value={formData.contact_name} onChange={handleChange} className="Selection">
-          <option value="">Please Select A Contact</option>
-          {parsedContacts}
-        </select>
-
-        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange} className="Selection">
-          <option value="">Please Select A Sound</option>
-          {parsedSounds}
-        </select>
-        <div className="Contacts-Sound"></div>
-      </div>
-      <button
-        onClick={setAlarm}
-        className={`setAlarm-btn ${hasAlarm && "play"}`}
-      >
-        {hasAlarm ? "Clear Alarm" : "Set Alarm"}
-      </button>
+          <select
+            id="sound_id"
+            name="sound_name"
+            value={formData.sound_name}
+            onChange={handleChange}
+            className="Selection"
+          >
+            <option value="">Please Select A Sound</option>
+            {parsedSounds}
+          </select>
+          <div className="Contacts-Sound"></div>
+        </div>
+        <button onClick={setAlarm}>Set Alarm </button>
+        <button onClick={() => setFlip(!flip)}>Cancel</button>
       </div>
     </div>
   );

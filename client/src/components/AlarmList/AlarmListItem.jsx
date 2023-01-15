@@ -44,32 +44,8 @@ export default function AlarmListItem(props) {
 
   const editAlarm = (id) => {
     console.log("edit alarm")
-    return (
-      <div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
-      <Modal
-      show="true"
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-      <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Your Alarm Has Gone Off!!</Modal.Title>
-        </Modal.Header>
-  
-        <Modal.Body>
-          {/* <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p> */}
-          <AlarmOption/>
-        </Modal.Body>
-  
-        <Modal.Footer>
-        </Modal.Footer>
-      </Modal.Dialog>
-      </Modal>
-    </div>
-    )
+
+
   }
   return (
     <Container fluid>
@@ -80,11 +56,9 @@ export default function AlarmListItem(props) {
             Alarm Title
             </Col>
             <Col>
-            <Button
-                variant="outline-secondary"
-                onClick={() => editAlarm(id)}
-              >
-                Edit
+            <Button variant="outline-secondary" onClick={() => onToggle(id)}>
+                {active && "Active"}
+                {!active && "Inactive"}
               </Button>
             </Col>
           </Row>
@@ -94,10 +68,13 @@ export default function AlarmListItem(props) {
             </Col>
 
             <Col>
-              <Button variant="outline-secondary" onClick={() => onToggle(id)}>
-                {active && "ON"}
-                {!active && "OFF"}
+            <Button
+                variant="outline-secondary"
+                onClick={() => editAlarm(id)}
+              >
+                Edit
               </Button>
+         
             </Col>
           </Row>
 
