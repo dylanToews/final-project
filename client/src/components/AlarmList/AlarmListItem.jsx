@@ -1,16 +1,34 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import axios from "axios";
 import { AlarmContext } from "../context/AlarmProvider";
-import { Card, Button, Container, Row, Col, Accordion, Dropdown, Modal } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Container,
+  Row,
+  Col,
+  Accordion,
+  Dropdown,
+  Modal,
+} from "react-bootstrap";
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
 import AlarmOption from "../AlarmOption/AlarmOption";
 import ReactCardFlip from "react-card-flip";
 
 export default function AlarmListItem(props) {
-  const { id, hour, minutes, am_pm, contact_name, sound_name, active, alarm_name } =
-    props;
-  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip } = useContext(AlarmContext);
+  const {
+    id,
+    hour,
+    minutes,
+    am_pm,
+    contact_name,
+    sound_name,
+    active,
+    alarm_name,
+  } = props;
+  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip } =
+    useContext(AlarmContext);
 
   const removeAlarm = (id) => {
     const filtered = (current) =>
@@ -18,8 +36,7 @@ export default function AlarmListItem(props) {
         return alarm.id !== id;
       });
     setAlarmItems(filtered);
-    axios.delete(`api/v1/alarmItems/${id}`).then((res) => {
-    });
+    axios.delete(`api/v1/alarmItems/${id}`).then((res) => {});
   };
 
   // find current alarmItem
@@ -35,79 +52,92 @@ export default function AlarmListItem(props) {
     });
   };
 
+  const flipCard = (id) => {
+    return (e) => {
+      e.preventDefault();
+      let flipped = new Set(alarmFlip);
+      if (flipped.has(id)) {
+        flipped.delete(id);
+      } else {
+        flipped.add(id);
+      }
+      setAlarmFlip(flipped);
+    };
+  };
 
   const editAlarm = (id) => {
-    console.log("edit alarm")
-    setAlarmFlip(!alarmFlip)
-
-  }
+    console.log("edit alarm");
+    setAlarmFlip(!alarmFlip);
+  };
 
 
 
   return (
-    <ReactCardFlip isFlipped={alarmFlip} flipDirection="vertical">
-      <>
-    <Container fluid>
-      <Card className="mt-2 shadow-lg ">
-        <Card.Body>
-          <Row>
-            <Col className="display-10">
-            {alarm_name ? alarm_name : "(no label)"}
-            </Col>
-            <Col>
-            <Button variant="outline-secondary" onClick={() => onToggle(id)}>
-                {active && "Active"}
-                {!active && "Inactive"}
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Card.Title className="display-10">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
-            </Col>
+    <ReactCardFlip isFlipped={alarmFlip.has(id)} flipDirection="horizontal">
+      <Container fluid>
+        <Card className="mt-2 shadow-lg ">
+          <Card.Body>
+            <Row>
+              <Col className="display-10">
+                {alarm_name ? alarm_name : "(no label)"}
+              </Col>
+              <Col>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => onToggle(id)}
+                >
+                  {active && "Active"}
+                  {!active && "Inactive"}
+                </Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Card.Title className="display-10">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
+              </Col>
 
-            <Col>
-            <Button
-                variant="outline-secondary"
-                onClick={() => setAlarmFlip(!alarmFlip)}
-              >
-                Edit
-              </Button>
-         
-            </Col>
-          </Row>
+              <Col>
+                <Button variant="outline-secondary" onClick={flipCard(id)}>
+                  Edit
+                </Button>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col>
-              <Dropdown>
-                <Dropdown.Toggle className="wrapper-option select" id="dropdown-basic">
-                  Details
-                </Dropdown.Toggle>
+            <Row>
+              <Col>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    className="wrapper-option select"
+                    id="dropdown-basic"
+                  >
+                    Details
+                  </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
-                  <Dropdown.Item>
-                  Sound: {sound_name}
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Col>
-            <Col>
-              <Button
-                variant="outline-secondary"
-                onClick={() => removeAlarm(id)}
-              >
-                Delete
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
+                    <Dropdown.Item>Sound: {sound_name}</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
+              <Col>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => removeAlarm(id)}
+                >
+                  Delete
+                </Button>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </Container>
+      <Card>
+        <AlarmOption flipCard={flipCard} id={id} />
+        <Button variant="outline-secondary" onClick={flipCard(id)}>
+          Save Edit
+        </Button>
       </Card>
-    </Container>
-    </>
-    <AlarmOption/>
     </ReactCardFlip>
-
   );
 }
 

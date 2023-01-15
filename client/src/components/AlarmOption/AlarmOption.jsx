@@ -7,7 +7,7 @@ import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
 
 function AlarmOption(props) {
-  const { id } = props;
+  const { id, flipCard, status } = props;
 
   const {
     hasAlarm,
@@ -53,7 +53,7 @@ function AlarmOption(props) {
   );
 
   const setAlarm = (event) => {
-
+    console.log(status)
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -63,8 +63,12 @@ function AlarmOption(props) {
       //could add error state here -- populate error state if all forms are not selected
     ) {
       addNewParams(formData);
-      setFlip(!flip);
       setFormData(initialValues);
+      if(!flipCard){
+      setFlip(!flip)}
+      if(flipCard){
+        flipCard(id)
+      }
     }
   };
 
