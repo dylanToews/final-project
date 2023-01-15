@@ -22,9 +22,9 @@ export default function ContactListItem(props) {
         return contact.id !== id;
       });
       setContactItems(filtered)
-      console.log(id)
+
       axios.delete(`api/v1/contactItems/${id}`).then((res) => {
-      console.log("deleted contact with id:", id )
+
   })
 };
 

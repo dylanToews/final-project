@@ -136,7 +136,7 @@ function ContextAlarm({ children }) {
     // alarm logic - to be moved
 
     if (testNotification) {
-      console.log("alarm has occured");
+
       setNotification(true);
     }
   }, [testNotification]);
@@ -157,6 +157,7 @@ function ContextAlarm({ children }) {
         contact_id: currentContactItem[0].id,
         ...formData,
       };
+
       axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
         newAlarmItem.id = res.data.id;
         setAlarmItems([...alarmItems, newAlarmItem]);

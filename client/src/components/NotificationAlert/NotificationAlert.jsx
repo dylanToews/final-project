@@ -17,20 +17,20 @@ export default function NotificationAlert(props) {
   };
 
   function snoozeAlarm() {
-    console.log(`text sent to:${notificationDetails.contact_number}`)
+
     setTimeout(() => {
       setNotification(true)
     }, 30000);
     setNotification(false);
     axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
-      console.log(`text sent to ${twilioData}`);
+ 
     });
     return;
   }
 
   function acceptNotification() {
     setNotification(false);
-    console.log("accept button pressed");
+
     return;
   }
 
