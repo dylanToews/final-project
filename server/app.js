@@ -46,7 +46,7 @@ const alarmsRouter = require("./routes/alarms");
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/contacts", contactsRouter);
 app.use("/api/v1/sounds", soundsRouter);
-app.use("/api/v1/alarms", alarmsRouter);
+// app.use("/api/v1/alarms", alarmsRouter);
 
 
 // MULTER // for audio upload
@@ -153,6 +153,14 @@ app.get("/api/v1/alarmItems/:email", (req, res) => {
   getAlarmDataByEmail(req.params.email).then((alarmItems) => res.json(alarmItems));
 });
 
+app.put("/api/v1/alarmItems/edit", (req, res) => {
+  console.log ("inside server?");
+  const { updatedAlarmItem } = req.body;
+  console.log("request body for update: ", updatedAlarmItem)
+
+  updateAlarmItem(updatedAlarmItem).then((updatedAlarmInfo) => res.json(updatedAlarmInfo));
+});
+
 app.post("/api/v1/alarmItems", (req, res) => {
   const { newAlarmItem } = req.body;
 
@@ -164,11 +172,6 @@ app.delete("/api/v1/alarmItems/:id", (req, res) => {
   deleteAlarmItem(alarmItemId).then((data) => res.send(data));
 });
 
-app.put("/api/v1/alarmItems/update"), (req, res) => {
-  const { updatedAlarmItem } = req.body;
-
-  updateAlarmItem(updatedAlarmItem).then((updatedAlarmInfo) => res.json(updatedAlarmInfo));
-}
 
 // PUT for toggle active / inactive
 app.put("/api/v1/alarmItems/:id", (req, res) => {

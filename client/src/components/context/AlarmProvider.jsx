@@ -173,15 +173,14 @@ function ContextAlarm({ children }) {
         contact_id: currentContactItem[0].id,
         ...formData,
       };
-      console.log(updatedAlarmItem);
-      axios
-        .put("/api/v1/alarmItems/update", { updatedAlarmItem })
+
+      axios.put("/api/v1/alarmItems/edit", { updatedAlarmItem })
         .then((res) => {
+
           const copiedAlarmItems = [...alarmItems];
           const filteredAlarmItems = copiedAlarmItems.filter((alarm) => {
             return alarm.id !== formData.id;
           });
-          console.log("server response: ", res.data);
           setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
         });
     }
