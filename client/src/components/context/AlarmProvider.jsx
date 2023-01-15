@@ -170,6 +170,7 @@ function ContextAlarm({ children }) {
         contact_id: currentContactItem[0].id,
         ...formData,
       };
+      console.log(updatedAlarmItem);
       axios
         .put("/api/v1/alarmItems/update", { updatedAlarmItem })
         .then((res) => {

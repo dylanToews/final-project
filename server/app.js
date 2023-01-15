@@ -122,15 +122,18 @@ const updateAlarmItem = (alarmUpdateParams) => {
       contact_id = $2, 
       hour = $3, 
       minute = $4, 
-      am_pm = $5 
-    WHERE id = $6
+      am_pm = $5,
+      name = $6
+    WHERE id = $7
     RETURNING *;
     `, [
         alarmUpdateParams.sound_id, 
         alarmUpdateParams.contact_id,
         alarmUpdateParams.hour,
         alarmUpdateParams.minutes,
-        alarmUpdateParams.am_pm
+        alarmUpdateParams.am_pm,
+        alarmUpdateParams.alarm_name,
+        alarmUpdateParams.id
       ]
   )
   .then((data) => data.rows)
