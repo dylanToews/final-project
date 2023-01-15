@@ -5,6 +5,7 @@ import AlarmListItem from "./AlarmListItem";
 export default function AlarmList(props) {
   const { alarmItems } = useContext(AlarmContext);
 
+
   const parsedAlarmItems = alarmItems.map((alarmItem) => (
     <AlarmListItem key={alarmItem.id} {... alarmItem} />
   ))

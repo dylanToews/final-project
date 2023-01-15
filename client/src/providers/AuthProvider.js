@@ -12,7 +12,6 @@ export default function AuthProvider(props) {
     axios.get(`/api/v1/users/${email}`)
       .then(res => res.data.user)
       .then(user => {
-        console.log("server response: ", user);
         if (user) {
           setAuth(true);
           setUser({ 
@@ -28,9 +27,7 @@ export default function AuthProvider(props) {
 
   useEffect(() => {
     const data = window.localStorage.getItem("BASIC_USER_AUTH");
-    console.log(data);
     const prevUser = JSON.parse(data);
-    console.log(prevUser);
     if (prevUser) {
       login(prevUser.email, prevUser.password);
 
