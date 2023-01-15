@@ -24,7 +24,15 @@ function NavbarComponent() {
       variant="dark"
       className="p-3 "
     >
-      <Navbar.Brand className="me-auto">Hello {user.name}</Navbar.Brand>
+      <Navbar.Brand className="me-auto">
+        <img
+          src={require('../startle.png')}
+          width="50"
+          height="50"
+          className="d-inline-block align-top"
+          alt="Startle logo"
+        />
+      </Navbar.Brand>
 
       <Button
         variant="outline-secondary"
@@ -54,9 +62,6 @@ function NavbarComponent() {
           </Nav.Link>
           <Nav.Link as={Link} to="/About">
             About
-          </Nav.Link>
-          <Nav.Link as={Link} to="/Login_Register">
-            Login{" "}
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
