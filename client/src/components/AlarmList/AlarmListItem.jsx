@@ -5,12 +5,12 @@ import { Card, Button, Container, Row, Col, Accordion, Dropdown, Modal } from "r
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
 import AlarmOption from "../AlarmOption/AlarmOption";
-
+import ReactCardFlip from "react-card-flip";
 
 export default function AlarmListItem(props) {
   const { id, user, hour, minutes, am_pm, contact_name, sound_name, active } =
     props;
-  const { alarmItems, setAlarmItems } = useContext(AlarmContext);
+  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip } = useContext(AlarmContext);
 
   const removeAlarm = (id) => {
     const filtered = (current) =>
@@ -38,13 +38,15 @@ export default function AlarmListItem(props) {
 
   const editAlarm = (id) => {
     console.log("edit alarm")
-
+    setAlarmFlip(!alarmFlip)
 
   }
 
 
 
   return (
+    <ReactCardFlip isFlipped={alarmFlip} flipDirection="vertical">
+      <>
     <Container fluid>
       <Card className="mt-2 shadow-lg ">
         <Card.Body>
@@ -67,7 +69,7 @@ export default function AlarmListItem(props) {
             <Col>
             <Button
                 variant="outline-secondary"
-                onClick={() => editAlarm(id)}
+                onClick={() => setAlarmFlip(!alarmFlip)}
               >
                 Edit
               </Button>
@@ -102,6 +104,10 @@ export default function AlarmListItem(props) {
         </Card.Body>
       </Card>
     </Container>
+    </>
+    <AlarmOption/>
+    </ReactCardFlip>
+
   );
 }
 

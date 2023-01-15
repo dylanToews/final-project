@@ -19,6 +19,7 @@ function ContextAlarm({ children }) {
   const [contactItems, setContactItems] = useState([]);
   const [soundItems, setSoundItems] = useState([]);
   const [flip, setFlip] = useState(false);
+  const [alarmFlip, setAlarmFlip] = useState(false);
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -205,6 +206,8 @@ function ContextAlarm({ children }) {
         setNotificationDetails,
         flip,
         setFlip,
+        alarmFlip, 
+        setAlarmFlip,
       }}
     >
       {children}
