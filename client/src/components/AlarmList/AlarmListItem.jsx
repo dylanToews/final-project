@@ -27,7 +27,7 @@ export default function AlarmListItem(props) {
     active,
     alarm_name,
   } = props;
-  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip } =
+  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions } =
     useContext(AlarmContext);
 
   const removeAlarm = (id) => {
@@ -52,7 +52,8 @@ export default function AlarmListItem(props) {
     });
   };
 
-  const flipCard = (id) => {
+  const flipCard = (id, save) => {
+    
     return (e) => {
       e.preventDefault();
       let flipped = new Set(alarmFlip);
@@ -62,13 +63,12 @@ export default function AlarmListItem(props) {
         flipped.add(id);
       }
       setAlarmFlip(flipped);
+      if(save === true){
+      setEditOptions(true)
+      }
     };
   };
 
-  const editAlarm = (id) => {
-    console.log("edit alarm");
-    setAlarmFlip(!alarmFlip);
-  };
 
 
 
@@ -132,9 +132,12 @@ export default function AlarmListItem(props) {
         </Card>
       </Container>
       <Card>
-        <AlarmOption flipCard={flipCard} id={id} />
-        <Button variant="outline-secondary" onClick={flipCard(id)}>
+        <AlarmOption flipCard={flipCard} id={id} status={"edit"} />
+        <Button variant="outline-secondary" onClick={flipCard(id, true)}>
           Save Edit
+        </Button>
+        <Button variant="outline-secondary" onClick={flipCard(id)}>
+          Cancel
         </Button>
       </Card>
     </ReactCardFlip>
