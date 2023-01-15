@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import "./DigitalClock.css";
+import "../../styles/Cards.css";
+import "../../styles/DigitalClock.css"
 import { AlarmContext } from "../context/AlarmProvider";
 
 function DigitalClock() {

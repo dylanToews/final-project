@@ -1,5 +1,5 @@
-import "../About.css";
 
+import { Card, Button, Container, Row, Col, Accordion } from "react-bootstrap";
 function About() {
 
 

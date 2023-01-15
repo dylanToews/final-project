@@ -4,6 +4,7 @@ import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import AlarmOption from "../AlarmOption/AlarmOption";
 
 export default function NotificationAlert(props) {
   const { setNotification, notificationDetails } = useContext(AlarmContext);

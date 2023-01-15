@@ -1,6 +1,6 @@
 import { formatMinutes, formatSeconds } from "../../helpers/soundHelpers";
 
-import "./recorder-controls.css"
+import "../../styles/recorder-controls.css"
 
 export default function RecorderControls({ recorderState, handlers}) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;

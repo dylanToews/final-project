@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { minutesNumber, hourNumber } from "../../func";
-import "./AlarmOption.css";
-import "../Alarms.css";
-import "../Dropdowns.css";
+// import useSelect from "../../hooks/useSelect";
+import "../../styles/AlarmOption.css";
+import "../../styles/Alarms.css";
+import "../../styles/Dropdowns.css";
 
 function AlarmOption(props) {
   const { id } = props;
@@ -14,6 +15,8 @@ function AlarmOption(props) {
     addNewParams,
     contactItems,
     soundItems,
+    flip,
+    setFlip,
   } = useContext(AlarmContext);
 
   const initialValues = {
@@ -23,14 +26,14 @@ function AlarmOption(props) {
     hour: "",
     minutes: "",
     am_pm: "",
-    active: true
+    active: true,
   };
 
   const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;  
-    setFormData({ ...formData, [name]: value});
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const parsedContacts = Object.values(
@@ -49,13 +52,14 @@ function AlarmOption(props) {
     ))
   );
 
-
   const setAlarm = (event) => {
-    if (hasAlarm) {
-      setHasAlarm(false);
-      return;
-    }
-    setHasAlarm(true);
+    // if (hasAlarm) {
+    //   pauseAlarm();
+    //   setHasAlarm(false);
+    //   return;
+    // }
+    // setHasAlarm(true);
+    // setAlarmTime(`${hour}:${minutes} ${am_pm}`);
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -63,8 +67,9 @@ function AlarmOption(props) {
       formData.minutes &&
       formData.am_pm
       //could add error state here -- populate error state if all forms are not selected
-      ) {
+    ) {
       addNewParams(formData);
+      setFlip(!flip);
       setFormData(initialValues);
     }
   };
@@ -116,24 +121,32 @@ function AlarmOption(props) {
             <option value="PM">Pm</option>
           </select>
         </div>
+        <div className="option-Container">
+          <select
+            name="contact_name"
+            value={formData.contact_name}
+            onChange={handleChange}
+            className="Selection"
+          >
+            <option value="">Please Select A Contact</option>
+            {parsedContacts}
+          </select>
 
-        <select name="contact_name" value={formData.contact_name} onChange={handleChange} className="Selection">
-          <option value="">Please Select A Contact</option>
-          {parsedContacts}
-        </select>
-
-        <select id="sound_id" name="sound_name" value={formData.sound_name}  onChange={handleChange} className="Selection">
-          <option value="">Please Select A Sound</option>
-          {parsedSounds}
-        </select>
-        <div className="Contacts-Sound"></div>
+          <select
+            id="sound_id"
+            name="sound_name"
+            value={formData.sound_name}
+            onChange={handleChange}
+            className="Selection"
+          >
+            <option value="">Please Select A Sound</option>
+            {parsedSounds}
+          </select>
+          <div className="Contacts-Sound"></div>
+        </div>
+        <button onClick={setAlarm}>Set Alarm </button>
+        <button onClick={() => setFlip(!flip)}>Cancel</button>
       </div>
-      <button
-        onClick={setAlarm}
-        className={`setAlarm-btn ${hasAlarm && "play"}`}
-      >
-        {hasAlarm ? "Clear Alarm" : "Set Alarm"}
-      </button>
     </div>
   );
 }

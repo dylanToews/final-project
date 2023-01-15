@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "../Nav.css";
+// import "../../styles/Nav.css";
 import { Link } from "react-router-dom";
 import { authContext } from "../providers/AuthProvider";
 
@@ -29,8 +29,8 @@ function NavbarComponent() {
       <Button
         variant="outline-secondary"
         onClick={logout}
-        className="mt-auto"
-        className="me-2"
+        className="mt-auto me-2"
+        // className="me-2"
       >
         Logout
       </Button>

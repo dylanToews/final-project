@@ -17,7 +17,8 @@ function ContextAlarm({ children }) {
 
   const [alarmItems, setAlarmItems] = useState([]);
   const [contactItems, setContactItems] = useState([]);
-  const [soundItems, setSoundItems] = useState([])
+  const [soundItems, setSoundItems] = useState([]);
+  const [flip, setFlip] = useState(false);
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -34,31 +35,32 @@ function ContextAlarm({ children }) {
     contact_name: "",
     contact_number: "",
     alarm_time: "",
-    active: null
+    active: null,
   };
-
 
   function checkAlarm() {
     Object.values(alarmItems).forEach((alarmItem) => {
       const alarmSeconds = "00";
-      const currentSoundItem = soundItems.filter( (e) => {
-        return e.sound_name === alarmItem.sound_name
-      })
+      const currentSoundItem = soundItems.filter((e) => {
+        return e.sound_name === alarmItem.sound_name;
+      });
 
-      const currentContactItem = contactItems.filter(function (e) { 
-        return e.contact_name === alarmItem.contact_name
-      })
+      const currentContactItem = contactItems.filter(function (e) {
+        return e.contact_name === alarmItem.contact_name;
+      });
       if (
         `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}` ===
-        `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}` && alarmItem.active === true
+          `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}` &&
+        alarmItem.active === true
       ) {
         testNotification = true;
 
         notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}`;
         notificationDetailsObject.contact_name = alarmItem.contact_name;
-        notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
+        notificationDetailsObject.contact_number =
+          currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
-        notificationDetailsObject.sound_url = currentSoundItem[0].sound_url
+        notificationDetailsObject.sound_url = currentSoundItem[0].sound_url;
       }
     });
   }
@@ -72,32 +74,26 @@ function ContextAlarm({ children }) {
   }, [notificationDetailsObject.alarm_time]);
 
   const user_email = user.email;
-  
+
   ///Axios calls and a bit of alarm logic
 
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
       axios.get(`/api/v1/contactItems/${user_email}`),
-      axios.get(`/api/v1/soundItems/${user_email}`)
+      axios.get(`/api/v1/soundItems/${user_email}`),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
         contactItems: responses[1].data,
-        soundItems: responses[2].data
+        soundItems: responses[2].data,
       }))
-      .then(
-        ({
-          alarmItems,
-          contactItems,
-          soundItems
-        }) => {
-          setAlarmItems(alarmItems);
-          setContactItems(contactItems);
-          setSoundItems(soundItems);
-        }
-      );
+      .then(({ alarmItems, contactItems, soundItems }) => {
+        setAlarmItems(alarmItems);
+        setContactItems(contactItems);
+        setSoundItems(soundItems);
+      });
 
     // clock functionality logic
 
@@ -105,9 +101,9 @@ function ContextAlarm({ children }) {
       let date = new Date();
 
       const addZero = (t) => {
-        return ((t < 10) ? '0'+t : t);
-      }
-      let sec = date.getSeconds()
+        return t < 10 ? "0" + t : t;
+      };
+      let sec = date.getSeconds();
       let HH = date.getHours(),
         MM = date.getMinutes(),
         SS = addZero(sec),
@@ -147,23 +143,19 @@ function ContextAlarm({ children }) {
 
   ///function for adding new alarms. function is called within AlarmOption
   const addNewParams = (formData) => {
-    
-    
-    const currentSoundItem = soundItems.filter( (e) => {
-      return e.sound_name === formData.sound_name
-    })
-    
-    const currentContactItem = contactItems.filter( (e) => {
-      return e.contact_name === formData.contact_name
-    })
-    if (!formData.id) {
+    const currentSoundItem = soundItems.filter((e) => {
+      return e.sound_name === formData.sound_name;
+    });
 
-    const newAlarmItem = { 
+    const currentContactItem = contactItems.filter((e) => {
+      return e.contact_name === formData.contact_name;
+    });
+    if (!formData.id) {
+      const newAlarmItem = {
         user_id: user.id,
         sound_id: currentSoundItem[0].id,
         contact_id: currentContactItem[0].id,
-        ...formData
-        
+        ...formData,
       };
       axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
         newAlarmItem.id = res.data.id;
@@ -173,22 +165,20 @@ function ContextAlarm({ children }) {
       const updatedAlarmItem = {
         sound_id: currentSoundItem[0].id,
         contact_id: currentContactItem[0].id,
-        ...formData
+        ...formData,
       };
-      axios.put("/api/v1/alarmItems/update", { updatedAlarmItem }).then((res) => {
-        const copiedAlarmItems = [...alarmItems];
-        const filteredAlarmItems = copiedAlarmItems.filter((alarm) => {
-          return alarm.id !== formData.id;
+      axios
+        .put("/api/v1/alarmItems/update", { updatedAlarmItem })
+        .then((res) => {
+          const copiedAlarmItems = [...alarmItems];
+          const filteredAlarmItems = copiedAlarmItems.filter((alarm) => {
+            return alarm.id !== formData.id;
+          });
+          console.log("server response: ", res.data);
+          setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
         });
-        console.log("server response: ", res.data);
-        setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
-
-
-      })
-
     }
-  }
-    
+  };
 
   return (
     <AlarmContext.Provider
@@ -213,6 +203,8 @@ function ContextAlarm({ children }) {
         setNotification,
         notificationDetails,
         setNotificationDetails,
+        flip,
+        setFlip,
       }}
     >
       {children}
