@@ -21,7 +21,7 @@ function ContextAlarm({ children }) {
   
   const [flip, setFlip] = useState(false);
   const [alarmFlip, setAlarmFlip] = useState(new Set());
-  // const [alarmFlipId, setAlarmFlipId] = useState(new Set())
+  const [editOptions, setEditOptions] = useState(false)
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -41,6 +41,10 @@ function ContextAlarm({ children }) {
     active: null,
     alarm_name: ""
   };
+
+  function orderedAlarms(alarmItems) {
+    // console.log(Object.values(alarmItems))
+  }
 
   function checkAlarm() {
     Object.values(alarmItems).forEach((alarmItem) => {
@@ -72,7 +76,10 @@ function ContextAlarm({ children }) {
 
   checkAlarm();
 
+
+
   useEffect(() => {
+    // orderedAlarms(alarmItems)
     if (notificationDetailsObject.alarm_time) {
       setNotificationDetails(notificationDetailsObject);
     }
@@ -213,6 +220,8 @@ function ContextAlarm({ children }) {
         setFlip,
         alarmFlip, 
         setAlarmFlip,
+        editOptions, 
+        setEditOptions,
      
       }}
     >

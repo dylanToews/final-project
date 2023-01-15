@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { minutesNumber, hourNumber } from "../../func";
 import AlarmListItem from "../AlarmList/AlarmListItem";
-
+import { Button } from "react-bootstrap";
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
@@ -17,6 +17,8 @@ function AlarmOption(props) {
     soundItems,
     flip,
     setFlip,
+    editOptions,
+    setEditOptions,
   } = useContext(AlarmContext);
 
   const initialValues = {
@@ -54,7 +56,6 @@ function AlarmOption(props) {
   );
 
   const setAlarm = (event) => {
-    console.log(status)
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -65,19 +66,37 @@ function AlarmOption(props) {
     ) {
       addNewParams(formData);
       setFormData(initialValues);
-      if(!flipCard){
-      setFlip(!flip)}
-      if(flipCard){
-        flipCard(id)
+      if (!flipCard) {
+        setFlip(!flip);
       }
     }
   };
+
+  let editStatus = false;
+
+  if (editOptions === true) {
+    editStatus = true;
+    setAlarm();
+  }
+
+  useEffect(() => {
+    if (editStatus === true) {
+      setEditOptions(false);
+    }
+  }, [editStatus]);
 
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
         <div className="name-row">
-          <input type="text" name="alarm_name" required maxLength="28" size="30" onChange={handleChange}/>
+          <input
+            type="text"
+            name="alarm_name"
+            required
+            maxLength="28"
+            size="30"
+            onChange={handleChange}
+          />
         </div>
         <div className="time-row">
           <select
@@ -146,8 +165,17 @@ function AlarmOption(props) {
           </select>
           <div className="Contacts-Sound"></div>
         </div>
-        <button onClick={setAlarm}>Set Alarm </button>
-        <button onClick={() => setFlip(!flip)}>Cancel</button>
+
+        {flip && (
+          <Button variant="outline-secondary" onClick={setAlarm}>
+            Set New Alarm
+          </Button>
+        )}
+        {flip && (
+          <Button variant="outline-secondary" onClick={() => setFlip(!flip)}>
+            Cancel
+          </Button>
+        )}
       </div>
     </div>
   );

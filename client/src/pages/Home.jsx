@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import AlarmList from '../components/AlarmList/AlarmList';
 import { AlarmContext } from "../components/context/AlarmProvider";
 import ReactCardFlip from "react-card-flip";
-
+import {Button} from "react-bootstrap"
 function Home() {
   const {
     setNotification,
@@ -38,7 +38,10 @@ function Home() {
             <div className="card">
               <ReactCardFlip isFlipped={flip} flipDirection="vertical">
                 <>
-                  <button onClick={() => setFlip(!flip)}> Create New Alarm</button>
+                <Button variant="outline-secondary" onClick={() => setFlip(!flip)}>
+                  Create New Alarm
+                </Button>
+              
                 </>
                 <AlarmOption/>
               </ReactCardFlip>
