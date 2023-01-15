@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { minutesNumber, hourNumber } from "../../func";
-// import useSelect from "../../hooks/useSelect";
+
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
@@ -11,7 +11,6 @@ function AlarmOption(props) {
 
   const {
     hasAlarm,
-    setHasAlarm,
     addNewParams,
     contactItems,
     soundItems,
@@ -21,6 +20,7 @@ function AlarmOption(props) {
 
   const initialValues = {
     id: id || "",
+    alarm_name: "",
     contact_name: "",
     sound_name: "",
     hour: "",
@@ -53,13 +53,7 @@ function AlarmOption(props) {
   );
 
   const setAlarm = (event) => {
-    // if (hasAlarm) {
-    //   pauseAlarm();
-    //   setHasAlarm(false);
-    //   return;
-    // }
-    // setHasAlarm(true);
-    // setAlarmTime(`${hour}:${minutes} ${am_pm}`);
+
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -77,6 +71,9 @@ function AlarmOption(props) {
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
+        <div className="name-row">
+          <input type="text" name="alarm_name" required maxLength="28" size="30" onChange={handleChange}/>
+        </div>
         <div className="time-row">
           <select
             name="hour"

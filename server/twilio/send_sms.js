@@ -11,11 +11,11 @@ const client = require('twilio')(accountSid, authToken);
 
 
 const sendTwilio = (twilioData) =>{
-  console.log("insidefunction",twilioData)
+
 
     client.messages
     .create({
-      body: `Hello ${twilioData.contact_number}! This is a message from Startle to inform you that ${twilioData.user_name} has snoozed through their alarm. Please use this information to convince ${twilioData.user_name} they need to examine their sleeping habits. `,
+      body: `Hello ${twilioData.contact_name}! This is a message from Startle to inform you that ${twilioData.user_name} has snoozed through their "${twilioData.alarm_name}" alarm. Please use this information to convince ${twilioData.user_name} they need to examine their sleeping habits. `,
       from: process.env.SEND_FROM_NUMBER,
       to: `+1${twilioData.contact_number}`
     })

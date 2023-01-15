@@ -37,6 +37,7 @@ function ContextAlarm({ children }) {
     contact_number: "",
     alarm_time: "",
     active: null,
+    alarm_name: ""
   };
 
   function checkAlarm() {
@@ -62,6 +63,7 @@ function ContextAlarm({ children }) {
           currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
         notificationDetailsObject.sound_url = currentSoundItem[0].sound_url;
+        notificationDetailsObject.alarm_name = alarmItem.alarm_name
       }
     });
   }
@@ -137,7 +139,7 @@ function ContextAlarm({ children }) {
     // alarm logic - to be moved
 
     if (testNotification) {
-      console.log("alarm has occured");
+
       setNotification(true);
     }
   }, [testNotification]);
@@ -158,6 +160,7 @@ function ContextAlarm({ children }) {
         contact_id: currentContactItem[0].id,
         ...formData,
       };
+
       axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
         newAlarmItem.id = res.data.id;
         setAlarmItems([...alarmItems, newAlarmItem]);

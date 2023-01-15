@@ -8,7 +8,7 @@ import AlarmOption from "../AlarmOption/AlarmOption";
 import ReactCardFlip from "react-card-flip";
 
 export default function AlarmListItem(props) {
-  const { id, user, hour, minutes, am_pm, contact_name, sound_name, active } =
+  const { id, hour, minutes, am_pm, contact_name, sound_name, active, alarm_name } =
     props;
   const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip } = useContext(AlarmContext);
 
@@ -52,7 +52,7 @@ export default function AlarmListItem(props) {
         <Card.Body>
           <Row>
             <Col className="display-10">
-            Alarm Title
+            {alarm_name ? alarm_name : "(no label)"}
             </Col>
             <Col>
             <Button variant="outline-secondary" onClick={() => onToggle(id)}>

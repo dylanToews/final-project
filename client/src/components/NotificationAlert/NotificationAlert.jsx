@@ -14,23 +14,24 @@ export default function NotificationAlert(props) {
     contact_name: notificationDetails.contact_name,
     contact_number: notificationDetails.contact_number,
     user_name: user.name,
+    alarm_name: notificationDetails.alarm_name
   };
 
   function snoozeAlarm() {
-    console.log(`text sent to:${notificationDetails.contact_number}`)
+
     setTimeout(() => {
       setNotification(true)
     }, 30000);
     setNotification(false);
     axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
-      console.log(`text sent to ${twilioData}`);
+ 
     });
     return;
   }
 
   function acceptNotification() {
     setNotification(false);
-    console.log("accept button pressed");
+
     return;
   }
 
@@ -50,7 +51,7 @@ export default function NotificationAlert(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_time} alarm has gone off</p>
+        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_name} alarm has gone off</p>
       </Modal.Body>
 
       <Modal.Footer>
