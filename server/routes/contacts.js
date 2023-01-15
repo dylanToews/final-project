@@ -5,7 +5,7 @@ const contacts = require('../db/queries/contacts');
 /* GET ALL contacts */
 router.get("/", (req, res) => {
   contacts.getAllContacts().then(data => {
-    console.log(data);
+
     res.json({contacts: data});
   })
 });
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   userID = req.params.id;
   contacts.getContactsForUser(userID).then(data => {
-    console.log(data);
+
     res.json({contacts: data});
   })
 

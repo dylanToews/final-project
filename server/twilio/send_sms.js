@@ -11,7 +11,7 @@ const client = require('twilio')(accountSid, authToken);
 
 
 const sendTwilio = (twilioData) =>{
-  console.log("insidefunction",twilioData)
+
 
     client.messages
     .create({
