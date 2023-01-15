@@ -11,6 +11,7 @@ import {
   Dropdown,
   Modal,
 } from "react-bootstrap";
+import {ToggleSlider} from "react-toggle-slider";
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
 import AlarmOption from "../AlarmOption/AlarmOption";
@@ -82,6 +83,8 @@ export default function AlarmListItem(props) {
                 {alarm_name ? alarm_name : "(no label)"}
               </Col>
               <Col>
+                <ToggleSlider className="toggle-switch" /> 
+                {/* Slider currently does nothing, just sits there looking round */}
                 <Button
                   variant="outline-secondary"
                   onClick={() => onToggle(id)}
