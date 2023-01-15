@@ -14,6 +14,7 @@ export default function NotificationAlert(props) {
     contact_name: notificationDetails.contact_name,
     contact_number: notificationDetails.contact_number,
     user_name: user.name,
+    alarm_name: notificationDetails.alarm_name
   };
 
   function snoozeAlarm() {

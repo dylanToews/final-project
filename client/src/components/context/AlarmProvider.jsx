@@ -36,6 +36,7 @@ function ContextAlarm({ children }) {
     contact_number: "",
     alarm_time: "",
     active: null,
+    alarm_name: ""
   };
 
   function checkAlarm() {
@@ -61,6 +62,7 @@ function ContextAlarm({ children }) {
           currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
         notificationDetailsObject.sound_url = currentSoundItem[0].sound_url;
+        notificationDetailsObject.alarm_name = alarmItem.alarm_name
       }
     });
   }
