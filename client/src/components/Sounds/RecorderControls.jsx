@@ -1,4 +1,4 @@
-import { formatMinutes, formatSeconds } from "../../helpers/format-time";
+import { formatMinutes, formatSeconds } from "../../helpers/soundHelpers";
 
 import "../../styles/recorder-controls.css"
 

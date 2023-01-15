@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { startRecording, saveRecording } from "../helpers/recorder-controls";
+import { startRecording, saveRecording } from "../helpers/soundHelpers";
 
 // sounds state object structure
 const initialState = {
@@ -36,12 +36,6 @@ export default function useRecorder() {
               recordingSeconds: prevState.recordingSeconds + 1
             };
 
-          // if (prevState.recordingSeconds === 59)
-          //   return {
-          //     ...prevState,
-          //     recordingMinutes: prevState.recordingMinutes + 1,
-          //     recordingSeconds: 0,
-          //   };
         });
       }, 1000);
     else clearInterval(recordingInterval);

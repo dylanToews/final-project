@@ -13,7 +13,9 @@ export default function SoundList() {
     <section className="SoundList">
       <h2>My Sounds</h2>
       <br />
-      <ul>{[parsedSoundItems]}</ul>
+      <li>
+        {[parsedSoundItems]}
+      </li>
     </section>
   );
 }

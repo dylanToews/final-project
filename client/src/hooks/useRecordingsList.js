@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { deleteAudio } from "../helpers/recordings-list";
-import generateKey from "../helpers/generate-key";
+import { generateKey, deleteAudio } from "../helpers/soundHelpers";
 
 export default function useRecordingsList(audio) {
   const [recordings, setRecordings] = useState([]);

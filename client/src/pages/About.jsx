@@ -1,4 +1,3 @@
-import React from 'react';
 
 import { Card, Button, Container, Row, Col, Accordion } from "react-bootstrap";
 function About() {
@@ -6,16 +5,17 @@ function About() {
 
 
     return (
-<Container fluid>
-  <Row>
-    <Col >Time</Col>
-    <Col >Active?</Col>
-  </Row>
-  <Row>
-    <Col>Details</Col>
-    <Col>Delete</Col>
-  </Row>
-</Container>
+        <div className="App">
+            <br/>
+            <br/>
+            <h1>About Startle</h1>
+            <img src={require('../startle.png')}/>
+            <br/>
+            <h2>Welcome to Startle, the App that does... something.</h2>
+            <br/>
+            <h3>We'll add to this later</h3>
+            <p>In the meantime, this page will be used to test styling</p>
+        </div>
     );
 }
 

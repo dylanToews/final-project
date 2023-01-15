@@ -13,44 +13,21 @@ function ContextAlarm({ children }) {
   const [dayNow, setDayNow] = useState("");
   const [monthNow, setMonthNow] = useState("");
   const [yearNow, setYearNow] = useState("");
-  const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
 
   const [alarmItems, setAlarmItems] = useState([]);
-  const [lastId, setLastId]= useState([])
-
   const [contactItems, setContactItems] = useState([]);
-  const [contactLastId, setContactLastId]= useState([])
-
-  const [soundItems, setSoundItems] = useState([])
-  const [soundLastId, setSoundLastId] = useState([])
-
-  const [flip, setFlip] = useState(false)
-
-  const testingNotificationDetails = {
-    alarm_time: "11:37 AM:00",
-    contact_name: "Dylan",
-    contact_number: "7802386933",
-    sound_name: "Test recording ",
-    sound_url: "soft_wakeup.ogg"}
-
+  const [soundItems, setSoundItems] = useState([]);
+  const [flip, setFlip] = useState(false);
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
 
-  const { auth, user } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   ///Notification and alarm logic///
 
-  // hard coded notification details object for testing purposes
-
-
-
-
-
   let testNotification = false;
-
-
 
   const notificationDetailsObject = {
     sound_name: "",
@@ -58,33 +35,32 @@ function ContextAlarm({ children }) {
     contact_name: "",
     contact_number: "",
     alarm_time: "",
-    active: null
+    active: null,
   };
 
-
   function checkAlarm() {
-    const fireAlarm = Object.values(alarmItems).forEach((alarmItem) => {
+    Object.values(alarmItems).forEach((alarmItem) => {
       const alarmSeconds = "00";
-      const parsedAlarmSeconds = parseInt(alarmSeconds)
-      const currentSoundItem = soundItems.filter( (e) => {
-        return e.sound_name === alarmItem.sound_name
-      })
+      const currentSoundItem = soundItems.filter((e) => {
+        return e.sound_name === alarmItem.sound_name;
+      });
 
-      const currentContactItem = contactItems.filter(function (e) { 
-        return e.contact_name === alarmItem.contact_name
-      })
+      const currentContactItem = contactItems.filter(function (e) {
+        return e.contact_name === alarmItem.contact_name;
+      });
       if (
         `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}` ===
-        `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}` && alarmItem.active === true
+          `${hourDigital}:${minutesDigital} ${amPm}:${alarmSeconds}` &&
+        alarmItem.active === true
       ) {
         testNotification = true;
 
         notificationDetailsObject.alarm_time = `${alarmItem.hour}:${alarmItem.minutes} ${alarmItem.am_pm}:${secondsDigital}`;
         notificationDetailsObject.contact_name = alarmItem.contact_name;
-        notificationDetailsObject.contact_number = currentContactItem[0].contact_number;
+        notificationDetailsObject.contact_number =
+          currentContactItem[0].contact_number;
         notificationDetailsObject.sound_name = alarmItem.sound_name;
-        notificationDetailsObject.sound_url = currentSoundItem[0].sound_url
-        console.log(notificationDetailsObject)
+        notificationDetailsObject.sound_url = currentSoundItem[0].sound_url;
       }
     });
   }
@@ -98,65 +74,36 @@ function ContextAlarm({ children }) {
   }, [notificationDetailsObject.alarm_time]);
 
   const user_email = user.email;
-  
+
   ///Axios calls and a bit of alarm logic
 
   useEffect(() => {
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
-      // axios.get("/api/v1/alarmItemLastId"),
       axios.get(`/api/v1/contactItems/${user_email}`),
-      // axios.get("/api/v1/contactItemsLastId"),
-      axios.get(`/api/v1/soundItems/${user_email}`)
-      // axios.get("/api/v1/soundItemsLastId")
-      // axios.get("/api/v1/users"),
-      // axios.get("/api/v1/times"),
-      // axios.get("/api/v1/sounds"),
+      axios.get(`/api/v1/soundItems/${user_email}`),
     ];
     Promise.all(requests)
       .then((responses) => ({
         alarmItems: responses[0].data,
-        lastId: responses[0].data.id,
         contactItems: responses[1].data,
-        contactLastId: responses[1].data.id,
         soundItems: responses[2].data,
-        soundLastId: responses[2].data.id,
-        // users: responses[1].data,
-        // times: responses[2].data,
-        // sounds: responses[3].data,
-        // contacts: responses[4].data,
       }))
-      .then(
-        ({
-          alarmItems,
-          lastId,
-          contactItems,
-          contactLastId,
-          soundItems,
-          soundLastId,
-          // users, times, sounds, contacts
-        }) => {
-          setAlarmItems(alarmItems);
-          setLastId(lastId);
-          setContactItems(contactItems);
-          setContactLastId(contactLastId);
-          setSoundItems(soundItems);
-          setSoundLastId(soundLastId);
-          // setUsers(users);
-          // setSounds(sounds);
-          // setContacts(contacts);
-          // setAlarms(times);
-        }
-      );
+      .then(({ alarmItems, contactItems, soundItems }) => {
+        setAlarmItems(alarmItems);
+        setContactItems(contactItems);
+        setSoundItems(soundItems);
+      });
+
     // clock functionality logic
 
     setInterval(() => {
       let date = new Date();
 
       const addZero = (t) => {
-        return ((t < 10) ? '0'+t : t);
-      }
-      let sec = date.getSeconds()
+        return t < 10 ? "0" + t : t;
+      };
+      let sec = date.getSeconds();
       let HH = date.getHours(),
         MM = date.getMinutes(),
         SS = addZero(sec),
@@ -195,43 +142,42 @@ function ContextAlarm({ children }) {
   }, [testNotification]);
 
   ///function for adding new alarms. function is called within AlarmOption
-
   const addNewParams = (formData) => {
-    // const id = lastId + 1;
-    const currentSoundItem = soundItems.filter( (e) => {
-      return e.sound_name === formData.sound_name
-    })
-    // console.log(currentSoundItem)
-    const currentContactItem = contactItems.filter( (e) => {
-      return e.contact_name === formData.contact_name
-    })
-    const newAlarmItem = { 
-      user_id: user.id,
-      sound_id: currentSoundItem[0].id,
-      contact_id: currentContactItem[0].id,
-      ...formData
-
-    };
-    console.log("newAlarmItem", newAlarmItem);
-    axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
-      newAlarmItem.id = res.data.id;
-      setAlarmItems([...alarmItems, newAlarmItem]);
+    const currentSoundItem = soundItems.filter((e) => {
+      return e.sound_name === formData.sound_name;
     });
-  };
 
-  //Original alarm conditional below
-
-  // if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
-  //   // alarm.play();
-  //   // alarm.loop = true;
-  //   console.log("alarm has occured")
-  // }
-
-  /// not really important but it gives me an error when i delete so im ignoring for now
-
-  const pauseAlarm = () => {
-    // alarm.pause();
-    setAlarmTime("");
+    const currentContactItem = contactItems.filter((e) => {
+      return e.contact_name === formData.contact_name;
+    });
+    if (!formData.id) {
+      const newAlarmItem = {
+        user_id: user.id,
+        sound_id: currentSoundItem[0].id,
+        contact_id: currentContactItem[0].id,
+        ...formData,
+      };
+      axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
+        newAlarmItem.id = res.data.id;
+        setAlarmItems([...alarmItems, newAlarmItem]);
+      });
+    } else {
+      const updatedAlarmItem = {
+        sound_id: currentSoundItem[0].id,
+        contact_id: currentContactItem[0].id,
+        ...formData,
+      };
+      axios
+        .put("/api/v1/alarmItems/update", { updatedAlarmItem })
+        .then((res) => {
+          const copiedAlarmItems = [...alarmItems];
+          const filteredAlarmItems = copiedAlarmItems.filter((alarm) => {
+            return alarm.id !== formData.id;
+          });
+          console.log("server response: ", res.data);
+          setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
+        });
+    }
   };
 
   return (
@@ -244,29 +190,21 @@ function ContextAlarm({ children }) {
         dayNow,
         monthNow,
         yearNow,
-        alarmTime,
-        setAlarmTime,
-        pauseAlarm,
         hasAlarm,
         setHasAlarm,
         alarmItems,
         setAlarmItems,
         contactItems,
         setContactItems,
-        contactLastId,
         soundItems,
         setSoundItems,
-        soundLastId,
-        setSoundLastId,
-        // sounds,
-        // alarms,
         addNewParams,
         notification,
         setNotification,
         notificationDetails,
         setNotificationDetails,
         flip,
-        setFlip
+        setFlip,
       }}
     >
       {children}

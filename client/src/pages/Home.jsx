@@ -1,17 +1,14 @@
-import React from "react";
-import { useContext, useState } from "react";
-import AlarmOption from "../components/AlarmOption/AlarmOption";
-import DigitalClock from "../components/DigitalClock/DigitalClock";
-import Header from "../components/Header";
-import AlarmList from "../components/AlarmList/AlarmList";
+import { useContext } from 'react';
+import AlarmOption from '../components/AlarmOption/AlarmOption';
+import DigitalClock from '../components/DigitalClock/DigitalClock';
+import Header from '../components/Header';
+import AlarmList from '../components/AlarmList/AlarmList';
 import { AlarmContext } from "../components/context/AlarmProvider";
 import ReactCardFlip from "react-card-flip";
 
 function Home() {
   const {
-    notification,
     setNotification,
-    notificationDetails,
     setNotificationDetails,
     flip,
     setFlip

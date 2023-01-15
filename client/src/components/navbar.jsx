@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // import "../../styles/Nav.css";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { authContext } from "../providers/AuthProvider";
 
 import {
@@ -29,8 +29,8 @@ function NavbarComponent() {
       <Button
         variant="outline-secondary"
         onClick={logout}
-        className="mt-auto"
-        className="me-2"
+        className="mt-auto me-2"
+        // className="me-2"
       >
         Logout
       </Button>
@@ -64,17 +64,4 @@ function NavbarComponent() {
   );
 }
 
-{
-  /* <nav className="navHeader">
-{user && <p>Logged in as {user.email}</p>}
-<ul>
-  <Link to="/" className="navButton">Home</Link>
-  {/* <Link to="/Login_Register" className="navButton">Account</Link> */
-}
-//   <Link to="/Contacts" className="navButton">Contacts</Link>
-//   <Link to="/Sounds" className="navButton">Sounds</Link>
-//   <Link to="/About" className="navButton">About</Link>
-//   <button type="button" className="navLogout" onClick={logout}>Logout</button>
-// </ul>
-// </nav> */}
 export default NavbarComponent;

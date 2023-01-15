@@ -18,9 +18,7 @@ export default function AlarmListItem(props) {
         return alarm.id !== id;
       });
     setAlarmItems(filtered);
-    console.log(id);
     axios.delete(`api/v1/alarmItems/${id}`).then((res) => {
-      console.log("deleted alarm with id:", id);
     });
   };
 
@@ -30,10 +28,6 @@ export default function AlarmListItem(props) {
   const nextToggle = currentAlarmItem.active ? false : true;
 
   const onToggle = (id) => {
-    const updatedAlarmItem = {
-      ...currentAlarmItem,
-      active: nextToggle,
-    };
     const updatedAlarmItems = [...alarmItems];
     updatedAlarmItems[alarmItemIndex].active = nextToggle;
     axios.put(`/api/v1/alarmItems/${id}`).then((res) => {
@@ -47,6 +41,9 @@ export default function AlarmListItem(props) {
 
 
   }
+
+
+
   return (
     <Container fluid>
       <Card className="mt-2 shadow-lg ">

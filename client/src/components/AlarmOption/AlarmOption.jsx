@@ -1,23 +1,18 @@
 import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { minutesNumber, hourNumber } from "../../func";
-import useSelect from "../../hooks/useSelect";
+// import useSelect from "../../hooks/useSelect";
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
 
-function AlarmOption() {
-  const [hour, setHour] = useSelect("Hour");
-  const [minutes, setMinutes] = useSelect("Minutes");
-  const [am_pm, setam_pm] = useSelect("Am-Pm");
+function AlarmOption(props) {
+  const { id } = props;
 
   const {
-    setAlarmTime,
-    pauseAlarm,
     hasAlarm,
     setHasAlarm,
     addNewParams,
-    alarmItems,
     contactItems,
     soundItems,
     flip,
@@ -25,6 +20,7 @@ function AlarmOption() {
   } = useContext(AlarmContext);
 
   const initialValues = {
+    id: id || "",
     contact_name: "",
     sound_name: "",
     hour: "",
@@ -63,7 +59,7 @@ function AlarmOption() {
     //   return;
     // }
     // setHasAlarm(true);
-    setAlarmTime(`${hour}:${minutes} ${am_pm}`);
+    // setAlarmTime(`${hour}:${minutes} ${am_pm}`);
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -74,6 +70,7 @@ function AlarmOption() {
     ) {
       addNewParams(formData);
       setFlip(!flip);
+      setFormData(initialValues);
     }
   };
 

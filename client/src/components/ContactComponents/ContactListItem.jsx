@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import "../../styles/Contacts.css"
 
 export default function ContactListItem(props) {
-  const { contact_name, contact_number, id, user_email } = props;
+  const { contact_name, contact_number, id } = props;
   const { setContactItems } = useContext(AlarmContext);
 
   function formatPhoneNumber(phoneNumberString) {
@@ -29,13 +29,13 @@ export default function ContactListItem(props) {
 };
 
   return (
-    <li className="ContactListItem">
+    <ul className="ContactListItem">
       <div key={id}>
         <p>Contact Name: {contact_name}</p>
         <p>Phone Number: {formatPhoneNumber(contact_number)}</p>
         <button onClick={() => removeContact(id)} className="deleteButton">Delete</button>
       </div>
       <br></br>
-    </li>
+    </ul>
   );
 }
