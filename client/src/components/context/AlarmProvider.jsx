@@ -18,7 +18,10 @@ function ContextAlarm({ children }) {
   const [alarmItems, setAlarmItems] = useState([]);
   const [contactItems, setContactItems] = useState([]);
   const [soundItems, setSoundItems] = useState([]);
+  
   const [flip, setFlip] = useState(false);
+  const [alarmFlip, setAlarmFlip] = useState(new Set());
+  // const [alarmFlipId, setAlarmFlipId] = useState(new Set())
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -209,6 +212,9 @@ function ContextAlarm({ children }) {
         setNotificationDetails,
         flip,
         setFlip,
+        alarmFlip, 
+        setAlarmFlip,
+     
       }}
     >
       {children}
