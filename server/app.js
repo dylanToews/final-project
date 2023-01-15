@@ -29,7 +29,7 @@ const audioStorage = multer.diskStorage({
     cb(null, DIR);
   },
   filename: (req, file, cb) => {
-    console.log("file before rename: ", file);
+
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
@@ -69,6 +69,7 @@ const getAlarmDataByEmail = email => {
     `SELECT 
       alarms.id AS id,
       users.email AS user_email,
+      alarms.name AS alarm_name,
       contacts.name AS contact_name,
       contacts.tel_number AS contact_number,
       sounds.name AS sound_name,
@@ -90,13 +91,14 @@ const getAlarmDataByEmail = email => {
 
 const addAlarmItem = (newAlarmItem) => {
   return db.query(`
-    INSERT INTO alarms (user_id, sound_id, contact_id, hour, minute, am_pm) 
-    VALUES ($1, $2, $3, $4, $5, $6)
+    INSERT INTO alarms (user_id, sound_id, contact_id, name, hour, minute, am_pm) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING id;
     `, [
         newAlarmItem.user_id, 
         newAlarmItem.sound_id, 
         newAlarmItem.contact_id, 
+        newAlarmItem.alarm_name,
         newAlarmItem.hour, 
         newAlarmItem.minutes, 
         newAlarmItem.am_pm
@@ -217,7 +219,7 @@ app.get("/api/v1/soundItems/:email", (req, res) => {
 
 app.post("/api/v1/soundItems", (req, res) => {
   const { newSoundItem } = req.body;
-  console.log(newSoundItem);
+
   addSoundItem(newSoundItem).then((data) => res.send(data));
 });
 
