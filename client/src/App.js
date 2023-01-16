@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Sounds from "./pages/Sounds";
-import Login_Register from "./pages/Login_Register";
+import Login from "./pages/Login";
 import Notification from "./components/Notifications/Notification";
 import ContextAlarm from "./context/AlarmProvider";
 
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-    {!auth && <Login_Register />}
+    {!auth && <Login />}
     { auth && <BrowserRouter>
       <ContextAlarm>
       <Notification />
@@ -28,7 +28,6 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path="sounds" element={<Sounds />}/>
-          <Route path="login_register" element={<Login_Register />}/>
           
         </Route>
       </Routes>
