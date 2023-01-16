@@ -24,7 +24,7 @@ export default function Login_Register(props) {
   return (
 <div className="Login">
 <NavbarComponent />
-<h1 className="login-form">Login</h1>
+<h1 className="login-form">Welcome to Startle!</h1>
 <Form className="wrapper login-form" onSubmit={handleSubmit}>
   <Form.Group className="mb-3 login-input" controlId="email"onChange={handleEmail}>
     <Form.Label>Email address</Form.Label>
@@ -40,7 +40,7 @@ export default function Login_Register(props) {
   </Form.Group>
 
   <Button variant="outline-secondary" type="submit"onSubmit={handleSubmit}>
-    Submit
+    Log In
   </Button>
 </Form>
 </div> 
