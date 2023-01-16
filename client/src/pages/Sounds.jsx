@@ -6,6 +6,7 @@ import useRecorder from '../hooks/useRecorder';
 import useRecordingsList from '../hooks/useRecordingsList';
 
 import "../styles/Contacts.css"
+import "../styles/Cards.css"
 
 
 
@@ -20,8 +21,8 @@ function Sounds() {
       
         {recordings.length === 0 && 
         <>
-          <h1 className="title">Sound Recorder</h1>
-          <RecorderControls recorderState={recorderState} handlers={handlers} />
+          <h1 className="title">Add a New Sound</h1>
+          <RecorderControls recorderState={recorderState} handlers={handlers} className="card"/>
         </>
         }
         <SoundForm recordings={recordings} deleteAudio={deleteAudio} />
