@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../providers/AuthProvider";
 
+import "../styles/Cards.css"
+
 import {
   Button,
   Container,
@@ -22,14 +24,14 @@ function NavbarComponent() {
       expand="lg"
       bg="dark"
       variant="dark"
-      className="p-3 "
+      className="p-3"
     >
       <Navbar.Brand className="me-auto">
         <img
           src={require('../startle.png')}
           width="50"
           height="50"
-          className="d-inline-block align-top"
+          className="d-inline-block align-top nav-background"
           alt="Startle logo"
         />
       </Navbar.Brand>
@@ -44,23 +46,23 @@ function NavbarComponent() {
       </Button>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
-        className="mr-2"
+        className="mr-2 nav-background"
       />
       <Navbar.Collapse
         id="responsive-navbar-nav"
-        className="nav-item dropright ml-auto"
+        className="nav-item dropright ml-auto nav-background"
       >
-        <Nav className="mt-auto justify-content-end">
-          <Nav.Link as={Link} to="/">
+        <Nav className="mt-auto justify-content-end nav-background">
+          <Nav.Link className="nav-background" as={Link} to="/">
             Home
           </Nav.Link>
-          <Nav.Link as={Link} to="/Contacts">
+          <Nav.Link className="nav-background" as={Link} to="/Contacts">
             Contacts
           </Nav.Link>
-          <Nav.Link as={Link} to="/Sounds">
+          <Nav.Link className="nav-background" as={Link} to="/Sounds">
             Sounds
           </Nav.Link>
-          <Nav.Link as={Link} to="/About">
+          <Nav.Link className="nav-background" as={Link} to="/About">
             About
           </Nav.Link>
         </Nav>

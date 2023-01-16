@@ -1,9 +1,25 @@
+* {
+  background-color: #97CDD1;
+}
+
+
 .App {
   text-align: center;
   background-color: #97CDD1;
 
 }
 
+.nav-background {
+  background-color: rgb(33, 37, 41);
+}
+
+.navbar-toggler-icon {
+  background-color: rgb(33, 37, 41);
+}
+
+.navbar-brand {
+  background-color: rgb(33, 37, 41);
+}
 
 /* tied to contact form */
  .Form-at {
