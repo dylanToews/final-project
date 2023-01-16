@@ -126,7 +126,7 @@ const updateAlarmItem = (alarmUpdateParams) => {
       minute = $4, 
       am_pm = $5,
       name = $6,
-      order_val = $7,
+      order_val = $7
     WHERE id = $8
     RETURNING *;
     `, [
