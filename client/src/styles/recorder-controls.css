@@ -1,77 +1,75 @@
-.controls-container {
-  height: 15%;
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0.5rem;
-}
 
-.recorder-display {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
+.holder {
+  background-color: #4c474c;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#4c474c), to(#141414));
+  background-image: -o-linear-gradient(bottom, #4c474c 0%, #141414 100%);
+  background-image: linear-gradient(0deg, #4c474c 0%, #141414 100%);
+  border-radius: 50px;
 }
-
-@keyframes animated-block {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.recording-indicator {
-  width: 10px;
-  height: 10px;
-  margin-right: 0.5rem;
-  border-radius: 50%;
-  background-color: #099fff;
-  animation-name: animated-block;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-.recording-time {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cancel-button-container {
-  width: 20%;
-  display: grid;
-  place-content: center;
-  animation-name: animated-block;
-  animation-duration: 2s;
-}
-
-.start-button,
-.cancel-button,
-.save-button {
-  text-align: center;
+[data-role="controls"] > button {
+  margin: 50px auto;
+  outline: none;
+  display: block;
   border: none;
+  background-color: #D9AFD9;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#D9AFD9), to(#97D9E1));
+  background-image: -o-linear-gradient(bottom, #D9AFD9 0%, #97D9E1 100%);
+  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background-color: #fff;
+  text-indent: -1000em;
   cursor: pointer;
-  width: 52px;
-  height: 52px;
-  font-size: 16px;
+  -webkit-box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.3) inset, 
+      0px 0px 0px 30px #fff, 0px 0px 0px 35px #333;
+          box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.3) inset, 
+      0px 0px 0px 30px #fff, 0px 0px 0px 35px #333;
 }
-
-.cancel-button:hover {
-  color: #fd1c03;
+[data-role="controls"] > button:hover {
+  background-color: #ee7bee;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#ee7bee), to(#6fe1f5));
+  background-image: -o-linear-gradient(bottom, #ee7bee 0%, #6fe1f5 100%);
+  background-image: linear-gradient(0deg, #ee7bee 0%, #6fe1f5 100%);
 }
-
-.start-button-container {
-  width: 15%;
-  display: grid;
-  place-content: center;
+[data-role="controls"] > button[data-recording="true"] {
+  background-color: #ff2038;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#ff2038), to(#b30003));
+  background-image: -o-linear-gradient(bottom, #ff2038 0%, #b30003 100%);
+  background-image: linear-gradient(0deg, #ff2038 0%, #b30003 100%);
 }
-
-.start-button:hover,
-.cancel-button:hover,
-.save-button {
-  background: radial-gradient(rgb(255, 59, 59), rgba(255, 205, 205, 0));
+[data-role="recordings"] > .row {
+  width: auto;
+  height: auto;
+  padding: 20px;
+}
+[data-role="recordings"] > .row > audio {
+  outline: none;
+}
+[data-role="recordings"] > .row > a {
+  display: inline-block;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: #0093E9;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#0093E9), to(#80D0C7));
+  background-image: -o-linear-gradient(bottom, #0093E9 0%, #80D0C7 100%);
+  background-image: linear-gradient(0deg, #0093E9 0%, #80D0C7 100%);
+  float: right;
+  margin-left: 20px;
+  cursor: pointer;
+}
+[data-role="recordings"] > .row > a:hover {
+  text-decoration: none;
+}
+[data-role="recordings"] > .row > a:active {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0093E9), to(#80D0C7));
+  background-image: -o-linear-gradient(top, #0093E9 0%, #80D0C7 100%);
+  background-image: linear-gradient(180deg, #0093E9 0%, #80D0C7 100%);
 }
