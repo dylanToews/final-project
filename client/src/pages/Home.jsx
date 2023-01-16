@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import AlarmOption from '../components/Alarms/AlarmForm';
 import DigitalClock from '../components/DigitalClock';
-import Header from '../components/Header';
 import AlarmList from '../components/Alarms/AlarmList';
 import { alarmContext } from "../context/AlarmProvider";
 import ReactCardFlip from "react-card-flip";
@@ -33,7 +32,6 @@ function Home() {
 
   return (
     <div className="App">
-      <Header />
       <main>
         <section className="clock container">
           <div className="clock__container grid">

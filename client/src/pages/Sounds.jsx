@@ -1,4 +1,4 @@
-import RecorderControls from '../components/Sounds/RecorderControls';
+import RecorderControls from '../components/RecorderControls';
 import SoundForm from '../components/Sounds/SoundForm';
 import SoundList from '../components/Sounds/SoundList';
 

@@ -1,8 +1,8 @@
-import { formatMinutes, formatSeconds } from "../../helpers/soundHelpers";
+import { formatMinutes, formatSeconds } from "../helpers/soundHelpers";
 import { Button } from "react-bootstrap";
 
-import "../../styles/recorder-controls.css"
-import "../../styles/Cards.css"
+import "../styles/recorder-controls.css"
+import "../styles/Cards.css"
 
 export default function RecorderControls({ recorderState, handlers}) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
