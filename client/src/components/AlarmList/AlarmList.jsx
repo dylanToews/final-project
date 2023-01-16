@@ -11,9 +11,6 @@ export default function AlarmList(props) {
   alarmItems.sort(
     (p1, p2) => (p1.order_val < p2.order_val) ? -1 : (p1.order_val > p2.order_val) ? 1 : 0);
 
-useEffect(()=>{
-    console.log("sortedAlarms", alarmItems)
-},[])
   const parsedAlarmItems = alarmItems.map((alarmItem, index) => (
     <AlarmListItem key={alarmItem.id} {... alarmItem} />
 

@@ -28,7 +28,7 @@ export default function AlarmListItem(props) {
     active,
     alarm_name,
   } = props;
-  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions } =
+  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions, initialEditValues, setEditValues } =
     useContext(AlarmContext);
 
   const removeAlarm = (id) => {
@@ -53,9 +53,17 @@ export default function AlarmListItem(props) {
     });
   };
 
+
+  const findAlarm = (id) => {
+    const filtered = alarmItems.filter((alarmItem) =>{
+      return alarmItem.id === id
+    })
+      setEditValues(filtered)
+  };
+
   const flipCard = (id, save, initial) => {
-    
     return (e) => {
+      setEditValues([initialEditValues])
       e.preventDefault();
       let flipped = new Set(alarmFlip);
       if (flipped.has(id)) {
@@ -65,10 +73,11 @@ export default function AlarmListItem(props) {
       }
       setAlarmFlip(flipped);
       if(save === true){
-      setEditOptions(true)
+        setEditOptions(true)
       }
       if(initial === true){
-        console.log(initial)
+        findAlarm(id)
+        // console.log("id", id)
       }
     };
   };
@@ -136,7 +145,18 @@ export default function AlarmListItem(props) {
         </Card>
       </Container>
       <Card>
-        <AlarmOption flipCard={flipCard} id={props.id} itemProps={props} status={"edit"} />
+        <AlarmOption 
+        flipCard={flipCard} 
+        id={props.id} 
+        hour={hour}
+        minutes={minutes}
+        am_pm={am_pm}
+        contact_name={contact_name}
+        sound_name={sound_name}
+        active={active}
+        alarm_name={alarm_name}
+         status={"edit"}
+         currentAlarmItem={currentAlarmItem} />
         <Button variant="outline-secondary" onClick={flipCard(id, true)}>
           Save Edit
         </Button>

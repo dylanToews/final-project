@@ -10,9 +10,23 @@ import "../../styles/Contacts.css";
 import "../../styles/Cards.css";
 
 function AlarmOption(props) {
-  const { id, flipCard, itemProps } = props;
+  const {
+    id,
+    flipCard,
+    hour,
+    minutes,
+    am_pm,
+    contact_name,
+    sound_name,
+    active,
+    alarm_name,
+    currentAlarmItem
+  } = props;
 
-
+  // console.log("id",id)
+  useEffect(() => {
+    // console.log(currentAlarmItem);
+  }, []);
   const {
     hasAlarm,
     addNewParams,
@@ -22,14 +36,10 @@ function AlarmOption(props) {
     setFlip,
     editOptions,
     setEditOptions,
+    editValues,
+    setEditValues
   } = useContext(AlarmContext);
 
-
-  // useEffect(()=> {
-  //   if(editOptions)
-  //   console.log(id)
-
-  // },[editOptions])
 
   const initialValues = {
     id: id || "",
@@ -41,6 +51,13 @@ function AlarmOption(props) {
     am_pm: "",
     active: true,
   };
+
+
+
+  useEffect(()=> {
+    console.log("editOptions", editValues[0])
+  
+    },[editOptions])
 
   const [formData, setFormData] = useState(initialValues);
 
@@ -120,13 +137,13 @@ function AlarmOption(props) {
       <div className={`wrapper-option ${hasAlarm && "disable"} card-background`}>
         <div className="name-row">
           <input
-          className="inputBox"
+            className="inputBox"
             type="text"
             name="alarm_name"
             required
             maxLength="28"
             size="30"
-            placeholder="Enter a name for this alarm..."
+            placeholder={editValues[0].alarm_name}
             onChange={handleChange}
           />
         </div>
@@ -138,7 +155,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-              Hour
+            {editValues[0].hour}
             </option>
             {hourNumber.map((hour, index) => (
               <option key={index} value={hour}>
@@ -153,7 +170,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-              Minutes
+            {editValues[0].minutes}
             </option>
             {minutesNumber.map((minutes, index) => (
               <option key={index} value={minutes}>
@@ -168,7 +185,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-              Am/Pm
+            {editValues[0].am_pm}
             </option>
             <option value="AM">Am</option>
             <option value="PM">Pm</option>
@@ -181,7 +198,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">Please Select A Contact</option>
+            <option value="">{editValues[0].contact_name}</option>
             {parsedContacts}
           </select>
 
@@ -192,7 +209,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">Please Select A Sound</option>
+            <option value="">{editValues[0].sound_name}</option>
             {parsedSounds}
           </select>
           <div className="Contacts-Sound"></div>
