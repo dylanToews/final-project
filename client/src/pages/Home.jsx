@@ -6,6 +6,9 @@ import AlarmList from '../components/AlarmList/AlarmList';
 import { AlarmContext } from "../components/context/AlarmProvider";
 import ReactCardFlip from "react-card-flip";
 import {Button} from "react-bootstrap"
+
+import "../styles/Cards.css"
+
 function Home() {
   const {
     setNotification,
@@ -35,18 +38,16 @@ function Home() {
         <section className="clock container">
           <div className="clock__container grid">
             <DigitalClock />
-            <div className="card">
-              <ReactCardFlip isFlipped={flip} flipDirection="vertical">
-                <>
-                <Button variant="outline-secondary" onClick={() => setFlip(!flip)}>
-                  Create New Alarm
-                </Button>
-              
-                </>
+            <div className="card card-background">
+              <ReactCardFlip isFlipped={flip} flipDirection="vertical" className="card-background">
+                <div className="card-background">
+                  <Button variant="outline-secondary" className="card-background" onClick={() => setFlip(!flip)}>
+                    Create New Alarm
+                  </Button>
+                </div>
                 <AlarmOption/>
               </ReactCardFlip>
 
-              {/* <AlarmOption /> */}
             </div>
             <AlarmList />
             <button onClick={setTestStart} className="submit">
