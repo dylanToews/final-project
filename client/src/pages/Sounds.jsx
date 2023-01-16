@@ -18,7 +18,7 @@ function Sounds() {
       
         {recordings.length === 0 && 
         <>
-          <h1 className="title">Alarm Tones</h1>
+          <h1 className="title">Sound Recorder</h1>
           <RecorderControls recorderState={recorderState} handlers={handlers} />
         </>
         }

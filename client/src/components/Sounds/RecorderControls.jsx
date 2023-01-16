@@ -9,12 +9,12 @@ export default function RecorderControls({ recorderState, handlers}) {
   return (
     <div className="controls-container" >
       <div className="recorder-display">
-        <div className="recording-time">
-          {initRecording && <div className="recording-indicator"></div>}
+        {initRecording && <div className="recording-time">
           <span>{formatMinutes(recordingMinutes)}</span>
           <span>:</span>
           <span>{formatSeconds(recordingSeconds)}</span>
-        </div>
+        </div>}
+        
         {initRecording && (
           <div className="cancel-button-container">
             <button className="cancel-button" title="Cancel recording" onClick={cancelRecording}>

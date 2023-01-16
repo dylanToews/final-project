@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
+import "../../styles/Contacts.css";
 
 function AlarmOption(props) {
   const { id, flipCard, status } = props;
@@ -90,11 +91,13 @@ function AlarmOption(props) {
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
         <div className="name-row">
           <input
+          className="inputBox"
             type="text"
             name="alarm_name"
             required
             maxLength="28"
             size="30"
+            placeholder="Enter a name for this alarm..."
             onChange={handleChange}
           />
         </div>
