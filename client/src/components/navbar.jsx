@@ -46,6 +46,7 @@ function NavbarComponent() {
         className="nav-item dropright ml-auto nav-background"
       >
         <Nav className="mt-auto justify-content-end nav-background">
+          <p className="nav-background nav-welcome">Hi, {user.name}!</p>
           <Nav.Link className="nav-background" as={Link} to="/">
             Home
           </Nav.Link>
