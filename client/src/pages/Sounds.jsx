@@ -5,6 +5,8 @@ import SoundList from '../components/Sounds/SoundList';
 import useRecorder from '../hooks/useRecorder';
 import useRecordingsList from '../hooks/useRecordingsList';
 
+import "../styles/Contacts.css"
+
 
 
 function Sounds() {
@@ -13,7 +15,7 @@ function Sounds() {
   const { recordings, deleteAudio } = useRecordingsList(audio);
 
     return (
-      <section className="App">
+      <section className="Contacts">
       <div className="recorder-container">
       
         {recordings.length === 0 && 
