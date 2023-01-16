@@ -9,9 +9,22 @@ import "../../styles/Dropdowns.css";
 import "../../styles/Contacts.css";
 
 function AlarmOption(props) {
-  const { id, flipCard, itemProps } = props;
+  const {
+    id,
+    flipCard,
+    hour,
+    minutes,
+    am_pm,
+    contact_name,
+    sound_name,
+    active,
+    alarm_name,
+  } = props;
 
-
+  // console.log("id",id)
+  useEffect(() => {
+    console.log(alarm_name);
+  }, []);
   const {
     hasAlarm,
     addNewParams,
@@ -23,10 +36,8 @@ function AlarmOption(props) {
     setEditOptions,
   } = useContext(AlarmContext);
 
-
   // useEffect(()=> {
-  //   if(editOptions)
-  //   console.log(id)
+  // console.log("itemProps", id)
 
   // },[editOptions])
 
@@ -80,7 +91,6 @@ function AlarmOption(props) {
         setFlip(!flip);
       }
     } else {
-      
     }
   };
 
@@ -102,7 +112,7 @@ function AlarmOption(props) {
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
         <div className="name-row">
           <input
-          className="inputBox"
+            className="inputBox"
             type="text"
             name="alarm_name"
             required

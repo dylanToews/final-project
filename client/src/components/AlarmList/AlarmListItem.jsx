@@ -135,7 +135,17 @@ export default function AlarmListItem(props) {
         </Card>
       </Container>
       <Card>
-        <AlarmOption flipCard={flipCard} id={props.id} itemProps={props} status={"edit"} />
+        <AlarmOption 
+        flipCard={flipCard} 
+        id={props.id} 
+        hour={hour}
+        minutes={minutes}
+        am_pm={am_pm}
+        contact_name={contact_name}
+        sound_name={sound_name}
+        active={active}
+        alarm_name={alarm_name}
+         status={"edit"} />
         <Button variant="outline-secondary" onClick={flipCard(id, true)}>
           Save Edit
         </Button>
