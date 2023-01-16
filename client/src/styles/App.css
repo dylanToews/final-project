@@ -2,6 +2,10 @@
   background-color: #97CDD1;
 }
 
+.fade, .modal, .show, .modal-content, .modal-backdrop, .modal-dialog {
+  background-color: transparent;
+}
+
 
 .App {
   text-align: center;

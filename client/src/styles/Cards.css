@@ -16,3 +16,7 @@
 .button-row {
   flex-direction: row;
 }
+
+.transparent {
+  background-color: transparent;
+}

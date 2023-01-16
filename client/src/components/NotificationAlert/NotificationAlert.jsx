@@ -37,21 +37,22 @@ export default function NotificationAlert(props) {
 
   return (
     <div
-    className="modal show"
+    className="modal show transparent"
     style={{ display: 'block', position: 'initial' }}
   >
     <Modal
     show="true"
     size="lg"
     aria-labelledby="contained-modal-title-vcenter"
+    className="transparent"
     centered>
-    <Modal.Dialog>
-      <Modal.Header closeButton>
-        <Modal.Title>Your Alarm Has Gone Off!!</Modal.Title>
+    <Modal.Dialog className="transparent">
+      <Modal.Header className="transparent">
+        <Modal.Title className="transparent">Your Alarm Has Gone Off!!</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
-        <p>Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_name} alarm has gone off</p>
+      <Modal.Body className="transparent">
+        <p className="transparent">Hello {notificationDetails.contact_name} Your {notificationDetails.alarm_name} alarm has gone off</p>
       </Modal.Body>
 
       <Modal.Footer>
