@@ -12,3 +12,7 @@
 .card-background {
     background-color: #C6F1E7;
 }
+
+.button-row {
+  flex-direction: row;
+}

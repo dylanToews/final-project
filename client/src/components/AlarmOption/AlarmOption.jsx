@@ -65,6 +65,20 @@ function AlarmOption(props) {
     ))
   );
 
+  const formCheck = () => {
+    if (
+      formData.contact_name &&
+      formData.sound_name &&
+      formData.hour &&
+      formData.minutes &&
+      formData.am_pm &&
+      formData.alarm_name
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   const setAlarm = (event) => {
     if (
       formData.contact_name &&
@@ -80,10 +94,13 @@ function AlarmOption(props) {
       if (!flipCard) {
         setFlip(!flip);
       }
-    } else {
-      
-    }
+    } 
   };
+
+  const handleCancel = (event) => {
+    setFormData(initialValues);
+    setFlip(!flip);
+  }
 
   let editStatus = false;
 
@@ -182,12 +199,14 @@ function AlarmOption(props) {
         </div>
 
         {flip && (
-          <Button variant="outline-secondary" onClick={setAlarm}>
+          <div className="button-row card-background">
+          <Button variant={(formCheck() && "outline-success") || (!formCheck() && "outline-danger")} className={!formCheck() && "disabled"} onClick={setAlarm}>
             Set New Alarm
           </Button>
+          </div>
         )}
         {flip && (
-          <Button variant="outline-secondary" onClick={() => setFlip(!flip)}>
+          <Button variant="outline-secondary" onClick={handleCancel}>
             Cancel
           </Button>
         )}
