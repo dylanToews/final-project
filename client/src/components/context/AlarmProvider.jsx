@@ -19,9 +19,25 @@ function ContextAlarm({ children }) {
   const [contactItems, setContactItems] = useState([]);
   const [soundItems, setSoundItems] = useState([]);
   
+  const initialEditValues = {
+    active: true,
+    alarm_name: "Please Enter Alarm Title",
+    am_pm: "AM/PM",
+    contact_name: "Please Select A Contact",
+    contact_number: "",
+    hour: "Hour",
+    id: "",
+    minutes: "Minutes",
+    order_val: "",
+    sound_name: "Please Select A Sound",
+    sound_string: "",
+    user_email: "",
+  }
+
   const [flip, setFlip] = useState(false);
   const [alarmFlip, setAlarmFlip] = useState(new Set());
   const [editOptions, setEditOptions] = useState(false)
+  const [editValues, setEditValues] = useState([initialEditValues])
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -41,6 +57,7 @@ function ContextAlarm({ children }) {
     active: null,
     alarm_name: ""
   };
+
 
   function orderedAlarms(alarmItems) {
     // console.log(Object.values(alarmItems))
@@ -156,6 +173,8 @@ function ContextAlarm({ children }) {
 
   ///function for adding new alarms. function is called within AlarmOption
   const addNewParams = (formData) => {
+    setEditOptions(initialEditValues)
+
     const currentSoundItem = soundItems.filter((e) => {
       return e.sound_name === formData.sound_name;
     });
@@ -180,7 +199,6 @@ function ContextAlarm({ children }) {
       return hourVal + minVal
       // console.log("hourVal:", hourVal, "minVal:", minVal, formData)
     }
-    console.log(getOrderValue(formData))
 
     const currentContactItem = contactItems.filter((e) => {
       return e.contact_name === formData.contact_name;
@@ -249,6 +267,9 @@ function ContextAlarm({ children }) {
         setAlarmFlip,
         editOptions, 
         setEditOptions,
+        editValues,
+        setEditValues,
+        initialEditValues,
      
       }}
     >
