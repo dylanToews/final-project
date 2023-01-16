@@ -77,6 +77,7 @@ const getAlarmDataByEmail = email => {
       hour,
       minute AS minutes,
       am_pm,
+      order_val,
       active
       FROM alarms
       JOIN sounds ON sound_id = sounds.id
@@ -91,8 +92,8 @@ const getAlarmDataByEmail = email => {
 
 const addAlarmItem = (newAlarmItem) => {
   return db.query(`
-    INSERT INTO alarms (user_id, sound_id, contact_id, name, hour, minute, am_pm) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO alarms (user_id, sound_id, contact_id, name, hour, minute, am_pm, order_val) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING id;
     `, [
         newAlarmItem.user_id, 
@@ -101,7 +102,8 @@ const addAlarmItem = (newAlarmItem) => {
         newAlarmItem.alarm_name,
         newAlarmItem.hour, 
         newAlarmItem.minutes, 
-        newAlarmItem.am_pm
+        newAlarmItem.am_pm,
+        newAlarmItem.order_val
       ]
   )
   .then((data) => data.rows[0])
@@ -123,8 +125,9 @@ const updateAlarmItem = (alarmUpdateParams) => {
       hour = $3, 
       minute = $4, 
       am_pm = $5,
-      name = $6
-    WHERE id = $7
+      name = $6,
+      order_val = $7
+    WHERE id = $8
     RETURNING *;
     `, [
         alarmUpdateParams.sound_id, 
@@ -133,7 +136,8 @@ const updateAlarmItem = (alarmUpdateParams) => {
         alarmUpdateParams.minutes,
         alarmUpdateParams.am_pm,
         alarmUpdateParams.alarm_name,
-        alarmUpdateParams.id
+        alarmUpdateParams.order_val,
+        alarmUpdateParams.id,
       ]
   )
   .then((data) => data.rows)

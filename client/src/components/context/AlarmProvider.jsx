@@ -90,6 +90,7 @@ function ContextAlarm({ children }) {
   ///Axios calls and a bit of alarm logic
 
   useEffect(() => {
+  
     const requests = [
       axios.get(`/api/v1/alarmItems/${user_email}`),
       axios.get(`/api/v1/contactItems/${user_email}`),
@@ -159,6 +160,28 @@ function ContextAlarm({ children }) {
       return e.sound_name === formData.sound_name;
     });
 
+    const getOrderValue =(formData) => {
+      let hourVal = parseInt(formData.hour)
+      let minVal = parseInt(formData.minutes)
+
+      if(hourVal !== 12 && formData.am_pm !== "PM"){
+        hourVal = hourVal * 60
+      }
+      if(hourVal === 12 && formData.am_pm !== "PM"){
+        hourVal = 0
+      }
+      if(hourVal !== 12 && formData.am_pm === "PM"){
+        hourVal = (hourVal * 60) + 720
+      }
+      if(hourVal === 12 && formData.am_pm === "PM"){
+        hourVal = hourVal * 60
+      }
+
+      return hourVal + minVal
+      // console.log("hourVal:", hourVal, "minVal:", minVal, formData)
+    }
+    console.log(getOrderValue(formData))
+
     const currentContactItem = contactItems.filter((e) => {
       return e.contact_name === formData.contact_name;
     });
@@ -167,20 +190,23 @@ function ContextAlarm({ children }) {
         user_id: user.id,
         sound_id: currentSoundItem[0].id,
         contact_id: currentContactItem[0].id,
+        order_val:  getOrderValue(formData),
         ...formData,
       };
+      // console.log("newAlarmDate", newAlarmItem)
 
       axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
         newAlarmItem.id = res.data.id;
         setAlarmItems([...alarmItems, newAlarmItem]);
+        console.log(alarmItems)
       });
     } else {
       const updatedAlarmItem = {
         sound_id: currentSoundItem[0].id,
         contact_id: currentContactItem[0].id,
+        order_val:  getOrderValue(formData),
         ...formData,
       };
-
       axios.put("/api/v1/alarmItems/edit", { updatedAlarmItem })
         .then((res) => {
 
@@ -190,6 +216,7 @@ function ContextAlarm({ children }) {
           });
           setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
         });
+     
     }
   };
 
