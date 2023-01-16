@@ -2,6 +2,10 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
+import {Button} from "react-bootstrap"
+
+import "../../styles/Cards.css"
+import "../../styles/AlarmOption.css";
 
 
 export default function RecordingsList(props) {
@@ -66,20 +70,23 @@ export default function RecordingsList(props) {
       {recordings.length > 0 ? (
         <>
           <h1>New Recording</h1>
-          <form className="SoundForm">
+          <form className="SoundForm option-Container card-background card">
             <input
               type="text"
               name="sound_name"
-              placeholder="Enter a title for your new sound"
+              placeholder="Enter a title for your new sound..."
+              className="inputBox"
+              maxLength="28"
+              size="30"
               onChange={handleChange}
               value={formData.sound_name}
             />
-            <button type="submit" onClick={handleSubmit}>
+            <Button variant="outline-secondary" type="submit" onClick={handleSubmit}>
               Save
-            </button>
-            <button type="reset" onClick={handleReset}>
+            </Button>
+            <Button variant="outline-secondary" type="reset" onClick={handleReset}>
               Cancel
-            </button>
+            </Button>
           </form>
         </>
       ) : (
@@ -88,3 +95,10 @@ export default function RecordingsList(props) {
     </div>
   );
 }
+
+// {/* <button type="submit" onClick={handleSubmit}>
+//               Save
+//             </button>
+//             <button type="reset" onClick={handleReset}>
+//               Cancel
+//             </button> */}

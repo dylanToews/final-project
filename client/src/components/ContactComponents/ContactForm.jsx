@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import { authContext } from "../../providers/AuthProvider";
 import "../../styles/Contacts.css"
+import "../../styles/Cards.css"
 
 function ContactForm() {
   const { contactItems, setContactItems } = useContext(AlarmContext);
@@ -57,18 +58,18 @@ function ContactForm() {
     <div className="ContactForm">
       <div className="container">
         <h1>Add a New Contact</h1>
-        <form className="Form-at" onSubmit={handleSubmit}>
-          <label>Name</label>
+        <form className="Form-at card card-background" onSubmit={handleSubmit}>
+          <label className="card-background">Name</label>
           <input
             name="contact_name"
             type="text"
             value={formData.contact_name}
             onChange={handleChange}
             placeholder="Enter contact name..."
-            className="inputBox"
+            className="inputBox card-background"
           />
-          <br />
-          <label>Phone number</label>
+          <br className="card-background"/>
+          <label className="card-background">Phone number</label>
           <input
             name="contact_number"
             type="tel"
@@ -79,7 +80,7 @@ function ContactForm() {
             className="inputBox"
           />
           <br />
-          <label>Confirm phone number</label>
+          <label className="card-background">Confirm phone number</label>
           <input
             name="confirm_number"
             type="tel"
@@ -90,7 +91,7 @@ function ContactForm() {
             className="inputBox"
           />
           <br />
-          <span className="note">
+          <span className="note card-background">
             {formData.contact_number && formData.confirm_number && (formData.contact_number === formData.confirm_number) && "Match! ✅"}
             {formData.contact_number !== formData.confirm_number && "Numbers don't match... ❌"}
           </span>
