@@ -20,6 +20,7 @@ CREATE TABLE alarms (
   hour VARCHAR(2) NOT NULL,
   minute VARCHAR(2) NOT NULL,
   am_pm VARCHAR(2) NOT NULL,
+  order_val INTEGER,
   active BOOL NOT NULL DEFAULT true,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()

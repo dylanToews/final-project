@@ -52,7 +52,7 @@ export default function AlarmListItem(props) {
     });
   };
 
-  const flipCard = (id, save) => {
+  const flipCard = (id, save, initial) => {
     
     return (e) => {
       e.preventDefault();
@@ -65,6 +65,9 @@ export default function AlarmListItem(props) {
       setAlarmFlip(flipped);
       if(save === true){
       setEditOptions(true)
+      }
+      if(initial === true){
+        console.log(initial)
       }
     };
   };
@@ -97,7 +100,7 @@ export default function AlarmListItem(props) {
               </Col>
 
               <Col>
-                <Button variant="outline-secondary" onClick={flipCard(id)}>
+                <Button variant="outline-secondary" onClick={flipCard(id, false, true)}>
                   Edit
                 </Button>
               </Col>
@@ -132,7 +135,7 @@ export default function AlarmListItem(props) {
         </Card>
       </Container>
       <Card>
-        <AlarmOption flipCard={flipCard} id={id} status={"edit"} />
+        <AlarmOption flipCard={flipCard} id={props.id} itemProps={props} status={"edit"} />
         <Button variant="outline-secondary" onClick={flipCard(id, true)}>
           Save Edit
         </Button>

@@ -8,7 +8,8 @@ import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
 
 function AlarmOption(props) {
-  const { id, flipCard, status } = props;
+  const { id, flipCard, itemProps } = props;
+
 
   const {
     hasAlarm,
@@ -20,6 +21,13 @@ function AlarmOption(props) {
     editOptions,
     setEditOptions,
   } = useContext(AlarmContext);
+
+
+  // useEffect(()=> {
+  //   if(editOptions)
+  //   console.log(id)
+
+  // },[editOptions])
 
   const initialValues = {
     id: id || "",
