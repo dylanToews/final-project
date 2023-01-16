@@ -7,6 +7,7 @@ import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
 import "../../styles/Dropdowns.css";
 import "../../styles/Contacts.css";
+import "../../styles/Cards.css";
 
 function AlarmOption(props) {
   const { id, flipCard, itemProps } = props;
@@ -98,8 +99,8 @@ function AlarmOption(props) {
   }, [editStatus]);
 
   return (
-    <div className="option-Container">
-      <div className={`wrapper-option ${hasAlarm && "disable"}`}>
+    <div className="option-Container card-background">
+      <div className={`wrapper-option ${hasAlarm && "disable"} card-background`}>
         <div className="name-row">
           <input
           className="inputBox"
@@ -112,7 +113,7 @@ function AlarmOption(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="time-row">
+        <div className="time-row card-background">
           <select
             name="hour"
             value={formData.hour}
@@ -156,7 +157,7 @@ function AlarmOption(props) {
             <option value="PM">Pm</option>
           </select>
         </div>
-        <div className="option-Container">
+        <div className="option-Container card-background">
           <select
             name="contact_name"
             value={formData.contact_name}

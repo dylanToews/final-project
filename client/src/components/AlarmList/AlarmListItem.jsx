@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
+import "../../styles/Cards.css"
 import AlarmOption from "../AlarmOption/AlarmOption";
 import ReactCardFlip from "react-card-flip";
 
@@ -78,13 +79,13 @@ export default function AlarmListItem(props) {
   return (
     <ReactCardFlip isFlipped={alarmFlip.has(id)} flipDirection="horizontal">
       <Container fluid>
-        <Card className="mt-2 shadow-lg ">
-          <Card.Body>
-            <Row>
-              <Col className="display-10">
+        <Card className="mt-2 shadow-lg card-background">
+          <Card.Body className="card-background">
+            <Row className="card-background">
+              <Col className="display-10 card-background">
                 {alarm_name ? alarm_name : "(no label)"}
               </Col>
-              <Col>
+              <Col className="card-background">
                 <Button
                   variant="outline-secondary"
                   onClick={() => onToggle(id)}
@@ -95,11 +96,11 @@ export default function AlarmListItem(props) {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <Card.Title className="display-10">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
+              <Col className="card-background">
+                <Card.Title className="display-10 card-background">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
               </Col>
 
-              <Col>
+              <Col className="card-background">
                 <Button variant="outline-secondary" onClick={flipCard(id, false, true)}>
                   Edit
                 </Button>
@@ -107,8 +108,8 @@ export default function AlarmListItem(props) {
             </Row>
 
             <Row>
-              <Col>
-                <Dropdown>
+              <Col className="card-background">
+                <Dropdown className="card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
                     id="dropdown-basic"
@@ -122,7 +123,7 @@ export default function AlarmListItem(props) {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col>
+              <Col className="card-background">
                 <Button
                   variant="outline-secondary"
                   onClick={() => removeAlarm(id)}
