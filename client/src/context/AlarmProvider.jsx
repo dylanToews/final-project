@@ -109,7 +109,7 @@ function ContextAlarm({ children }) {
   useEffect(() => {
   
     const requests = [
-      axios.get(`/api/v1/alarmItems/${user_email}`),
+      axios.get(`/api/v1/alarms/${user_email}`),
       axios.get(`/api/v1/contactItems/${user_email}`),
       axios.get(`/api/v1/soundItems/${user_email}`),
     ];
@@ -213,7 +213,7 @@ function ContextAlarm({ children }) {
       };
       // console.log("newAlarmDate", newAlarmItem)
 
-      axios.post("/api/v1/alarmItems", { newAlarmItem }).then((res) => {
+      axios.post("/api/v1/alarms", { newAlarmItem }).then((res) => {
         newAlarmItem.id = res.data.id;
         setAlarmItems([...alarmItems, newAlarmItem]);
         console.log(alarmItems)
@@ -225,7 +225,7 @@ function ContextAlarm({ children }) {
         order_val:  getOrderValue(formData),
         ...formData,
       };
-      axios.put("/api/v1/alarmItems/edit", { updatedAlarmItem })
+      axios.put("/api/v1/alarms/edit", { updatedAlarmItem })
         .then((res) => {
 
           const copiedAlarmItems = [...alarmItems];

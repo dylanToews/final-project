@@ -38,7 +38,7 @@ export default function AlarmListItem(props) {
         return alarm.id !== id;
       });
     setAlarmItems(filtered);
-    axios.delete(`api/v1/alarmItems/${id}`).then((res) => {});
+    axios.delete(`api/v1/alarms/${id}`).then((res) => {});
   };
 
   // find current alarmItem
@@ -49,7 +49,7 @@ export default function AlarmListItem(props) {
   const onToggle = (id) => {
     const updatedAlarmItems = [...alarmItems];
     updatedAlarmItems[alarmItemIndex].active = nextToggle;
-    axios.put(`/api/v1/alarmItems/${id}`).then((res) => {
+    axios.put(`/api/v1/alarms/${id}`).then((res) => {
       setAlarmItems(updatedAlarmItems);
     });
   };
