@@ -3,6 +3,8 @@ import { authContext } from "../providers/AuthProvider";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import "../styles/LoginRegister.css";
+
 
 
 export default function Login_Register(props) {
@@ -19,22 +21,32 @@ export default function Login_Register(props) {
   }
 
   return (
-<div className="Login">
-<Form className="wrapper" onSubmit={handleSubmit}>
-  <Form.Group className="mb-3" controlId="email"onChange={handleEmail}>
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
+  <div className="page Login">
+    <br/><br/>
+  <img
+    src={require('../startle.png')}
+    width="20%"
+    height="20%"
+    className="logo"
+    alt="Startle logo"
+  />
+  <startle>Startle!</startle>
+  <br/>
+  <Form className="wrapper login-items" onSubmit={handleSubmit}>
+  <Form.Group className="mb-3 login-items" controlId="email"onChange={handleEmail}>
+    <Form.Label className="login-text">Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" className="login-field"/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
   </Form.Group>
 
-  <Form.Group className="mb-3" controlId="password"onChange={handlePassword}>
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+  <Form.Group className="mb-3 login-items" controlId="password"onChange={handlePassword}>
+    <Form.Label className="login-text">Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" className="login-field"/>
   </Form.Group>
 
-  <Button variant="primary" type="submit"onSubmit={handleSubmit}>
+  <Button variant="primary" type="submit"onSubmit={handleSubmit} className="login-button">
     Submit
   </Button>
 </Form>
