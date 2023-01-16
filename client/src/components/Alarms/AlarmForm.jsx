@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import { AlarmContext } from "../context/AlarmProvider";
-import { minutesNumber, hourNumber } from "../../func";
-import AlarmListItem from "../AlarmList/AlarmListItem";
+import { alarmContext } from "../../context/AlarmProvider";
+import { minutesNumber, hourNumber } from "../../helpers/alarmHelpers";
+import AlarmListItem from "./AlarmListItem";
 import { Button } from "react-bootstrap";
 import "../../styles/AlarmOption.css";
 import "../../styles/Alarms.css";
@@ -9,7 +9,7 @@ import "../../styles/Dropdowns.css";
 import "../../styles/Contacts.css";
 import "../../styles/Cards.css";
 
-function AlarmOption(props) {
+function AlarmForm(props) {
   const {
     id,
     flipCard,
@@ -38,7 +38,7 @@ function AlarmOption(props) {
     setEditOptions,
     editValues,
     setEditValues
-  } = useContext(AlarmContext);
+  } = useContext(alarmContext);
 
 
   const initialValues = {
@@ -232,4 +232,4 @@ function AlarmOption(props) {
   );
 }
 
-export default AlarmOption;
+export default AlarmForm;

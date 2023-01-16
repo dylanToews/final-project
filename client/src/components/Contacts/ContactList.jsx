@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { AlarmContext } from "../context/AlarmProvider";
+import { alarmContext } from "../../context/AlarmProvider";
 import ContactListItem from "./ContactListItem";
 import "../../styles/Contacts.css";
 
 export default function ContactList() {
-  const { contactItems } = useContext(AlarmContext);
+  const { contactItems } = useContext(alarmContext);
 
   const parsedContactItems = contactItems.map((contactItem) => (
     <ContactListItem key={contactItem.id} {... contactItem} />

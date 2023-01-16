@@ -1,7 +1,7 @@
 import { useContext } from "react";
 // import "../../styles/Nav.css";
 import { Link } from "react-router-dom";
-import { authContext } from "../providers/AuthProvider";
+import { authContext } from "../context/AuthProvider";
 
 import "../styles/Cards.css"
 
@@ -28,7 +28,7 @@ function NavbarComponent() {
     >
       <Navbar.Brand className="me-auto">
         <img
-          src={require('../startle.png')}
+          src="startle.png"
           width="50"
           height="50"
           className="d-inline-block align-top nav-background"

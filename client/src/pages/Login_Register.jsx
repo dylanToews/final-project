@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
-import { authContext } from "../providers/AuthProvider";
+import { authContext } from "../context/AuthProvider";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import NavbarComponent from "../components/navbar";
+import NavbarComponent from "../components/Navbar";
 
 import "../styles/App.css"
 

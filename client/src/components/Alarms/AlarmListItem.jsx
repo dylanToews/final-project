@@ -1,6 +1,6 @@
 import { useContext, useCallback } from "react";
 import axios from "axios";
-import { AlarmContext } from "../context/AlarmProvider";
+import { alarmContext } from "../../context/AlarmProvider";
 import {
   Card,
   Button,
@@ -15,7 +15,7 @@ import {
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
 import "../../styles/Cards.css"
-import AlarmOption from "../AlarmOption/AlarmOption";
+import AlarmForm from "./AlarmForm";
 import ReactCardFlip from "react-card-flip";
 
 export default function AlarmListItem(props) {
@@ -30,7 +30,7 @@ export default function AlarmListItem(props) {
     alarm_name,
   } = props;
   const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions, initialEditValues, setEditValues } =
-    useContext(AlarmContext);
+    useContext(alarmContext);
 
   const removeAlarm = (id) => {
     const filtered = (current) =>
@@ -117,7 +117,7 @@ export default function AlarmListItem(props) {
 
             <Row className="card-row card-background">
               <Col className="card-background">
-                <Dropdown drop="up" className="card-background">
+                <Dropdown drop="end" className="card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
                     
@@ -127,7 +127,7 @@ export default function AlarmListItem(props) {
                     Details
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu align="end">
                     <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
                     <Dropdown.Item>Sound: {sound_name}</Dropdown.Item>
                   </Dropdown.Menu>
@@ -146,7 +146,7 @@ export default function AlarmListItem(props) {
         </Card>
       </Container>
       <Card>
-        <AlarmOption 
+        <AlarmForm 
         flipCard={flipCard} 
         id={props.id} 
         hour={hour}

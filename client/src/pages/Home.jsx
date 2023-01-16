@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import AlarmOption from '../components/AlarmOption/AlarmOption';
-import DigitalClock from '../components/DigitalClock/DigitalClock';
+import AlarmOption from '../components/Alarms/AlarmForm';
+import DigitalClock from '../components/DigitalClock';
 import Header from '../components/Header';
-import AlarmList from '../components/AlarmList/AlarmList';
-import { AlarmContext } from "../components/context/AlarmProvider";
+import AlarmList from '../components/Alarms/AlarmList';
+import { alarmContext } from "../context/AlarmProvider";
 import ReactCardFlip from "react-card-flip";
 import {Button} from "react-bootstrap"
 
@@ -15,7 +15,7 @@ function Home() {
     setNotificationDetails,
     flip,
     setFlip
-  } = useContext(AlarmContext);
+  } = useContext(alarmContext);
 
   const testingNotificationDetails = {
     alarm_time: "11:37 AM:00",

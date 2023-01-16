@@ -1,9 +1,9 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import axios from "axios";
-import months from "../../data";
-import { authContext } from "../../providers/AuthProvider";
+import { months } from "../helpers/alarmHelpers";
+import { authContext } from "./AuthProvider";
 
-export const AlarmContext = createContext();
+export const alarmContext = createContext();
 
 function ContextAlarm({ children }) {
   const [hourDigital, setHourDigital] = useState("");
@@ -239,7 +239,7 @@ function ContextAlarm({ children }) {
   };
 
   return (
-    <AlarmContext.Provider
+    <alarmContext.Provider
       value={{
         hourDigital,
         minutesDigital,
@@ -274,7 +274,7 @@ function ContextAlarm({ children }) {
       }}
     >
       {children}
-    </AlarmContext.Provider>
+    </alarmContext.Provider>
   );
 }
 

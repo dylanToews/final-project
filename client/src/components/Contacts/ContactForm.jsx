@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { AlarmContext } from "../context/AlarmProvider";
-import { authContext } from "../../providers/AuthProvider";
+import { alarmContext } from "../../context/AlarmProvider";
+import { authContext } from "../../context/AuthProvider";
 import "../../styles/Contacts.css"
 import "../../styles/Cards.css"
 
 function ContactForm() {
-  const { contactItems, setContactItems } = useContext(AlarmContext);
+  const { contactItems, setContactItems } = useContext(alarmContext);
   const { user } = useContext(authContext);
 
   const initialValues = {

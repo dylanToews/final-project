@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { AlarmContext } from "../context/AlarmProvider";
+import { alarmContext } from "../../context/AlarmProvider";
 import SoundListItem from "./SoundListItem";
 import "../../styles/Contacts.css"
 
 
 export default function SoundList() {
-  const { soundItems } = useContext(AlarmContext);
+  const { soundItems } = useContext(alarmContext);
 
   const parsedSoundItems = soundItems.map((soundItem) => (
     <SoundListItem key={soundItem.id} {...soundItem} />

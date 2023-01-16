@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import { AlarmContext } from "../context/AlarmProvider";
-import { authContext } from "../../providers/AuthProvider";
+import { alarmContext } from "../../context/AlarmProvider";
+import { authContext } from "../../context/AuthProvider";
 import {Button} from "react-bootstrap"
 
 import "../../styles/Cards.css"
@@ -9,7 +9,7 @@ import "../../styles/AlarmOption.css";
 
 
 export default function RecordingsList(props) {
-  const { soundItems, setSoundItems } = useContext(AlarmContext);
+  const { soundItems, setSoundItems } = useContext(alarmContext);
 
   const { recordings, deleteAudio } = props;
   const {user} = useContext(authContext)

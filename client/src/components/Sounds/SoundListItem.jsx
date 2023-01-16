@@ -1,11 +1,11 @@
 import { useContext } from "react"
-import { AlarmContext } from "../context/AlarmProvider"
+import { alarmContext } from "../../context/AlarmProvider"
 import axios from "axios"
 
 
 export default function SoundListItem(props) {
   const { sound_name, sound_url, id } = props;
-  const { setSoundItems } = useContext(AlarmContext);
+  const { setSoundItems } = useContext(alarmContext);
 
   const removeSound = (id) => {
     const filtered = (current) =>

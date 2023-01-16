@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import "../../styles/Cards.css";
-import "../../styles/DigitalClock.scss"
-import { AlarmContext } from "../context/AlarmProvider";
+
+import { alarmContext } from "../context/AlarmProvider";
+
+import "../styles/Cards.css";
+import "../styles/digital-clock.scss"
 
 function DigitalClock() {
   const { hourDigital, minutesDigital, secondsDigital, amPm, dayNow, monthNow, yearNow } =
-    useContext(AlarmContext);
+    useContext(alarmContext);
 
     
 

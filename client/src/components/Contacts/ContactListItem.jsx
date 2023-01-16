@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useContext } from "react";
-import { AlarmContext } from "../context/AlarmProvider";
+import { alarmContext } from "../../context/AlarmProvider";
 import "../../styles/Contacts.css"
 
 export default function ContactListItem(props) {
   const { contact_name, contact_number, id } = props;
-  const { setContactItems } = useContext(AlarmContext);
+  const { setContactItems } = useContext(alarmContext);
 
   function formatPhoneNumber(phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');

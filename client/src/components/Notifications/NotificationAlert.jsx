@@ -1,13 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
-import { AlarmContext } from "../context/AlarmProvider";
-import { authContext } from "../../providers/AuthProvider";
+
+import { alarmContext } from "../../context/AlarmProvider";
+import { authContext } from "../../context/AuthProvider";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import AlarmOption from "../AlarmOption/AlarmOption";
+import AlarmForm from "../Alarms/AlarmForm";
 
 export default function NotificationAlert(props) {
-  const { setNotification, notificationDetails } = useContext(AlarmContext);
+  const { setNotification, notificationDetails } = useContext(alarmContext);
   const { user } = useContext(authContext);
 
   const twilioData = {

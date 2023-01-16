@@ -1,5 +1,5 @@
-import ContactForm from '../components/ContactComponents/ContactForm';
-import ContactList from '../components/ContactComponents/ContactList';
+import ContactForm from '../components/Contacts/ContactForm';
+import ContactList from '../components/Contacts/ContactList';
 import "../styles/App.css";
 import "../styles/Contacts.css"
 

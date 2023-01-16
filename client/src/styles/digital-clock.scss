@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 .clock__bg {
@@ -10,44 +9,6 @@
   background-color: transparent;
 }
 
-.clock__am-pm {
-  color: #fff;
-  height: 100%;
-  font-size: xx-large;
-}
-
-
-.clock__text {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.clock__text-hour,
-.clock__text-minutes {
-  font-size: var(--biggest-font-size);
-  font-weight: 400;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-}
-
-.clock__text-seconds {
-  font-size: 28px;
-  padding-left: 6px;
-  padding-top: 6px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
-
-.clock__text-ampm {
-  font-size: var(--biggest-font-size);
-  color: var(--title-color);
-  font-weight: 400;
-  padding-left: 6px;
-  padding-top: -6px;
-  font-family: 'Roboto', sans-serif;
-}
-
 .clock__date {
   text-align: center;
   font-size: 24px;
@@ -57,18 +18,6 @@
   font-weight: 300;
   background-color: transparent;
 }
-
-.card {
-  display: flex ;
-  flex-direction: column ;
-  border-style: solid ;
-  border-width: 3px !important;
-  border-radius: 15px !important;
-  border-color: #70ACB1 !important;
-  background-color: #C6F1E7 !important;
-  padding: 5px 5px 5px 5px;
-}
-
 
 .clock {
   &-day {
@@ -92,15 +41,6 @@
     }
   }
 }
-
-// body {
-//   background: linear-gradient(45deg, #1870ed 0, #f18f88 100%);
-//   font-family: 'Montserrat', 'sans-serif';
-//   min-height: 100vh; 
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
 
 .clock {
   &-container {
