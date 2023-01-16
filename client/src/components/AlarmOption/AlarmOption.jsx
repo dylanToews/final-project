@@ -62,7 +62,8 @@ function AlarmOption(props) {
       formData.sound_name &&
       formData.hour &&
       formData.minutes &&
-      formData.am_pm
+      formData.am_pm &&
+      formData.alarm_name
       //could add error state here -- populate error state if all forms are not selected
     ) {
       addNewParams(formData);
@@ -70,6 +71,8 @@ function AlarmOption(props) {
       if (!flipCard) {
         setFlip(!flip);
       }
+    } else {
+      
     }
   };
 
