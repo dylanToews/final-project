@@ -38,6 +38,7 @@ function ContextAlarm({ children }) {
   const [alarmFlip, setAlarmFlip] = useState(new Set());
   const [editOptions, setEditOptions] = useState(false)
   const [editValues, setEditValues] = useState()
+  const [editFlip, setEditFlip] = useState(false)
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -270,6 +271,8 @@ function ContextAlarm({ children }) {
         setEditOptions,
         editValues,
         setEditValues,
+        editFlip, 
+        setEditFlip,
         // initialEditValues,
      
       }}
