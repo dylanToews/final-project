@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { AlarmContext } from "../context/AlarmProvider";
 import SoundListItem from "./SoundListItem";
+import "../../styles/Contacts.css"
+
 
 export default function SoundList() {
   const { soundItems } = useContext(AlarmContext);

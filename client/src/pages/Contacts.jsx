@@ -1,6 +1,7 @@
 import ContactForm from '../components/ContactComponents/ContactForm';
 import ContactList from '../components/ContactComponents/ContactList';
 import "../styles/App.css";
+import "../styles/Contacts.css"
 
 function Contacts() {
     return (

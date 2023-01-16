@@ -18,13 +18,13 @@ export default function SoundListItem(props) {
   }
 
   return (
-    <li className="SoundListItem">
+    <ul className="ContactListItem">
       <div key={id}>
       <p>Sound Title: {sound_name}</p><br />
       <audio controls controlsList="nodownload" src={`/audio/${sound_url}`}></audio>
-      <button onClick={() => removeSound(id)}>Delete</button>
+      <button className="deleteButton" onClick={() => removeSound(id)}>Delete</button>
 
       </div>
-    </li>
+    </ul>
   )
 }

@@ -5,18 +5,22 @@ import SoundList from '../components/Sounds/SoundList';
 import useRecorder from '../hooks/useRecorder';
 import useRecordingsList from '../hooks/useRecordingsList';
 
+import "../styles/Contacts.css"
+
+
+
 function Sounds() {
   const { recorderState, ...handlers } = useRecorder();
   const { audio } = recorderState;
   const { recordings, deleteAudio } = useRecordingsList(audio);
 
     return (
-      <section className="App">
+      <section className="Contacts">
       <div className="recorder-container">
       
         {recordings.length === 0 && 
         <>
-          <h1 className="title">Alarm Tones</h1>
+          <h1 className="title">Sound Recorder</h1>
           <RecorderControls recorderState={recorderState} handlers={handlers} />
         </>
         }
