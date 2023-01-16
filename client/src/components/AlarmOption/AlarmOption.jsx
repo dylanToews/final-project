@@ -20,13 +20,10 @@ function AlarmOption(props) {
     sound_name,
     active,
     alarm_name,
-    currentAlarmItem
+    currentAlarmItem,
   } = props;
 
-  // console.log("id",id)
-  useEffect(() => {
-    // console.log(currentAlarmItem);
-  }, []);
+
   const {
     hasAlarm,
     addNewParams,
@@ -37,9 +34,12 @@ function AlarmOption(props) {
     editOptions,
     setEditOptions,
     editValues,
-    setEditValues
+    setEditValues,
+    setEditFlip,
+    // initialEditValues
   } = useContext(AlarmContext);
 
+  let editStatus = false;
 
   const initialValues = {
     id: id || "",
@@ -52,19 +52,87 @@ function AlarmOption(props) {
     active: true,
   };
 
-
-
-  useEffect(()=> {
-    console.log("editOptions", editValues[0])
-  
-    },[editOptions])
+  const initialEditValues = {
+    active: true,
+    alarm_name: "Please Enter Alarm Title" || editOptions.alarm_name,
+    am_pm: "AM/PM",
+    contact_name: "Please Select A Contact",
+    contact_number: "",
+    hour: "Hour",
+    id: id || "",
+    minutes: "Minutes",
+    order_val: "",
+    sound_name: "Please Select A Sound",
+    sound_string: "",
+    user_email: "",
+  };
 
   const [formData, setFormData] = useState(initialValues);
+
+  const [editFormData, setEditFormData] = useState(initialEditValues);
+
+  useEffect(() => {
+    if (editValues) {
+      setFormData(editValues[0])
+      setEditFormData(editValues[0]);
+    }
+  }, [editValues]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    // setEditFormData({ ...editFormData, [name]: value });
   };
+
+  const setAlarm = (form) => {
+    console.log("Inside set Alarm", form)
+    if (
+      form.contact_name &&
+      form.sound_name &&
+      form.hour &&
+      form.minutes &&
+      form.am_pm &&
+      form.alarm_name
+    ) {
+      addNewParams(form);
+
+      // setFormData(initialValues);
+      // setEditFormData(initialEditValues)
+      if (!flipCard) {
+        setFlip(!flip);
+      }
+    }
+  };
+
+  let runEdit = false
+
+  const editOrCreate = (input) => {
+    if (input === "create") {
+      // console.log("I am created using", formData);
+      setAlarm(formData);
+      setEditFlip(true)
+ 
+    }
+    if (input === "edit") {
+      // console.log("I am created using", formData)
+      
+      // setEditOptions(false)
+      setAlarm(formData);
+      setEditFormData(initialEditValues)
+    }
+  };
+
+
+  if (editOptions === true) {
+    editStatus = true;
+  }
+  
+  useEffect(() => {
+    if (editStatus === true) {
+      setEditOptions(false);
+      editOrCreate("edit")
+    }
+  }, [editStatus]);
 
   const parsedContacts = Object.values(
     contactItems.map((alarmItem) => (
@@ -94,47 +162,18 @@ function AlarmOption(props) {
       return true;
     }
     return false;
-  }
-
-  const setAlarm = (event) => {
-    if (
-      formData.contact_name &&
-      formData.sound_name &&
-      formData.hour &&
-      formData.minutes &&
-      formData.am_pm &&
-      formData.alarm_name
-      //could add error state here -- populate error state if all forms are not selected
-    ) {
-      addNewParams(formData);
-      setFormData(initialValues);
-      if (!flipCard) {
-        setFlip(!flip);
-      }
-    } 
   };
 
   const handleCancel = (event) => {
     setFormData(initialValues);
     setFlip(!flip);
-  }
-
-  let editStatus = false;
-
-  if (editOptions === true) {
-    editStatus = true;
-    setAlarm();
-  }
-
-  useEffect(() => {
-    if (editStatus === true) {
-      setEditOptions(false);
-    }
-  }, [editStatus]);
+  };
 
   return (
     <div className="option-Container card-background">
-      <div className={`wrapper-option ${hasAlarm && "disable"} card-background`}>
+      <div
+        className={`wrapper-option ${hasAlarm && "disable"} card-background`}
+      >
         <div className="name-row">
           <input
             className="inputBox"
@@ -143,7 +182,7 @@ function AlarmOption(props) {
             required
             maxLength="28"
             size="30"
-            placeholder={editValues[0].alarm_name}
+            placeholder={editFormData.alarm_name}
             onChange={handleChange}
           />
         </div>
@@ -155,7 +194,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].hour}
+              {editFormData.hour}
             </option>
             {hourNumber.map((hour, index) => (
               <option key={index} value={hour}>
@@ -170,7 +209,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].minutes}
+              {editFormData.minutes}
             </option>
             {minutesNumber.map((minutes, index) => (
               <option key={index} value={minutes}>
@@ -185,7 +224,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].am_pm}
+              {editFormData.am_pm}
             </option>
             <option value="AM">Am</option>
             <option value="PM">Pm</option>
@@ -198,7 +237,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editValues[0].contact_name}</option>
+            <option value="">{editFormData.contact_name}</option>
             {parsedContacts}
           </select>
 
@@ -209,19 +248,26 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editValues[0].sound_name}</option>
+            <option value="">{editFormData.sound_name}</option>
             {parsedSounds}
           </select>
           <div className="Contacts-Sound"></div>
         </div>
 
-        {flip && (
+        
           <div className="button-row card-background">
-          <Button variant={(formCheck() && "outline-success") || (!formCheck() && "outline-danger")} className={!formCheck() && "disabled"} onClick={setAlarm}>
-            Set New Alarm
-          </Button>
+            <Button
+              variant={
+                (formCheck() && "outline-success") ||
+                (!formCheck() && "outline-danger")
+              }
+              className={!formCheck() && "disabled"}
+              onClick={() => editOrCreate("create")}
+            >
+              Set New Alarm
+            </Button>
           </div>
-        )}
+    
         {flip && (
           <Button variant="outline-secondary" onClick={handleCancel}>
             Cancel

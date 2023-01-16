@@ -17,6 +17,7 @@ import "../../styles/AlarmOption.css";
 import "../../styles/Cards.css"
 import AlarmOption from "../AlarmOption/AlarmOption";
 import ReactCardFlip from "react-card-flip";
+import { useEffect } from "react";
 
 export default function AlarmListItem(props) {
   const {
@@ -29,7 +30,7 @@ export default function AlarmListItem(props) {
     active,
     alarm_name,
   } = props;
-  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions, initialEditValues, setEditValues } =
+  const { alarmItems, setAlarmItems, alarmFlip, setAlarmFlip, editOptions, setEditOptions, initialEditValues, setEditValues, editFlip, setEditFlip } =
     useContext(AlarmContext);
 
   const removeAlarm = (id) => {
@@ -62,10 +63,11 @@ export default function AlarmListItem(props) {
       setEditValues(filtered)
   };
 
+  
   const flipCard = (id, save, initial) => {
     return (e) => {
-      setEditValues([initialEditValues])
       e.preventDefault();
+      // 
       let flipped = new Set(alarmFlip);
       if (flipped.has(id)) {
         flipped.delete(id);
@@ -75,16 +77,29 @@ export default function AlarmListItem(props) {
       setAlarmFlip(flipped);
       if(save === true){
         setEditOptions(true)
+        findAlarm(id)
+        // setEditValues([initialEditValues])
       }
       if(initial === true){
         findAlarm(id)
-        // console.log("id", id)
       }
     };
   };
+  
+  let editFlipWatcher = false
+  
+  if(editFlip === true) {
+    editFlipWatcher = true
+  }
 
+  useEffect(() => {
+    if(editFlipWatcher === true){
+      console.log("in use effect", id)
+      flipCard(id, true)
+      // setEditFlip(false)
+    }
 
-
+  }, [editFlipWatcher])
 
   return (
     <ReactCardFlip isFlipped={alarmFlip.has(id)} flipDirection="horizontal">
@@ -147,7 +162,7 @@ export default function AlarmListItem(props) {
       </Container>
       <Card>
         <AlarmOption 
-        flipCard={flipCard} 
+        flipCard={flipCard(id)} 
         id={props.id} 
         hour={hour}
         minutes={minutes}
@@ -158,11 +173,11 @@ export default function AlarmListItem(props) {
         alarm_name={alarm_name}
          status={"edit"}
          currentAlarmItem={currentAlarmItem} />
-        <Button variant="outline-secondary" onClick={flipCard(id, true)}>
+        {/* <Button variant="outline-secondary" onClick={flipCard(id, true)}>
           Save Edit
-        </Button>
+        </Button> */}
         <Button variant="outline-secondary" onClick={flipCard(id)}>
-          Cancel
+          Close Editor
         </Button>
       </Card>
     </ReactCardFlip>

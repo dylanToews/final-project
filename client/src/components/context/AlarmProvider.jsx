@@ -19,25 +19,26 @@ function ContextAlarm({ children }) {
   const [contactItems, setContactItems] = useState([]);
   const [soundItems, setSoundItems] = useState([]);
   
-  const initialEditValues = {
-    active: true,
-    alarm_name: "Please Enter Alarm Title",
-    am_pm: "AM/PM",
-    contact_name: "Please Select A Contact",
-    contact_number: "",
-    hour: "Hour",
-    id: "",
-    minutes: "Minutes",
-    order_val: "",
-    sound_name: "Please Select A Sound",
-    sound_string: "",
-    user_email: "",
-  }
+  // const initialEditValues = {
+  //   active: true,
+  //   alarm_name: "Please Enter Alarm Title",
+  //   am_pm: "AM/PM",
+  //   contact_name: "Please Select A Contact",
+  //   contact_number: "",
+  //   hour: "Hour",
+  //   id: "",
+  //   minutes: "Minutes",
+  //   order_val: "",
+  //   sound_name: "Please Select A Sound",
+  //   sound_string: "",
+  //   user_email: "",
+  // }
 
   const [flip, setFlip] = useState(false);
   const [alarmFlip, setAlarmFlip] = useState(new Set());
   const [editOptions, setEditOptions] = useState(false)
-  const [editValues, setEditValues] = useState([initialEditValues])
+  const [editValues, setEditValues] = useState()
+  const [editFlip, setEditFlip] = useState(false)
 
   const [notification, setNotification] = useState(false);
   const [notificationDetails, setNotificationDetails] = useState();
@@ -173,7 +174,7 @@ function ContextAlarm({ children }) {
 
   ///function for adding new alarms. function is called within AlarmOption
   const addNewParams = (formData) => {
-    setEditOptions(initialEditValues)
+
 
     const currentSoundItem = soundItems.filter((e) => {
       return e.sound_name === formData.sound_name;
@@ -233,6 +234,7 @@ function ContextAlarm({ children }) {
             return alarm.id !== formData.id;
           });
           setAlarmItems([...filteredAlarmItems, updatedAlarmItem]);
+
         });
      
     }
@@ -269,7 +271,9 @@ function ContextAlarm({ children }) {
         setEditOptions,
         editValues,
         setEditValues,
-        initialEditValues,
+        editFlip, 
+        setEditFlip,
+        // initialEditValues,
      
       }}
     >
