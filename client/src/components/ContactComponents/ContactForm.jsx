@@ -54,7 +54,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="App">
+    <div className="ContactForm">
       <div className="container">
         <h1>Add a New Contact</h1>
         <form className="Form-at" onSubmit={handleSubmit}>
