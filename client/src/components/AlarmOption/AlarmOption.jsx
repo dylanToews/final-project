@@ -27,6 +27,7 @@ function AlarmOption(props) {
   useEffect(() => {
     // console.log(currentAlarmItem);
   }, []);
+
   const {
     hasAlarm,
     addNewParams,
@@ -37,10 +38,13 @@ function AlarmOption(props) {
     editOptions,
     setEditOptions,
     editValues,
-    setEditValues
+    setEditValues,
+    // initialEditValues
   } = useContext(AlarmContext);
 
 
+  
+  
   const initialValues = {
     id: id || "",
     alarm_name: "",
@@ -51,19 +55,40 @@ function AlarmOption(props) {
     am_pm: "",
     active: true,
   };
-
-
-
-  useEffect(()=> {
-    console.log("editOptions", editValues[0])
   
-    },[editOptions])
+
+  const initialEditValues = {
+    active: true,
+    alarm_name: "Please Enter Alarm Title" || editOptions.alarm_name,
+    am_pm: "AM/PM",
+    contact_name: "Please Select A Contact",
+    contact_number: "",
+    hour: "Hour",
+    id: id || "",
+    minutes: "Minutes",
+    order_val: "",
+    sound_name: "Please Select A Sound",
+    sound_string: "",
+    user_email: "",
+  }
+
 
   const [formData, setFormData] = useState(initialValues);
+  
+  const [editFormData, setEditFormData] = useState(initialEditValues)
 
+  useEffect(() => {
+if(editValues){
+  setEditFormData(editValues[0])
+  console.log("edit values", editValues)
+}
+
+  }, [editValues])
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value })
+    setEditFormData({...editFormData, [name]: value});
+    console.log("handle change", editFormData)
   };
 
   const parsedContacts = Object.values(
@@ -97,6 +122,11 @@ function AlarmOption(props) {
   }
 
   const setAlarm = (event) => {
+    // if(editStatus === true){
+
+    //   console.log("editFormData", editFormData)
+    // }
+
     if (
       formData.contact_name &&
       formData.sound_name &&
@@ -104,9 +134,17 @@ function AlarmOption(props) {
       formData.minutes &&
       formData.am_pm &&
       formData.alarm_name
+
+
+
       //could add error state here -- populate error state if all forms are not selected
     ) {
-      addNewParams(formData);
+      // console.log("form Data", formData)
+   
+      if(editStatus === false){
+
+        addNewParams(formData);
+      }
       setFormData(initialValues);
       if (!flipCard) {
         setFlip(!flip);
@@ -123,12 +161,13 @@ function AlarmOption(props) {
 
   if (editOptions === true) {
     editStatus = true;
-    setAlarm();
+    // setAlarm();
   }
-
+  
   useEffect(() => {
     if (editStatus === true) {
       setEditOptions(false);
+      console.log("edit Values", editValues)
     }
   }, [editStatus]);
 
@@ -143,7 +182,7 @@ function AlarmOption(props) {
             required
             maxLength="28"
             size="30"
-            placeholder={editValues[0].alarm_name}
+            placeholder={"testmode"}
             onChange={handleChange}
           />
         </div>
@@ -155,7 +194,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].hour}
+            {"testmode"}
             </option>
             {hourNumber.map((hour, index) => (
               <option key={index} value={hour}>
@@ -170,7 +209,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].minutes}
+            {"testmode"}
             </option>
             {minutesNumber.map((minutes, index) => (
               <option key={index} value={minutes}>
@@ -185,7 +224,7 @@ function AlarmOption(props) {
             className="Minkowski"
           >
             <option value="" disabled defaultValue={""} hidden>
-            {editValues[0].am_pm}
+            {"testmode"}
             </option>
             <option value="AM">Am</option>
             <option value="PM">Pm</option>
@@ -198,7 +237,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editValues[0].contact_name}</option>
+            <option value="">{"testmode"}</option>
             {parsedContacts}
           </select>
 
@@ -209,7 +248,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editValues[0].sound_name}</option>
+            <option value="">{"testmode"}</option>
             {parsedSounds}
           </select>
           <div className="Contacts-Sound"></div>

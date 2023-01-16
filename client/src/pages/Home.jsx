@@ -14,7 +14,9 @@ function Home() {
     setNotification,
     setNotificationDetails,
     flip,
-    setFlip
+    setFlip,
+    setEditValues,
+    initialEditValues
   } = useContext(AlarmContext);
 
   const testingNotificationDetails = {
@@ -31,6 +33,13 @@ function Home() {
     setNotification(true);
   }
 
+
+  function createAlarmFlip() {
+    setFlip(!flip)
+    // setEditValues(initialEditValues)
+
+  }
+
   return (
     <div className="App">
       <Header />
@@ -41,7 +50,7 @@ function Home() {
             <div className="card card-background">
               <ReactCardFlip isFlipped={flip} flipDirection="vertical" className="card-background">
                 <div className="card-background">
-                  <Button variant="outline-secondary" className="card-background" onClick={() => setFlip(!flip)}>
+                  <Button variant="outline-secondary" className="card-background" onClick={createAlarmFlip}>
                     Create New Alarm
                   </Button>
                 </div>

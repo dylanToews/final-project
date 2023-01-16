@@ -63,8 +63,8 @@ export default function AlarmListItem(props) {
 
   const flipCard = (id, save, initial) => {
     return (e) => {
-      setEditValues([initialEditValues])
       e.preventDefault();
+      // 
       let flipped = new Set(alarmFlip);
       if (flipped.has(id)) {
         flipped.delete(id);
@@ -74,10 +74,11 @@ export default function AlarmListItem(props) {
       setAlarmFlip(flipped);
       if(save === true){
         setEditOptions(true)
+        findAlarm(id)
+        // setEditValues([initialEditValues])
       }
       if(initial === true){
-        findAlarm(id)
-        // console.log("id", id)
+       findAlarm(id)
       }
     };
   };
