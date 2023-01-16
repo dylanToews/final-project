@@ -13,6 +13,10 @@
 
 }
 
+.login-form {
+  padding-left: 1em;
+}
+
 .nav-background {
   background-color: rgb(33, 37, 41);
 }
@@ -41,6 +45,10 @@
   border-radius: 6px;
   padding-left: 22px;
 } 
+
+.login-input {
+  max-width: 50%;
+}
 
 
 /* EFFECTS BUTTONS WITHOUT CLASSNAMES  */

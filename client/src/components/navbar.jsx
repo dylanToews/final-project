@@ -36,14 +36,7 @@ function NavbarComponent() {
         />
       </Navbar.Brand>
 
-      <Button
-        variant="outline-secondary"
-        onClick={logout}
-        className="mt-auto me-2"
-        // className="me-2"
-      >
-        Logout
-      </Button>
+      { user && <>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
         className="mr-2 nav-background"
@@ -65,9 +58,18 @@ function NavbarComponent() {
           <Nav.Link className="nav-background" as={Link} to="/About">
             About
           </Nav.Link>
+          <Button
+        variant="outline-secondary"
+        onClick={logout}
+        className="mt-auto me-2 logout-button"
+        // className="me-2"
+      >
+        Log out
+      </Button>
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+      </>}
+    </Navbar> 
   );
 }
 

@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { authContext } from "../providers/AuthProvider";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import NavbarComponent from "../components/navbar";
+
+import "../styles/App.css"
 
 
 
@@ -20,8 +23,10 @@ export default function Login_Register(props) {
 
   return (
 <div className="Login">
-<Form className="wrapper" onSubmit={handleSubmit}>
-  <Form.Group className="mb-3" controlId="email"onChange={handleEmail}>
+<NavbarComponent />
+<h1 className="login-form">Login</h1>
+<Form className="wrapper login-form" onSubmit={handleSubmit}>
+  <Form.Group className="mb-3 login-input" controlId="email"onChange={handleEmail}>
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" placeholder="Enter email" />
     <Form.Text className="text-muted">
@@ -29,12 +34,12 @@ export default function Login_Register(props) {
     </Form.Text>
   </Form.Group>
 
-  <Form.Group className="mb-3" controlId="password"onChange={handlePassword}>
+  <Form.Group className="mb-3 login-input" controlId="password"onChange={handlePassword}>
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" placeholder="Password" />
   </Form.Group>
 
-  <Button variant="primary" type="submit"onSubmit={handleSubmit}>
+  <Button variant="outline-secondary" type="submit"onSubmit={handleSubmit}>
     Submit
   </Button>
 </Form>
