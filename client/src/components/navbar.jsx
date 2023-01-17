@@ -1,5 +1,5 @@
 import { useContext } from "react";
-// import "../../styles/Nav.css";
+import "../styles/Nav.css";
 import { Link } from "react-router-dom";
 import { authContext } from "../providers/AuthProvider";
 
@@ -47,23 +47,23 @@ function NavbarComponent() {
         className="nav-item dropright ml-auto nav-background"
       >
         <Nav className="mt-auto justify-content-end nav-background">
-        <p className="nav-background nav-welcome">Hi, {user.name}!</p>
-          <Nav.Link className="nav-background" as={Link} to="/">
+        <p className="nav-background nav-welcome Name-Space">Hi, {user.name}!</p>
+          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/">
             Home
           </Nav.Link>
-          <Nav.Link className="nav-background" as={Link} to="/Contacts">
+          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/Contacts">
             Contacts
           </Nav.Link>
-          <Nav.Link className="nav-background" as={Link} to="/Sounds">
+          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/Sounds">
             Sounds
           </Nav.Link>
-          <Nav.Link className="nav-background" as={Link} to="/About">
+          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/About">
             About
           </Nav.Link>
           <Button
         variant="outline-secondary"
         onClick={logout}
-        className="mt-auto me-2 logout-button"
+        className="mt-auto me-2 logout-button Button-Spacing"
         // className="me-2"
       >
         Log out
