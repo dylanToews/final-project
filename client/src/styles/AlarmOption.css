@@ -1,9 +1,11 @@
 .option-Container {
-  width: 100%;
+  width: 540px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .wrapper-option {

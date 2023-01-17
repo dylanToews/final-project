@@ -8,7 +8,9 @@
   border-color: #70ACB1 !important;
   background-color: #C6F1E7 !important;
   padding: 5px 5px 5px 5px;
-  justify-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 554px;
 }
 
 .AddContactBox {
@@ -18,8 +20,17 @@
   align-items: center;
 }
 
+.name-row {
+  background-color: #C6F1E7;
+}
+
 .card-background {
   background-color: #C6F1E7;
+}
+
+.create-butt {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .inactive-background {
