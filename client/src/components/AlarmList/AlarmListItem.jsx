@@ -132,7 +132,7 @@ export default function AlarmListItem(props) {
 
             <Row className="card-row card-background">
               <Col className="card-background">
-                <Dropdown drop="up" className="card-background">
+                <Dropdown drop="end" className="card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
                     
@@ -142,7 +142,7 @@ export default function AlarmListItem(props) {
                     Details
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu align="end">
                     <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
                     <Dropdown.Item>Sound: {sound_name}</Dropdown.Item>
                   </Dropdown.Menu>

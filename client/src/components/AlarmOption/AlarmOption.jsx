@@ -264,7 +264,7 @@ function AlarmOption(props) {
               className={!formCheck() && "disabled"}
               onClick={() => editOrCreate("create")}
             >
-              Set New Alarm
+              Set Alarm
             </Button>
           </div>
     
