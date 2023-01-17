@@ -51,7 +51,7 @@ function Home() {
             <div className="card card-background">
               <ReactCardFlip isFlipped={flip} flipDirection="vertical" className="card-background">
                 <div className="card-background">
-                  <Button variant="outline-secondary" size="lg" bsClass=".create-btn"className="card-background create-butt" onClick={createAlarmFlip}>
+                  <Button variant="outline-secondary" size="lg" bsclass=".create-btn" className="card-background create-butt" onClick={createAlarmFlip}>
                     Create New Alarm
                   </Button>
                 </div>

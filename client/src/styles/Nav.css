@@ -29,6 +29,16 @@
   padding-right: 10px;
 } */
 
+/* .nav-sticky {
+  position: sticky !important;
+  top: 0px;
+} */
+
+.navbar-collapse {
+  text-align: right;
+  justify-content: flex-end;
+}
+
 .Name-Space {
   margin-left: 15px;
   margin-right: 15px;
