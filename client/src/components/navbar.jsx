@@ -20,7 +20,7 @@ function NavbarComponent() {
   return (
     
     <Navbar
-      collapseOnSelect="true"
+      collapseOnSelect={true}
       expand="lg"
       bg="dark"
       variant="dark"
@@ -48,16 +48,16 @@ function NavbarComponent() {
       >
         <Nav className="nav-background">
         <p className="nav-background nav-welcome Name-Space">Hi, {user.name}!</p>
-          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/">
+          <Nav.Link className="nav-background Nav-Butts" eventKey="1" as={Link} to="/">
             Home
           </Nav.Link>
-          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/Contacts">
+          <Nav.Link className="nav-background Nav-Butts" eventKey="2" as={Link} to="/Contacts">
             Contacts
           </Nav.Link>
-          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/Sounds">
+          <Nav.Link className="nav-background Nav-Butts" eventKey="3" as={Link} to="/Sounds">
             Sounds
           </Nav.Link>
-          <Nav.Link className="nav-background Nav-Butts" as={Link} to="/About">
+          <Nav.Link className="nav-background Nav-Butts" eventKey="4" as={Link} to="/About">
             About
           </Nav.Link>
           <Button
