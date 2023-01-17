@@ -12,12 +12,12 @@ export default function SoundList() {
   ));
 
   return (
-    <section className="SoundList">
+    <section className="SoundList SoundFormat">
       <h2>My Sounds</h2>
       <br />
-      <ul>
+      <div>
         {[parsedSoundItems]}
-      </ul>
+      </div>
     </section>
   );
 }
