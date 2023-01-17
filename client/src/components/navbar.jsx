@@ -40,13 +40,13 @@ function NavbarComponent() {
       { user && <>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
-        className="mr-2 nav-background justify-content-end"
+        className="mr-2 nav-background"
       />
       <Navbar.Collapse
         id="responsive-navbar-nav"
         className="nav-item dropright ml-auto nav-background"
       >
-        <Nav className="mt-auto justify-content-end nav-background">
+        <Nav className="nav-background">
         <p className="nav-background nav-welcome Name-Space">Hi, {user.name}!</p>
           <Nav.Link className="nav-background Nav-Butts" as={Link} to="/">
             Home
@@ -63,7 +63,7 @@ function NavbarComponent() {
           <Button
         variant="outline-secondary"
         onClick={logout}
-        className="mt-auto me-2 logout-button Button-Spacing"
+        className="mt-auto me-2 logout-button"
         // className="me-2"
       >
         Log out
