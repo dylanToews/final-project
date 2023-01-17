@@ -107,9 +107,13 @@ export default function AlarmListItem(props) {
         <Card className="mt-2 shadow-lg card-background">
           <Card.Body className="card-background">
             <Row className="card-row card-background">
+
+
               <Col className="display-10 card-background alarm-name">
                 {alarm_name ? alarm_name : "(no label)"}
               </Col>
+
+
               <Col className="card-background">
                 {active && <Badge bg="secondary">active</Badge>}
                 {!active && <Badge bg="secondary">inactive</Badge>}
@@ -119,8 +123,9 @@ export default function AlarmListItem(props) {
               </Col>
             </Row>
             <Row className="card-row card-background">
+              
               <Col className="card-background">
-                <Card.Title className="display-10 card-background">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
+                <Card.Title className="display-6 card-background">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
               </Col>
 
               <Col className="card-background">

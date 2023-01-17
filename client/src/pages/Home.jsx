@@ -49,8 +49,8 @@ function Home() {
             <DigitalClock />
             <div className="card card-background">
               <ReactCardFlip isFlipped={flip} flipDirection="vertical" className="card-background">
-                <div className="card-background">
-                  <Button variant="outline-secondary" className="card-background" onClick={createAlarmFlip}>
+                <div className="d-gid gap-2">
+                  <Button variant="outline-secondary" size="lg" className="d-gid gap-2" onClick={createAlarmFlip}>
                     Create New Alarm
                   </Button>
                 </div>
