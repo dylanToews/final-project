@@ -19,7 +19,7 @@ export default function AlarmList(props) {
   return (
     <section className="AlarmList">
       <br/><br/>
-      <h2>My Alarms</h2>
+      <h2 className="title-text">My Alarms</h2>
       <br/>
       
         {[parsedAlarmItems]}

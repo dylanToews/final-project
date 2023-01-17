@@ -14,6 +14,25 @@
 
 }
 
+.pill.time-pill {
+  background: rgb(151,205,209);
+  background: radial-gradient(circle, rgba(151,205,209,1) 0%, rgba(238,174,202,1) 100%);
+  color: black;
+  box-shadow: 1px 1px 5px rgba(255,255,255,.15), 0 15px 90px 30px rgba(0,0,0,.25);
+  width:200px;
+  height: 50px;
+  font-size:30px;
+  font-weight: 300;
+  border-radius: 20px;
+  margin-bottom: 10px;
+
+}
+
+.title-text {
+  font-size: calc(1.325rem + .9vw);
+  font-weight: 700;
+  font-style:italic;
+}
 .nav-background {
   background-color: rgb(33, 37, 41);
 }
@@ -50,7 +69,7 @@
 } 
 
 
-/* EFFECTS BUTTONS WITHOUT CLASSNAMES  */
+/* AFFECTS BUTTONS WITHOUT CLASSNAMES  */
 
 .submit {
   height: 35px;
