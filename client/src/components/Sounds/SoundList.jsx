@@ -13,7 +13,7 @@ export default function SoundList() {
 
   return (
     <section className="SoundList SoundFormat">
-      <h2>My Sounds</h2>
+      <h2 className="title-text">My Sounds</h2>
       <br />
       <div>
         {[parsedSoundItems]}

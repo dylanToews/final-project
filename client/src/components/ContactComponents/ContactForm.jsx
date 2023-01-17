@@ -57,7 +57,7 @@ function ContactForm() {
   return (
     <div className="ContactForm">
       <div className="container AddContactBox">
-        <h1>Add a New Contact</h1>
+        <h1 className="title-text">Add a New Contact</h1>
         <form className="Form-at card card-background" onSubmit={handleSubmit}>
           <label className="card-background">Name</label>
           <input

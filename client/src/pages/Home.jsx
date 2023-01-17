@@ -8,6 +8,7 @@ import ReactCardFlip from "react-card-flip";
 import {Button} from "react-bootstrap"
 
 import "../styles/Cards.css"
+import "../styles/ButtonsWrappers.css"
 
 function Home() {
   const {
@@ -50,7 +51,7 @@ function Home() {
             <div className="card card-background">
               <ReactCardFlip isFlipped={flip} flipDirection="vertical" className="card-background">
                 <div className="card-background">
-                  <Button variant="outline-secondary" size="lg" className="card-background create-butt" onClick={createAlarmFlip}>
+                  <Button variant="outline-secondary" size="lg" bsClass=".create-btn"className="card-background create-butt" onClick={createAlarmFlip}>
                     Create New Alarm
                   </Button>
                 </div>
