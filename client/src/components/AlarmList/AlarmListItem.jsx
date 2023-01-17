@@ -135,7 +135,7 @@ export default function AlarmListItem(props) {
 
             <Row className="card-row card-background">
               <Col className="card-background">
-                <Dropdown drop="up" className="card-background">
+                <Dropdown drop="up" className="d-inline-block card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
                     
@@ -146,8 +146,8 @@ export default function AlarmListItem(props) {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu align="end">
-                    <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
-                    <Dropdown.Item>Sound: {sound_name}</Dropdown.Item>
+                    <Dropdown.Item disabled>Contacts: {contact_name}</Dropdown.Item>
+                    <Dropdown.Item disabled>Sound: {sound_name}</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
