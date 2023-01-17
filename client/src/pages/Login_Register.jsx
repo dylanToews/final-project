@@ -30,7 +30,7 @@ export default function Login_Register(props) {
     className="logo"
     alt="Startle logo"
   />
-  <startle>Startle!</startle>
+  <startle>Welcome to Startle!</startle>
   <br/>
   <Form className="wrapper login-items" onSubmit={handleSubmit}>
   <Form.Group className="mb-3 login-items" controlId="email"onChange={handleEmail}>
@@ -46,7 +46,7 @@ export default function Login_Register(props) {
     <Form.Control type="password" placeholder="Password" className="login-field"/>
   </Form.Group>
 
-  <Button variant="primary" type="submit"onSubmit={handleSubmit} className="login-button">
+  <Button variant="outline-secondary" type="submit"onSubmit={handleSubmit} className="login-button">
     Submit
   </Button>
 </Form>

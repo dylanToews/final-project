@@ -25,6 +25,11 @@
   background-color: rgb(33, 37, 41);
 }
 
+.nav-welcome {
+  color: #97CDD1;
+  padding-top: 0.5em;
+}
+
 /* tied to contact form */
  .Form-at {
   margin: 10px;
