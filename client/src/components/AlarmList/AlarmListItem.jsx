@@ -128,11 +128,6 @@ export default function AlarmListItem(props) {
                 <Card.Title className="display-6 card-background">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
               </Col>
 
-              <Col className="card-background">
-                <Button variant="outline-secondary" onClick={flipCard(id, false, true)}>
-                  Edit
-                </Button>
-              </Col>
             </Row>
 
             <Row className="card-row card-background">
@@ -153,6 +148,13 @@ export default function AlarmListItem(props) {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
+
+              <Col className="card-background">
+                <Button variant="outline-secondary" onClick={flipCard(id, false, true)}>
+                  Edit
+                </Button>
+              </Col>
+              
               <Col className="card-background">
                 <Button
                   variant="outline-secondary"
