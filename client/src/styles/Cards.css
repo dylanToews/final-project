@@ -8,10 +8,18 @@
   border-color: #70ACB1 !important;
   background-color: #C6F1E7 !important;
   padding: 5px 5px 5px 5px;
+  justify-self: center;
+}
+
+.AddContactBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-background {
-    background-color: #C6F1E7;
+  background-color: #C6F1E7;
 }
 
 .inactive-background {

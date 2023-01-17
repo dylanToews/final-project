@@ -1,4 +1,11 @@
-* {background-color: #C6F1E7;}
+
+.Login {
+  background-color: #C6F1E7;
+}
+
+.login-gradient {
+  background: linear-gradient(to bottom,#C6F1E7, #97CDD1);
+}
 
 
 .page {
