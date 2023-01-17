@@ -14,9 +14,9 @@ export default function ContactList() {
     <section className="ContactList">
     <h2>My Contacts</h2>
     <br/>
-    <ul>
+    <div>
       {[parsedContactItems]}
-    </ul>
+    </div>
   </section>
   )
 
