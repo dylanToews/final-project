@@ -104,7 +104,7 @@ export default function AlarmListItem(props) {
   return (
     <ReactCardFlip isFlipped={alarmFlip.has(id)} flipDirection="horizontal">
       <Container fluid>
-        <Card className="mt-2 shadow-lg card-background">
+        <Card className="mt-2 shadow-lg card-background mw-100">
           <Card.Body className="card-background">
             <Row className="card-row card-background">
 
@@ -132,7 +132,7 @@ export default function AlarmListItem(props) {
 
             <Row className="card-row card-background">
               <Col className="card-background">
-                <Dropdown drop="end" className="card-background">
+                <Dropdown drop="up" className="card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
                     

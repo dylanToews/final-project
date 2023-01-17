@@ -24,7 +24,7 @@ function NavbarComponent() {
       expand="lg"
       bg="dark"
       variant="dark"
-      className="p-3"
+      className="p-3 mw-100"
     >
       <Navbar.Brand className="me-auto">
         <img
@@ -40,7 +40,7 @@ function NavbarComponent() {
       { user && <>
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
-        className="mr-2 nav-background"
+        className="mr-2 nav-background justify-content-end"
       />
       <Navbar.Collapse
         id="responsive-navbar-nav"
