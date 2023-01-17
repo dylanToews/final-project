@@ -22,10 +22,11 @@ function Sounds() {
       
         {recordings.length === 0 && 
         <div className="SoundFormat">
-          <h1>Add a New Sound</h1>
+          <br/><h1>Add a New Sound</h1>
           <RecorderControls recorderState={recorderState} handlers={handlers} className="card"/>
         </div>
         }
+        <br/>
         <SoundForm recordings={recordings} deleteAudio={deleteAudio} />
       </div>
       <div className="SoundFormat">

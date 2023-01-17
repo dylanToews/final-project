@@ -9,7 +9,7 @@ export default function RecorderControls({ recorderState, handlers}) {
   const { startRecording, saveRecording, cancelRecording } = handlers;
 
   return (
-    <div className="controls-container card card-background" >
+    <div className="controls-container card card-background card-sound" >
       <div className="recorder-display card-background">
         {initRecording && <div className="recording-time card-background">
           <span className="card-background">{formatMinutes(recordingMinutes)}</span>

@@ -13,6 +13,29 @@
   width: 554px;
 }
 
+.card-sound {
+  display: flex ;
+  flex-direction: column ;
+  align-content: space-between;
+  border-style: solid ;
+  border-width: 3px !important;
+  border-radius: 15px !important;
+  border-color: #70ACB1 !important;
+  background-color: #C6F1E7 !important;
+  padding: 5px 5px 5px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px !important;
+}
+
+.my-sound-alignment {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 15px;
+}
+
 .AddContactBox {
   display: flex;
   flex-direction: column;
