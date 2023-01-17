@@ -28,3 +28,31 @@
   padding-left: 10px;
   padding-right: 10px;
 } */
+
+.Name-Space {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.Button-Spacing {
+  margin-left: 18px;
+  margin-bottom: 10px;
+}
+
+.Nav-Butts {
+  cursor: pointer;
+  color: #F0FFF3;
+}
+
+.Nav-Butts:after {
+  display:block;
+  content: "";
+  color: #F0FFF3;
+  border-bottom: solid 1px #F0FFF3;
+  transform: scaleX(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.Nav-Butts:hover:after {
+  transform: scaleX(1);
+}
