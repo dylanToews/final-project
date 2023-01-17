@@ -12,7 +12,7 @@ export default function ContactList() {
 
   return (
     <section className="ContactList">
-    <h2>My Contacts</h2>
+    <h2 className="title-text">My Contacts</h2>
     <br/>
     <div>
       {[parsedContactItems]}

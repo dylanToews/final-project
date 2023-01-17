@@ -109,7 +109,7 @@ export default function AlarmListItem(props) {
             <Row className="card-row card-background">
 
 
-              <Col className="display-10 card-background alarm-name">
+              <Col className="card-background alarm-name">
                 {alarm_name ? alarm_name : "(no label)"}
               </Col>
 

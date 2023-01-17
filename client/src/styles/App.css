@@ -18,7 +18,6 @@
   background: rgb(151,205,209);
   background: radial-gradient(circle, rgba(151,205,209,1) 0%, rgba(238,174,202,1) 100%);
   color: black;
-  box-shadow: 1px 1px 5px rgba(255,255,255,.15), 0 15px 90px 30px rgba(0,0,0,.25);
   width:200px;
   height: 50px;
   font-size:30px;
@@ -28,10 +27,16 @@
 
 }
 
+.card-background.row-details {
+  background: red!important;
+
+}
+
+
 .title-text {
   font-size: calc(1.325rem + .9vw);
-  font-weight: 700;
-  font-style:italic;
+  font-weight: 600;
+  font-family: "Gill Sans", sans-serif;
 }
 .nav-background {
   background-color: rgb(33, 37, 41);
