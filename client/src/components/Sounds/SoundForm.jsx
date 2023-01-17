@@ -6,6 +6,7 @@ import {Button} from "react-bootstrap"
 
 import "../../styles/Cards.css"
 import "../../styles/AlarmOption.css";
+import "../../styles/Sounds.css";
 
 
 export default function RecordingsList(props) {
@@ -66,9 +67,9 @@ export default function RecordingsList(props) {
   }
 
   return (
-    <div className="App">
+    <div>
       {recordings.length > 0 ? (
-        <>
+        <div className="SoundFormat">
           <h1>New Recording</h1>
           <form className="SoundForm option-Container card-background card">
             <input
@@ -81,14 +82,18 @@ export default function RecordingsList(props) {
               onChange={handleChange}
               value={formData.sound_name}
             />
-            <Button variant="outline-secondary" type="submit" onClick={handleSubmit}>
-              Save
-            </Button>
-            <Button variant="outline-secondary" type="reset" onClick={handleReset}>
-              Cancel
-            </Button>
+
+            <div className="SoundOptions">
+              <Button variant="outline-secondary" type="submit" onClick={handleSubmit} className="SaveSound">
+                Save
+              </Button>
+              <Button variant="outline-secondary" type="reset" onClick={handleReset} className="AbandonSound">
+                Cancel
+              </Button>
+            </div>
+
           </form>
-        </>
+        </div>
       ) : (
         <div className="no-records"></div>
       )}
