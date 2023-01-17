@@ -16,25 +16,25 @@ function DigitalClock() {
     <p className="clock-hours clock-timer clock__bg">
       {hourDigital || "00"}
     </p>
-    <p className="clock-label clock__bg">
+    {/* <p className="clock-label clock__bg">
       Hours
-    </p>
+    </p> */}
   </div>
   <div className="clock-col clock__bg">
     <p className="clock-minutes clock-timer clock__bg">
       {minutesDigital || "00"}
     </p>
-    <p className="clock-label clock__bg">
+    {/* <p className="clock-label clock__bg">
       Minutes
-    </p>
+    </p> */}
   </div>
   <div className="clock-col clock__bg">
     <p className="clock-seconds clock-timer clock__bg">
       {secondsDigital || "00"}
     </p>
-    <p className="clock-label clock__bg">
+    {/* <p className="clock-label clock__bg">
       Seconds
-    </p>
+    </p> */}
   </div>
   <div className="clock-col clock__bg">
     <p className="clock__bg clock__am-pm">
