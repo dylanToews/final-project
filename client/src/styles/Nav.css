@@ -42,6 +42,7 @@
 .Nav-Butts {
   cursor: pointer;
   color: #F0FFF3;
+  text-align: right;
 }
 
 .Nav-Butts:after {
@@ -55,4 +56,10 @@
 
 .Nav-Butts:hover:after {
   transform: scaleX(1);
+}
+
+.logout-button {
+  display: flex;
+  align-self: end;
+  max-width: 6em;
 }

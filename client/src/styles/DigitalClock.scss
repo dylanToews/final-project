@@ -124,6 +124,7 @@
     display: flex;
     justify-content: center;
     width: 560px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-top: 50px;
@@ -132,9 +133,10 @@
   }
   &-col {
     text-align: center;
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-right: 10%;
+    margin-left: 10%;
     // min-width: 90px;
+    max-width: min-content;
     position: relative;
     &:not(:last-child):before,
     &:not(:last-child):after{

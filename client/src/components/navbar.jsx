@@ -24,7 +24,7 @@ function NavbarComponent() {
       expand="lg"
       bg="dark"
       variant="dark"
-      className="p-3"
+      className="p-3 mw-100"
     >
       <Navbar.Brand className="me-auto">
         <img
@@ -46,7 +46,7 @@ function NavbarComponent() {
         id="responsive-navbar-nav"
         className="nav-item dropright ml-auto nav-background"
       >
-        <Nav className="mt-auto justify-content-end nav-background">
+        <Nav className="nav-background">
         <p className="nav-background nav-welcome Name-Space">Hi, {user.name}!</p>
           <Nav.Link className="nav-background Nav-Butts" as={Link} to="/">
             Home
@@ -63,7 +63,7 @@ function NavbarComponent() {
           <Button
         variant="outline-secondary"
         onClick={logout}
-        className="mt-auto me-2 logout-button Button-Spacing"
+        className="mt-auto me-2 logout-button"
         // className="me-2"
       >
         Log out

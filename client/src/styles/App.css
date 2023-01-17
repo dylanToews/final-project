@@ -1,5 +1,6 @@
 * {
   background-color: #97CDD1;
+  max-width: 100%;
 }
 
 .fade, .modal, .show, .modal-content, .modal-backdrop, .modal-dialog {
