@@ -10,6 +10,7 @@ import {
   Accordion,
   Dropdown,
   Modal,
+  Badge
 } from "react-bootstrap";
 // import "../../styles/ButtonsWrappers.css"
 import "../../styles/AlarmOption.css";
@@ -105,21 +106,19 @@ export default function AlarmListItem(props) {
       <Container fluid>
         <Card className="mt-2 shadow-lg card-background">
           <Card.Body className="card-background">
-            <Row className="card-background">
-              <Col className="display-10 card-background">
+            <Row className="card-row card-background">
+              <Col className="display-10 card-background alarm-name">
                 {alarm_name ? alarm_name : "(no label)"}
               </Col>
               <Col className="card-background">
-                <Button
-                  variant="outline-secondary"
-                  onClick={() => onToggle(id)}
-                >
-                  {active && "Active"}
-                  {!active && "Inactive"}
-                </Button>
+                {active && <Badge bg="secondary">active</Badge>}
+                {!active && <Badge bg="secondary">inactive</Badge>}
+                <br/>
+                <input type="checkbox" onChange={() => onToggle(id)} checked={!active && true} />
+                <br/>
               </Col>
             </Row>
-            <Row>
+            <Row className="card-row card-background">
               <Col className="card-background">
                 <Card.Title className="display-10 card-background">{`${hour}:${minutes} ${am_pm}`}</Card.Title>
               </Col>
@@ -131,17 +130,19 @@ export default function AlarmListItem(props) {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="card-row card-background">
               <Col className="card-background">
-                <Dropdown className="card-background">
+                <Dropdown drop="end" className="card-background">
                   <Dropdown.Toggle
                     className="wrapper-option select"
+                    
+                    variant="outline-secondary"
                     id="dropdown-basic"
                   >
                     Details
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu align="end">
                     <Dropdown.Item>Contacts: {contact_name}</Dropdown.Item>
                     <Dropdown.Item>Sound: {sound_name}</Dropdown.Item>
                   </Dropdown.Menu>
