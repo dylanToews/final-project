@@ -2,8 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 .clock__bg {
-  background-color: #080808;
-  color: #fff;
+  display:flex;
+  flex-direction: column;
+  background-color: transparent;
+  color: #56606D!important;
+  font-size: 100%;
 }
 
 .transparent {
@@ -11,7 +14,7 @@
 }
 
 .clock__am-pm {
-  color: #fff;
+  color: #56606D;
   height: 100%;
   font-size: xx-large;
 }
@@ -27,12 +30,12 @@
 .clock__text-minutes {
   font-size: var(--biggest-font-size);
   font-weight: 400;
-  color: #fff;
+  color: #56606D;
   font-family: 'Roboto', sans-serif;
 }
 
 .clock__text-seconds {
-  font-size: 28px;
+  font-size: 1em;
   padding-left: 6px;
   padding-top: 6px;
   font-family: 'Roboto', sans-serif;
@@ -41,7 +44,7 @@
 
 .clock__text-ampm {
   font-size: var(--biggest-font-size);
-  color: var(--title-color);
+  color: #56606D;
   font-weight: 400;
   padding-left: 6px;
   padding-top: -6px;
@@ -55,7 +58,9 @@
   padding-bottom: 12px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  font-style:italic;
   background-color: transparent;
+  
 }
 
 .card {
@@ -67,6 +72,7 @@
   border-color: #70ACB1 !important;
   background-color: #C6F1E7 !important;
   padding: 5px 5px 5px 5px;
+ 
 }
 
 
@@ -107,26 +113,31 @@
     font-size: xx-large;
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: #080808;
-    border-radius: 5px;
-    padding: 60px 20px;
+    color:eeaeca;
+    background-color: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(151,205,209,1) 100%);
+    border-radius: 20px;
+    border-color:#56606D;
+    border-width: medium;
+    padding: 20px 20px;
     box-shadow: 1px 1px 5px rgba(255,255,255,.15), 0 15px 90px 30px rgba(0,0,0,.25);
     display: flex;
+    justify-content: center;
   }
   &-col {
     text-align: center;
     margin-right: 40px;
     margin-left: 40px;
-    min-width: 90px;
+    // min-width: 90px;
     position: relative;
     &:not(:last-child):before,
     &:not(:last-child):after{
       content: "";
-      background-color: rgba(255,255,255,.3);
+      background-color: #56606D;
       height: 5px;
       width: 5px;
       border-radius: 50%;
-      display: block;
+      display: flex;
       position: absolute;
       right: -42px;
     }
@@ -139,7 +150,7 @@
   }
   &-timer {
     &:before {
-      color: #fff;
+      color: #56606D;
       font-size: 4.2rem;
       text-transform: uppercase;
     }
@@ -152,7 +163,7 @@
   }
 }
 
-@media (max-width: 825px) {
+@media (max-width: 3px) {
   .clock-container {
   flex-direction: column;
     padding-top: 40px;
