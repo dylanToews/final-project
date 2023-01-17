@@ -32,6 +32,10 @@
 
 }
 
+.dropdown-menu.show {
+  display: table !important;
+}
+
 
 .title-text {
   font-size: calc(1.325rem + .9vw);

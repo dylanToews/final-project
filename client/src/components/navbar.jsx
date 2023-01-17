@@ -25,6 +25,7 @@ function NavbarComponent() {
       bg="dark"
       variant="dark"
       className="p-3 mw-100"
+      sticky="top"
     >
       <Navbar.Brand className="me-auto">
         <img

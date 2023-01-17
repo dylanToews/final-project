@@ -20,20 +20,6 @@ function Home() {
     initialEditValues
   } = useContext(AlarmContext);
 
-  const testingNotificationDetails = {
-    alarm_time: "11:37 AM:00",
-    contact_name: "Dylan",
-    contact_number: "7802386933",
-    sound_name: "Test recording ",
-    sound_url: "soft_wakeup.ogg",
-  };
-
-
-  function setTestStart() {
-    setNotificationDetails(testingNotificationDetails);
-    setNotification(true);
-  }
-
 
   function createAlarmFlip() {
     setFlip(!flip)
@@ -60,9 +46,7 @@ function Home() {
 
             </div>
             <AlarmList />
-            <button onClick={setTestStart} className="submit">
-              Test Notification
-            </button>
+
           </div>
         </section>
       </main>
