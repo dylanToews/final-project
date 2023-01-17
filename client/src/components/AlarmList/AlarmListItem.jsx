@@ -115,10 +115,12 @@ export default function AlarmListItem(props) {
 
 
               <Col className="card-background">
-                {active && <Badge bg="secondary">active</Badge>}
-                {!active && <Badge bg="secondary">inactive</Badge>}
                 <br/>
-                <input type="checkbox" onChange={() => onToggle(id)} checked={!active && true} />
+                <div className="badger-line">
+                  <input type="checkbox" onChange={() => onToggle(id)} checked={!active && true} />
+                  {active && <Badge bg="secondary badge-background">active</Badge>}
+                  {!active && <Badge bg="secondary badge-background">inactive</Badge>}
+                </div>
                 <br/>
               </Col>
             </Row>

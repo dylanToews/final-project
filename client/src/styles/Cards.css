@@ -77,11 +77,13 @@
 
 .alarm-name {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  margin-left: 18px;
+  padding-top: 18px;
+  justify-content: flex-start;
   font-weight: 600;
   color:#313131;
-
+  font-size: 24px;
 }
 
 input[type="checkbox"] {
@@ -116,4 +118,13 @@ input[type="checkbox"]:checked::before {
 
 input[type="checkbox"]:checked {
   background: #56606D;
+}
+
+.badger-line {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  width: 70px;
+  margin-left: auto;
+  margin-bottom: -30px;
 }
