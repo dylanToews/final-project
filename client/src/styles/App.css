@@ -37,6 +37,7 @@
   font-size: calc(1.325rem + .9vw);
   font-weight: 600;
   font-family: "Gill Sans", sans-serif;
+  color:#313131;
 }
 .nav-background {
   background-color: rgb(33, 37, 41);
@@ -71,6 +72,7 @@
   border-radius: 6px;
   padding-left: 22px;
   background-color: #97CDD1;
+  color:#313131;
 } 
 
 

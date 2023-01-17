@@ -21,7 +21,7 @@ export default function NotificationAlert(props) {
 
     setTimeout(() => {
       setNotification(true)
-    }, 30000);
+    }, 300000);
     setNotification(false);
     axios.post("/api/v1/sendSMS", { twilioData }).then((res) => {
  
