@@ -97,7 +97,7 @@ function AlarmOption(props) {
       addNewParams(form);
 
       // setFormData(initialValues);
-      // setEditFormData(initialEditValues)
+      setEditFormData(initialEditValues)
       if (!flipCard) {
         setFlip(!flip);
       }
