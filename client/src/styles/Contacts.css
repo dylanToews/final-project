@@ -11,7 +11,16 @@
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px 10px 10px 10px;
+  width: 440px;
 }
+
+.ContactList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
 /* 
 .TimeCardFormat {
   display: flex;
@@ -20,7 +29,18 @@
   justify-content: center;
 } */
 
-.inputBox,
+.inputBox {
+  border-color: #70ACB1;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 2px;
+  background-color: #C6F1E7;
+  color: #70ACB1;
+  width: 380px;
+  margin-top: 8px;
+  align-self: center;
+}
+
 .submit {
   border-color: #70ACB1;
   border-style: solid;
@@ -28,6 +48,7 @@
   border-width: 2px;
   background-color: #C6F1E7;
   color: #70ACB1;
+  margin-bottom: 30px;
 }
 
 .deleteButton {
@@ -39,6 +60,17 @@
   border-width: 2px;
   background-color: #C6F1E7;
   color: #70ACB1;
+}
+
+.ContactForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  align-items: center;
 }
 
 ::placeholder {
