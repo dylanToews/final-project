@@ -118,8 +118,8 @@ export default function AlarmListItem(props) {
                 <br/>
                 <div className="badger-line">
                   <input type="checkbox" onChange={() => onToggle(id)} checked={!active && true} />
-                  {active && <Badge bg="secondary badge-background">active</Badge>}
-                  {!active && <Badge bg="secondary badge-background">inactive</Badge>}
+                  {active && <Badge bg="secondary badge-background badge-properties">active</Badge>}
+                  {!active && <Badge bg="secondary badge-background badge-properties">inactive</Badge>}
                 </div>
                 <br/>
               </Col>
@@ -139,7 +139,7 @@ export default function AlarmListItem(props) {
               <Col className="card-background">
                 <Dropdown drop="up" className="d-inline-block card-background">
                   <Dropdown.Toggle
-                    className="wrapper-option select"
+                    className="wrapper-option select long"
                     
                     variant="outline-secondary"
                     id="dropdown-basic"
@@ -154,13 +154,13 @@ export default function AlarmListItem(props) {
                 </Dropdown>
               </Col>
 
-              <Col className="card-background">
+              <Col className="card-background push">
                 <Button variant="outline-secondary" onClick={flipCard(id, false, true)}>
                   Edit
                 </Button>
               </Col>
               
-              <Col className="card-background">
+              <Col className="card-background push">
                 <Button
                   variant="outline-secondary"
                   onClick={() => removeAlarm(id)}

@@ -46,7 +46,10 @@
 }
 
 .name-row {
-  background-color: #C6F1E7;
+  background-color: transparent;
+  width: 60.5%;
+  padding-top: 16px;
+  padding-bottom: 6px;
 }
 
 .card-background {
@@ -56,6 +59,13 @@
 .create-butt {
   margin-top: 16px;
   margin-bottom: 16px;
+  border-color: transparent !important;
+}
+
+.create-butt:hover {
+  background: transparent !important;
+  color: #313131 !important;
+  text-shadow: 0 0 20px #fff, 0 0 30px #70ACB1, 0 0 40px #70ACB1, 0 0 50px #70ACB1, 0 0 60px #70ACB1 !important;
 }
 
 .inactive-background {
@@ -63,7 +73,9 @@
 }
 
 .button-row {
-  flex-direction: row;
+  display: flex;
+  flex-direction:row;
+  margin-bottom: 12px;
 }
 
 .card-row {
@@ -79,7 +91,6 @@
   display: flex;
   flex-direction: row;
   margin-left: 18px;
-  padding-top: 18px;
   justify-content: flex-start;
   font-weight: 600;
   color:#313131;
@@ -88,7 +99,7 @@
 
 input[type="checkbox"] {
   position: relative;
-  width: 80px;
+  width: 90px;
   height: 40px;
   -webkit-appearance: none;
   appearance: none;
@@ -97,6 +108,7 @@ input[type="checkbox"] {
   border-radius: 2rem;
   cursor: pointer;
   box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+  margin-top: -24px;
 }
 
 input[type="checkbox"]::before {
@@ -112,8 +124,8 @@ input[type="checkbox"]::before {
 }
 
 input[type="checkbox"]:checked::before {
-  transform: translateX(100%);
-  background: #fff;
+  transform: translateX(80%);
+  background: #F0F0F0;
 }
 
 input[type="checkbox"]:checked {
@@ -127,4 +139,25 @@ input[type="checkbox"]:checked {
   width: 70px;
   margin-left: auto;
   margin-bottom: -30px;
+}
+
+
+.badge-background.badge-properties {
+  margin-top: 2px;
+  background:rgba(100,100,100,0.4) !important;
+}
+
+.Invisible {
+  padding:20px;
+  background-color: transparent;
+}
+
+.long {
+  width: 160px;
+  margin-left: 20px;
+}
+
+.push {
+  text-align: right;
+
 }

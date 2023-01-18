@@ -30,7 +30,7 @@
 }
 
 .card-background.row-details {
-  background: red!important;
+  background: transparent !important;
 
 }
 
@@ -74,7 +74,7 @@
 
 /* tied to contact form */
 .inputBox {
-  height: 35px;
+  height: 40px;
   font-size: 16px;
   border-radius: 6px;
   padding-left: 22px;
