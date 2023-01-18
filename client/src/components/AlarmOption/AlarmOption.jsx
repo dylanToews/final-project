@@ -237,7 +237,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editFormData.contact_name}</option>
+            <option value="" hidden>{editFormData.contact_name}</option>
             {parsedContacts}
           </select>
 
@@ -248,7 +248,7 @@ function AlarmOption(props) {
             onChange={handleChange}
             className="Selection"
           >
-            <option value="">{editFormData.sound_name}</option>
+            <option value="" hidden>{editFormData.sound_name}</option>
             {parsedSounds}
           </select>
           <div className="Contacts-Sound"></div>
