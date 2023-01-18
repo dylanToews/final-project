@@ -251,10 +251,8 @@ function AlarmOption(props) {
             <option value="">{editFormData.sound_name}</option>
             {parsedSounds}
           </select>
-          <div className="Contacts-Sound"></div>
         </div>
 
-        
           <div className="button-row card-background">
             <Button
               variant={
@@ -266,13 +264,15 @@ function AlarmOption(props) {
             >
               Set Alarm
             </Button>
+
+            <div className="Invisible"/>
+
+            {flip && (
+              <Button variant="outline-secondary" onClick={handleCancel}>
+                Cancel
+              </Button>
+            )}
           </div>
-    
-        {flip && (
-          <Button variant="outline-secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-        )}
       </div>
     </div>
   );
