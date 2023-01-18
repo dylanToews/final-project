@@ -18,9 +18,9 @@ export default function SoundListItem(props) {
   }
 
   return (
-    <ul className="ContactListItem">
+    <ul className="SoundListItem">
       <div key={id} className="card-background">
-      <p className="card-background">Sound Title: {sound_name}</p><br />
+      <p id="sound-name"className="card-background">{sound_name}</p><br />
       <div className="my-sound-alignment">
         <audio className="card-background" controls controlsList="nodownload" src={`/audio/${sound_url}`}></audio>
         <button className="deleteButton" onClick={() => removeSound(id)}>Delete</button>

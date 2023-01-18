@@ -24,6 +24,10 @@
   font-size: 20px;
 }
 
+#contact-name{
+  font-weight:600;
+}
+
 #modal-text{
   background-color: transparent;
   font-size: 145%;

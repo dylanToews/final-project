@@ -32,6 +32,9 @@ function Sounds() {
       <div className="SoundFormat">
         <SoundList />
       </div>
+      <br/>
+      <br/>
+   
     </section>
     );
 }

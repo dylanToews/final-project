@@ -37,14 +37,14 @@ export default function RecorderControls({ recorderState, handlers}) {
               >
               Stop
             </button>
-            <p className="card-background"> Cllick To Finish Recording!</p>
+            <p className="card-background" id="contact-name"> Click To Finish Recording!</p>
           </div>
         ) : (
           <div data-role="controls" className="card-background">
             <button onClick={startRecording} className="start-button">
               Start
             </button>
-            <p className="card-background"> Click To Start Recording!</p>
+            <p className="card-background"id="contact-name"> Click To Start Recording!</p>
           </div>
         )}
       </div>
