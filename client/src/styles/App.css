@@ -14,6 +14,18 @@
 
 }
 
+
+
+#modal-text{
+  background-color: transparent;
+  font-size: 145%;
+  display:flex;
+  justify-content: center;
+
+}
+#modal-header {
+  background-color: transparent!important;
+}
 .pill.time-pill {
   background: rgb(151,205,209);
   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(151,205,209,1) 100%);

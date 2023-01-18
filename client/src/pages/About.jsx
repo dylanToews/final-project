@@ -13,10 +13,14 @@ function About() {
             <br/><br/><br/><br/>
             <h2>Welcome to Startle!</h2>
             <br/>
-            <h3>Startle is an application that lets YOU wake yourself up.</h3>
+            <h3>Helping you manage time through communication and technology</h3>
             <br/>
-            <p>And if it fails to do that, it passes the responsibility onto your loved ones</p>
-            <p>by sending them SMS messages when you snooze your alarms.</p>
+            <br/>
+            <p>Startle is an application that lets YOU wake yourself up.</p>
+            <br/>
+            <p>Using sound recording technology, Startle allows you to record any custom audio you want for your alarms. And in the situation of snoozing through an alarm, Startle sends a message to a contact of your choosing.</p>
+            {/* <p>And if it fails to do that, it passes the responsibility onto your selected contact</p>
+            <p>by sending them SMS messages when you snooze your alarms.</p> */}
 
         </div>
     );
