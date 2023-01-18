@@ -56,6 +56,13 @@
 .create-butt {
   margin-top: 16px;
   margin-bottom: 16px;
+  border-color: transparent !important;
+}
+
+.create-butt:hover {
+  background: transparent !important;
+  color: #313131 !important;
+  text-shadow: 0 0 20px #fff, 0 0 30px #70ACB1, 0 0 40px #70ACB1, 0 0 50px #70ACB1, 0 0 60px #70ACB1 !important;
 }
 
 .inactive-background {
