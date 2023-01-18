@@ -30,10 +30,12 @@ export default function ContactListItem(props) {
 
   return (
     <ul className="ContactListItem">
-      <div key={id} className="card-background">
-        <p className="card-background">Contact Name: {contact_name}</p>
-        <p className="card-background">Phone Number: {formatPhoneNumber(contact_number)}</p>
-        <button onClick={() => removeContact(id)} className="deleteButton">Delete</button>
+      <div key={id} className="card-background make-row">
+        <div className="contact-info">
+          <p className="card-background">Contact Name: {contact_name}</p>
+          <p className="card-background">Phone Number: {formatPhoneNumber(contact_number)}</p>
+        </div>
+        <button onClick={() => removeContact(id)} className="deleteButton squish">Delete</button>
       </div>
       <br></br>
     </ul>
