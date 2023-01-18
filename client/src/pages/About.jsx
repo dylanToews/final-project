@@ -7,14 +7,17 @@ function About() {
     return (
         <div className="App">
             <br/>
-            <br/>
             <h1>About Startle</h1>
+            <br/><br/>
             <img src={require('../startle.png')}/>
+            <br/><br/><br/><br/>
+            <h2>Welcome to Startle!</h2>
             <br/>
-            <h2>Welcome to Startle, the App that does... something.</h2>
+            <h3>Startle is an application that lets YOU wake yourself up.</h3>
             <br/>
-            <h3>We'll add to this later</h3>
-            <p>In the meantime, this page will be used to test styling</p>
+            <p>And if it fails to do that, it passes the responsibility onto your loved ones</p>
+            <p>by sending them SMS messages when you snooze your alarms.</p>
+
         </div>
     );
 }

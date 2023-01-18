@@ -151,3 +151,13 @@ input[type="checkbox"]:checked {
   padding:20px;
   background-color: transparent;
 }
+
+.long {
+  width: 160px;
+  margin-left: 20px;
+}
+
+.push {
+  text-align: right;
+
+}
