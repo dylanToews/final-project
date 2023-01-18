@@ -77,3 +77,24 @@
 ::placeholder {
   color: #70ACB1;
 }
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #C6F1E7;
+}
+
+.make-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.squish {
+  height: 40px;
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+.billboard {
+  margin-top: 5%;
+}
