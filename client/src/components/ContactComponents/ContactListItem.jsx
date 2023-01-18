@@ -31,9 +31,11 @@ export default function ContactListItem(props) {
   return (
     <ul className="ContactListItem">
       <div key={id} className="card-background make-row">
+        <img id="contact-img"src={require('../../startle.png')} max-width="100%" height="auto"/>
         <div className="contact-info">
-          <p className="card-background">Contact Name: {contact_name}</p>
-          <p className="card-background">Phone Number: {formatPhoneNumber(contact_number)}</p>
+
+          <p id="contact-name"className="card-background">{contact_name}</p>
+          <p id="contact-number"className="card-background">{formatPhoneNumber(contact_number)}</p>
         </div>
         <button onClick={() => removeContact(id)} className="deleteButton squish">Delete</button>
       </div>
