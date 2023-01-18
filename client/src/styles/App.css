@@ -17,6 +17,8 @@
 .pill.time-pill {
   background: rgb(151,205,209);
   background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(151,205,209,1) 100%);
+  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
   color: #313131;
   width:220px;
   padding-top: 18px;

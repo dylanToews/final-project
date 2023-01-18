@@ -11,7 +11,7 @@ function About() {
             <h1>About Startle</h1>
             <img src={require('../startle.png')}/>
             <br/>
-            <h2>Welcome to Startle, the App that does... something.</h2>
+            <h2>Startle helps you with time management </h2>
             <br/>
             <h3>We'll add to this later</h3>
             <p>In the meantime, this page will be used to test styling</p>
