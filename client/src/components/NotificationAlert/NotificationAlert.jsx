@@ -47,12 +47,13 @@ export default function NotificationAlert(props) {
     className="transparent"
     centered>
     <Modal.Dialog className="transparent">
-      <Modal.Header className="transparent">
+      <Modal.Header className="transparent" id="modal-header">
+      <img id="modal-header"src={require('../../startle.png')} width="20%"/>
         <Modal.Title className="transparent">Your Alarm Has Gone Off!!</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="transparent">
-        <p className="transparent">Hey {user.name}! Your "{notificationDetails.alarm_name}" alarm has gone off!</p>
+        <p id="modal-text">Hey {user.name}! Your "{notificationDetails.alarm_name}" alarm has gone off!</p>
       </Modal.Body>
 
       <Modal.Footer>
