@@ -47,6 +47,9 @@
 
 .name-row {
   background-color: transparent;
+  width: 60.5%;
+  padding-top: 16px;
+  padding-bottom: 6px;
 }
 
 .card-background {
@@ -70,7 +73,9 @@
 }
 
 .button-row {
-  flex-direction: row;
+  display: flex;
+  flex-direction:row;
+  margin-bottom: 12px;
 }
 
 .card-row {
@@ -140,4 +145,9 @@ input[type="checkbox"]:checked {
 .badge-background.badge-properties {
   margin-top: 2px;
   background:rgba(100,100,100,0.4) !important;
+}
+
+.Invisible {
+  padding:20px;
+  background-color: transparent;
 }
