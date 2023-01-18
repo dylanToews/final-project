@@ -13,6 +13,25 @@
   margin-right: auto;
 }
 
+.SoundListItem {
+  background-color: #C6F1E7;
+  border-color: #70ACB1;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 10px;
+  width: 440px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
+}
+
+#sound-name{
+  font-weight:600;
+  margin-bottom: 0
+}
+
 .SoundOptions {
   display: flex;
   flex-direction: row;
