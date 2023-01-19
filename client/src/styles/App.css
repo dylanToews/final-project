@@ -15,11 +15,12 @@
 }
 
 .About {
-    text-align: center;
+  text-align: center;
   background-color: #97CDD1;
   margin-left: 10%;
   margin-right: 10%;
 }
+
 .about-text{
   font-size: 20px;
 }
