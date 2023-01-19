@@ -148,7 +148,7 @@ input[type="checkbox"]:checked {
 }
 
 .Invisible {
-  padding:20px;
+  padding:5px;
   background-color: transparent;
 }
 

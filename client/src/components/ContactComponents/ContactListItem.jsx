@@ -31,7 +31,7 @@ export default function ContactListItem(props) {
   return (
     <ul className="ContactListItem">
       <div key={id} className="card-background make-row">
-        <img id="contact-img"src={require('../../startle.png')} max-width="100%" height="auto"/>
+        <img id="contact-img"src={require('../../person-icon.png')} max-width="100%" height="auto"/>
         <div className="contact-info">
 
           <p id="contact-name"className="card-background">{contact_name}</p>

@@ -18,7 +18,7 @@ function DigitalClock() {
     <>
       <div className="clock__date ">
         <span className="transparent">{`${dayNow} `}</span>
-        <span className="transparent">{`${monthNow} , `}</span>
+        <span className="transparent">{`${monthNow}, `}</span>
         <span className="transparent">{yearNow}</span>
       </div>
       <div className="clock-container">
@@ -51,7 +51,6 @@ function DigitalClock() {
           <p className="clock__bg clock__am-pm">{amPm || "AM"}</p>
         </div>
       </div>
-    
     </>
   );
 }
