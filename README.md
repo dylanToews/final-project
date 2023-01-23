@@ -109,4 +109,8 @@ code base for audio recording:
 
 https://github.com/jleonardo007/voice-recorder-example
 
+Twilio requests:
+
+https://www.twilio.com/docs/usage/requests-to-twilio
+
 
