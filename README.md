@@ -1,58 +1,116 @@
-To set up db: 
+ABOUT PAGE IMAGE HERE 
 
 
-psql
-SET ROLE labber;
-CREATE DATABASE finals; 
-\q
-npm run db:reset
+Startle was built by full stack developers Cheever Esler, Ryan Zhen and Dylan Toews while enrolled in the Web Development Bootcamp at Lighthouse Labs. 
+
+
+This application was built using an Express.js backend, with React for the front-end, Postgress for the database and makes use of the Twilio API.
+
+The motivation for building this project was to create an alarm application that gives a user the ability to easily record their own audio for an alarm, and have notifications go off through text messages if the user has snoozed through their alarm
+
+INSERT IMAGE FOR MAIN PAGE 
+
+With Startle, the user is able to set an alarm and choose both the custom sound that they would like for their alarm, as well as the contact that they would like to have messaged in the event of snoozing. 
+
+INSERT SET ALARM IMAGE
+
+Once the alarm has gone off, the users audio will be played on a loop until they either "Accept" or "Snooze" the alarm. If "Snooze" has been selected, an SMS message will be sent to their contact and the alarm will go off again in 5 minutes. 
+
+INSERT ALARM NOTIFICATION IMAGE 
+
+INSERT TEXT MESSAGE IMAGE
+
+By going to the Sounds page, the user is able to record and name their own audio to be used as an alarm tone.
+
+INSERT SOUND PAGE IMAGE 
+
+
+The next step in development at Startle is to transition to React Native for mobile development. We would also like to add in the ability for users to create customizable messages for their alarm text notifications. One of the challenges we faced was recording the sound on the front end of the application, and turning the audio files into data that could be stored and brought up from the backend. Other planned features include setting recurring alarms for days of the week, and assigning multiple contacts to a single alarm for events that involve more than two people.
+
+This project taught us a lot - from MediaElements to Sets, from React Context to complex SQL queries - but most of all it taught us that the sound of your own voice yelling at you is a great motivator to get out of bed in the morning.
+
+*** Startle is currently running on a trial Twilio account, which only allows for approved number to be added for contacts. Please contact the development team for more information ***
+
 
 ------------------
 
-to start server:
+Steps to Run
 
-cd server 
-nodemon
+------------------
+
+Clone the project 
+
+```git clone "INSERT CLONE LINK"```
+
+Install dependencies
+
+```npm install``` 
+
+Set Up .env
+
+```Use env.example information for .env```
+
+Set Up Database: 
+
+```psql```
+
+```SET ROLE labber;```
+
+```CREATE DATABASE finals;``` 
+
+```npm run db:reset```
+
+
+Start Server
+
+```cd server```
+
+```nodemon```
 
 (server should start on port 8080)
 
 
 -------------------
 
-to start client:
+Start Client
 
-cd client 
-npm start 
+```cd client```
+
+```npm start```
 
 (client should start on port 3000)
 
 
+------------------
 
-git steps 
+Our Team: 
 
-git checkout -b "new-feature-branch"
-git pull origin main 
- (add some features)
-git add .
-git commit -m "some explanation"
-git push origin "new-feature-branch"
+Cheever Esler - https://www.linkedin.com/in/cheever-esler/
 
-On github, create a pull request by, clicking Pull Requests button, then clicking the new pull request button on the page. Pick your branch, and fill out the form to generate a Pull request.
+Ryan Zhen - https://www.linkedin.com/in/ryanzhen/
 
-Anyone on your team can view your pull request
-That means anyone can review people's codes. This is a good practice to see how other people are coding, and using different methods.
-
-If you have a merge conflict github will tell you
-There are 2 ways to fix it, one way, github will give you the tools ( BAD WAY)
-Switch to main/master, pull all the changes, switch back to your branch, MERGE master INTO your branch and fix the conflicts!
-Once you fixed them, push the branch back out, and your pull request will be updated.
-
-How to Merge
-Scroll down to Merge Pull Request Click the button, Click confirm merge and now everything will be added into your master/main branch.
+Dylan Toews - https://www.linkedin.com/in/dylan-toews-b4752925a/
 
 
 
+------------------
 
-THIS IS A TEST FOR PULL REQUESTS 
+Resources and References Used:
 
-I have added a line to test something
+Alarm clock example:
+
+https://reactjsexample.com/alarm-clock-in-react/
+
+CSS for audio recorder button:
+
+https://www.youtube.com/watch?v=B3wWIsNHPk4&ab_channel=Stephino
+
+code base for audio recording:
+
+https://github.com/jleonardo007/voice-recorder-example
+
+Twilio requests:
+
+https://www.twilio.com/docs/usage/requests-to-twilio
+
+
