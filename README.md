@@ -11,7 +11,7 @@ The motivation for building this project was to create an alarm application that
 
 With Startle, the user is able to set an alarm and choose both the custom sound that they would like for their alarm, as well as the contact that they would like to have messaged in the event of snoozing. 
 
-INSERT SET ALARM IMAGE
+
 !["Set Alarm Image"](https://github.com/dylanToews/final-project/blob/main/docs/Startle-SetAlarm.png?raw=true)
 
 Once the alarm has gone off, the users audio will be played on a loop until they either "Accept" or "Snooze" the alarm. If "Snooze" has been selected, an SMS message will be sent to their contact and the alarm will go off again in 5 minutes. 
@@ -19,9 +19,10 @@ Once the alarm has gone off, the users audio will be played on a loop until they
 !["Alarm Notification"](https://github.com/dylanToews/final-project/blob/main/docs/Startle-Notification.png?raw=true)
 ---------
 !["Text Message Example"](https://github.com/dylanToews/final-project/blob/main/docs/Startle-Text.png?raw=true)
+---------
 By going to the Sounds page, the user is able to record and name their own audio to be used as an alarm tone.
 
-INSERT SOUND PAGE IMAGE 
+
 !["Sound Recording Page"](https://github.com/dylanToews/final-project/blob/main/docs/Startle-Sound.png?raw=true)
 
 The next step in development at Startle is to transition to React Native for mobile development. We would also like to add in the ability for users to create customizable messages for their alarm text notifications. One of the challenges we faced was recording the sound on the front end of the application, and turning the audio files into data that could be stored and brought up from the backend. Other planned features include setting recurring alarms for days of the week, and assigning multiple contacts to a single alarm for events that involve more than two people.
@@ -39,7 +40,7 @@ Steps to Run
 
 Clone the project 
 
-```git clone "INSERT CLONE LINK"```
+```git clone git@github.com:dylanToews/final-project.git```
 
 Install dependencies
 
