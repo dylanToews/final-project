@@ -46,10 +46,6 @@ Install dependencies
 
 ```npm install``` 
 
-Set Up .env
-
-```Use env.example information for .env```
-
 Set Up Database: 
 
 ```psql```
