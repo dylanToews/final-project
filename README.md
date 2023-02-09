@@ -81,11 +81,11 @@ Start Client
 
 Our Team: 
 
-Cheever Esler - https://www.linkedin.com/in/cheever-esler/
+Cheever Esler - [GitHub](https://github.com/Thornrose) - [LinkedIn](https://www.linkedin.com/in/cheever-esler/)
 
-Ryan Zhen - https://www.linkedin.com/in/ryanzhen/
+Ryan Zhen - [GitHub](https://github.com/Squoog) - [LinkedIn](https://www.linkedin.com/in/ryanzhen/)
 
-Dylan Toews - https://www.linkedin.com/in/dylan-toews-b4752925a/
+Dylan Toews - [GitHub](https://github.com/dylanToews) - [LinkedIn](https://www.linkedin.com/in/dylan-toews-b4752925a/)
 
 
 
@@ -101,12 +101,10 @@ CSS for audio recorder button:
 
 https://www.youtube.com/watch?v=B3wWIsNHPk4&ab_channel=Stephino
 
-code base for audio recording:
+Code base for audio recording:
 
 https://github.com/jleonardo007/voice-recorder-example
 
 Twilio requests:
 
 https://www.twilio.com/docs/usage/requests-to-twilio
-
-
